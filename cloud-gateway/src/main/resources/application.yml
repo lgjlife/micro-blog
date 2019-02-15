@@ -1,0 +1,83 @@
+server:
+  port: 6003
+  servlet:
+    context-path: /zuul
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8001/eureka/
+
+
+
+spring:
+  application:
+    name: geteway
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+#zuul 路由配置
+zuul:
+  routes:
+    oauth2:
+      path: /oauth2-server/**
+      url: http://localhost:6001
+    resource:
+      path: /resource/**
+      url: http://localhost:7002
+    web:
+      path: /cloud-web/**
+      url: http://localhost:7005
+    user:
+      path: /user/**
+      url: http://localhost:8009/user
+  # 用户模块
+    user-api:
+      path: /server-api/**
+      serviceId: Auth-User
+  # 用户服务提供者
+    authprovider-api:
+      path: /security-provider-api/**
+      serviceId: security-provider
+  # 任务调度中心
+    scheduler-quartz-api:
+      path: /scheduler-quartz-api/**
+      serviceId: scheduler-quartz
+  # 服务注册中心
+  # 访问注册中心，使用的是url,否则会报错
+  # com.netflix.client.ClientException: Load balancer does not have available server for client
+    eureka-server-api:
+      path: /eureka-server-api/**
+      url: http://localhost:8001/
+security:
+  oauth2:
+    client:
+      client-id: client
+      client-secret: secret
+      access-token-uri: http://localhost:6001/oauth/token
+      client-authentication-scheme: form
+  #    access-token-uri: http://localhost:6001/oauth/token
+  #    user-authorization-uri: http://localhost:6001/oauth/authorize
+  #    client-authentication-scheme: form
+    resource:
+      jwt:
+      #提供公有密匙的端点，如果你使用JWT令牌的话。
+        key-uri: http://localhost:6001/oauth/token_key
+   #   user-info-uri: http://localhost:7002/user
+   #   prefer-token-info: false
+logging:
+  level:
+      org.springframework.security: debug
+      com.cloud: debug
+
+# 忽略拦截
+ignore:
+  urls:
+    - /oauth2-server/**
+    - /auth/login
+    - /auth/sumit

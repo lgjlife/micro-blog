@@ -1,0 +1,62 @@
+server:
+  port: 8016
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8001/eureka/
+
+spring:
+  application:
+    name: cloud-consumer-feign
+  boot:
+    admin:
+      client:
+        url: "http://localhost:8006"
+  zipkin:
+    base-url: http://localhost:9411
+  sleuth:
+    sampler:
+      percentage: 1.0
+  #spring-thymeleaf模板配置-------------------------------------------------
+  thymeleaf:
+      prefix: classpath:/templates/
+      suffix: .html
+      cache: false
+  datasource:
+      type: com.alibaba.druid.pool.DruidDataSource    # 配置当前要使用的数据源的操作类型
+      driver-class-name: com.mysql.jdbc.Driver      # 配置MySQL的驱动程序类
+      url: jdbc:mysql://localhost:3306/cloud_frame?characterEncoding=utf-8           # 数据库连接地址
+      username: root                                  # 数据库用户名
+      password: 563739007                            # 数据库连接密码
+      filters: config,stat
+      dbcp2:                                          # 进行数据库连接池的配置
+        min-idle: 5                                   # 数据库连接池的最小维持连接数
+        initial-size: 5                               # 初始化提供的连接数
+        max-total: 5                                  # 最大的连接数
+        max-wait-millis: 200                          # 等待连接获取的最大超时时间
+    #  name: mydatasource
+    #  url: jdbc:mysql://localhost:3306/cloud_frame?characterEncoding=utf-8
+    #  username: root
+    #  password: 563739007
+     # type: com.alibaba.druid.pool.DruidDataSource
+    #  driver-class-name: com.mysql.jdbc.Driver
+  mybatis:
+    mapper-locations: com.cloud.frame.scheduler.quartz.dao.mapper.*
+    configuration:
+      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  security:
+    user:
+      password: admin
+      name:  admin
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+logging:
+  level:
+    com.cloud.frame.consumerFeign: debug
+

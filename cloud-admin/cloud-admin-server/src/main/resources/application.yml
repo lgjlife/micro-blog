@@ -1,0 +1,21 @@
+server:
+  port: 8006
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8001/eureka/
+
+spring:
+  application:
+    name: cloud-admin-server
+

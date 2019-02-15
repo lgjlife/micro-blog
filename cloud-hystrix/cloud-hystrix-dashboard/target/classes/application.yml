@@ -1,0 +1,20 @@
+server:
+  port: 8012
+
+spring:
+  application:
+    name: Cloud-Hystrixdashboard
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8001/eureka/
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"

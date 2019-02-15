@@ -1,0 +1,9 @@
+server:
+  port: 9411
+spring:
+  application:
+    name: sleuth-zipkin
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8001/eureka/

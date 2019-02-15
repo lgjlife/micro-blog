@@ -1,0 +1,33 @@
+server:
+  port: 9001
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/Mrlgj/Cloud-Frame
+          #Spring Cloud Config Server强制从远程存储库中提取
+          force-pull: true
+          search-paths: config-repo
+   # 使用rabbitmq实现自动刷新
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      cors:
+        allowed-origins: "*"
+        allowed-methods: "*"
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8001/eureka/

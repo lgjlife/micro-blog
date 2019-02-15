@@ -1,0 +1,27 @@
+server:
+  port: 8013
+
+spring:
+  application:
+    name: Cloud-HystrixTurbine
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8001/eureka/
+
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+turbine:
+  #监控的应用名称
+  app-config: cloud-consumer
+  #集群的名称
+  cluster-name-expression: new String('default')
+  combine-host-port: true

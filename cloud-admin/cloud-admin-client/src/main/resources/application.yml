@@ -1,0 +1,22 @@
+
+spring:
+  application:
+    name: cloud-admin-client
+  boot:
+    admin:
+      client:
+        url: "http://localhost:8006"
+management:
+  security:
+    enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+server:
+  port: 8007
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8001/eureka/

@@ -1,0 +1,13 @@
+server:
+  port: 9001
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/repo
+  profiles:
+    active: native

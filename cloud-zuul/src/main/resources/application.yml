@@ -1,0 +1,76 @@
+server:
+  port: 8005
+  servlet:
+    context-path: /zuul
+spring:
+  application:
+    name: cloud-gate-zuul
+  #spring-thymeleaf模板配置-------------------------------------------------
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
+
+# management
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+# eureka
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8001/eureka/
+
+#zuul 路由配置
+zuul:
+  routes:
+    resource:
+      path: /resource/**
+      url: http://localhost:9000
+    user:
+      path: /user/**
+      url: http://localhost:8009/user
+  # 用户模块
+    user-api:
+      path: /server-api/**
+      serviceId: Auth-User
+  # 用户服务提供者
+    authprovider-api:
+      path: /security-provider-api/**
+      serviceId: security-provider
+  # 任务调度中心
+    scheduler-quartz-api:
+      path: /scheduler-quartz-api/**
+      serviceId: scheduler-quartz
+  # 服务注册中心
+  # 访问注册中心，使用的是url,否则会报错
+  # com.netflix.client.ClientException: Load balancer does not have available server for client
+    eureka-server-api:
+      path: /eureka-server-api/**
+      url: http://localhost:8001/
+      #serviceId: center
+  # 配置版本前缀 eureka-server
+  # http://localhost:8005/user-api/** --> http://localhost:8005/v10/user-api/**
+ # prefix: /v10
+# security----------------------------------------------------------------------
+security:
+  oauth2:
+    client:
+      client-id: client
+      client-secret: secret
+      access-token-uri: http://localhost:7001/oauth/token
+      user-authorization-uri: http://localhost:7001/oauth/authorize
+      client-authentication-scheme: form
+    resource:
+      user-info-uri: http://localhost:7002/user
+      prefer-token-info: false
+
+#logging
+logging:
+  level:
+    org.springframework: debug

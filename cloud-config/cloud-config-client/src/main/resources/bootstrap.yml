@@ -1,0 +1,33 @@
+# 必须放在bootstrap.yml中
+spring:
+  application:
+    name: config-client
+  # 配置中心
+  cloud:
+    config:
+
+      uri: http://localhost:9001
+      #如果服务无法连接到配置服务器，则可能希望启动服务失败
+      fail-fast: true
+      label: master
+  profiles:
+    active: dev
+  # 使用rabbitmq实现自动刷新
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      cors:
+        allowed-origins: "*"
+        allowed-methods: "*"
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8001/eureka/
