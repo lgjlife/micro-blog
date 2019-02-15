@@ -1,4 +1,4 @@
-package com.cloud.frame.consumer.config.ribbon;
+package com.cloud.microblog.consumer.config.ribbon;
 
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;

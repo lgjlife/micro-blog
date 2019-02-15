@@ -1,4 +1,4 @@
-package com.cloud.frame.cloudzuul.filter;
+package com.cloud.microblog.cloudzuul.filter;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;

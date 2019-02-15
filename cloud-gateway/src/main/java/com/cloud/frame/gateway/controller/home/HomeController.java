@@ -1,7 +1,7 @@
-package com.cloud.frame.gateway.controller.home;
+package com.cloud.microblog.gateway.controller.home;
 
 
-import com.cloud.frame.common.aop.syslog.anno.PrintUrlAnno;
+import com.cloud.microblog.common.aop.syslog.anno.PrintUrlAnno;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 

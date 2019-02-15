@@ -1,4 +1,4 @@
-package com.cloud.frame.cloudzuul;
+package com.cloud.microblog.cloudzuul;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,4 +1,4 @@
-package com.cloud.frame.cloudzuul.aop.syslog.anno;
+package com.cloud.microblog.cloudzuul.aop.syslog.anno;
 
 import java.lang.annotation.*;
 

@@ -1,6 +1,6 @@
-package com.cloud.frame.cloudzuul.controller.login;
+package com.cloud.microblog.cloudzuul.controller.login;
 
-import com.cloud.frame.cloudzuul.aop.syslog.anno.PrintUrlAnno;
+import com.cloud.microblog.cloudzuul.aop.syslog.anno.PrintUrlAnno;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 

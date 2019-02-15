@@ -1,4 +1,4 @@
-package com.cloud.frame.provider;
+package com.cloud.microblog.provider;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

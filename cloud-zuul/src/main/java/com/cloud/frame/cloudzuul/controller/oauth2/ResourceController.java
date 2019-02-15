@@ -1,4 +1,4 @@
-package com.cloud.frame.cloudzuul.controller.oauth2;
+package com.cloud.microblog.cloudzuul.controller.oauth2;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

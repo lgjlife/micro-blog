@@ -1,4 +1,4 @@
-package com.cloud.frame.gateway.modul;
+package com.cloud.microblog.gateway.modul;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;

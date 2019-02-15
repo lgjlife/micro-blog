@@ -1,4 +1,4 @@
-package com.cloud.frame.scheduler.quartz.job;
+package com.cloud.microblog.scheduler.quartz.job;
 
 /**
  * @program: top-parent

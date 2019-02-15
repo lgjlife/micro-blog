@@ -1,6 +1,6 @@
-package com.cloud.frame.consumerFeign.service.serviceImpl.feign;
+package com.cloud.microblog.consumerFeign.service.serviceImpl.feign;
 
-import com.cloud.frame.consumerFeign.service.FeignService;
+import com.cloud.microblog.consumerFeign.service.FeignService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

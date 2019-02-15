@@ -1,12 +1,12 @@
 
-var schedulerInfo=[{"name":"任务1","cron":"0/5 * * * * ?","jobClass":"com.cloud.frame.scheduler.quartz.job.HelloJob",
+var schedulerInfo=[{"name":"任务1","cron":"0/5 * * * * ?","jobClass":"com.cloud.microblog.scheduler.quartz.job.HelloJob",
     "status":"停止","description":"这是一个打印任务","createTime":"2018-11-16 11：00","createBy":"张三"},
-    {"name":"任务2","cron":"0/5 * * * * ?","jobClass":"com.cloud.frame.scheduler.quartz.job.HelloJob",
+    {"name":"任务2","cron":"0/5 * * * * ?","jobClass":"com.cloud.microblog.scheduler.quartz.job.HelloJob",
         "status":"停止","description":"这是一个打印任务","createTime":"2018-11-16 11：00","createBy":"张三"}];
-var schedulerClass=[{"jobClass":"com.cloud.frame.scheduler.quartz.job.HelloJob"},
-    {"jobClass":"com.cloud.frame.scheduler.quartz.job.HelloJob","description":"这是一个打印任务1"},
-    {"jobClass":"com.cloud.frame.scheduler.quartz.job.HelloJob","description":"这是一个打印任务2"},
-    {"jobClass":"com.cloud.frame.scheduler.quartz.job.HelloJob","description":"这是一个打印任务3"},
+var schedulerClass=[{"jobClass":"com.cloud.microblog.scheduler.quartz.job.HelloJob"},
+    {"jobClass":"com.cloud.microblog.scheduler.quartz.job.HelloJob","description":"这是一个打印任务1"},
+    {"jobClass":"com.cloud.microblog.scheduler.quartz.job.HelloJob","description":"这是一个打印任务2"},
+    {"jobClass":"com.cloud.microblog.scheduler.quartz.job.HelloJob","description":"这是一个打印任务3"},
                     ];
 var scheduler={
 

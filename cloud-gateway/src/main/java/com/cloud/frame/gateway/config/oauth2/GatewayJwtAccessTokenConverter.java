@@ -1,4 +1,4 @@
-package com.cloud.frame.gateway.config.oauth2;
+package com.cloud.microblog.gateway.config.oauth2;
 
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;

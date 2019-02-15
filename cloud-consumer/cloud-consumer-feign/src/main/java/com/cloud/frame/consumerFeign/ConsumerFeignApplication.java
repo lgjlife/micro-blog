@@ -1,4 +1,4 @@
-package com.cloud.frame.consumerFeign;
+package com.cloud.microblog.consumerFeign;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

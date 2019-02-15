@@ -1,6 +1,6 @@
-package com.cloud.frame.scheduler.quartz.dao.mapper;
+package com.cloud.microblog.scheduler.quartz.dao.mapper;
 
-import com.cloud.frame.scheduler.quartz.dao.model.QuartzJob;
+import com.cloud.microblog.scheduler.quartz.dao.model.QuartzJob;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.cloud.frame.scheduler.quartz.config;
+package com.cloud.microblog.scheduler.quartz.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

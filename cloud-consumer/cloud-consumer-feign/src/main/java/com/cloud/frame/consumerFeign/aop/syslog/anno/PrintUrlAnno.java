@@ -1,4 +1,4 @@
-package com.cloud.frame.consumerFeign.aop.syslog.anno;
+package com.cloud.microblog.consumerFeign.aop.syslog.anno;
 
 import java.lang.annotation.*;
 

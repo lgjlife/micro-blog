@@ -1,4 +1,4 @@
-package com.cloud.frame.gateway.config.oauth2.handler;
+package com.cloud.microblog.gateway.config.oauth2.handler;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.AccessDeniedException;

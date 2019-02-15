@@ -43,7 +43,7 @@ spring:
    # type: com.alibaba.druid.pool.DruidDataSource
   #  driver-class-name: com.mysql.jdbc.Driver
   mybatis:
-    mapper-locations: com.cloud.frame.scheduler.quartz.dao.mapper.*
+    mapper-locations: com.cloud.microblog.scheduler.quartz.dao.mapper.*
     configuration:
       log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 management:

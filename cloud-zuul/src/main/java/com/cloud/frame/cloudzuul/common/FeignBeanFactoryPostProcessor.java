@@ -1,4 +1,4 @@
-package com.cloud.frame.cloudzuul.common;
+package com.cloud.microblog.cloudzuul.common;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanDefinition;

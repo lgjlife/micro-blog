@@ -1,4 +1,4 @@
-package com.cloud.frame.gateway.config.swagger;
+package com.cloud.microblog.gateway.config.swagger;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;

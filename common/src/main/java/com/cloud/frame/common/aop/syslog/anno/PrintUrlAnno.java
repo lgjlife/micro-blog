@@ -1,4 +1,4 @@
-package com.cloud.frame.common.aop.syslog.anno;
+package com.cloud.microblog.common.aop.syslog.anno;
 
 import java.lang.annotation.*;
 

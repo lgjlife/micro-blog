@@ -1,7 +1,7 @@
-package com.cloud.frame.cloudzuul.aop.syslog.aspect;
+package com.cloud.microblog.cloudzuul.aop.syslog.aspect;
 
 
-import com.cloud.frame.cloudzuul.aop.syslog.anno.PrintUrlAnno;
+import com.cloud.microblog.cloudzuul.aop.syslog.anno.PrintUrlAnno;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -46,7 +46,7 @@ public class PrintUrlAspect {
 	 */
 	/*匹配 com.lanmei.os.controller本包及其子孙包的所有方法*/
 //	@Pointcut(value = "execution(* com.lanmei.*.controller..*(..))")
-	@Pointcut(value = "@annotation(com.cloud.frame.cloudzuul.aop.syslog.anno.PrintUrlAnno)")
+	@Pointcut(value = "@annotation(com.cloud.microblog.cloudzuul.aop.syslog.anno.PrintUrlAnno)")
 	public void urlLogPointcut() {
 		
 	}

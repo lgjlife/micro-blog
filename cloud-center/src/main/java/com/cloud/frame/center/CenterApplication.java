@@ -1,4 +1,4 @@
-package com.cloud.frame.center;
+package com.cloud.microblog.center;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

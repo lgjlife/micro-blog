@@ -1,4 +1,4 @@
-package com.cloud.frame.cloudzuul;
+package com.cloud.microblog.cloudzuul;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

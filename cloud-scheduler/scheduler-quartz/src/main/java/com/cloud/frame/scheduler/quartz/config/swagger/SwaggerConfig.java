@@ -1,4 +1,4 @@
-package com.cloud.frame.scheduler.quartz.config.swagger;
+package com.cloud.microblog.scheduler.quartz.config.swagger;
 
 
 import org.springframework.context.annotation.Bean;
@@ -31,7 +31,7 @@ public class SwaggerConfig {
                 .apiInfo(apiInfo())
                 .select()
                 //为当前包路径
-                .apis(RequestHandlerSelectors.basePackage("com.cloud.frame.scheduler.quartz.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.cloud.microblog.scheduler.quartz.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }

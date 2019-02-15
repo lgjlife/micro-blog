@@ -1,4 +1,4 @@
-package com.cloud.frame.gateway.config.swagger;
+package com.cloud.microblog.gateway.config.swagger;
 
 
 import org.springframework.context.annotation.Bean;
@@ -33,7 +33,7 @@ public class SwaggerConfig {
                 .apiInfo(apiInfo())
                 .select()
                 //为当前包路径
-                .apis(RequestHandlerSelectors.basePackage("com.cloud.frame.cloudzuul.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.cloud.microblog.cloudzuul.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }

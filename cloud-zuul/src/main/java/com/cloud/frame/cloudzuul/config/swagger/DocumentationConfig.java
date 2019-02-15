@@ -1,4 +1,4 @@
-package com.cloud.frame.cloudzuul.config.swagger;
+package com.cloud.microblog.cloudzuul.config.swagger;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;

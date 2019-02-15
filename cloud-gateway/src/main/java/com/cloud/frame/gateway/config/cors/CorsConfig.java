@@ -1,4 +1,4 @@
-package com.cloud.frame.gateway.config.cors;
+package com.cloud.microblog.gateway.config.cors;
 
 
 import org.springframework.context.annotation.Bean;

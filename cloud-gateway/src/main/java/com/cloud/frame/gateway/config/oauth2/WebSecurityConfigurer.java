@@ -1,4 +1,4 @@
-package com.cloud.frame.gateway.config.oauth2;
+package com.cloud.microblog.gateway.config.oauth2;
 
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;

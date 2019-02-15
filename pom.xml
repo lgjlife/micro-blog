@@ -3,26 +3,21 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.cloud.frame</groupId>
-    <artifactId>cloud-parent</artifactId>
+    <groupId>com.cloud.microblog</groupId>
+    <artifactId>microblog</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <modules>
         <module>cloud-center</module>
-        <module>cloud-auth</module>
         <module>cloud-config</module>
         <module>cloud-admin</module>
         <module>cloud-zuul</module>
         <module>cloud-filesystem</module>
         <module>cloud-scheduler</module>
-        <module>spring-cloud-oauth</module>
-        <module>cloud-test</module>
-        <module>cloud-security</module>
         <module>cloud-consumer</module>
         <module>cloud-provider</module>
         <module>cloud-hystrix</module>
         <module>cloud-sleuth</module>
         <module>common</module>
-        <module>cloud-oauth2-server</module>
         <module>cloud-gateway</module>
 
     </modules>

@@ -1,6 +1,6 @@
-package com.cloud.frame.cloudzuul.controller;
+package com.cloud.microblog.cloudzuul.controller;
 
-import com.cloud.frame.cloudzuul.pojo.User;
+import com.cloud.microblog.cloudzuul.pojo.User;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;

@@ -1,4 +1,4 @@
-package com.cloud.frame.scheduler.quartz;
+package com.cloud.microblog.scheduler.quartz;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -15,7 +15,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * @create: 2018-11-20 00:15
  **/
 
-@MapperScan(basePackages = "com.cloud.frame.scheduler.quartz.dao.mapper")
+@MapperScan(basePackages = "com.cloud.microblog.scheduler.quartz.dao.mapper")
 @EnableEurekaClient
 @SpringBootApplication
 //使能spring 定时任务

@@ -1,4 +1,4 @@
-package com.cloud.frame.gateway;
+package com.cloud.microblog.gateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,7 +16,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @EnableZuulProxy
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.cloud.frame.gateway","com.cloud.frame.common"})
+@ComponentScan(basePackages = {"com.cloud.microblog.gateway","com.cloud.microblog.common"})
 public class GatewayApplication {
 
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package com.cloud.frame.center.service;
+package com.cloud.microblog.center.service;
 
 import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;

@@ -1,4 +1,4 @@
-package com.cloud.frame.cloudconfigclient;
+package com.cloud.microblog.cloudconfigclient;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,7 +1,7 @@
-package com.cloud.frame.gateway.config.oauth2;
+package com.cloud.microblog.gateway.config.oauth2;
 
-import com.cloud.frame.common.bean.FilterIgnorePropertiesConfig;
-import com.cloud.frame.gateway.config.oauth2.handler.AccessDeniedHandler;
+import com.cloud.microblog.common.bean.FilterIgnorePropertiesConfig;
+import com.cloud.microblog.gateway.config.oauth2.handler.AccessDeniedHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;

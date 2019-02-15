@@ -1,4 +1,4 @@
-package com.cloud.frame.scheduler.quartz.result;
+package com.cloud.microblog.scheduler.quartz.result;
 
 import lombok.Getter;
 import lombok.Setter;

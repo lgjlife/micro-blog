@@ -1,4 +1,4 @@
-package com.cloud.frame.gateway.controller;
+package com.cloud.microblog.gateway.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,4 +1,4 @@
-package com.cloud.frame.cloudzuul.config.oauth2;
+package com.cloud.microblog.cloudzuul.config.oauth2;
 
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package com.cloud.frame.hystrixdashboard;
+package com.cloud.microblog.hystrixdashboard;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package com.cloud.frame.cloudzuul.pojo;
+package com.cloud.microblog.cloudzuul.pojo;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

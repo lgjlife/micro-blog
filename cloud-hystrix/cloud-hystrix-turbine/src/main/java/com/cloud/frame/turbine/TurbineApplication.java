@@ -1,4 +1,4 @@
-package com.cloud.frame.turbine;
+package com.cloud.microblog.turbine;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

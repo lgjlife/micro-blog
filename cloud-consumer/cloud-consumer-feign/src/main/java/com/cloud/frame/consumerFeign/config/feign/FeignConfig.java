@@ -1,4 +1,4 @@
-package com.cloud.frame.consumerFeign.config.feign;
+package com.cloud.microblog.consumerFeign.config.feign;
 
 import feign.Retryer;
 import org.springframework.context.annotation.Bean;

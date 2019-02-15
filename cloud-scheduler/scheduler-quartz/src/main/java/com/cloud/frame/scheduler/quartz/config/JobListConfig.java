@@ -1,6 +1,6 @@
-package com.cloud.frame.scheduler.quartz.config;
+package com.cloud.microblog.scheduler.quartz.config;
 
-import com.cloud.frame.scheduler.quartz.job.HelloJob;
+import com.cloud.microblog.scheduler.quartz.job.HelloJob;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

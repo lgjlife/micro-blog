@@ -1,7 +1,7 @@
-package com.cloud.frame.scheduler.quartz.serviceImpl;
+package com.cloud.microblog.scheduler.quartz.serviceImpl;
 
-import com.cloud.frame.scheduler.quartz.dao.mapper.QuartzJobMapper;
-import com.cloud.frame.scheduler.quartz.dao.model.QuartzJob;
+import com.cloud.microblog.scheduler.quartz.dao.mapper.QuartzJobMapper;
+import com.cloud.microblog.scheduler.quartz.dao.model.QuartzJob;
 import org.quartz.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

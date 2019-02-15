@@ -1,6 +1,6 @@
-package com.cloud.frame.center.controller;
+package com.cloud.microblog.center.controller;
 
-import com.cloud.frame.center.service.CenterService;
+import com.cloud.microblog.center.service.CenterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

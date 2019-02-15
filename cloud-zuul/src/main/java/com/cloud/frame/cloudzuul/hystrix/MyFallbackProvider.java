@@ -1,4 +1,4 @@
-package com.cloud.frame.cloudzuul.hystrix;
+package com.cloud.microblog.cloudzuul.hystrix;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

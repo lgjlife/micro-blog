@@ -1,4 +1,4 @@
-package com.cloud.frame.common.bean;
+package com.cloud.microblog.common.bean;
 
 import lombok.Data;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;

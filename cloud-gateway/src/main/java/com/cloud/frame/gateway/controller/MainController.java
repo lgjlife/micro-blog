@@ -1,6 +1,6 @@
-package com.cloud.frame.gateway.controller;
+package com.cloud.microblog.gateway.controller;
 
-import com.cloud.frame.common.aop.syslog.anno.PrintUrlAnno;
+import com.cloud.microblog.common.aop.syslog.anno.PrintUrlAnno;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
