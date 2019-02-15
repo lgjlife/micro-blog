@@ -7,18 +7,19 @@
     <artifactId>microblog</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <modules>
-        <module>cloud-center</module>
-        <module>cloud-config</module>
-        <module>cloud-admin</module>
-        <module>cloud-zuul</module>
-        <module>cloud-filesystem</module>
-        <module>cloud-scheduler</module>
-        <module>cloud-consumer</module>
-        <module>cloud-provider</module>
-        <module>cloud-hystrix</module>
-        <module>cloud-sleuth</module>
+        <module>microblog-center</module>
+        <module>microblog-config</module>
+        <module>microblog-admin</module>
+        <module>microblog-zuul</module>
+        <module>microblog-filesystem</module>
+        <module>microblog-scheduler</module>
+        <module>microblog-consumer</module>
+        <module>microblog-provider</module>
+        <module>microblog-hystrix</module>
+        <module>microblog-sleuth</module>
         <module>common</module>
-        <module>cloud-gateway</module>
+        <module>microblog-gateway</module>
+        <module>microblog-search</module>
 
     </modules>
     <packaging>pom</packaging>
@@ -29,7 +30,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.0.3.RELEASE</version>
+        <version>2.1.2.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
