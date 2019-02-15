@@ -1,2 +1,9 @@
 server:
   port: 8700
+
+spring:
+    #spring-thymeleaf模板配置-------------------------------------------------
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
