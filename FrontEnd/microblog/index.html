@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="#" />
+    <title>microblog主页</title>
+
+    <script src="static/js/jquery/jquery-3.3.1.js"></script>
+    <link rel="stylesheet" type="text/css" href="static/css/bootstrap/bootstrap.css">
+    <script src="static/css/bootstrap/bootstrap.js"></script>
+    
+     <link rel="stylesheet" type="text/css" href="static/css/index/index.css">
+    
+</head>
+<body>
+
+    <!-- 顶部导航栏 -->
+    <div id="top-nav" class="top-nav-element">
+        <div id="top-nav-trademark">
+            <span>MicroBlog</span>
+        </div>
+        <div id="top-nav-search">
+            <input type="text"/><img src="static/img/common/serach.jpg" height="20px" width="20px"/>
+        </div>
+        <div id="top-nav-list">
+            <div id="top-nav-list-main">
+                <a href="index.html">首页</a>
+            </div>
+            <div>
+                <div id="top-nav-unlogin">
+                    <a href="user/login.html">登录</a>
+                    <a href="user/register.html">注册</a>
+                </div>
+                <div id="top-nav-login" style=" display: none">
+                    <a href="index.html" >皮皮虾</a>
+                </div>
+            </div>            
+        </div>    
+    </div>
+    <!-- 内容页面 -->
+    <div id="content">
+         <!--###################################################### -->
+        <!-- 左侧菜单 -->
+        <div id="content-left-menu">
+            <a href="#">首页</a>
+            <a href="#">我的收藏</a>
+            <a href="#">我的赞</a>
+            <a href="#">热门微博</a>
+            <a href="#">热门视频</a>
+            <a href="#">好友圈</a>
+            <a href="#">特别关注</a>
+            <a href="#">V+微博</a>
+            <a href="#">美女</a>
+            <a href="#">网络红人</a>
+            <a href="#">群微博</a>
+            <a href="#">悄悄关注</a>
+        </div>
+        
+         <!--###################################################### -->
+        
+        <div id="content-middle">
+             <!-- 输入 编辑-->
+            <div id="content-blog-edit">
+                <span style="display: block">有什么新鲜事想告诉大家?</span>
+                <div>
+                    <textarea id="content-blog-edit-input" rows="10" cols="30">
+                    </textarea>
+                </div>
+                
+
+                <a href="#">表情</a>
+                <a href="#">图片</a>
+                <a href="#">视频</a>
+                <a href="#">话题</a>
+                <a href="#">头条文章</a>
+                <a href="#">定时发</a>
+
+                <select style="height: 30px;">
+                    <option value="public">公开</option>
+                    <option value="freinds">好友圈</option>
+                    <option value="private">仅自己可见</option>
+                    <option value="group">群可见</option>
+                </select>
+                <button>发布</button>
+
+            </div>
+            <!-- 微博查看选项 -->
+            <div id="content-display-select">
+                <a href="#">全部</a>
+                <a href="#">原创</a>
+                <a href="#">图片</a>
+                <a href="#">视频</a>
+                <a href="#">音乐</a>
+                <a href="#">文章</a>
+                <div id="boog-search">
+                    <input type="text"/><img src="static/img/common/serach.jpg" height="20px" width="20px"/><button>高级搜索</button>
+                </div>
+
+            </div>
+            <!-- 微波内容 -->
+            <div id="content-display">
+                 <ul>
+                    <li>
+                        <div id="content-blog">
+                            <div>
+                                 <a href="javascript:void(0);" onclick="$("#content-blog-menu").show();">操作</a>
+                            </div>
+                            <div style="display: none;" id="content-blog-menu">
+                                <ul>
+                                    <li>    
+                                        <a href="javascript:void(0);">帮上头条</a>
+                                    </li>
+                                    <li>    
+                                        <a href="javascript:void(0);">屏蔽这条微博</a>
+                                    </li>
+                                    <li>    
+                                        <a href="javascript:void(0);">屏蔽<span>xxxx</span></a>
+                                    </li>
+                                    <li>    
+                                        <a href="javascript:void(0);">取消关注<span>xxxx</span></a>
+                                    </li>
+                                    <li>    
+                                        <a href="javascript:void(0);">投诉</a>
+                                    </li>                                    
+                                </ul>
+                            </div>
+                            <div>
+                                <img src="static/img/user/head/head.jpg" height="80px" width="80px">
+                            </div>
+                            <div>
+                                <a href="#">谁知我心</a>
+                                <span>2月15日 23:23 来自 禁转载截屏Android</span>
+                            </div>
+                            <div>
+                                <span>
+                                    小米9的好看，值得细细品味。
+
+                                    最难描述的是小米9颜色。远看天蓝色，安安静静的。换个角度，不同的光线下，就会呈现各种炫丽的彩虹色，还依稀闪现金属光泽。
+                                    这是纳米级激光全息工艺，加双层镀膜，才造就了这么独特的色彩，越看越好看！
+                                    附上小米9全息幻彩蓝版本的实拍图。
+                                </span>
+                            </div>
+                            <div>
+                                <img src="static/img/user/shouji.jpg" height="180px" width="180px"> 
+                            </div>
+                            <div>
+                              <button>收藏</button>  
+                              <button>转发</button>  
+                              <button>评论</button>  
+                              <button>点赞</button>  
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div id="content-blog">
+                            <div>
+                                <a href="javascript:void(0);">操作</a>
+                            </div>
+                            <div style="display: none;">
+                                <ul>
+                                    <li>    
+                                        <a href="javascript:void(0);">帮上头条</a>
+                                    </li>
+                                    <li>    
+                                        <a href="javascript:void(0);">屏蔽这条微博</a>
+                                    </li>
+                                    <li>    
+                                        <a href="javascript:void(0);">屏蔽<span>xxxx</span></a>
+                                    </li>
+                                    <li>    
+                                        <a href="javascript:void(0);">取消关注<span>xxxx</span></a>
+                                    </li>
+                                    <li>    
+                                        <a href="javascript:void(0);">投诉</a>
+                                    </li>                                    
+                                </ul>
+                            </div>
+                            <div>
+                                <img src="static/img/user/head/head.jpg" height="80px" width="80px">
+                            </div>
+                            <div>
+                                <a href="#">谁知我心</a>
+                                <span>2月15日 23:23 来自 禁转载截屏Android</span>
+                            </div>
+                            <div>
+                                <span>
+                                    小米9的好看，值得细细品味。
+
+                                    最难描述的是小米9颜色。远看天蓝色，安安静静的。换个角度，不同的光线下，就会呈现各种炫丽的彩虹色，还依稀闪现金属光泽。
+                                    这是纳米级激光全息工艺，加双层镀膜，才造就了这么独特的色彩，越看越好看！
+                                    附上小米9全息幻彩蓝版本的实拍图。
+                                </span>
+                            </div>
+                            <div>
+                                <img src="static/img/user/shouji.jpg" height="180px" width="180px"> 
+                            </div>
+                            <div>
+                              <button>收藏</button>  
+                              <button>转发</button>  
+                              <button>评论</button>  
+                              <button>点赞</button>  
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+           
+            
+        </div>
+        <!--###################################################### -->
+        <div  id="content-right">
+             <!-- 个人信息 -->
+            <div id="content-user" style="">
+                <div>
+                    <img src="static/img/user/head/head.jpg" height="80px" width="80px">
+                </div>
+                
+                <div>
+                    <a href="#">冥王星的皮皮虾</a>
+                </div>
+                <div>
+                    <span>关注：<a href="#">10</a></span>
+                    <span>粉丝：<a href="#">100</a></span>
+                    <span>微博：<a href="#">1000</a></span>
+                </div>
+                
+                
+            </div>
+            <!-- 热门话题 -->
+            <div id="content-hot">
+                <span id="content-hot-data" style="">热门话题</span>
+                <button>换一换</button>
+                <div id="content-hot-list">
+                     <ul>
+                        <li>
+                            <a href="#">#歌手#</a><span class="content-hot-number" >44.3忆</span>
+                        </li>
+                        <li >
+                            <a href="#">#青春有你#</a><span class="content-hot-number">16.3忆</span>
+                        </li>
+                        <li>
+                            <a href="#">#身临其境#</a><span class="content-hot-number">6.3忆</span>
+                        </li>
+                        <li >
+                            <a href="#">#最强大脑#</a><span class="content-hot-number">6.3忆</span>
+                        </li>
+                        <li>
+                            <a href="#">#王牌对王牌#</a><span class="content-hot-number">46.3忆</span>
+                        </li>
+                        <li>
+                            <a href="#">#流浪地球#</a><span class="content-hot-number">41.3忆</span>
+                        </li>
+                        <li>
+                            <a href="#">#华为5G#</a><span class="content-hot-number">49忆</span>
+                        </li>
+                    </ul>  
+                </div>
+               
+            </div>
+        </div>
+       
+        
+        
+    </div>
+
+</body>
+
+<script>
+    //登录事件
+    function login() {
+        console.log("按钮按下 " )
+    }
+</script>
+
+</html>

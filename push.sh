@@ -6,7 +6,7 @@ rm -rf FrontEnd
 echo +++++++++创建目录FronEnd...............
 mkdir FrontEnd
 echo +++++++++复制目录...............
-cp -r  /nginx/microblog  /home/lgj/aProject/aRealPrj/mocroblog/FrontEnd  
+cp -r  /nginx/microblog  /home/lgj/aProject/aRealPrj/microblog/FrontEnd  
 
 echo  ++++++++git add  .
 git add .

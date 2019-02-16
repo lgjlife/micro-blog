@@ -1,0 +1,93 @@
+html,body,#content{
+    width: 100%;
+    height: 100%;
+}
+
+/**/
+#top-nav{
+    background-color: #FFEFD5;
+    height: 50px;
+    width: 100%;
+}
+
+
+
+#top-nav div{
+    display: inline;
+}
+
+/*#content{
+    background-color: blueviolet;
+}*/
+/*左侧菜单 #EBEBEB */
+#content-left-menu{
+    background-color: #EBEBEB ;
+    width: 130px;
+    height: 100%;
+    
+    float: left;
+}
+#content-left-menu a{
+    display: block;
+    margin: 20px;
+}
+
+#content-middle{
+    width:900px;
+    float: left;
+    background-color: #6495ED;
+}
+/*输入 编辑*/
+#content-blog-edit{
+   background-color: #FFEF8B; 
+   width:inherit;
+   margin-top: 20px;
+
+
+}
+#content-blog-edit-input{
+    width: 100%;
+    height: 100px;
+}
+/*微博查看选项*/
+#content-display-select{
+    background-color: #EEEEE0; 
+    width:inherit;
+    margin-top: 20px;
+}
+#content-display ul{
+    list-style-type: none;
+     padding: 0;
+}
+#content-display li{
+   background-color: antiquewhite;
+   margin-top: 10px;
+   margin-bottom: 10px;
+}
+/***************************************************************/
+/*内容 右侧*/
+#content-right{
+    float: left;
+}
+#content-user{
+    background-color: #EED5B7;
+    margin-bottom: 20px;
+}
+#content-hot{
+    background-color: #EED5B7 ;
+    margin-bottom: 20px;
+    width: 250px;
+}
+.content-hot-number{
+    /*position:absolute;
+	right:0px;*/
+    float: right;
+	
+    color: red;
+}
+
+#content-hot ul{
+    list-style-type: none;
+    padding: 0;
+    
+}

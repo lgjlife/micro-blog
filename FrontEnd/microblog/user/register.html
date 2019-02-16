@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="#" />
+    <title>注册页面</title>
+    <script src="../../js/jquery/jquery-3.3.1.js"></script>
+   <!-- <script src="js/jquery/jquery-3.3.1.js"></script>-->
+    <link rel="stylesheet" type="text/css" href="../../css/bootstrap/bootstrap.css">
+    <script src="../../css/bootstrap/bootstrap.js"></script>
+    
+    
+    <link rel="stylesheet" type="text/css" href="../../css/user/login.css">
+    
+</head>
+<body>
+    <h1>注册页面</h1>
+    <a href="/index.html">返回首页</a>
+    
+    <div class="login-table">
+        <div>
+            <div><label for="login-name">注册名</label></div>                
+            <input type="text" id = "login-name" placeholder="手机/邮箱/用户名">
+        </div>
+         <div>
+            <div><label for="login-password">密   码</label></div>            
+            <input type="text" id = "login-password" placeholder="密码">
+        </div>
+        <div>
+            <div><label for="login-password">重新输入密码</label></div>            
+            <input type="text" id = "login-password" placeholder="密码">
+        </div>
+         <div>
+             <div><label for="login-verification-code">验证码 <a href="">获取验证码</a></label><div>             
+             <input type="text" id = "login-verification-code"  placeholder="验证码">
+             <img id="login-kaptcha" title="点击更换" alt="验证图片"
+						src="/kaptcha" onclick="this.src=this.src+'?d=100'"
+						style="vertical-align: middle;"  height="30" width="80">
+        </div>        
+        <button>注册</button>
+    </div>
+
+</body>
+
+<script>
+    //登录事件
+    function login() {
+        console.log("按钮按下 " )
+    }
+</script>
+
+</html>
