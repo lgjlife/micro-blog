@@ -2,6 +2,7 @@ package com.clolud.microblog.search.controller.elasticsearch;
 
 
 import com.clolud.microblog.search.pojo.Book;
+import com.cloud.microblog.common.aop.syslog.anno.PrintUrlAnno;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexResponse;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+
 
 @Slf4j
 @RestController
@@ -25,6 +28,7 @@ public class ElasticsearchController {
     TransportClient elasticsearchClient;
 
 
+    @PrintUrlAnno
     @GetMapping("/add")
     public GetResponse add(){
 
@@ -73,8 +77,10 @@ public class ElasticsearchController {
 
     }
 
+    @PrintUrlAnno
     @RequestMapping("/delete")
-    public void delete(){
+    public void delete(HttpServletRequest request){
+
 
         log.info("/ela/delete");
     }

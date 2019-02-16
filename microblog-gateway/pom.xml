@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>cloud-security</artifactId>
+        <artifactId>microblog</artifactId>
         <groupId>com.cloud.microblog</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
@@ -14,37 +14,30 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-dependencies -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <version>Finchley.RELEASE</version>
+                <version>Greenwich.RELEASE</version>
                 <type>pom</type>
-                <scope>import</scope>
             </dependency>
+
         </dependencies>
     </dependencyManagement>
 
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <!-- security -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-security</artifactId>
-        </dependency>
 
-        <!--zuul -->
+        <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-netflix-zuul -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
+            <version>2.1.0.RELEASE</version>
         </dependency>
-
 
         <!--支持热部署 -->
         <dependency>
@@ -59,6 +52,26 @@
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
+
+
+        <dependency>
+            <groupId>com.netflix.zuul</groupId>
+            <artifactId>zuul-core</artifactId>
+            <version>1.3.1</version>
+            <scope>compile</scope>
+        </dependency>
+        <!--        <dependency>
+                    <groupId>com.netflix.zuul</groupId>
+                    <artifactId>zuul-core</artifactId>
+                    <version>1.3.1</version>
+                    <scope>compile</scope>
+                </dependency>
+                <dependency>
+                    <groupId>com.netflix.zuul</groupId>
+                    <artifactId>zuul-core</artifactId>
+                    <version>1.3.1</version>
+                    <scope>compile</scope>
+                </dependency>-->
 
 
     </dependencies>
