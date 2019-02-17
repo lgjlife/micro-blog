@@ -1,0 +1,27 @@
+
+body{
+    background-color: aquamarine;
+}
+
+
+#register-title{
+    position: absolute;
+    left: 40%;
+    top: 50px;
+}
+
+#register-table{
+    position: absolute;
+    top: 200px;
+    left: 40%;  
+    background-color: beige;
+    width: 400px;
+}
+
+.register-lable{
+    display: block;
+}
+.input-block{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

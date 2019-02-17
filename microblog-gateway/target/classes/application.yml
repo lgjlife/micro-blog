@@ -1,5 +1,6 @@
 server:
   port: 6003
+
 eureka:
   client:
     service-url:
@@ -9,7 +10,24 @@ eureka:
 
 spring:
   application:
-    name: geteway
+    name: gateway
+    #spring-redis相关配置---------------------------------------------------
+  redis:
+    #host地址
+    host: 127.0.0.1
+    #端口
+    port: 6379
+    jedis:
+      pool:
+        #最大连接数 0表示无限制
+        max-active: 8
+        #最大空闲处
+        max-idle: 100
+        #最大等待时间
+        max-wait: 1000
+        #连接池中的最小空闲连接
+        min-idle: 0
+
 management:
   endpoint:
     health:
@@ -35,9 +53,7 @@ zuul:
     web:
       path: /cloud-web/**
       url: http://localhost:7005
-    user:
-      path: /user/**
-      url: http://localhost:8009/user
+
   # 用户模块
     user-api:
       path: /server-api/**
@@ -60,4 +76,3 @@ logging:
   level:
       org.springframework.security: debug
       com.cloud: debug
-

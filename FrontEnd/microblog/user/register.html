@@ -2,53 +2,71 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="shortcut icon" href="#" />
-    <title>注册页面</title>
-    <script src="../../js/jquery/jquery-3.3.1.js"></script>
-   <!-- <script src="js/jquery/jquery-3.3.1.js"></script>-->
-    <link rel="stylesheet" type="text/css" href="../../css/bootstrap/bootstrap.css">
-    <script src="../../css/bootstrap/bootstrap.js"></script>
-    
-    
-    <link rel="stylesheet" type="text/css" href="../../css/user/login.css">
-    
-</head>
-<body>
-    <h1>注册页面</h1>
-    <a href="/index.html">返回首页</a>
-    
-    <div class="login-table">
-        <div>
-            <div><label for="login-name">注册名</label></div>                
-            <input type="text" id = "login-name" placeholder="手机/邮箱/用户名">
-        </div>
-         <div>
-            <div><label for="login-password">密   码</label></div>            
-            <input type="text" id = "login-password" placeholder="密码">
-        </div>
-        <div>
-            <div><label for="login-password">重新输入密码</label></div>            
-            <input type="text" id = "login-password" placeholder="密码">
-        </div>
-         <div>
-             <div><label for="login-verification-code">验证码 <a href="">获取验证码</a></label><div>             
-             <input type="text" id = "login-verification-code"  placeholder="验证码">
-             <img id="login-kaptcha" title="点击更换" alt="验证图片"
-						src="/kaptcha" onclick="this.src=this.src+'?d=100'"
-						style="vertical-align: middle;"  height="30" width="80">
-        </div>        
-        <button>注册</button>
-    </div>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="shortcut icon" href="#" />
+        <title>注册页面</title>
+        <script src="../static/js/jquery/jquery-3.3.1.js"></script>
+       <!-- <script src="js/jquery/jquery-3.3.1.js"></script>-->
+        <link rel="stylesheet" type="text/css" href="../static/css/bootstrap/bootstrap.css">
+        <script src="../static/css/bootstrap/bootstrap.js"></script>
 
-</body>
 
-<script>
-    //登录事件
-    function login() {
-        console.log("按钮按下 " )
-    }
-</script>
+        <link rel="stylesheet" type="text/css" href="../static/css/user/register.css">
+
+    </head>
+    <body>
+        <div id="register-title">
+             <h1>MicroBlog注册页面</h1>
+             <a href="/index.html">返回首页</a>   
+        </div>
+       
+
+        <div id="register-table">
+            <div class="input-block">
+                <div>                   
+                    <span class="register-lable">手机</span>
+                    <input type="text" id = "register-name" placeholder="请输入手机号码">
+                    <span>或使用</span><a href="javascript:void(0)">邮箱注册</a>
+                </div>
+                <div>
+                    <span class="register-lable">邮箱</span>
+                    <input type="text" id = "register-name" placeholder="请输入邮箱地址">
+                    <span>或使用</span><a href="javascript:void(0)">手机注册</a>
+                </div>
+                
+                
+            </div>
+            
+             <div class="input-block">
+                <span class="register-lable">验证码</span>
+                <input type="text" id = "register-verification-code" placeholder="请输入收到的验证码">
+                 <span><a  href="javascript:void(0)">获取验证码</a></span>
+            </div> 
+            
+            <div class="input-block">
+                <span class="register-lable">密码</span>
+                <input type="text" id = "register-password" placeholder="密码">
+            </div>
+            
+            <div class="input-block">
+                <span class="register-lable">重新输入密码</span>
+                <input type="text" id = "register-password" placeholder="密码">
+            </div>
+            
+            
+            
+             <div class="input-block">
+                 <span class="register-lable">验证码</span>
+                 <input type="text" id = "register-img-verification-code"  placeholder="验证码">
+                 <img id="register-kaptcha" title="点击更换" alt="验证图片"
+                            src="/kaptcha" onclick="this.src=this.src+'?d=100'"
+                            style="vertical-align: middle;"  height="30" width="80">
+            </div>        
+            <button>注册</button>
+        </div>
+
+    </body>
+
 
 </html>
