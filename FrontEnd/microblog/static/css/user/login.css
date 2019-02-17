@@ -1,6 +1,31 @@
-.login-table{
-    
-    position:fixed;
-    top:40%;
-    left:40%;
+
+body{
+    background-color: aquamarine;
+}
+
+
+#login-title{
+    position: absolute;
+    left: 40%;
+    top: 50px;
+}
+
+#login-table{
+    position: absolute;
+    top: 200px;
+    left: 40%;  
+    background-color: beige;
+    width: 400px;
+}
+
+.login-lable{
+    display: block;
+}
+.input-block{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#login-name-email{
+    display: none;
 }

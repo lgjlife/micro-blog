@@ -13,7 +13,10 @@
 
 
         <link rel="stylesheet" type="text/css" href="../static/css/user/register.css">
-
+        <script src="../static/js/user/register.js"></script>
+        
+        <script src="../static/js/common/regex.js"></script>
+        
     </head>
     <body>
         <div id="register-title">
@@ -25,45 +28,50 @@
         <div id="register-table">
             <div class="input-block">
                 <div>                   
-                    <span class="register-lable">手机</span>
-                    <input type="text" id = "register-name" placeholder="请输入手机号码">
-                    <span>或使用</span><a href="javascript:void(0)">邮箱注册</a>
+                    <span class="register-lable" id="register-name-lable">手机</span>
+                    <input type="text" id = "register-name-input" placeholder="请输入手机号码">
+                    <span>或使用</span><a href="javascript:void(0)" id="register-name-select">邮箱注册</a>
+                    <div style="display: none" id="name-input-warn">
+                        <span style="color: red" id="name-input-warn-disp"></span>
+                    </div>
                 </div>
-                <div>
-                    <span class="register-lable">邮箱</span>
-                    <input type="text" id = "register-name" placeholder="请输入邮箱地址">
-                    <span>或使用</span><a href="javascript:void(0)">手机注册</a>
-                </div>
-                
-                
             </div>
             
              <div class="input-block">
                 <span class="register-lable">验证码</span>
-                <input type="text" id = "register-verification-code" placeholder="请输入收到的验证码">
-                 <span><a  href="javascript:void(0)">获取验证码</a></span>
+                <input type="text" id = "register-verification-code-input" placeholder="请输入收到的验证码">
+                <span><a  href="javascript:void(0)" id="get-verification-code">获取验证码</a></span>
+                <div style="display: none" id="verification-code-input-warn">
+                    <span style="color: red" id="verification-code-input-warn-disp"></span>
+                </div>
             </div> 
             
             <div class="input-block">
                 <span class="register-lable">密码</span>
-                <input type="text" id = "register-password" placeholder="密码">
+                <input type="text" id = "register-password-input" placeholder="密码">
+                <span id="password-strength"></span>
             </div>
             
             <div class="input-block">
                 <span class="register-lable">重新输入密码</span>
-                <input type="text" id = "register-password" placeholder="密码">
+                <input type="text" id = "register-password-input-again" placeholder="密码">
+                <div style="display: none" id="password-input-warn">
+                    <span style="color: red" id="password-input-warn-disp"></span>
+                </div>
             </div>
             
-            
-            
-             <div class="input-block">
-                 <span class="register-lable">验证码</span>
-                 <input type="text" id = "register-img-verification-code"  placeholder="验证码">
+                        
+             <div class="input-block"密码>
+                 <span class="register-lable">图片验证码</span>
+                 <input type="text" id = "register-img-verification-code-input"  placeholder="验证码">
                  <img id="register-kaptcha" title="点击更换" alt="验证图片"
                             src="/kaptcha" onclick="this.src=this.src+'?d=100'"
                             style="vertical-align: middle;"  height="30" width="80">
+                 <div style="display: none" id="register-img-verification-code-input-warn">
+                    <span style="color: red" id="register-img-verification-code-input-warn-disp"></span>
+                </div>
             </div>        
-            <button>注册</button>
+            <button id="register-submit-btn">注册</button>
         </div>
 
     </body>

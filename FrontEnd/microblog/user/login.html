@@ -2,52 +2,63 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="shortcut icon" href="#" />
-    <title>登录页面</title>
-    <script src="../../js/jquery/jquery-3.3.1.js"></script>
-   <!-- <script src="js/jquery/jquery-3.3.1.js"></script>-->
-    <link rel="stylesheet" type="text/css" href="../../css/bootstrap/bootstrap.css">
-    <script src="../../css/bootstrap/bootstrap.js"></script>
-    
-    
-    <link rel="stylesheet" type="text/css" href="../../css/user/login.css">
-    
-</head>
-<body>
-    <h1>登录页面</h1>
-    <a href="/index.html">返回首页</a>
-    
-    <div class="login-table">
-        <div>
-            <div><label for="login-name">登录名</label></div>                
-            <input type="text" id = "login-name" placeholder="手机/邮箱/用户名">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="shortcut icon" href="#" />
+        <title>登录页面</title>
+        <script src="../static/js/jquery/jquery-3.3.1.js"></script>
+       <!-- <script src="js/jquery/jquery-3.3.1.js"></script>-->
+        <link rel="stylesheet" type="text/css" href="../static/css/bootstrap/bootstrap.css">
+        <script src="../static/css/bootstrap/bootstrap.js"></script>
+
+
+        <link rel="stylesheet" type="text/css" href="../static/css/user/login.css">
+        <script src="../static/js/user/login.js"></script>
+        
+         <script src="../static/js/common/regex.js"></script>
+    </head>
+    <body>
+        <div id="login-title">
+             <h1>MicroBlog登录页面</h1>
+             <a href="/index.html">返回首页</a>   
         </div>
-         <div>
-            <div><label for="login-password">密   码</label></div>
+       
+
+        <div id="login-table">
+            <div class="input-block">
+                <div id="login-name">                   
+                    <span class="login-lable" id="">手机</span>
+                    <input type="text" id = "login-name-input" placeholder="请输入手机号码">
+                    <span>或使用</span><a href="javascript:void(0)" id="login-name-select">邮箱登录</a>
+                    <div style="display: none" id="name-input-warn">
+                        <span style="color: red" id="name-input-warn-disp"></span>
+                    </div>
+                </div> 
+            </div>
+        
             
-            <input type="text" id = "login-password" placeholder="密码">
+            <div class="input-block">
+                <span class="login-lable">密码</span>
+                <input type="text" id = "login-password-input" placeholder="密码">
+                <div style="display: none" id="login-password-input-warn">
+                    <span style="color: red" id="login-password-input-warn-disp"></span>
+                </div>
+            </div>        
+    
+             <div class="input-block">
+                 <span class="login-lable">验证码</span>
+                 <input type="text" id = "login-img-verification-code-input"  placeholder="验证码">
+                 <img id="login-kaptcha" title="点击更换" alt="验证图片"
+                            src="/kaptcha" onclick="this.src=this.src+'?d=100'"
+                            style="vertical-align: middle;"  height="30" width="80">
+                 <div style="display: none" id="login-img-verification-code-input-warn">
+                    <span style="color: red" id="login-img-verification-code-input-warn-disp"></span>
+                </div>
+            </div>        
+            <button  id="login-submit-btn">登录</button>
         </div>
-         <div>
-             <div><label for="login-verification-code">验证码 <a href="">获取验证码</a></label><div>
-             
-             <input type="text" id = "login-verification-code"  placeholder="验证码">
-             <img id="login-kaptcha" title="点击更换" alt="验证图片"
-						src="/kaptcha" onclick="this.src=this.src+'?d=100'"
-						style="vertical-align: middle;"  height="30" width="80">
-        </div>        
-        <button>登录</button>
-        <a  href="register.html">注册</a>
-    </div>
 
-</body>
+    </body>
 
-<script>
-    //登录事件
-    function login() {
-        console.log("按钮按下 " )
-    }
-</script>
 
 </html>

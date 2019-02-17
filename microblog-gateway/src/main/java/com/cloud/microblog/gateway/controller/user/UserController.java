@@ -1,17 +1,19 @@
 package com.cloud.microblog.gateway.controller.user;
 
 
+import com.cloud.microblog.common.Utils.UserRegexUtil;
 import com.cloud.microblog.common.aop.syslog.anno.PrintUrlAnno;
+import com.cloud.microblog.common.code.UserReturnCode;
+import com.cloud.microblog.common.result.BaseResult;
+import com.cloud.microblog.common.result.WebResult;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 import java.util.Random;
 
 @RequestMapping("/user")
@@ -21,19 +23,96 @@ public class UserController {
 
 
     @PrintUrlAnno
-    @GetMapping("/login")
-    public String login(HttpServletRequest request){
+    @PostMapping("/login")
+    public BaseResult login(@RequestBody Map<String, Object> requestMap){
 
+        String loginName = (String)requestMap.get("loginName");
+        String loginNameType = (String)requestMap.get("loginNameType");
+        String loginPassword = (String)requestMap.get("loginPassword");
+        String imgVerificationCode = (String)requestMap.get("imgVerificationCode");
+
+        log.debug("loginName = " + loginName
+                +"  loginNameType = " + loginNameType
+                +"  loginPassword = " + loginPassword
+                +"  imgVerificationCode = " + imgVerificationCode
+        );
         Subject subject = SecurityUtils.getSubject();
         Session session = subject.getSession();
-        log.debug("session id = " + session.getId());
-        session.setAttribute("data","login value");
+        BaseResult result = new WebResult(UserReturnCode.LOGIN_SUCCESS);
 
-        Cookie[] cookies = request.getCookies();
-        for(Cookie cookie:cookies){
-            log.debug("cookie Value = " + cookie.getValue() + "  cookie name =  " + cookie.getName() + "  cookie age =  " + cookie.getMaxAge() );
+        return   result ;
+    }
+
+    @PrintUrlAnno
+    @PostMapping("/register")
+    public BaseResult register(@RequestBody Map<String, Object> requestMap){
+
+        String registerName = (String)requestMap.get("registerName");
+        String registerNameType = (String)requestMap.get("registerNameType");
+        String verificationCode = (String)requestMap.get("verificationCode");
+        String registerPassword = (String)requestMap.get("registerPassword");
+        String imgVerificationCode = (String)requestMap.get("imgVerificationCode");
+
+        log.debug("registerName = " + registerName
+                +"  registerNameType = " + registerNameType
+                +"  verificationCode = " + verificationCode
+                +"  registerPassword = " + registerPassword
+                +"  imgVerificationCode = " + imgVerificationCode
+        );
+
+        BaseResult result = new WebResult(UserReturnCode.LOGIN_SUCCESS);
+
+        log.debug("result = " + result);
+
+        return   result ;
+    }
+
+    /**
+     *功能描述
+     * @author lgj
+     * @Description  获取手机或者邮箱的验证码
+     * @date 2/18/19
+     * @param:
+     * @return:
+     *
+    */
+    @PrintUrlAnno
+    @PostMapping("/verification/code")
+    public BaseResult requestVerificationCode(@RequestBody Map<String, Object> requestMap){
+        BaseResult result = null;
+        String registerName = (String)requestMap.get("registerName");
+        String registerNameType = (String)requestMap.get("registerNameType");
+
+        if(StringUtils.isEmpty(registerName)
+        || StringUtils.isEmpty(registerNameType) ){
+            result = new WebResult(UserReturnCode.ERROR_PARAM);
+            return  result;
         }
-        return   String.valueOf(new Random().nextInt(100)) ;
+
+        if(registerNameType == "phone"){
+            if(!UserRegexUtil.isMobile(registerName)){
+                result = new WebResult(UserReturnCode.ERROR_PARAM);
+                return  result;
+            }
+
+            // TODO aaa
+        }
+        else if(registerNameType == "email"){
+            if(!UserRegexUtil.isEmail(registerName)){
+                result = new WebResult(UserReturnCode.ERROR_PARAM);
+                return  result;
+            }
+            // TODO aaa
+        }
+
+
+        log.debug("registerName = " + registerName
+                +"  registerNameType = " + registerNameType
+        );
+
+        result = new WebResult(UserReturnCode.LOGIN_SUCCESS);
+        log.debug("result = " + result);
+        return   result ;
     }
 
     @PrintUrlAnno
