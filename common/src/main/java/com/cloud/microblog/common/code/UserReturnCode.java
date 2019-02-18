@@ -13,6 +13,8 @@ public enum UserReturnCode implements  ReturnCode{
     VALIDATE_CODE_CHECK_FAIL(103,"验证码校验失败"),
     IMG_VALIDATE_CODE_CHECK_PASS(104,"图片验证码校验通过"),
     IMG_VALIDATE_CODE_CHECK_FAIL(105,"图片验证码校验失败"),
+    REQUEST_RSA_KEY_SUCCESS(106,"获取RSA密钥成功"),
+    REQUEST_RSA_KEY_FAIL(107,"获取RSA密钥失败"),
 
     //登录相关　1000-1029
     LOGIN_SUCCESS(1000,"用户登录成功"),

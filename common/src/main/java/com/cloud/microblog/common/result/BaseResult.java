@@ -15,7 +15,7 @@ public class BaseResult implements Serializable {
     private String message;
 
     //返回对象
-    private  Object object;
+    private  Object data;
 
     public BaseResult(Integer code, String message) {
         this.code = code;
@@ -25,7 +25,7 @@ public class BaseResult implements Serializable {
     public BaseResult(Integer code, String message, Object object) {
         this.code = code;
         this.message = message;
-        this.object = object;
+        this.data = object;
     }
 
 

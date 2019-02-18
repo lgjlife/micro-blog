@@ -8,7 +8,6 @@ import com.cloud.microblog.common.result.WebResult;
 import com.cloud.microblog.common.utils.UserRegexUtil;
 import com.cloud.microblog.common.utils.encrypt.rsa.RSAKeyFactory;
 import com.cloud.microblog.common.utils.encrypt.rsa.RSAUtil;
-import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
@@ -18,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.Serializable;
 import java.security.KeyPair;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
@@ -231,29 +229,9 @@ public class UserController {
         return   String.valueOf(new Random().nextInt(100)) ;
     }
 
-    void redisTest(){
-        Mama mm = new Mama("aa",1);
-        log.debug("set mama");
-        redisTemplate.opsForValue().set("mm",mm);
-        Mama mama = (Mama)redisTemplate.opsForValue().get("mm");
-        log.debug("mama = " + mama);
-    }
+
 
 }
 
 
 
-@ToString
-class  Mama implements Serializable {
-
-    String name;
-    Integer age;
-
-    public Mama() {
-    }
-
-    public Mama(String name, Integer age) {
-        this.name = name;
-        this.age = age;
-    }
-}

@@ -33,6 +33,7 @@ public class RSAUtilTest {
 
         log.debug("加密后的密码 = " + new String(encPassword) );
         log.debug("encPassword len  =  " + encPassword.length);
+
         byte[] en_result  = RSAUtil.hexStringToBytes(new String(encPassword));//解决Bad arguments问题
         log.debug("en_result len  =  " + en_result.length);
 

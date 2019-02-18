@@ -1,12 +1,19 @@
 var register={
     //登录名称类型 phone / email
     "registerNameType":"phone",
+    "rsa":{
+        "modulus":"",
+        "exponent":"",
+    },
+    
     //请求url
     "requestUrl":{
         //注册提交
        "registerSubmitUrl":"/user/register",
         //获取手机或者邮箱验证码
        "getVerificationCodeUrl":"/user/verification/code",
+        //获取 rsa modulus  exponent
+        "requestmModulusAndExponentUrl":"/user/key",
     },
     //服务端返回的状态码
     "returnCode":{
@@ -23,6 +30,22 @@ var register={
             sendData.verificationCode = $("#register-verification-code-input").val(); 
             sendData.registerPassword = $("#register-password-input").val(); 
             sendData.imgVerificationCode = $("#register-img-verification-code-input").val(); 
+            
+            
+            //加密
+            if((register.rsa.exponent == null)
+                || (register.rsa.modulus == null)){
+                    register.request.requestmModulusAndExponent();
+                    return;
+            }
+            console.log("开始进行加密......");
+            setMaxDigits(130);
+            var publicKey = new RSAKeyPair(register.rsa.exponent,"",register.rsa.modulus);            
+            var password = encryptedString(publicKey, encodeURIComponent(sendData.registerPassword));
+            console.log("加密的密码为：" + password);   
+            sendData.registerPassword = password;
+            
+            
             var jsonData = JSON.stringify(sendData);
             console.log(jsonData);
             $.ajax({
@@ -59,6 +82,24 @@ var register={
                   console.log("data = " + data + "  status = " + status);
                   console.log("code  = " + data.code);
                   console.log("message  = " + data.message); 
+               }
+            })    
+        },
+        //获取 rsa modulus  exponent
+        "requestmModulusAndExponent":function(){
+            $.ajax({
+               type: "get",
+               url : register.requestUrl.requestmModulusAndExponentUrl,
+               contentType : "application/json;charset=utf-8",      
+               dataType: "json",
+               success:function(data,status){
+                   console.log("data = " + data.message + "  status = " + status);
+                   console.log("modulus  = " + data.data.modulus);
+                   console.log("exponent  = " + data.data.exponent);
+                   
+                   register.rsa.modulus = data.data.modulus;
+                   register.rsa.exponent = data.data.exponent;
+                   
                }
             })    
         }
@@ -221,7 +262,8 @@ $(function(){
     * 注册请求提交
     */
     $("#register-submit-btn").click(function(){
-         if(register.checkAllInput() == true){
+         //if(register.checkAllInput() == true)
+         {
             register.request.registerSubmit(); 
          }
             
@@ -232,6 +274,7 @@ $(function(){
     */
     $("#get-verification-code").click(function(){
          register.request.getVerificationCode();   
+         register.request.requestmModulusAndExponent();
     });
     
      /**
