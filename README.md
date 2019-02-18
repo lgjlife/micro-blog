@@ -18,8 +18,11 @@
 ├─── microblog-config 配置中心应用
 
 ├─── microblog-gateway 网关应用
+
      ├─── microblog-gateway-controller  网关控制层
+     
      ├─── microblog-gateway-service     网关服务层
+     
      ├─── microblog-gateway-dao         网关数据层
 
 ├─── microblog-hystrix  hystrix 监控应用
