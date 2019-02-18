@@ -1,4 +1,4 @@
-package com.cloud.microblog.common.Utils;
+package com.cloud.microblog.common.utils;
 
 import java.util.regex.Pattern;
 
