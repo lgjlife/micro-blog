@@ -1,4 +1,4 @@
-package com.cloud.microblog.gateway.shiro.config;
+package com.cloud.microblog.gateway.service.shiro.config;
 
 
 import com.cloud.microblog.gateway.shiro.realm.ShiroRealm;

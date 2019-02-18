@@ -1,4 +1,4 @@
-package com.cloud.microblog.gateway.shiro.config;
+package com.cloud.microblog.gateway.service.shiro.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.session.Session;

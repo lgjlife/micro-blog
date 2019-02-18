@@ -1,4 +1,4 @@
-package com.cloud.microblog.gateway.utils.redis.config;
+package com.cloud.microblog.gateway.service.redis.config;
 
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
