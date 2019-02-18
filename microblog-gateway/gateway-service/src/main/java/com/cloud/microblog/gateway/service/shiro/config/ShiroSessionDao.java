@@ -34,7 +34,8 @@ public class ShiroSessionDao extends CachingSessionDAO {
     protected void doUpdate(Session session) {
 
         log.debug("doUpdate 。。。。");
-        redisTemplate.opsForValue().set(getKey(session.getId().toString()),session,cacheTimeMinute, TimeUnit.MILLISECONDS);
+
+        redisTemplate.opsForValue().set(getKey(session.getId().toString()),session,session.getTimeout(), TimeUnit.MINUTES);
 
     }
 

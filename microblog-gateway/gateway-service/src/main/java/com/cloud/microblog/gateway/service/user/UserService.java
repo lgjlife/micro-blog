@@ -1,5 +1,8 @@
 package com.cloud.microblog.gateway.service.user;
 
+import com.cloud.microblog.common.code.UserReturnCode;
+import com.cloud.microblog.common.result.BaseResult;
+
 import java.util.Map;
 
 /**
@@ -19,7 +22,7 @@ public interface UserService {
      * @return:
      *
     */
-    void sendPhoneVerificationCode(String code);
+    void sendPhoneVerificationCode(String phone);
     /**
      *功能描述
      * @author lgj
@@ -29,7 +32,7 @@ public interface UserService {
      * @return:
      *
     */
-    void sendEmailVerificationCode(String code);
+    void sendEmailVerificationCode(String email);
 
     /**
      *功能描述
@@ -41,4 +44,47 @@ public interface UserService {
      *
      */
     Map getRsaKey();
+
+    /**
+     *功能描述
+     * @author lgj
+     * @Description  通过电话/邮箱登录
+     * @date 2/18/19
+     * @param:
+     * @return:
+     *
+    */
+    BaseResult login(String name,String type,String password);
+
+    /**
+     *功能描述
+     * @author lgj
+     * @Description  通过电话/邮箱注册
+     * @date 2/18/19
+     * @param:
+     * @return:
+     *
+     */
+    UserReturnCode register(String name, String type, String password);
+    /**
+     *功能描述
+     * @author lgj
+     * @Description  测试手机邮箱验证码是否正确
+     * @date 2/18/19
+     * @param:
+     * @return:
+     *
+    */
+    boolean checkVerificationCode(String code);
+    /**
+     *功能描述
+     * @author lgj
+     * @Description   测试图片验证码是否正确
+     * @date 2/18/19
+     * @param:
+     * @return:
+     *
+    */
+    boolean checkImgVerificationCode(String code);
+
 }

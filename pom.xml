@@ -17,7 +17,7 @@
         <module>microblog-provider</module>
         <module>microblog-hystrix</module>
         <module>microblog-sleuth</module>
-        <module>common</module>
+        <module>microblog-common</module>
         <module>microblog-gateway</module>
         <module>microblog-search</module>
 

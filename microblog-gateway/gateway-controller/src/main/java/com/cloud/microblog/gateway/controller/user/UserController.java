@@ -49,10 +49,24 @@ public class UserController {
     @PostMapping("/login")
     public BaseResult login(@RequestBody Map<String, Object> requestMap){
 
+        BaseResult result = null;
+
         String loginName = (String)requestMap.get("loginName");
         String loginNameType = (String)requestMap.get("loginNameType");
         String loginPassword = (String)requestMap.get("loginPassword");
         String imgVerificationCode = (String)requestMap.get("imgVerificationCode");
+
+
+        if(StringUtils.isEmpty(loginName)
+           || StringUtils.isEmpty(loginNameType)
+           || StringUtils.isEmpty(loginPassword)
+           || StringUtils.isEmpty(imgVerificationCode)){
+            result = new WebResult(UserReturnCode.ERROR_PARAM);
+            return  result;
+        }
+
+
+        userService.login(loginName,loginNameType,loginPassword);
 
         log.debug("loginName = " + loginName
                 +"  loginNameType = " + loginNameType
@@ -62,7 +76,7 @@ public class UserController {
 
         Subject subject = SecurityUtils.getSubject();
         Session session = subject.getSession();
-        BaseResult result = new WebResult(UserReturnCode.LOGIN_SUCCESS);
+        result = new WebResult(UserReturnCode.LOGIN_SUCCESS);
 
         return   result ;
     }
@@ -80,6 +94,8 @@ public class UserController {
     @PostMapping("/register")
     public BaseResult register(@RequestBody Map<String, Object> requestMap){
 
+        BaseResult result = null;
+
         String registerName = (String)requestMap.get("registerName");
         String registerNameType = (String)requestMap.get("registerNameType");
         String verificationCode = (String)requestMap.get("verificationCode");
@@ -93,36 +109,24 @@ public class UserController {
                 +"  imgVerificationCode = " + imgVerificationCode
         );
 
-
-        log.debug("开始进行解密");
-        Subject subject = SecurityUtils.getSubject();
-        Session session = subject.getSession();
-        KeyPair keyPair = (KeyPair)session.getAttribute("RSA:KeyPair");
-        RSAPrivateKey privateKey = (RSAPrivateKey)keyPair.getPrivate();
-
-        byte[] en_result  = RSAUtil.hexStringToBytes(registerPassword);//解决Bad arguments问题
-        log.debug("en_result len  =  " + en_result.length);
-
-        try{
-            byte[] decPasswordByte = RSAUtil.decrypt(privateKey,en_result);
-
-            String passStr = new String(decPasswordByte);
-
-            StringBuffer StrBuf = new StringBuffer();
-            StrBuf.append(passStr);
-            String decPassqord = StrBuf.reverse().toString();
-
-            log.debug("解密后的密码 = " + decPassqord);
+        //手机邮件校验码
+        if(!userService.checkVerificationCode(verificationCode)){
+            result = new WebResult(UserReturnCode.VALIDATE_CODE_CHECK_FAIL);
+            return   result ;
         }
-        catch(Exception ex){
-            ex.printStackTrace();
+        //图片验证码
+        if(!userService.checkImgVerificationCode(imgVerificationCode)){
+            result = new WebResult(UserReturnCode.IMG_VALIDATE_CODE_CHECK_FAIL);
+            return   result ;
         }
+        //注册
+        userService.register(registerName,registerNameType,registerPassword);
 
 
 
-        BaseResult result = new WebResult(UserReturnCode.LOGIN_SUCCESS);
 
-        log.debug("result = " + result);
+
+        result = new WebResult(UserReturnCode.LOGIN_SUCCESS);
 
         return   result ;
     }
