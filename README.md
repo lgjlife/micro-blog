@@ -38,3 +38,8 @@
 ├─── github 上传脚本
 
 ├─── micro-blog 设计图.jpg
+
+# 前端页面
+![首页](https://github.com/lgjlife/micro-blog/blob/master/img/index.png)
+![登录页](https://github.com/lgjlife/micro-blog/blob/master/img/login.png)
+![注册页](https://github.com/lgjlife/micro-blog/blob/master/img/register.png)
