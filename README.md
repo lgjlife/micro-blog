@@ -1,5 +1,6 @@
 # 基于SpringCloud的仿微博系统
 
+## 设计思路
 ![](https://github.com/lgjlife/micro-blog/blob/master/micro-blog%20%E8%AE%BE%E8%AE%A1%E5%9B%BE.jpg)
 
 # 模块说明
