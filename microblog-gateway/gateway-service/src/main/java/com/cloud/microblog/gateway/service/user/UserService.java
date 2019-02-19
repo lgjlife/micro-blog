@@ -22,7 +22,7 @@ public interface UserService {
      * @return:
      *
     */
-    void sendPhoneVerificationCode(String phone);
+    boolean sendPhoneVerificationCode(String phone);
     /**
      *功能描述
      * @author lgj
@@ -32,7 +32,7 @@ public interface UserService {
      * @return:
      *
     */
-    void sendEmailVerificationCode(String email);
+    boolean sendEmailVerificationCode(String email);
 
     /**
      *功能描述
@@ -56,6 +56,16 @@ public interface UserService {
     */
     BaseResult login(String name,String type,String password);
 
+    /**
+     *功能描述
+     * @author lgj
+     * @Description   退出登录
+     * @date 2/19/19
+     * @param:
+     * @return:
+     *
+    */
+    void logout();
     /**
      *功能描述
      * @author lgj

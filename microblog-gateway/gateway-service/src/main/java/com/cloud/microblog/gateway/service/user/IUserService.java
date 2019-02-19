@@ -6,6 +6,7 @@ import com.cloud.microblog.common.result.BaseResult;
 import com.cloud.microblog.common.utils.SessionUtils;
 import com.cloud.microblog.common.utils.encrypt.rsa.RSAKeyFactory;
 import com.cloud.microblog.common.utils.encrypt.rsa.RSAUtil;
+import com.cloud.microblog.common.utils.sms.SmsUtil;
 import com.cloud.microblog.gateway.dao.mapper.UserMapper;
 import com.cloud.microblog.gateway.dao.model.User;
 import com.cloud.microblog.gateway.service.utils.UserSessionKeyUtil;
@@ -25,7 +26,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-
+/**
+ *功能描述 
+ * @author lgj
+ * @Description  用户模块实现
+ * @date 2/19/19
+*/
 @Slf4j
 @Service
 public class IUserService  implements  UserService{
@@ -42,8 +48,19 @@ public class IUserService  implements  UserService{
      *
      */
     @Override
-    public void sendPhoneVerificationCode(String phone) {
+    public boolean sendPhoneVerificationCode(String phone) {
         String code = getCode();
+        try{
+            SmsUtil.sendSms(phone,code);
+            SessionUtils.set(UserSessionKeyUtil.PHONE_VERIFICATION_CODE_KEY,code);
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+            return  false;
+        }
+        return  true;
+
+
     }
 
     /**
@@ -56,8 +73,18 @@ public class IUserService  implements  UserService{
      *
      */
     @Override
-    public void sendEmailVerificationCode(String email) {
+    public boolean sendEmailVerificationCode(String email) {
         String code = getCode();
+        try{
+            SmsUtil.sendSms(email,code);
+            SessionUtils.set(UserSessionKeyUtil.PHONE_VERIFICATION_CODE_KEY,code);
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+            return  false;
+        }
+        return  true;
+
     }
 
     /**
@@ -105,6 +132,20 @@ public class IUserService  implements  UserService{
     @Override
     public BaseResult login(String name, String type, String password) {
         return null;
+    }
+
+    /**
+     *功能描述
+     * @author lgj
+     * @Description 退出登录
+     * @date 2/19/19
+     * @param:
+     * @return:
+     *
+    */
+    @Override
+    public void logout() {
+
     }
 
     /**

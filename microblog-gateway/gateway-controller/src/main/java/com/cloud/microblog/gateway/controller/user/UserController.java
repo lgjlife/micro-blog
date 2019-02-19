@@ -6,18 +6,12 @@ import com.cloud.microblog.common.code.UserReturnCode;
 import com.cloud.microblog.common.result.BaseResult;
 import com.cloud.microblog.common.result.WebResult;
 import com.cloud.microblog.common.utils.UserRegexUtil;
-import com.cloud.microblog.common.utils.encrypt.rsa.RSAUtil;
 import com.cloud.microblog.gateway.service.user.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.session.Session;
-import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.KeyPair;
-import java.security.interfaces.RSAPrivateKey;
 import java.util.Map;
 import java.util.Random;
 
@@ -65,19 +59,14 @@ public class UserController {
             return  result;
         }
 
-
-        userService.login(loginName,loginNameType,loginPassword);
-
         log.debug("loginName = " + loginName
                 +"  loginNameType = " + loginNameType
                 +"  loginPassword = " + loginPassword
                 +"  imgVerificationCode = " + imgVerificationCode
         );
-
-        Subject subject = SecurityUtils.getSubject();
-        Session session = subject.getSession();
+        //登录请求
+        userService.login(loginName,loginNameType,loginPassword);
         result = new WebResult(UserReturnCode.LOGIN_SUCCESS);
-
         return   result ;
     }
 
@@ -119,15 +108,9 @@ public class UserController {
             result = new WebResult(UserReturnCode.IMG_VALIDATE_CODE_CHECK_FAIL);
             return   result ;
         }
-        //注册
+        //注册请求
         userService.register(registerName,registerNameType,registerPassword);
-
-
-
-
-
-        result = new WebResult(UserReturnCode.LOGIN_SUCCESS);
-
+        result = new WebResult(UserReturnCode.REGISTER_SUCCESS);
         return   result ;
     }
 
@@ -148,38 +131,49 @@ public class UserController {
         String registerName = (String)requestMap.get("registerName");
         String registerNameType = (String)requestMap.get("registerNameType");
 
+        //号码/邮箱地址为空
         if(StringUtils.isEmpty(registerName)
         || StringUtils.isEmpty(registerNameType) ){
             result = new WebResult(UserReturnCode.ERROR_PARAM);
             return  result;
         }
+        log.debug("registerName = " + registerName
+                +"  registerNameType = " + registerNameType
+        );
 
+        //是电话号码类型
         if(registerNameType == "phone"){
+            //不是电话号码
             if(!UserRegexUtil.isMobile(registerName)){
                 result = new WebResult(UserReturnCode.ERROR_PARAM);
                 return  result;
             }
 
-            // TODO  电话获取验证码处理
-            userService.sendPhoneVerificationCode(registerName);
+
+            if(!userService.sendPhoneVerificationCode(registerName)){
+                result = new WebResult(UserReturnCode.VALIDATE_CODE_SEND_FAIL);
+                return result;
+            }
+
+            result = new WebResult(UserReturnCode.VALIDATE_CODE_SEND_SUCCESS);
+            return result;
         }
+        //是邮件地址类型
         else if(registerNameType == "email"){
             if(!UserRegexUtil.isEmail(registerName)){
                 result = new WebResult(UserReturnCode.ERROR_PARAM);
                 return  result;
             }
-            // TODO 邮件获取验证码处理
-            userService.sendEmailVerificationCode(registerName);
+            if(!userService.sendEmailVerificationCode(registerName)){
+                result = new WebResult(UserReturnCode.VALIDATE_CODE_SEND_FAIL);
+                return result;
+            }
+            result = new WebResult(UserReturnCode.VALIDATE_CODE_SEND_SUCCESS);
+            return result;
+
         }
-
-
-        log.debug("registerName = " + registerName
-                +"  registerNameType = " + registerNameType
-        );
-
-        result = new WebResult(UserReturnCode.LOGIN_SUCCESS,code);
-        log.debug("result = " + result);
-        return   result ;
+        result = new WebResult(UserReturnCode.VALIDATE_CODE_SEND_FAIL);
+        return result;
     }
 
     /**
@@ -215,13 +209,7 @@ public class UserController {
     @GetMapping("/logout")
     public String logout(){
 
-        Subject subject = SecurityUtils.getSubject();
-        Session session = subject.getSession();
-        log.debug("session id = " + session.getId());
-        String value = (String) session.getAttribute("data");
-
-        log.debug("value = " + value);
-
+        userService.logout();
         return   String.valueOf(new Random().nextInt(100)) ;
     }
 
