@@ -40,7 +40,28 @@
 
 ├─── micro-blog 设计图.jpg
 
-# 前端页面
+## 使用工具和技术
+### 工具
+* 开发环境： IDEA
+* 前端开发工具： Brackets
+* 版本管理： git
+* 思维导图软件： MindMaster
+### 技术
+* 核心框架： Spring Cloud , Spring ,Spring MVC
+* 持久层： Mybatis
+* 数据库： MySQL
+* 数据库连接池： Druid
+* 缓存： Redis
+* 代理服务器： nginx
+* 安全框架： shiro
+* 网络通信： netty
+* 消息中间件： RabbitMQ
+* 搜索：elasticsearch
+* 日志： log4j2
+* 日志聚合： kafka
+* 前端:Html,Javascript,css,jquery
+
+## 前端页面
 ![首页](https://github.com/lgjlife/micro-blog/blob/master/img/index.png)
 ![登录页](https://github.com/lgjlife/micro-blog/blob/master/img/login.png)
 ![注册页](https://github.com/lgjlife/micro-blog/blob/master/img/register.png)
