@@ -2,19 +2,20 @@ package com.cloud.microblog.gateway.service.user;
 
 
 import com.cloud.microblog.common.code.UserReturnCode;
-import com.cloud.microblog.common.result.BaseResult;
 import com.cloud.microblog.common.utils.SessionUtils;
+import com.cloud.microblog.common.utils.UserRegexUtil;
 import com.cloud.microblog.common.utils.encrypt.rsa.RSAKeyFactory;
 import com.cloud.microblog.common.utils.encrypt.rsa.RSAUtil;
-import com.cloud.microblog.common.utils.sms.SmsUtil;
+import com.cloud.microblog.common.utils.mail.MailSenderMsg;
+import com.cloud.microblog.common.utils.mail.MailService;
 import com.cloud.microblog.gateway.dao.mapper.UserMapper;
 import com.cloud.microblog.gateway.dao.model.User;
 import com.cloud.microblog.gateway.service.utils.UserSessionKeyUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.Md5Hash;
-import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,7 @@ import org.springframework.stereotype.Service;
 import java.security.KeyPair;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -38,6 +40,9 @@ public class IUserService  implements  UserService{
 
     @Autowired
     UserMapper userMapper;
+
+    @Autowired
+    MailService mailService;
     /**
      *功能描述
      * @author lgj
@@ -51,8 +56,15 @@ public class IUserService  implements  UserService{
     public boolean sendPhoneVerificationCode(String phone) {
         String code = getCode();
         try{
-            SmsUtil.sendSms(phone,code);
-            SessionUtils.set(UserSessionKeyUtil.PHONE_VERIFICATION_CODE_KEY,code);
+            // TODO  使用消息中间件处理
+            Date start = new Date();
+         //   SmsUtil.sendSms(phone,code);
+            Date end = new Date();
+            log.debug("向手机号({})发送验证码:({})",phone,code);
+            log.info("短信花费时间：" + (end.getTime() - start.getTime()));
+            SessionUtils.set(UserSessionKeyUtil.PHONE_EMAIL_VERIFICATION_CODE_KEY,
+                    code,
+                    UserSessionKeyUtil.PHONE_EMAIL_VERIFICATION_CODE_KEY.getTimeout());
         }
         catch(Exception ex){
             ex.printStackTrace();
@@ -76,8 +88,17 @@ public class IUserService  implements  UserService{
     public boolean sendEmailVerificationCode(String email) {
         String code = getCode();
         try{
-            SmsUtil.sendSms(email,code);
-            SessionUtils.set(UserSessionKeyUtil.PHONE_VERIFICATION_CODE_KEY,code);
+            String content = "本次验证码为：" + code+"." ;
+            Date start = new Date();
+            // TODO  使用消息中间件处理
+            MailSenderMsg msg = new MailSenderMsg("563739007@qq.com","Micro-Blog 验证码",content);
+            mailService.sendSimpleMail(msg);
+            log.debug("向邮箱({})发送验证码:({})",email,code);
+            Date end = new Date();
+            log.info("邮件花费时间：" + (end.getTime() - start.getTime()));
+            SessionUtils.set(UserSessionKeyUtil.PHONE_EMAIL_VERIFICATION_CODE_KEY,
+                    code,
+                    UserSessionKeyUtil.PHONE_EMAIL_VERIFICATION_CODE_KEY.getTimeout());
         }
         catch(Exception ex){
             ex.printStackTrace();
@@ -99,17 +120,15 @@ public class IUserService  implements  UserService{
     @Override
     public Map getRsaKey() {
 
-        KeyPair key = RSAKeyFactory.getInstance().getKeyPair();
-        RSAPublicKey publicKey = (RSAPublicKey) key.getPublic();
-        RSAPrivateKey privateKey = (RSAPrivateKey)key.getPrivate();
+        KeyPair keyPair = RSAKeyFactory.getInstance().getKeyPair();
+        RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
+        RSAPrivateKey privateKey = (RSAPrivateKey)keyPair.getPrivate();
         String modulus = publicKey.getModulus().toString(16);
         String exponent = publicKey.getPublicExponent().toString(16);
 
-
-        Subject subject = SecurityUtils.getSubject();
-        Session session = subject.getSession();
-        log.debug("set key ");
-        session.setAttribute("RSA:KeyPair",key);
+        SessionUtils.set(UserSessionKeyUtil.REGISTER_AES_KEYPAIR_KEY,
+                keyPair,
+                UserSessionKeyUtil.REGISTER_AES_KEYPAIR_KEY.getTimeout());
 
         Map map = new HashMap();
         map.put("modulus",modulus);
@@ -130,8 +149,74 @@ public class IUserService  implements  UserService{
      *
      */
     @Override
-    public BaseResult login(String name, String type, String password) {
-        return null;
+    public UserReturnCode login(String name,  String encPassword) {
+
+        User user = null;
+        //
+        //获取原始密码
+      /*  KeyPair keyPair = (KeyPair) SessionUtils.get(UserSessionKeyUtil.REGISTER_AES_KEYPAIR_KEY);
+        RSAPrivateKey privateKey = (RSAPrivateKey)keyPair.getPrivate();
+        String password = decPassword(encPassword,privateKey);
+        log.debug("原始密码 = " + password);*/
+        String  password = "ZXCVBNM123";
+        Subject subject = null;
+        try {
+
+            //开始认证
+            log.debug("开始认证");
+            subject = SecurityUtils.getSubject();
+            UsernamePasswordToken token = new UsernamePasswordToken(name,password);
+            log.debug("认证状态 = " + subject.isAuthenticated());
+
+            token.setRememberMe(true);
+            /*登录验证*/
+            subject.login(token);
+            log.debug("用户{}登录成功",name);
+            if(UserRegexUtil.isMobile(name)){
+                user = userMapper.selectByPhone(name);
+            }
+            else if(UserRegexUtil.isEmail(name)){
+                user = userMapper.selectByEmail(name);
+            }
+
+            SessionUtils.set(UserSessionKeyUtil.CURRENT_LOGIN_USER_KEY,user,UserSessionKeyUtil.CURRENT_LOGIN_USER_KEY.getTimeout());
+
+
+        }catch(UnknownAccountException uae){
+            log.debug("对用户[" + name + "]进行登录验证..验证未通过,未知账户");
+            return UserReturnCode.LOGIN_UNKNOW_ACCOUT;
+        }catch(IncorrectCredentialsException ice){
+            log.debug("对用户[" + name + "]进行登录验证..验证未通过,错误的凭证");
+            return UserReturnCode.LOGIN_PASSWORD_ERR;
+        }catch(LockedAccountException lae){
+            log.debug("对用户[" + name + "]进行登录验证..验证未通过,账户已锁定");
+            return UserReturnCode.LOGIN_LOCK_ACCOUNT;
+        }catch(ExcessiveAttemptsException eae){
+            log.debug("对用户[" + name + "]进行登录验证..验证未通过,错误次数过多");
+            return UserReturnCode.LOGIN_PASSWORD_ERR_MORE;
+        }catch(AuthenticationException ae){
+            //通过处理Shiro的运行时AuthenticationException就可以控制用户登录失败或密码错误时的情景
+            log.debug("对用户[" + name + "]进行登录验证..验证未通过,堆栈轨迹如下5");
+            return UserReturnCode.LOGIN_FAIL;
+         }
+        log.debug("认证状态 = " + subject.isAuthenticated());
+        if(subject.isAuthenticated()) {
+            log.debug("用户[" + name + "]登录认证通过(这里可以进行一些认证通过后的一些系统参数初始化操作)");
+        }
+        return UserReturnCode.LOGIN_SUCCESS;
+    }
+
+    @Override
+    public User queryCurrentLoginInfo() {
+        User user = (User) SessionUtils.get(UserSessionKeyUtil.CURRENT_LOGIN_USER_KEY);
+
+        if(user != null){
+            log.debug("user info = " + user);
+        }
+        else {
+            log.debug("user is null  ");
+        }
+        return  user;
     }
 
     /**
@@ -144,8 +229,13 @@ public class IUserService  implements  UserService{
      *
     */
     @Override
-    public void logout() {
+    public UserReturnCode logout() {
 
+        User user = (User)SessionUtils.get(UserSessionKeyUtil.CURRENT_LOGIN_USER_KEY);
+        log.debug("用户{}退出登录");
+        Subject subject = SecurityUtils.getSubject();
+        subject.logout();
+        return  UserReturnCode.LOGOUT_SUCCESS;
     }
 
     /**
@@ -158,27 +248,30 @@ public class IUserService  implements  UserService{
      *
      */
     @Override
-    public UserReturnCode register(String name, String type, String encPassword) {
+    public UserReturnCode register(String name,String encPassword) {
 
         User user = null;
-
+        log.debug("{}正在注册.....",name);
 
         //检测是否已经注册
-        if("phone".equals(type)){
-            if(userMapper.selectIdByPhone(name) != 0){
+        if(UserRegexUtil.isMobile(name)){
+            if(userMapper.selectIdByPhone(name) != null){
                 return UserReturnCode.ACCOUNT_EXIST;
             }
             user = new User();
             user.setPhoneNum(name);
+            log.debug("手机帐号({})注册",name);
 
         }
-        else if("email".equals(type)){
-            if(userMapper.selectIdByEmail(name) != 0){
+        else if(UserRegexUtil.isEmail(name)){
+            if(userMapper.selectIdByEmail(name) != null){
                 return UserReturnCode.ACCOUNT_EXIST;
             }
             user = new User();
             user.setEmail(name);
+            log.debug("手机帐号({})注册",name);
         }
+
 
         //获取原始密码
         KeyPair keyPair = (KeyPair) SessionUtils.get(UserSessionKeyUtil.REGISTER_AES_KEYPAIR_KEY);
@@ -193,7 +286,9 @@ public class IUserService  implements  UserService{
         log.debug("进行MD5加密的密码 = " + resultPassword);
 
 
-        user.setLoginPassword(password);
+        user.setLoginPassword(resultPassword);
+        user.setSalt(random);
+        user.setRegisterTime(new Date());
 
         if(userMapper.insert(user) != 0){
             return UserReturnCode.REGISTER_SUCCESS;
@@ -214,7 +309,9 @@ public class IUserService  implements  UserService{
      */
     public boolean checkVerificationCode(String code){
 
-        return  false;
+        String saveCode = (String)SessionUtils.get(UserSessionKeyUtil.PHONE_EMAIL_VERIFICATION_CODE_KEY);
+        log.debug("saveCode = {} , code = {}",saveCode , code);
+        return  code.equals(saveCode);
     }
     /**
      *功能描述
@@ -226,7 +323,10 @@ public class IUserService  implements  UserService{
      *
      */
     public boolean checkImgVerificationCode(String code){
-        return false;
+
+        String saveCode = (String)SessionUtils.get(UserSessionKeyUtil.IMG_VERIFICATION_CODE_KEY);
+        log.debug("saveCode = {} , code = {}",saveCode , code);
+        return  code.equals(saveCode);
     }
 
     private String decPassword(String encPassword,RSAPrivateKey privateKey ){

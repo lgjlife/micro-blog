@@ -44,6 +44,10 @@ public interface UserMapper {
      */
     int updateByPrimaryKey(User record);
 
-    long selectIdByPhone(String phone);
-    long selectIdByEmail(String email);
+    Long selectIdByPhone(String phone);
+    Long selectIdByEmail(String email);
+
+    User selectByPhone(String phone);
+    User selectByEmail(String email);
+
 }

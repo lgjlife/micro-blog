@@ -24,7 +24,7 @@ var login={
                data : jsonData,
                dataType: "json",
                success:function(data,status){
-
+                    console.log(data.message);
                }
             });  
         },

@@ -1,13 +1,12 @@
 package com.cloud.microblog.gateway.utils.kaptcha;
 
 import com.cloud.microblog.common.aop.syslog.anno.PrintUrlAnno;
+import com.cloud.microblog.common.utils.SessionUtils;
+import com.cloud.microblog.gateway.service.utils.UserSessionKeyUtil;
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.session.Session;
-import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,12 +43,10 @@ public class KaptchaImageCreateController {
 
         String verificationCode = kaptchaProducer.createText();
         log.debug("验证码 = " +  verificationCode);
-        request.getSession().setAttribute(Constants.KAPTCHA_SESSION_KEY, verificationCode); 
-        
-        Subject currentUser = SecurityUtils.getSubject();
-		Session session = currentUser.getSession();
-		session.setAttribute("verificationCode",verificationCode);
-		log.debug("session id = " + session.getId());
+        request.getSession().setAttribute(Constants.KAPTCHA_SESSION_KEY, verificationCode);
+
+        SessionUtils.set(UserSessionKeyUtil.IMG_VERIFICATION_CODE_KEY,verificationCode,UserSessionKeyUtil.IMG_VERIFICATION_CODE_KEY.getTimeout());
+
         BufferedImage bi = kaptchaProducer.createImage(verificationCode);  
         ServletOutputStream out = response.getOutputStream();  
         ImageIO.write(bi, "jpg", out);  

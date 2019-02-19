@@ -1,5 +1,6 @@
 package com.cloud.microblog.gateway.dao.model;
 
+import java.util.Arrays;
 import java.util.Date;
 
 public class User {
@@ -513,5 +514,27 @@ public class User {
      */
     public void setHeadPortrait(byte[] headPortrait) {
         this.headPortrait = headPortrait;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", userNumber=" + userNumber +
+                ", nickName='" + nickName + '\'' +
+                ", loginPassword='" + loginPassword + '\'' +
+                ", salt='" + salt + '\'' +
+                ", actualName='" + actualName + '\'' +
+                ", gender='" + gender + '\'' +
+                ", age=" + age +
+                ", status=" + status +
+                ", email='" + email + '\'' +
+                ", emailActive=" + emailActive +
+                ", phoneNum='" + phoneNum + '\'' +
+                ", registerTime=" + registerTime +
+                ", lastLoginTime=" + lastLoginTime +
+                ", loginNums=" + loginNums +
+                ", headPortrait=" + Arrays.toString(headPortrait) +
+                '}';
     }
 }

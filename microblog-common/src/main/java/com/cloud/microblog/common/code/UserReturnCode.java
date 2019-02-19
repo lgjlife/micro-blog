@@ -1,5 +1,11 @@
 package com.cloud.microblog.common.code;
 
+/**
+ *功能描述
+ * @author lgj
+ * @Description  后台向前端返回的CODE
+ * @date 2/19/19
+*/
 public enum UserReturnCode implements  ReturnCode{
 
 
@@ -25,6 +31,10 @@ public enum UserReturnCode implements  ReturnCode{
     LOGIN_GET_KEYPAIR_FAIL(1005,"登陆时获取keypair失败"),
     LOGIN_GET_KEYPAIR_SUCCESS(1006,"登陆时获取keypair成功"),
     LOGIN_UNKNOW_ACCOUT(1007,"帐号不存在"),
+
+    //退出登录
+    LOGOUT_SUCCESS(1015,"用户退出登录成功"),
+    LOGOUT_FAIL(1016,"用户退出登录失败"),
 
     //注册相关　1030-1059
     ACCOUNT_EXIST(1030,"帐号注册失败,帐号已经存在"),
@@ -53,6 +63,8 @@ public enum UserReturnCode implements  ReturnCode{
     //INFO 1080-2010
     INFO_RESET_PASSWORD_SUCCESS (1080,"重置密码成功"),
     INFO_RESET_PASSWORD_FAIL (1081,"重置密码失败"),
+    QUERY_USER_INFO_SUCCESS (1082,"查询用户信息成功"),
+    QUERY_USER_INFO_FAIL (1083,"查询用户信息失败"),
     ;
 
     //代码

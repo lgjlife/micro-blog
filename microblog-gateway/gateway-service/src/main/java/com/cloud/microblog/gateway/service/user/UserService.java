@@ -1,7 +1,7 @@
 package com.cloud.microblog.gateway.service.user;
 
 import com.cloud.microblog.common.code.UserReturnCode;
-import com.cloud.microblog.common.result.BaseResult;
+import com.cloud.microblog.gateway.dao.model.User;
 
 import java.util.Map;
 
@@ -54,7 +54,18 @@ public interface UserService {
      * @return:
      *
     */
-    BaseResult login(String name,String type,String password);
+    UserReturnCode login(String name,String password);
+
+    /**
+     *功能描述
+     * @author lgj
+     * @Description  获取当前登录的用户
+     * @date 2/19/19
+     * @param:
+     * @return:
+     *
+    */
+    User queryCurrentLoginInfo();
 
     /**
      *功能描述
@@ -65,7 +76,7 @@ public interface UserService {
      * @return:
      *
     */
-    void logout();
+    UserReturnCode logout();
     /**
      *功能描述
      * @author lgj
@@ -75,7 +86,7 @@ public interface UserService {
      * @return:
      *
      */
-    UserReturnCode register(String name, String type, String password);
+    UserReturnCode register(String name, String password);
     /**
      *功能描述
      * @author lgj

@@ -1,6 +1,8 @@
 package com.cloud.microblog.common.utils.mail;
 
 
+import org.springframework.mail.MailException;
+
 import javax.mail.MessagingException;
 
 /**
@@ -20,7 +22,7 @@ public interface MailService {
      * @author: Mr.lgj
      * @date: 7/4/18
      */
-    void sendSimpleMail(MailSenderMsg msg);
+    void sendSimpleMail(MailSenderMsg msg)  throws MailException;
 
     /**
      * @description: 发送Html邮件

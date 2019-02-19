@@ -27,10 +27,8 @@ public class MailServiceImplTest {
      @Test
     public  void sendSimpleMailTest(){
          Date start = new Date();
-        MailSenderMsg msg = new MailSenderMsg("563739007@qq.com","Spring Boot 邮件测试","邮件内容");
-
-
-        mailService.sendSimpleMail(msg);
+         MailSenderMsg msg = new MailSenderMsg("563739007@qq.com","Spring Boot 邮件测试","邮件内容");
+         mailService.sendSimpleMail(msg);
          Date end = new Date();
          log.info("邮件花费时间：" + (end.getTime() - start.getTime()));
     }

@@ -5,7 +5,9 @@ import com.cloud.microblog.common.aop.syslog.anno.PrintUrlAnno;
 import com.cloud.microblog.common.code.UserReturnCode;
 import com.cloud.microblog.common.result.BaseResult;
 import com.cloud.microblog.common.result.WebResult;
+import com.cloud.microblog.common.utils.SessionUtils;
 import com.cloud.microblog.common.utils.UserRegexUtil;
+import com.cloud.microblog.gateway.dao.model.User;
 import com.cloud.microblog.gateway.service.user.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -13,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
-import java.util.Random;
 
 /**
  *功能描述 
@@ -65,11 +66,24 @@ public class UserController {
                 +"  imgVerificationCode = " + imgVerificationCode
         );
         //登录请求
-        userService.login(loginName,loginNameType,loginPassword);
-        result = new WebResult(UserReturnCode.LOGIN_SUCCESS);
+        UserReturnCode returnCode =  userService.login(loginName,loginPassword);
+        result = new WebResult(returnCode);
         return   result ;
     }
+    @PrintUrlAnno
+    @GetMapping("/info")
+    public BaseResult queryCurrentLoginInfo(){
+        BaseResult result = null;
+        User user =  userService.queryCurrentLoginInfo();
+        if(user  == null){
 
+            result = new WebResult(UserReturnCode.QUERY_USER_INFO_FAIL);
+            return   result ;
+
+         }
+        result = new WebResult(UserReturnCode.QUERY_USER_INFO_SUCCESS,user);
+        return   result ;
+    }
     /**
      *功能描述
      * @author lgj
@@ -99,18 +113,20 @@ public class UserController {
         );
 
         //手机邮件校验码
-        if(!userService.checkVerificationCode(verificationCode)){
+        /*if(!userService.checkVerificationCode(verificationCode)){
             result = new WebResult(UserReturnCode.VALIDATE_CODE_CHECK_FAIL);
+            log.debug(UserReturnCode.VALIDATE_CODE_CHECK_FAIL.getMessage());
             return   result ;
-        }
+        }*/
         //图片验证码
-        if(!userService.checkImgVerificationCode(imgVerificationCode)){
+        /*if(!userService.checkImgVerificationCode(imgVerificationCode)){
             result = new WebResult(UserReturnCode.IMG_VALIDATE_CODE_CHECK_FAIL);
+            log.debug(UserReturnCode.IMG_VALIDATE_CODE_CHECK_FAIL.getMessage());
             return   result ;
-        }
+        }*/
         //注册请求
-        userService.register(registerName,registerNameType,registerPassword);
-        result = new WebResult(UserReturnCode.REGISTER_SUCCESS);
+        UserReturnCode returnCode = userService.register(registerName,registerPassword);
+        result = new WebResult(returnCode);
         return   result ;
     }
 
@@ -131,6 +147,7 @@ public class UserController {
         String registerName = (String)requestMap.get("registerName");
         String registerNameType = (String)requestMap.get("registerNameType");
 
+        SessionUtils.set("aaaaaa","bbbbbbbbbbbbbbbbbbbb",10);
         //号码/邮箱地址为空
         if(StringUtils.isEmpty(registerName)
         || StringUtils.isEmpty(registerNameType) ){
@@ -141,37 +158,21 @@ public class UserController {
                 +"  registerNameType = " + registerNameType
         );
 
-        //是电话号码类型
-        if(registerNameType == "phone"){
-            //不是电话号码
-            if(!UserRegexUtil.isMobile(registerName)){
-                result = new WebResult(UserReturnCode.ERROR_PARAM);
-                return  result;
-            }
-
-
-            if(!userService.sendPhoneVerificationCode(registerName)){
-                result = new WebResult(UserReturnCode.VALIDATE_CODE_SEND_FAIL);
+        //是电话号码
+        if(UserRegexUtil.isMobile(registerName)){
+            if(userService.sendPhoneVerificationCode(registerName)){
+                result = new WebResult(UserReturnCode.VALIDATE_CODE_SEND_SUCCESS);
                 return result;
             }
-
-            result = new WebResult(UserReturnCode.VALIDATE_CODE_SEND_SUCCESS);
-            return result;
         }
         //是邮件地址类型
-        else if(registerNameType == "email"){
-            if(!UserRegexUtil.isEmail(registerName)){
-                result = new WebResult(UserReturnCode.ERROR_PARAM);
-                return  result;
-            }
-            if(!userService.sendEmailVerificationCode(registerName)){
-                result = new WebResult(UserReturnCode.VALIDATE_CODE_SEND_FAIL);
+        else if(UserRegexUtil.isEmail(registerName)){
+            if(userService.sendEmailVerificationCode(registerName)){
+                result = new WebResult(UserReturnCode.VALIDATE_CODE_SEND_SUCCESS);
                 return result;
             }
-            result = new WebResult(UserReturnCode.VALIDATE_CODE_SEND_SUCCESS);
-            return result;
-
         }
+
         result = new WebResult(UserReturnCode.VALIDATE_CODE_SEND_FAIL);
         return result;
     }
@@ -191,10 +192,8 @@ public class UserController {
         BaseResult result = null;
         Map map = userService.getRsaKey();
         result = new WebResult(UserReturnCode.REQUEST_RSA_KEY_SUCCESS,map);
-        log.debug("result = " + result);
         return   result ;
     }
-
 
     /**
      *功能描述
@@ -207,14 +206,12 @@ public class UserController {
     */
     @PrintUrlAnno
     @GetMapping("/logout")
-    public String logout(){
-
-        userService.logout();
-        return   String.valueOf(new Random().nextInt(100)) ;
+    public BaseResult logout(){
+        BaseResult result = null;
+        UserReturnCode code = userService.logout();
+        result = new WebResult(code);
+        return   result ;
     }
-
-
-
 }
 
 

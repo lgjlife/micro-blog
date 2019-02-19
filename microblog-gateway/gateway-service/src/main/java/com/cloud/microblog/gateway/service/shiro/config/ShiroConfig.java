@@ -1,7 +1,8 @@
 package com.cloud.microblog.gateway.service.shiro.config;
 
 
-import com.cloud.microblog.gateway.shiro.realm.ShiroRealm;
+import com.cloud.microblog.gateway.dao.mapper.UserMapper;
+import com.cloud.microblog.gateway.service.shiro.realm.ShiroRealm;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.cache.MemoryConstrainedCacheManager;
@@ -74,9 +75,10 @@ public class ShiroConfig {
     }
 
     @Bean
-    public ShiroRealm shiroRealm(HashedCredentialsMatcher matcher){
+    public ShiroRealm shiroRealm(HashedCredentialsMatcher matcher, UserMapper userMapper){
         ShiroRealm realm = new ShiroRealm();
         realm.setCredentialsMatcher(matcher);
+        realm.setUserMapper(userMapper);
         return  realm;
     }
 

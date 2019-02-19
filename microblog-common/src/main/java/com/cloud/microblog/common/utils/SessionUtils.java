@@ -25,7 +25,7 @@ public class SessionUtils {
         Subject subject = SecurityUtils.getSubject();
         Session session = subject.getSession();
         session.setAttribute(key,value);
-        session.setTimeout(timeout);
+        session.setTimeout(timeout*1000*60);
     }
 
 

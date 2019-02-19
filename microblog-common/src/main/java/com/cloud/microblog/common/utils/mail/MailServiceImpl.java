@@ -3,6 +3,7 @@ package com.cloud.microblog.common.utils.mail;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -44,23 +45,15 @@ public class MailServiceImpl implements MailService {
      * @date: 7/4/18
      */
     @Override
-    public void sendSimpleMail(MailSenderMsg msg) {
+    public void sendSimpleMail(MailSenderMsg msg) throws MailException {
         System.out.println("from = " + from);
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(msg.getToMail());
         message.setFrom(from);
         message.setSubject(msg.getSubject());
         message.setText(msg.getText());
-        try{
-            javaMailSender.send(message);
-            log.info(msg.getToMail() + "邮件发送成功！");
-        }
-        catch (Exception ex){
-            ex.printStackTrace();
-            log.error(msg.getToMail() + "邮件发送失败！");
-        }
+        javaMailSender.send(message);
     }
-
     /**
      * @description: 发送Html邮件
      * @param:

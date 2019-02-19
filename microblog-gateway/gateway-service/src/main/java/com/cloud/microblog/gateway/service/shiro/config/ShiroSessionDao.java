@@ -8,6 +8,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
@@ -33,8 +34,9 @@ public class ShiroSessionDao extends CachingSessionDAO {
     @Override
     protected void doUpdate(Session session) {
 
-        log.debug("doUpdate 。。。。");
-
+        log.debug("doUpdate,session({})",session.getId());
+        Collection<Object> keys =  session.getAttributeKeys();
+        log.debug("keys = " + keys);
         redisTemplate.opsForValue().set(getKey(session.getId().toString()),session,session.getTimeout(), TimeUnit.MINUTES);
 
     }
@@ -48,6 +50,8 @@ public class ShiroSessionDao extends CachingSessionDAO {
      */
     @Override
     protected void doDelete(Session session) {
+
+        log.debug("doDelete,session({})",session.getId());
         redisTemplate.delete(getKey(session.getId().toString()));
 
     }
@@ -62,18 +66,23 @@ public class ShiroSessionDao extends CachingSessionDAO {
     @Override
     protected Serializable doCreate(Session session) {
 
+
         if(session == null){
             log.info("session is null");
         }
-        log.info("doCreate");
+        log.debug("doCreate,session({})",session.getId());
         Serializable sessionId = generateSessionId(session);
         assignSessionId(session, sessionId);
         log.info("session.toString"+session.toString());
         log.info(""+session.getHost());
         log.info(session.getId()+"");
-        redisTemplate.opsForValue().set(getKey(session.getId().toString()),session,cacheTimeMinute,TimeUnit.SECONDS);
+        redisTemplate.opsForValue().set(getKey(session.getId().toString()),
+                session,
+                session.getTimeout(),
+                TimeUnit.MICROSECONDS);
         return sessionId;
     }
+
 
     /**
      * @description:
@@ -85,9 +94,17 @@ public class ShiroSessionDao extends CachingSessionDAO {
     @Override
     protected Session doReadSession(Serializable serializable) {
 
-        log.info("doReadSession");
-        Session session =  (Session)redisTemplate.opsForValue().get(getKey(serializable.toString()));
-        log.info("doReadSession -- serializable.toString()" + serializable.toString());
+        log.debug("doCreate,session({})",serializable.toString());
+        Session session = null;
+
+        try{
+            session =  (Session)redisTemplate.opsForValue().get(getKey(serializable.toString()));
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
+
+
         if(session == null){
             log.debug("session is null!");
         }
