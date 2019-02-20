@@ -1,7 +1,6 @@
 package com.cloud.microblog.gateway.service.user;
 
 import com.cloud.microblog.common.code.UserReturnCode;
-import com.cloud.microblog.gateway.dao.model.User;
 
 import java.util.Map;
 
@@ -56,16 +55,7 @@ public interface UserService {
     */
     UserReturnCode login(String name,String password);
 
-    /**
-     *功能描述
-     * @author lgj
-     * @Description  获取当前登录的用户
-     * @date 2/19/19
-     * @param:
-     * @return:
-     *
-    */
-    User queryCurrentLoginInfo();
+
 
     /**
      *功能描述

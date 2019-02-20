@@ -65,6 +65,8 @@ public enum UserReturnCode implements  ReturnCode{
     INFO_RESET_PASSWORD_FAIL (1081,"重置密码失败"),
     QUERY_USER_INFO_SUCCESS (1082,"查询用户信息成功"),
     QUERY_USER_INFO_FAIL (1083,"查询用户信息失败"),
+    HEADER_FILE_NULL(1084,"上传的图片为空"),
+    HEADER_FILE_SUCCESS(1085,"上传的图片成功"),
     ;
 
     //代码

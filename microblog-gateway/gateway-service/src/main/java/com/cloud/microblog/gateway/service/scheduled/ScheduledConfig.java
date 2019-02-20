@@ -16,6 +16,6 @@ public class ScheduledConfig {
  //   @Scheduled(cron = "0/10 * *  * * * ")
     public void reportCurrentByCron(){
         log.debug("任务执行中");
-        userService.queryCurrentLoginInfo();
+
     }
 }

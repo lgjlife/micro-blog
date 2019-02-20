@@ -28,6 +28,7 @@ public class RequestInterceptor extends HandlerInterceptorAdapter {
 
             log.debug("SessionId={}",request.getRequestedSessionId());
             log.debug("cookie={} : {}",cookie.getName(),cookie.getValue());
+
             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         }
         return true;

@@ -31,14 +31,14 @@
         <div id="info">
             <div class="info-input-block">
                 <img src="../static/img/user/head/head.jpg" height="80px" width="80px">
-            </div>
+            </div>    
             <div>
                 <a href="javascript:void(0)" id="modify-head">修改头像</a>
             </div>
-            <div>
-                <input type="file" id="" style="display:none;" ><!-- onchange="filechange(event)"-->
+            <div id="head-file-preview"style="display:none;">
+                <input id="head-file" name="file" type="file"  style="display:none;" />
                 <img src="" width="200px" height="200px" id="img-change">
-                <button id="btn">保存图片</button>
+                <button id="head-file-save-btn">保存图片</button>
             </div>
             <div class="info-input-block">
                 <span class="info-lable" id="">昵称</span>
@@ -57,7 +57,4 @@
             </div>
         </div>
     </body>
-
-
-
 </html>

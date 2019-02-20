@@ -6,7 +6,6 @@ import com.cloud.microblog.common.code.UserReturnCode;
 import com.cloud.microblog.common.result.BaseResult;
 import com.cloud.microblog.common.result.WebResult;
 import com.cloud.microblog.common.utils.UserRegexUtil;
-import com.cloud.microblog.gateway.dao.model.User;
 import com.cloud.microblog.gateway.service.user.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -69,20 +68,7 @@ public class UserController {
         result = new WebResult(returnCode);
         return   result ;
     }
-    @PrintUrlAnno
-    @GetMapping("/info")
-    public BaseResult queryCurrentLoginInfo(){
-        BaseResult result = null;
-        User user =  userService.queryCurrentLoginInfo();
-        if(user  == null){
 
-            result = new WebResult(UserReturnCode.QUERY_USER_INFO_FAIL);
-            return   result ;
-
-         }
-        result = new WebResult(UserReturnCode.QUERY_USER_INFO_SUCCESS,user);
-        return   result ;
-    }
     /**
      *功能描述
      * @author lgj

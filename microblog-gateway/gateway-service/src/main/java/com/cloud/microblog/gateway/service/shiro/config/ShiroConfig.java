@@ -167,7 +167,7 @@ public class ShiroConfig {
          * user:例如/admins/user/**=user没有参数表示必须存在用户，当登入操作时不做检查        -->
          **/
         Map<String, String> filterChainDefinitionMap  =  new HashMap<String, String>();
-        filterChainDefinitionMap.put("/admins/**","authc");
+        filterChainDefinitionMap.put("/**","anon");
         filter.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return filter;
     }
