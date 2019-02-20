@@ -22,7 +22,7 @@ var index={
                     $("#top-nav-unlogin").hide();
                     $("#top-nav-login").show();
                     
-                    $("#top-nav-login-name").text(data.data.userId);
+                    $("#top-nav-login-name").text(data.data.userId + " phone = " + data.data.phoneNum);
                 }
                 else if(data.code == index.return.QUERY_USER_INFO_FAIL.code ){
                     console.log(data.message);

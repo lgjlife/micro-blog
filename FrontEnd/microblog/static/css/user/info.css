@@ -1,0 +1,14 @@
+.info-lable{
+    display: block;
+}
+.info-input-block{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+#info{
+    position: absolute;
+    top: 200px;
+    left: 40%;  
+    background-color: beige;
+    width: 400px;
+}

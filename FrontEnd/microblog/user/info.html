@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="shortcut icon" href="#" />
+        <title>个人中心</title>
+        <script src="../static/js/jquery/jquery-3.3.1.js"></script>
+       <!-- <script src="js/jquery/jquery-3.3.1.js"></script>-->
+        <link rel="stylesheet" type="text/css" href="../static/css/bootstrap/bootstrap.css">
+        <script src="../static/css/bootstrap/bootstrap.js"></script>
+
+
+         <link rel="stylesheet" type="text/css" href="../static/css/user/info.css">
+        <script src="../static/js/user/info.js"></script>
+         
+         <script src="../static/js/common/regex.js"></script>
+        
+        <!-- rsa 加密 -->
+        <script src="../static/js/security/Barrett.js"></script>
+ 	    <script src="../static/js/security/BigInt.js"></script>
+ 	    <script src="../static/js/security/RSA.js"></script>
+        
+        <!-- file upload -->
+        <script src="../static/js/fileuploaad/ajaxfileupload.js"></script>
+        
+    </head>
+    <body>
+       
+        <div id="info">
+            <div class="info-input-block">
+                <img src="../static/img/user/head/head.jpg" height="80px" width="80px">
+            </div>
+            <div>
+                <a href="javascript:void(0)" id="modify-head">修改头像</a>
+            </div>
+            <div>
+                <input type="file" id="" style="display:none;" ><!-- onchange="filechange(event)"-->
+                <img src="" width="200px" height="200px" id="img-change">
+                <button id="btn">保存图片</button>
+            </div>
+            <div class="info-input-block">
+                <span class="info-lable" id="">昵称</span>
+                <input type="text" id = "info-nick-name-input" value="">
+            </div>
+            <div class="info-input-block">
+                <span class="info-lable" id="">电话号码</span>
+                <input type="text" id = "info-nick-name-input" value="">
+            </div>
+            <div class="info-input-block">
+                <span class="info-lable" id="">邮箱</span>
+                <input type="text" id = "info-nick-name-input" value="">
+            </div>
+            <div class="info-input-block">
+                <button>保存设置</button>
+            </div>
+        </div>
+    </body>
+
+
+
+</html>

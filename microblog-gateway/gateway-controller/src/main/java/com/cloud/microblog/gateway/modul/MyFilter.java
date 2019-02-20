@@ -1,10 +1,14 @@
 package com.cloud.microblog.gateway.modul;
 
 import com.netflix.zuul.ZuulFilter;
+import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @program: cloud-parent
@@ -38,7 +42,15 @@ public class MyFilter  extends ZuulFilter {
     @Override
     public Object run() throws ZuulException {
 
+        log.debug("ZuulFilter....");
+        HttpServletRequest req = (HttpServletRequest)RequestContext.getCurrentContext().getRequest();
+        Cookie[] cookies = req.getCookies();
 
+        for(Cookie cookie:cookies){
+            System.out.println("++++++++++++++++++++++");
+            log.debug("cookie={}"+cookie.getValue());
+            System.out.println("++++++++++++++++++");
+        }
 
         return null;
     }

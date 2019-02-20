@@ -89,3 +89,5 @@ logging:
   level:
       org.springframework.security: debug
       com.cloud: debug
+      org.apache.shiro.session.mgt: error
+

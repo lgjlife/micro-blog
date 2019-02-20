@@ -18,14 +18,26 @@ body{
     width: 400px;
 }
 
-.login-lable{
-    display: block;
+#login-success-disp{
+    
+    display: none;
+    position: absolute;
+    top: 200px;
+    left: 40%; 
+    background-color: beige;
+    width:200px;
 }
+
 .input-block{
     margin-top: 10px;
     margin-bottom: 10px;
 }
+.login-lable{
+    display: block;
+    
+}
 
 #login-name-email{
     display: none;
+
 }

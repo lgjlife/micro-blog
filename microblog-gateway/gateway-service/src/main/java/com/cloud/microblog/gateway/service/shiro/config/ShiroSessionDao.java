@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Component
@@ -19,9 +18,6 @@ public class ShiroSessionDao extends CachingSessionDAO {
 
     //用作key的前缀，key = keyPrefix + session_id
     private String keyPrefix = "SHIRO_REDIS_SESSION:";
-    //session 缓存过期时间
-    private static  final int cacheTimeMinute = 30;
-
     @Autowired
     RedisTemplate redisTemplate;
     /**
@@ -35,9 +31,17 @@ public class ShiroSessionDao extends CachingSessionDAO {
     protected void doUpdate(Session session) {
 
         log.debug("doUpdate,session({})",session.getId());
+        sessionPrint(session);
         Collection<Object> keys =  session.getAttributeKeys();
         log.debug("keys = " + keys);
-        redisTemplate.opsForValue().set(getKey(session.getId().toString()),session,session.getTimeout(), TimeUnit.MINUTES);
+
+        try{
+            redisTemplate.opsForValue().set(getKey(session.getId().toString()),session);
+        }
+        catch(Exception ex){
+
+            log.debug("Exception:{}--{}",ex.getCause(),ex.getMessage());
+        }
 
     }
 
@@ -52,7 +56,13 @@ public class ShiroSessionDao extends CachingSessionDAO {
     protected void doDelete(Session session) {
 
         log.debug("doDelete,session({})",session.getId());
-        redisTemplate.delete(getKey(session.getId().toString()));
+
+        try{
+            redisTemplate.delete(getKey(session.getId().toString()));
+        }
+        catch(Exception ex){
+            log.debug("Exception:{}--{}",ex.getCause(),ex.getMessage());
+        }
 
     }
 
@@ -76,10 +86,13 @@ public class ShiroSessionDao extends CachingSessionDAO {
         log.info("session.toString"+session.toString());
         log.info(""+session.getHost());
         log.info(session.getId()+"");
-        redisTemplate.opsForValue().set(getKey(session.getId().toString()),
-                session,
-                session.getTimeout(),
-                TimeUnit.MICROSECONDS);
+
+        try{
+            redisTemplate.opsForValue().set(getKey(session.getId().toString()),session);
+        }
+        catch(Exception ex){
+            log.debug("Exception:{}--{}",ex.getCause(),ex.getMessage());
+        }
         return sessionId;
     }
 
@@ -113,5 +126,20 @@ public class ShiroSessionDao extends CachingSessionDAO {
 
     private String getKey(String sessionId){
         return keyPrefix + sessionId;
+    }
+
+    private void sessionPrint(Session session){
+
+        if(session  == null){
+            log.debug("session is null!");
+        }
+
+        log.debug("LastAccessTime={},AttributeKeys = {},Host={},Id={},StartTimestamp={},Timeout={}",
+                session.getLastAccessTime(),
+                session.getAttributeKeys(),
+                session.getHost(),
+                session.getId(),
+                session.getStartTimestamp(),
+                session.getTimeout());
     }
 }

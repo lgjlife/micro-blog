@@ -45,7 +45,7 @@ public class KaptchaImageCreateController {
         log.debug("验证码 = " +  verificationCode);
         request.getSession().setAttribute(Constants.KAPTCHA_SESSION_KEY, verificationCode);
 
-        SessionUtils.set(UserSessionKeyUtil.IMG_VERIFICATION_CODE_KEY,verificationCode,UserSessionKeyUtil.IMG_VERIFICATION_CODE_KEY.getTimeout());
+        SessionUtils.set(UserSessionKeyUtil.IMG_VERIFICATION_CODE_KEY,verificationCode);
 
         BufferedImage bi = kaptchaProducer.createImage(verificationCode);  
         ServletOutputStream out = response.getOutputStream();  

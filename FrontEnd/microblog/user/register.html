@@ -71,14 +71,25 @@
                  <input type="text" id = "register-img-verification-code-input"  placeholder="验证码">
                  <img id="register-kaptcha" title="点击更换" alt="验证图片"
                             src="/kaptcha" onclick="this.src=this.src+'?d=100'"
-                            style="vertical-align: middle;"  height="30" width="80">
+                            style="vertical-align: middle;"  height="30" width="120">
                  <div style="display: none" id="register-img-verification-code-input-warn">
                     <span style="color: red" id="register-img-verification-code-input-warn-disp"></span>
                 </div>
             </div>        
             <button id="register-submit-btn">注册</button>
+            <div>
+                <span id="register-warn" style="color: red"></span>
+            </div>
+                        
+        </div>
+        <div id="register-success-disp">
+            <div>
+                <a href="login.html">点击跳转到登录页</a>
+            </div>
             
-            <button id="register-submit-btn1">注册1</button>
+            <div>
+                <a href="../index.html">点击跳转到首页</a>
+            </div>
             
         </div>
 

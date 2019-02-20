@@ -22,7 +22,7 @@ import java.util.List;
 @Service
 public class ScheduleTriggerServiceImpl {
 
-    private  static  final Logger log = LoggerFactory.getLogger(SchedulerServiceImpl.class);
+    private  static  final Logger log = LoggerFactory.getLogger(com.cloud.microblog.scheduler.quartz.serviceImpl.SchedulerServiceImpl.class);
 
 
     @Autowired

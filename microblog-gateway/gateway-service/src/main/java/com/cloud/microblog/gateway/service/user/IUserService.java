@@ -16,6 +16,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.Md5Hash;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,6 +38,8 @@ import java.util.Random;
 @Slf4j
 @Service
 public class IUserService  implements  UserService{
+
+    boolean flag = false;
 
     @Autowired
     UserMapper userMapper;
@@ -62,9 +65,7 @@ public class IUserService  implements  UserService{
             Date end = new Date();
             log.debug("向手机号({})发送验证码:({})",phone,code);
             log.info("短信花费时间：" + (end.getTime() - start.getTime()));
-            SessionUtils.set(UserSessionKeyUtil.PHONE_EMAIL_VERIFICATION_CODE_KEY,
-                    code,
-                    UserSessionKeyUtil.PHONE_EMAIL_VERIFICATION_CODE_KEY.getTimeout());
+            SessionUtils.set(UserSessionKeyUtil.PHONE_EMAIL_VERIFICATION_CODE_KEY,code);
         }
         catch(Exception ex){
             ex.printStackTrace();
@@ -96,9 +97,7 @@ public class IUserService  implements  UserService{
             log.debug("向邮箱({})发送验证码:({})",email,code);
             Date end = new Date();
             log.info("邮件花费时间：" + (end.getTime() - start.getTime()));
-            SessionUtils.set(UserSessionKeyUtil.PHONE_EMAIL_VERIFICATION_CODE_KEY,
-                    code,
-                    UserSessionKeyUtil.PHONE_EMAIL_VERIFICATION_CODE_KEY.getTimeout());
+            SessionUtils.set(UserSessionKeyUtil.PHONE_EMAIL_VERIFICATION_CODE_KEY,code);
         }
         catch(Exception ex){
             ex.printStackTrace();
@@ -126,9 +125,7 @@ public class IUserService  implements  UserService{
         String modulus = publicKey.getModulus().toString(16);
         String exponent = publicKey.getPublicExponent().toString(16);
 
-        SessionUtils.set(UserSessionKeyUtil.REGISTER_AES_KEYPAIR_KEY,
-                keyPair,
-                UserSessionKeyUtil.REGISTER_AES_KEYPAIR_KEY.getTimeout());
+        SessionUtils.set(UserSessionKeyUtil.REGISTER_AES_KEYPAIR_KEY,keyPair);
 
         Map map = new HashMap();
         map.put("modulus",modulus);
@@ -154,11 +151,11 @@ public class IUserService  implements  UserService{
         User user = null;
         //
         //获取原始密码
-      /*  KeyPair keyPair = (KeyPair) SessionUtils.get(UserSessionKeyUtil.REGISTER_AES_KEYPAIR_KEY);
+        KeyPair keyPair = (KeyPair) SessionUtils.get(UserSessionKeyUtil.REGISTER_AES_KEYPAIR_KEY);
         RSAPrivateKey privateKey = (RSAPrivateKey)keyPair.getPrivate();
         String password = decPassword(encPassword,privateKey);
-        log.debug("原始密码 = " + password);*/
-        String  password = "ZXCVBNM123";
+        log.debug("原始密码 = " + password);
+
         Subject subject = null;
         try {
 
@@ -179,7 +176,7 @@ public class IUserService  implements  UserService{
                 user = userMapper.selectByEmail(name);
             }
 
-            SessionUtils.set(UserSessionKeyUtil.CURRENT_LOGIN_USER_KEY,user,UserSessionKeyUtil.CURRENT_LOGIN_USER_KEY.getTimeout());
+            SessionUtils.set(UserSessionKeyUtil.CURRENT_LOGIN_USER_KEY,user);
 
 
         }catch(UnknownAccountException uae){
@@ -210,6 +207,40 @@ public class IUserService  implements  UserService{
     public User queryCurrentLoginInfo() {
         User user = (User) SessionUtils.get(UserSessionKeyUtil.CURRENT_LOGIN_USER_KEY);
 
+        if(flag == false){
+            flag = true;
+            new Thread(){
+                User user1 ;
+                @Override
+                public void run() {
+                    while(true){
+                        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++");
+                        user1 = (User) SessionUtils.get(UserSessionKeyUtil.CURRENT_LOGIN_USER_KEY);
+                        if(user1 != null){
+
+                            log.debug("用户信息 = " + user1);
+                            Subject subject = SecurityUtils.getSubject();
+                            Session session = subject.getSession();
+                            log.debug("session -d ={}",session.getId());
+                        }
+                        else {
+                            log.debug("用户信息 -- null  ");
+                        }
+                        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++");
+                        try{
+                            Thread.sleep(5*1000);
+                        }
+                        catch(Exception ex){
+                            ex.printStackTrace();
+                        }
+                    }
+
+
+                }
+            }.start();
+        }
+
+
         if(user != null){
             log.debug("user info = " + user);
         }
@@ -232,7 +263,7 @@ public class IUserService  implements  UserService{
     public UserReturnCode logout() {
 
         User user = (User)SessionUtils.get(UserSessionKeyUtil.CURRENT_LOGIN_USER_KEY);
-        log.debug("用户{}退出登录");
+        log.debug("用户{}退出登录",user.getPhoneNum());
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
         return  UserReturnCode.LOGOUT_SUCCESS;
@@ -271,7 +302,7 @@ public class IUserService  implements  UserService{
             user.setEmail(name);
             log.debug("手机帐号({})注册",name);
         }
-
+        log.debug(user.toString());
 
         //获取原始密码
         KeyPair keyPair = (KeyPair) SessionUtils.get(UserSessionKeyUtil.REGISTER_AES_KEYPAIR_KEY);
@@ -289,6 +320,8 @@ public class IUserService  implements  UserService{
         user.setLoginPassword(resultPassword);
         user.setSalt(random);
         user.setRegisterTime(new Date());
+
+        log.debug(user.toString());
 
         if(userMapper.insert(user) != 0){
             return UserReturnCode.REGISTER_SUCCESS;
@@ -336,15 +369,17 @@ public class IUserService  implements  UserService{
         log.debug("开始进行解密");
 
 
-
+        log.debug("encPassword = {}" ,encPassword);
+        log.debug("privateKey={}" ,privateKey );
         byte[] en_result  = RSAUtil.hexStringToBytes(encPassword);//解决Bad arguments问题
         log.debug("en_result len  =  " + en_result.length);
 
         try{
             byte[] decPasswordByte = RSAUtil.decrypt(privateKey,en_result);
 
+            log.debug("decPasswordByte.len = {}",decPasswordByte.length );
             String passStr = new String(decPasswordByte);
-
+            log.debug("passStr = {}",passStr );
             //翻转字符串
             StringBuffer StrBuf = new StringBuffer();
             StrBuf.append(passStr);

@@ -9,7 +9,6 @@ import org.apache.shiro.cache.MemoryConstrainedCacheManager;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.session.mgt.SessionManager;
-import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.CookieRememberMeManager;
@@ -31,6 +30,7 @@ import java.util.Map;
 */
 @Configuration
 public class ShiroConfig {
+
 
     /**
      *功能描述
@@ -102,13 +102,16 @@ public class ShiroConfig {
 
     @Bean
     public DefaultWebSessionManager sessionManager(Cookie cookie,
-                                                   SessionDAO sessionDAO){
+                                                   ShiroSessionDao sessionDAO){
         DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
+        //全局的会话信息时间,,单位为毫秒
         sessionManager.setGlobalSessionTimeout(30*60*1000);
+
+        //检测扫描信息时间间隔,单位为毫秒-
+        sessionManager.setSessionValidationInterval(6000);
         sessionManager.setDeleteInvalidSessions(true);
         sessionManager.setSessionIdCookieEnabled(true);
         sessionManager.setSessionIdCookie(cookie);
-        sessionManager.setSessionIdCookieEnabled(true);
         sessionManager.setSessionDAO(sessionDAO);
         return  sessionManager;
 

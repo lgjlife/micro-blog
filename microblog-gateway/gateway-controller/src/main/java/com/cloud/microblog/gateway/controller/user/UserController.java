@@ -5,7 +5,6 @@ import com.cloud.microblog.common.aop.syslog.anno.PrintUrlAnno;
 import com.cloud.microblog.common.code.UserReturnCode;
 import com.cloud.microblog.common.result.BaseResult;
 import com.cloud.microblog.common.result.WebResult;
-import com.cloud.microblog.common.utils.SessionUtils;
 import com.cloud.microblog.common.utils.UserRegexUtil;
 import com.cloud.microblog.gateway.dao.model.User;
 import com.cloud.microblog.gateway.service.user.UserService;
@@ -113,17 +112,17 @@ public class UserController {
         );
 
         //手机邮件校验码
-        /*if(!userService.checkVerificationCode(verificationCode)){
+        if(!userService.checkVerificationCode(verificationCode)){
             result = new WebResult(UserReturnCode.VALIDATE_CODE_CHECK_FAIL);
             log.debug(UserReturnCode.VALIDATE_CODE_CHECK_FAIL.getMessage());
             return   result ;
-        }*/
+        }
         //图片验证码
-        /*if(!userService.checkImgVerificationCode(imgVerificationCode)){
+        if(!userService.checkImgVerificationCode(imgVerificationCode)){
             result = new WebResult(UserReturnCode.IMG_VALIDATE_CODE_CHECK_FAIL);
             log.debug(UserReturnCode.IMG_VALIDATE_CODE_CHECK_FAIL.getMessage());
             return   result ;
-        }*/
+        }
         //注册请求
         UserReturnCode returnCode = userService.register(registerName,registerPassword);
         result = new WebResult(returnCode);
@@ -147,8 +146,6 @@ public class UserController {
         String registerName = (String)requestMap.get("registerName");
         String registerNameType = (String)requestMap.get("registerNameType");
 
-        SessionUtils.set("aaaaaa","bbbbbbbbbbbbbbbbbbbb",10);
-        //号码/邮箱地址为空
         if(StringUtils.isEmpty(registerName)
         || StringUtils.isEmpty(registerNameType) ){
             result = new WebResult(UserReturnCode.ERROR_PARAM);

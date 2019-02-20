@@ -2,7 +2,19 @@ var login={
     //登录名称类型 phone / email
     "loginNameType":"phone",
     "requestUrl":{
-       "loginSubmitUrl":"/user/login" 
+       "loginSubmitUrl":"/user/login",
+        //获取 rsa modulus  exponent
+        "requestmModulusAndExponentUrl":"/user/key",
+    },
+    "rsa":{
+        "modulus":"",
+        "exponent":"",
+    },
+    "return":{
+        "LOGIN_SUCCESS":{
+            "code":"1000",
+            "message":"用户登录成功",
+        },
     },
     "request":{
         //登录提交
@@ -14,6 +26,20 @@ var login={
             sendData.verificationCode = $("#login-verification-code-input").val(); 
             sendData.loginPassword = $("#login-password-input").val(); 
             sendData.imgVerificationCode = $("#login-img-verification-code-input").val(); 
+            
+             //加密
+            if((login.rsa.exponent == null)
+                || (login.rsa.modulus == null)){
+                    login.request.requestmModulusAndExponent();
+                    return;
+            }
+            console.log("开始进行加密......");
+            setMaxDigits(130);
+            var publicKey = new RSAKeyPair(login.rsa.exponent,"",login.rsa.modulus);            
+            var password = encryptedString(publicKey, encodeURIComponent(sendData.loginPassword));
+            console.log("加密的密码为：" + password);   
+            sendData.loginPassword = password;
+            
             var jsonData = JSON.stringify(sendData);
             console.log(jsonData);
             $.ajax({
@@ -25,8 +51,37 @@ var login={
                dataType: "json",
                success:function(data,status){
                     console.log(data.message);
+                    if(data.code == login.return.LOGIN_SUCCESS.code){
+                        $("#login-table").hide();
+                        $("#login-success-disp").show();
+                        $("#login-warn").hide();
+                    }
+                    else{
+                        $("#login-table").show();
+                        $("#login-success-disp").hide();
+                        $("#login-warn").show();
+                        $("#login-warn").text(data.message);
+                    }
                }
             });  
+        },
+        //获取 rsa modulus  exponent
+        "requestmModulusAndExponent":function(){
+            $.ajax({
+               type: "get",
+               url : login.requestUrl.requestmModulusAndExponentUrl,
+               contentType : "application/json;charset=utf-8",      
+               dataType: "json",
+               success:function(data,status){
+                   console.log("data = " + data.message + "  status = " + status);
+                   console.log("modulus  = " + data.data.modulus);
+                   console.log("exponent  = " + data.data.exponent);
+                   
+                   login.rsa.modulus = data.data.modulus;
+                   login.rsa.exponent = data.data.exponent;
+                   
+               }
+            })    
         },
     },
      /**
@@ -131,6 +186,8 @@ var login={
 };
 
 $(function(){
+    
+    login.request.requestmModulusAndExponent();
     /**
     * 选择登录方式
     */

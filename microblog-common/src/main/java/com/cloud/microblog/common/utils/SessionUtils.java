@@ -6,29 +6,16 @@ import org.apache.shiro.subject.Subject;
 
 public class SessionUtils {
 
+    private static final Long hour = 60*60*1000L;
+    private static final Long timeoutHour = 2*hour;
+
     public static void set(Object key, Object value){
         Subject subject = SecurityUtils.getSubject();
         Session session = subject.getSession();
         session.setAttribute(key,value);
+        session.setTimeout(timeoutHour);
     }
-
-    /**
-     *功能描述 
-     * @author lgj
-     * @Description    超时时间为分钟
-     * @date 2/18/19
-     * @param: 
-     * @return: 
-     *
-    */
-    public static void set(Object key, Object value,long timeout){
-        Subject subject = SecurityUtils.getSubject();
-        Session session = subject.getSession();
-        session.setAttribute(key,value);
-        session.setTimeout(timeout*1000*60);
-    }
-
-
+    
     public static Object get(Object key){
         Subject subject = SecurityUtils.getSubject();
         Session session = subject.getSession();

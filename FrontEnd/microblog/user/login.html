@@ -16,19 +16,25 @@
         <script src="../static/js/user/login.js"></script>
         
          <script src="../static/js/common/regex.js"></script>
+        
+          <!-- rsa 加密 -->
+        <script src="../static/js/security/Barrett.js"></script>
+ 	    <script src="../static/js/security/BigInt.js"></script>
+ 	    <script src="../static/js/security/RSA.js"></script>
+        
     </head>
     <body>
         <div id="login-title">
              <h1>MicroBlog登录页面</h1>
-             <a href="/index.html">返回首页</a>   
+             <a href="../index.html">返回首页</a>   
         </div>
        
 
         <div id="login-table">
             <div class="input-block">
                 <div id="login-name">                   
-                    <span class="login-lable" id="">手机</span>
-                    <input type="text" id = "login-name-input" placeholder="请输入手机号码">
+                    <span class="login-lable" id="login-name-lable">手机</span>
+                    <input type="text" id = "login-name-input" placeholder="请输入手机号码" value="13925716753">
                     <span>或使用</span><a href="javascript:void(0)" id="login-name-select">邮箱登录</a>
                     <div style="display: none" id="name-input-warn">
                         <span style="color: red" id="name-input-warn-disp"></span>
@@ -39,7 +45,7 @@
             
             <div class="input-block">
                 <span class="login-lable">密码</span>
-                <input type="text" id = "login-password-input" placeholder="密码">
+                <input type="text" id = "login-password-input" placeholder="密码" value="123456789">
                 <div style="display: none" id="login-password-input-warn">
                     <span style="color: red" id="login-password-input-warn-disp"></span>
                 </div>
@@ -47,16 +53,27 @@
     
              <div class="input-block">
                  <span class="login-lable">验证码</span>
-                 <input type="text" id = "login-img-verification-code-input"  placeholder="验证码">
+                 <input type="text" id = "login-img-verification-code-input"  placeholder="验证码" value="asdd">
                  <img id="login-kaptcha" title="点击更换" alt="验证图片"
                             src="/kaptcha" onclick="this.src=this.src+'?d=100'"
-                            style="vertical-align: middle;"  height="30" width="80">
+                            style="vertical-align: middle;"  height="30" width="120">
                  <div style="display: none" id="login-img-verification-code-input-warn">
                     <span style="color: red" id="login-img-verification-code-input-warn-disp"></span>
                 </div>
             </div>        
             <button  id="login-submit-btn">登录</button>
+            <div>
+                <span id="login-warn" style="color: red"></span>
+            </div>
         </div>
+
+        <div id="login-success-disp">          
+            <div>
+                <span>登录成功！</span><a href="../index.html">点击跳转到首页</a>
+            </div>
+            
+        </div>
+
 
     </body>
 
