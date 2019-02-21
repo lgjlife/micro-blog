@@ -168,7 +168,7 @@ public class ShiroConfig {
          **/
         Map<String, String> filterChainDefinitionMap  =  new HashMap<String, String>();
         filterChainDefinitionMap.put("/**","anon");
-        filterChainDefinitionMap.put("/user/info/**","authc");
+        filterChainDefinitionMap.put("/user/info/**","anon");
         filter.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return filter;
     }

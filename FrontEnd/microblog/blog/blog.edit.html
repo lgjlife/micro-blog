@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="shortcut icon" href="#" />
+        <title>个人中心</title>
+        <script src="../static/js/jquery/jquery-3.3.1.js"></script>
+       <!-- <script src="js/jquery/jquery-3.3.1.js"></script>-->
+        <link rel="stylesheet" type="text/css" href="../static/css/bootstrap/bootstrap.css">
+        <script src="../static/css/bootstrap/bootstrap.js"></script>
+
+
+         <link rel="stylesheet" type="text/css" href="blog.edit.css">
+         <script src="blog.edit.js"></script>    
+    </head>
+    <body>
+       
+        <div id="content-blog-edit">
+            <span style="display: block">有什么新鲜事想告诉大家?</span>
+            <div>
+                <textarea id="content-blog-edit-input" rows="10" cols="30">
+                </textarea>
+            </div>
+
+
+            <a href="#">表情</a>
+            <a href="#">图片</a>
+            <a href="#">视频</a>
+            <a href="#">话题</a>
+            <a href="#">头条文章</a>
+            <a href="#">定时发</a>
+
+            <select style="height: 30px;">
+                <option value="public">公开</option>
+                <option value="freinds">好友圈</option>
+                <option value="private">仅自己可见</option>
+                <option value="group">群可见</option>
+            </select>
+            <button>发布</button>
+
+        </div>
+    </body>
+</html>

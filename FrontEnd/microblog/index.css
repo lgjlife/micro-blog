@@ -10,7 +10,16 @@ html,body,#content{
     width: 100%;
 }
 
-
+#blog-edit{
+    //overflow:hidden;
+    border-style: none;
+   // background-color: red;
+   // color: aqua;
+    //overflow: visible;   
+    overflow-y: hidden; 
+    width: 100%;
+    height: 210px;
+}
 
 #top-nav div{
     display: inline;
@@ -35,10 +44,10 @@ html,body,#content{
 #content-middle{
     width:900px;
     float: left;
-    background-color: #6495ED;
+    background-color:antiquewhite;
 }
 /*输入 编辑*/
-#content-blog-edit{
+/*#content-blog-edit{
    background-color: #FFEF8B; 
    width:inherit;
    margin-top: 20px;
@@ -49,7 +58,7 @@ html,body,#content{
     width: 100%;
     height: 100px;
 }
-/*微博查看选项*/
+微博查看选项
 #content-display-select{
     background-color: #EEEEE0; 
     width:inherit;
@@ -63,7 +72,7 @@ html,body,#content{
    background-color: antiquewhite;
    margin-top: 10px;
    margin-bottom: 10px;
-}
+}*/
 /***************************************************************/
 /*内容 右侧*/
 #content-right{
