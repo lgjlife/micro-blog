@@ -1,5 +1,5 @@
 var blog={
-    "staticPath":"static",
+    "staticPath":"../static",
     "paging":{
         "start": 0,
         "limit": 10,  
@@ -15,8 +15,8 @@ var blog={
     "request":{
         "requestBlog":function(type){
             var sendData ={"start":"","limit":"","type":""};
-            sendData.start = "0"; 
-            sendData.limit = "10";
+            sendData.start = blog.paging.start; 
+            sendData.limit = blog.paging.limit;
             sendData.type = type; 
                     
             var jsonData = JSON.stringify(sendData);
@@ -49,7 +49,12 @@ var blog={
         },
         
     },
-    
+    "IFrameResize":function(){
+       //alert(this.document.body.scrollHeight); //弹出当前页面的高度
+            var obj = parent.document.getElementById("blog-display"); //取得父页面IFrame对象
+            //alert(obj.height); //弹出父页面中IFrame中设置的高度
+            obj.height = document.body.scrollHeight; //调整父页面中IFrame的高度为此页面的高度 
+    },
     "test":[
         {
             "headerUrl":"/img/user/head/u=2855470066,1941636318&fm=26&gp=0.jpg",
@@ -142,8 +147,9 @@ var blog={
                   + "  </li> "; 
             
             $("#blog-content-ul").append(blogText);
+            
         }
-        
+        blog.IFrameResize();
     }
 }
 
@@ -154,5 +160,10 @@ $(function(){
     console.log("test blog length = " ,blog.test.length);
    // blog.displayBlog(blog.test);
     
+    $("#show-more").click(function(){
+        blog.paging.start +=  blog.paging.limit;
+        
+        blog.request.requestBlog(blog.type.ALL);
+    })
     
 })

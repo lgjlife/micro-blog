@@ -1,7 +1,10 @@
 html,body,#content{
     width: 100%;
     height: 100%;
+    margin:0;
+    padding:0;
 }
+
 
 /**/
 #top-nav{
@@ -11,15 +14,17 @@ html,body,#content{
 }
 
 #blog-edit{
-    //overflow:hidden;
-    border-style: none;
-   // background-color: red;
-   // color: aqua;
-    //overflow: visible;   
+    border-style: none; 
     overflow-y: hidden; 
     width: 100%;
     height: 210px;
 }
+#blog-display{
+    border-style: none; 
+    overflow-y: hidden; 
+    width: 100%;   
+}
+
 
 #top-nav div{
     display: inline;

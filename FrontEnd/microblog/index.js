@@ -81,4 +81,9 @@ $(function(){
         index.request.requestLogout();
         
     })
+    
+    
+  /*  $("#headlogin").load(function(){
+        console.log("headlogin onload;");
+    })*/
 })

@@ -12,11 +12,9 @@
     
 
     
-    <link rel="stylesheet" type="text/css" href="static/css/index/index.css">
-    <script src="static/js/index/index.js"></script>
-    
-    <link rel="stylesheet" type="text/css" href="static/css/index/blog.css">
-    <script src="static/js/index/blog.js"></script>
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <script src="index.js"></script>
+
 </head>
 <body>
 
@@ -66,10 +64,18 @@
          <!--###################################################### -->
         
         <div id="content-middle">
-            
             <!-- 输入 编辑-->
             <iframe src="blog/blog.edit.html" id="blog-edit" scrolling="no">
-            </iframe>    
+            </iframe>  
+            
+            <iframe src="blog/blog.display.html" name="iframe2" id="blog-display" scrolling="no" >
+            </iframe>
+            
+          <!-- <iframe id="headlogin" marginWidth=0  marginHeight=0 src="blog/blog.display.html" frameBorder=0 width=100%  scrolling=no height=25 onload="this.height=this.contentWindow.document.body.scrollHeight"></iframe>-->
+      <!--      <iframe border=0 marginWidth=0
+frameSpacing=0 marginHeight=0
+src="blog/blog.display.html" frameBorder=0
+noResize scrolling="no" width=100% height=100% vspale="0" id="childFrame"></iframe>-->
         </div>
         <!--###################################################### -->
         <div  id="content-right">

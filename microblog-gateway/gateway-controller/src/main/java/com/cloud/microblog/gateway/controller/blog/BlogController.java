@@ -28,12 +28,12 @@ public class BlogController {
     public BaseResult queryBlog(@RequestBody Map<String,Object>  map){
 
        // String type = (String) map.get("type");
-      //  int start = (Integer) map.get("start");
-       // int end= (Integer)map.get("limit");
+        int start = (Integer) map.get("start");
+        int limit= (Integer)map.get("limit");
 
         log.debug(map.values().toString());
 
-         List<BlogInfoDto> blogInfoDtos = blogService.queryBlog("ALL",0,10);
+         List<BlogInfoDto> blogInfoDtos = blogService.queryBlog("ALL",start,limit);
 
          BaseResult result = new WebResult(BlogReturnCode.BLOG_QUERY_SUCCESS,blogInfoDtos);
 
