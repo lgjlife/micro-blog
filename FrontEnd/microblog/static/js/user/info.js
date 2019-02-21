@@ -2,27 +2,83 @@ var info={
     
     "requestUrl":{
         "fileUploadUrl":"/user/info/head-img",
+        "queryUserInfoUrl":"/user/info" ,
+        "requestSettingUrl":"/user/info/setting" ,
     },
     "request":{
+        /**
+        * 上传文件请求
+        */
         "fileUpload":function(){
-             $.ajaxFileUpload({
-                //<!--   需要上传的文件域的ID，即input type="file"的ID。 -->
-                url: info.requestUrl.fileUploadUrl,
-                fileElementId: "head-file-input",
-              //  dataType:'txt',
-                //是否启用安全提交，默认为false。
-                secureuri : false,
-                type: 'post',   //当要提交自定义参数时，这个参数要设置成post
-                success: function (data){
-                    console.log(data.message);
-                },
-                error:function(data,status,e){
-                    alert(e);
-                }
-            });
+            $.ajax({
+                url: "/user/info/img",
+                type: 'POST',
+                cache: false,
+                data: formData,
+                processData: false,
+                contentType: false,
+                success:function(data,status){
+                   console.log(data.message);
+                    console.log(data.data);
+
+                    $("#info-header-img").attr("src","../static"+data.data);
+               }
+            })  
         },
+        
+        /**
+        * 查询用户信息
+        */
+        "queryUserInfo":function(){
+            $.ajax({
+                type: "GET",
+                url: info.requestUrl.queryUserInfoUrl,
+                headers: {'Authorization': "i am a token"},
+                success: function(data,status){
+                    console.log("queryUserInfo 返回 status : "+status)
+                    $("#info-nick-name-input").val(data.data.nickName);
+                    $("#info-phone-input").val(data.data.phoneNum);
+                    $("#info-email-input").val(data.data.email);
+
+                },
+                error:function(data,status){
+                     console.log("queryUserInfo 返回 status"+status);  
+                }
+                
+            });
+            
+        },
+         /**
+        * 查询用户信息
+        */
+        "requestSetting":function(){
+            $.ajax({
+                type: "POST",
+                url: info.requestUrl.queryUserInfoUrl,
+                headers: {'Authorization': "i am a token"},
+                success: function(data,status){
+                    console.log("queryUserInfo 返回 status : "+status)
+                    $("#info-nick-name-input").val(data.data.nickName);
+                    $("#info-phone-input").val(data.data.phoneNum);
+                    $("#info-email-input").val(data.data.email);
+
+                },
+                error:function(data,status){
+                     console.log("queryUserInfo 返回 status"+status);  
+                }
+                
+            });
+            
+        }
+        
     
-        "isImgFile":function(feid){
+        
+    },
+    
+    /**
+    * 判断是否图片
+    */
+    "isImgFile":function(feid){
              var img = document.getElementById(feid);
              var reg  = /.(jpg|png|gif|bmp)$/;
              if(reg.test(img.value)){
@@ -34,7 +90,6 @@ var info={
                  return false;
              }
             
-        },
     },
     
 }
@@ -45,9 +100,9 @@ var info={
     $("#modify-head").click(function(){
        console.log("#modify-head")
        $("#head-file").click();  
-       $("#head-file-preview").show();
+      
     })
-    //
+    //图片选择之后
     $("#head-file").change(function(){
         
         console.log("#head-file-input onchange");
@@ -70,10 +125,14 @@ var info={
 
             $("#img-change").attr("src",imgURL);
          } 
-        
+        //打开预览窗口
+         $("#head-file-preview").show();
         
     })
      
+    /**
+    * 提交上传头像请求
+    */
     $("#head-file-save-btn").click(function () {
         
         var formData = new FormData(); 
@@ -81,18 +140,27 @@ var info={
         for(var i = 0 ; i < files.length ; i ++){
             formData.append('file',files[i]);
         }
-        $.ajax({
-            url: "/user/info/img",
-            type: 'POST',
-            cache: false,
-            data: formData,
-            processData: false,
-            contentType: false,
-            success:function(data,status){
-               console.log(data.message);
-           }
-        })
         
-    })     
+        info.request.fileUpload();
+        
+    }) 
+     
+   /**
+    * 保存设置
+    */
+    $("#head-file-save-btn").click(function () {
+        
+        var formData = new FormData(); 
+        var files = $("#head-file")[0].files;
+        for(var i = 0 ; i < files.length ; i ++){
+            formData.append('file',files[i]);
+        }
+        
+        info.request.fileUpload();
+        
+    })   
+     
+     
+    info.request.queryUserInfo();
      
 })

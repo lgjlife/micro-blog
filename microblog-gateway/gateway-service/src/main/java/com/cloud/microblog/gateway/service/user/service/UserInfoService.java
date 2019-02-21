@@ -1,7 +1,10 @@
-package com.cloud.microblog.gateway.service.user;
+package com.cloud.microblog.gateway.service.user.service;
 
+import com.cloud.microblog.common.code.ReturnCode;
 import com.cloud.microblog.gateway.dao.model.User;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import java.util.Map;
 
 public interface UserInfoService {
 
@@ -17,4 +20,6 @@ public interface UserInfoService {
     User userInfo();
 
     String upLoadHeaderImg(MultipartHttpServletRequest multiRequest) throws  Exception;
+
+    ReturnCode saveSetting(Map<String,Object> map);
 }

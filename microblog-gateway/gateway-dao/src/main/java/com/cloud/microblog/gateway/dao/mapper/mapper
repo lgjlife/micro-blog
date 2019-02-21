@@ -1,0 +1,5 @@
+ Long selectIdByPhone(String phone);
+    Long selectIdByEmail(String email);
+    User selectByPhone(String phone);
+    User selectByEmail(String email);
+    Integer  updateInfoByPrimaryKey(HashMap<String,Object> map);

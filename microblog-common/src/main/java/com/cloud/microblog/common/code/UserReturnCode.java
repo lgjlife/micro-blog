@@ -31,6 +31,7 @@ public enum UserReturnCode implements  ReturnCode{
     LOGIN_GET_KEYPAIR_FAIL(1005,"登陆时获取keypair失败"),
     LOGIN_GET_KEYPAIR_SUCCESS(1006,"登陆时获取keypair成功"),
     LOGIN_UNKNOW_ACCOUT(1007,"帐号不存在"),
+    ACCOUT_UNLOGIN(1008,"帐号未登录"),
 
     //退出登录
     LOGOUT_SUCCESS(1015,"用户退出登录成功"),
@@ -67,6 +68,7 @@ public enum UserReturnCode implements  ReturnCode{
     QUERY_USER_INFO_FAIL (1083,"查询用户信息失败"),
     HEADER_FILE_NULL(1084,"上传的图片为空"),
     HEADER_FILE_SUCCESS(1085,"上传的图片成功"),
+    INFO_RESET_SUCCESS (1086,"重置信息成功"),
     ;
 
     //代码

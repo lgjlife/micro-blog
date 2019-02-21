@@ -142,7 +142,7 @@ public class ShiroConfig {
         // Shiro的核心安全接口,这个属性是必须的
         filter.setSecurityManager(securityManager);
         //要求登录时的链接(可根据项目的URL进行替换),非必须的属性,默认会自动寻找Web工程根目录下的"/user/Login.html"页面
-        filter.setLoginUrl("/user/Login");
+        filter.setLoginUrl("/user/login.html");
         //登录成功后要跳转的连接
         filter.setSuccessUrl("");
         //用户访问未对其授权的资源时,所显示的连接
@@ -168,6 +168,7 @@ public class ShiroConfig {
          **/
         Map<String, String> filterChainDefinitionMap  =  new HashMap<String, String>();
         filterChainDefinitionMap.put("/**","anon");
+        filterChainDefinitionMap.put("/user/info/**","authc");
         filter.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return filter;
     }

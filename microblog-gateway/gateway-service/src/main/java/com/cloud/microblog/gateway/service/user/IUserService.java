@@ -1,6 +1,7 @@
 package com.cloud.microblog.gateway.service.user;
 
 
+import com.cloud.microblog.common.aop.usetime.anno.PrintUseTimeAnno;
 import com.cloud.microblog.common.code.UserReturnCode;
 import com.cloud.microblog.common.utils.SessionUtils;
 import com.cloud.microblog.common.utils.UserRegexUtil;
@@ -10,6 +11,7 @@ import com.cloud.microblog.common.utils.mail.MailSenderMsg;
 import com.cloud.microblog.common.utils.mail.MailService;
 import com.cloud.microblog.gateway.dao.mapper.UserMapper;
 import com.cloud.microblog.gateway.dao.model.User;
+import com.cloud.microblog.gateway.service.user.service.UserService;
 import com.cloud.microblog.gateway.service.utils.UserSessionKeyUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
@@ -36,7 +38,7 @@ import java.util.Random;
 */
 @Slf4j
 @Service
-public class IUserService  implements  UserService{
+public class IUserService implements  UserService{
 
 
 
@@ -115,6 +117,8 @@ public class IUserService  implements  UserService{
      * @return: Map
      *
     */
+    @PrintUseTimeAnno
+    // TODO 第一次花费2.368s,后面11ms
     @Override
     public Map getRsaKey() {
 
@@ -220,6 +224,7 @@ public class IUserService  implements  UserService{
         log.debug("用户{}退出登录",user.getPhoneNum());
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
+
         return  UserReturnCode.LOGOUT_SUCCESS;
     }
 

@@ -2,12 +2,11 @@ package com.cloud.microblog.common.aop.syslog.aspect;
 
 
 import com.cloud.microblog.common.aop.syslog.anno.PrintUrlAnno;
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -18,7 +17,7 @@ import java.lang.reflect.Method;
 /** 
  * @description:  Controller 层打印请求路径切面类
  *                1.spring-mvc 配置文件添加切面注解支持 <aop:aspectj-autoproxy proxy-target-class="true"/>
- *                2.在Controller上添加注解@PrintUrlAnno
+ *                2.在Controller上添加注解@PrintUseTimeAnno
  * @param:
  * @return:
  * @author: Mr.lgj 
@@ -26,13 +25,10 @@ import java.lang.reflect.Method;
 */ 
 @Aspect
 @Component
+@Slf4j
 public class PrintUrlAspect {
 
-	private final static Logger logger = LoggerFactory.getLogger(PrintUrlAspect.class);
-	{
-		
-		logger.info("PrintUrlAspect create bean --------------");
-	}
+
 
 	/**
 	 * 定义切点
@@ -77,7 +73,7 @@ public class PrintUrlAspect {
 
 
 			//打印请求路径
-             logger.info("\r\n 访问  " + joinPoint.getTarget().getClass().getName() //类名称
+			log.info("\r\n 访问  " + joinPoint.getTarget().getClass().getName() //类名称
             		+  "  method = " + methodName
             		+  "  路径 = "
 				    +  request.getRequestURI()
@@ -85,7 +81,7 @@ public class PrintUrlAspect {
 
 
 		} catch (Exception e) {
-			logger.info("前置通知出现异常,error = " + e);
+			log.info("前置通知出现异常,error = " + e);
 		}
 		
 		

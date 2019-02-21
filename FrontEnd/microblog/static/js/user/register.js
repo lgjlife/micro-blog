@@ -62,12 +62,10 @@ var register={
        "registerSubmitUrl":"/user/register",
         //获取手机或者邮箱验证码
        "getVerificationCodeUrl":"/user/verification/code",
-        
+       //获取 rsa modulus  exponent
+        "requestmModulusAndExponentUrl":"/user/key",
     },
-    //服务端返回的状态码
-    "returnCode":{
-        
-    },
+ 
     //向服务端ajax请求
     "request":{
         //注册提交
@@ -145,6 +143,24 @@ var register={
                   console.log("data = " + data + "  status = " + status);
                   console.log("code  = " + data.code);
                   console.log("message  = " + data.message); 
+               }
+            })    
+        },
+        //获取 rsa modulus  exponent
+        "requestmModulusAndExponent":function(){
+            $.ajax({
+               type: "get",
+               url : register.requestUrl.requestmModulusAndExponentUrl,
+               contentType : "application/json;charset=utf-8",      
+               dataType: "json",
+               success:function(data,status){
+                   console.log("data = " + data.message + "  status = " + status);
+                   console.log("modulus  = " + data.data.modulus);
+                   console.log("exponent  = " + data.data.exponent);
+                   
+                   register.rsa.modulus = data.data.modulus;
+                   register.rsa.exponent = data.data.exponent;
+                   
                }
             })    
         },

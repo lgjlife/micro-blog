@@ -6,7 +6,7 @@ import com.cloud.microblog.common.code.UserReturnCode;
 import com.cloud.microblog.common.result.BaseResult;
 import com.cloud.microblog.common.result.WebResult;
 import com.cloud.microblog.common.utils.UserRegexUtil;
-import com.cloud.microblog.gateway.service.user.UserService;
+import com.cloud.microblog.gateway.service.user.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,7 +97,7 @@ public class UserController {
                 +"  imgVerificationCode = " + imgVerificationCode
         );
 
-        //手机邮件校验码
+       /* //手机邮件校验码
         if(!userService.checkVerificationCode(verificationCode)){
             result = new WebResult(UserReturnCode.VALIDATE_CODE_CHECK_FAIL);
             log.debug(UserReturnCode.VALIDATE_CODE_CHECK_FAIL.getMessage());
@@ -108,7 +108,7 @@ public class UserController {
             result = new WebResult(UserReturnCode.IMG_VALIDATE_CODE_CHECK_FAIL);
             log.debug(UserReturnCode.IMG_VALIDATE_CODE_CHECK_FAIL.getMessage());
             return   result ;
-        }
+        }*/
         //注册请求
         UserReturnCode returnCode = userService.register(registerName,registerPassword);
         result = new WebResult(returnCode);
@@ -188,7 +188,7 @@ public class UserController {
      *
     */
     @PrintUrlAnno
-    @GetMapping("/logout")
+    @PostMapping("/logout")
     public BaseResult logout(){
         BaseResult result = null;
         UserReturnCode code = userService.logout();

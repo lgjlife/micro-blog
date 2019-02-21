@@ -1,4 +1,4 @@
-package com.cloud.microblog.gateway.service.user;
+package com.cloud.microblog.gateway.service.user.service;
 
 import com.cloud.microblog.common.code.UserReturnCode;
 

@@ -1,7 +1,9 @@
 package com.cloud.microblog.gateway.dao.mapper;
 
 import com.cloud.microblog.gateway.dao.model.User;
+
 import java.util.List;
+import java.util.Map;
 
 public interface UserMapper {
     /**
@@ -46,8 +48,8 @@ public interface UserMapper {
 
     Long selectIdByPhone(String phone);
     Long selectIdByEmail(String email);
-
     User selectByPhone(String phone);
     User selectByEmail(String email);
+    Integer  updateInfoByPrimaryKey(Map<String,Object> map);
 
 }
