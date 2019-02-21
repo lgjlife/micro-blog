@@ -9,7 +9,7 @@ var info={
         /**
         * 上传文件请求
         */
-        "fileUpload":function(){
+        "fileUpload":function(formData){
             $.ajax({
                 url: "/user/info/img",
                 type: 'POST',
@@ -21,6 +21,9 @@ var info={
                    console.log(data.message);
                     console.log(data.data);
 
+                    var jsonData = JSON.stringify(data);
+                    console.log(jsonData);
+                    
                     $("#info-header-img").attr("src","../static"+data.data);
                }
             })  
@@ -36,6 +39,11 @@ var info={
                 headers: {'Authorization': "i am a token"},
                 success: function(data,status){
                     console.log("queryUserInfo 返回 status : "+status)
+                    var jsonData = JSON.stringify(data);
+                    console.log(jsonData);
+                    
+                    $("#info-header-img").attr("src","../static"+data.data.headerUrl);
+                    
                     $("#info-nick-name-input").val(data.data.nickName);
                     $("#info-phone-input").val(data.data.phoneNum);
                     $("#info-email-input").val(data.data.email);
@@ -49,22 +57,33 @@ var info={
             
         },
          /**
-        * 查询用户信息
+        *setting用户信息
         */
         "requestSetting":function(){
+            
+              
+            var sendData ={"nickName":"","phoneNum":"","email":"",};
+            sendData.nickName = $("#info-nick-name-input").val(); 
+            sendData.phoneNum = $("#info-phone-input").val();
+            sendData.email = $("#info-email-input").val(); 
+
+            var jsonData = JSON.stringify(sendData);
+            console.log(jsonData);      
+
             $.ajax({
                 type: "POST",
-                url: info.requestUrl.queryUserInfoUrl,
+                url: info.requestUrl.requestSettingUrl,
                 headers: {'Authorization': "i am a token"},
+                contentType : "application/json;charset=utf-8",      
+                dataType: "json",
+                data: jsonData,
                 success: function(data,status){
                     console.log("queryUserInfo 返回 status : "+status)
-                    $("#info-nick-name-input").val(data.data.nickName);
-                    $("#info-phone-input").val(data.data.phoneNum);
-                    $("#info-email-input").val(data.data.email);
+
 
                 },
                 error:function(data,status){
-                     console.log("queryUserInfo 返回 status"+status);  
+                     console.log("queryUserInfo 返回 status : "+status);  
                 }
                 
             });
@@ -141,23 +160,16 @@ var info={
             formData.append('file',files[i]);
         }
         
-        info.request.fileUpload();
+        info.request.fileUpload(formData);
         
     }) 
      
    /**
     * 保存设置
     */
-    $("#head-file-save-btn").click(function () {
-        
-        var formData = new FormData(); 
-        var files = $("#head-file")[0].files;
-        for(var i = 0 ; i < files.length ; i ++){
-            formData.append('file',files[i]);
-        }
-        
-        info.request.fileUpload();
-        
+    $("#info-setting-btn").click(function () {
+        console.log("保存设置");
+        info.request.requestSetting();        
     })   
      
      

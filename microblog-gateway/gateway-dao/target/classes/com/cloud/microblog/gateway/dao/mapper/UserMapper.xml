@@ -126,52 +126,54 @@
 
   <update id="updateInfoByPrimaryKey" parameterType="com.cloud.microblog.gateway.dao.model.User">
     update user
-    set
-    <if test="_parameter.containsKey('userNumber')">
-      user_number = #{userNumber,jdbcType=BIGINT},
-    </if>
-    <if test="_parameter.containsKey('nickName')">
-      nick_name = #{nickName,jdbcType=VARCHAR},
-    </if>
-    <if test="_parameter.containsKey('loginPassword')">
-      login_password = #{loginPassword,jdbcType=VARCHAR},
-    </if>
-    <if test="_parameter.containsKey('salt')">
-      salt = #{salt,jdbcType=VARCHAR},
-    </if>
-    <if test="_parameter.containsKey('actualName')">
-      actual_name = #{actualName,jdbcType=VARCHAR},
-    </if>
-    <if test="_parameter.containsKey('gender')">
-      gender = #{gender,jdbcType=VARCHAR},
-    </if>
-    <if test="_parameter.containsKey('age')">
-      age = #{age,jdbcType=TINYINT},
-    </if>
-    <if test="_parameter.containsKey('headerUrl')">
-      header_url = #{headerUrl,jdbcType=VARCHAR},
-    </if>
-    <if test="_parameter.containsKey('status')">
-      status = #{status,jdbcType=TINYINT},
-    </if>
-    <if test="_parameter.containsKey('email')">
-      email = #{email,jdbcType=VARCHAR},
-    </if>
-    <if test="_parameter.containsKey('emailActive')">
-      email_active = #{emailActive,jdbcType=TINYINT},
-    </if>
-    <if test="_parameter.containsKey('phoneNum')">
-      phone_num = #{phoneNum,jdbcType=VARCHAR},
-    </if>
-    <if test="_parameter.containsKey('registerTime')">
-      register_time = #{registerTime,jdbcType=TIMESTAMP},
-    </if>
-    <if test="_parameter.containsKey('lastLoginTime')">
-      last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
-    </if>
-    <if test="_parameter.containsKey('loginNums')">
-      login_nums = #{loginNums,jdbcType=INTEGER}
-    </if>
+    <set>
+      <if test="_parameter.containsKey('userNumber')">
+        user_number = #{userNumber,jdbcType=BIGINT},
+      </if>
+      <if test="_parameter.containsKey('nickName')">
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="_parameter.containsKey('loginPassword')">
+        login_password = #{loginPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="_parameter.containsKey('salt')">
+        salt = #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="_parameter.containsKey('actualName')">
+        actual_name = #{actualName,jdbcType=VARCHAR},
+      </if>
+      <if test="_parameter.containsKey('gender')">
+        gender = #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="_parameter.containsKey('age')">
+        age = #{age,jdbcType=TINYINT},
+      </if>
+      <if test="_parameter.containsKey('headerUrl')">
+        header_url = #{headerUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="_parameter.containsKey('status')">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="_parameter.containsKey('email')">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="_parameter.containsKey('emailActive')">
+        email_active = #{emailActive,jdbcType=TINYINT},
+      </if>
+      <if test="_parameter.containsKey('phoneNum')">
+        phone_num = #{phoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="_parameter.containsKey('registerTime')">
+        register_time = #{registerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="_parameter.containsKey('lastLoginTime')">
+        last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="_parameter.containsKey('loginNums')">
+        login_nums = #{loginNums,jdbcType=INTEGER},
+      </if>
+      user_id = #{userId,jdbcType=BIGINT},
+    </set>
     where user_id = #{userId,jdbcType=BIGINT}
   </update>
 

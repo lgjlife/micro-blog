@@ -3,7 +3,6 @@ package com.cloud.microblog.gateway.service.user;
 import com.cloud.microblog.common.code.ReturnCode;
 import com.cloud.microblog.common.code.UserReturnCode;
 import com.cloud.microblog.common.utils.SessionUtils;
-import com.cloud.microblog.common.utils.UserRegexUtil;
 import com.cloud.microblog.gateway.dao.mapper.UserMapper;
 import com.cloud.microblog.gateway.dao.model.User;
 import com.cloud.microblog.gateway.service.user.service.UserInfoService;
@@ -47,16 +46,21 @@ public class IUserInfoService  implements UserInfoService {
         String phone = (String) map.get("phoneNum");
         String email = (String) map.get("email");
 
-        if(!UserRegexUtil.isMobile(phone)){
+        log.debug("info = {}"+ map.values());
+
+        /*if(!UserRegexUtil.isMobile(phone)){
             return UserReturnCode.FORMAT_PHONE_NUM_ERR;
         }
         else if(!UserRegexUtil.isEmail(email)){
             return UserReturnCode.FORMAT_EMAIL_ERR;
-        }
+        }*/
         User user = (User) SessionUtils.get(UserSessionKeyUtil.CURRENT_LOGIN_USER_KEY);
         if(user != null){
             map.put("userId",user.getUserId());
             userMapper.updateInfoByPrimaryKey(map);
+            User user1 = userMapper.selectByPrimaryKey(user.getUserId());
+            SessionUtils.set(UserSessionKeyUtil.CURRENT_LOGIN_USER_KEY,user1);
+
             return UserReturnCode.INFO_RESET_SUCCESS;
         }
         else {
@@ -121,6 +125,8 @@ public class IUserInfoService  implements UserInfoService {
                 map.put("headerUrl",subPath);
                 userMapper.updateInfoByPrimaryKey(map);
 
+                user.setHeaderUrl(subPath);
+                SessionUtils.set(UserSessionKeyUtil.CURRENT_LOGIN_USER_KEY,user);
                 File newfile = new File(savePath);
                 log.debug("newfile={}", newfile.getAbsolutePath());
                 file.transferTo(newfile);

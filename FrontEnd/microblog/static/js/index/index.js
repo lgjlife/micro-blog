@@ -23,18 +23,24 @@ var index={
                 success: function(data,status){
                     console.log("queryUserInfo 返回 status : "+status)
                     if(data.code == index.return.QUERY_USER_INFO_SUCCESS.code ){
+                        $("#index-content-user").show();
                         console.log(data.message);
 
                         $("#top-nav-unlogin").hide();
                         $("#top-nav-login").show();
 
                         $("#top-nav-login-name").text(data.data.userId + " phone = " + data.data.phoneNum);
+                        $("#index-header-img").attr("src","static"+data.data.headerUrl);
+                        $("#index-content-user-name").text(data.data.nickName);
+                        
                     }
                     else if(data.code == index.return.QUERY_USER_INFO_FAIL.code ){
                         console.log(data.message);
 
                         $("#top-nav-login").hide();
                         $("#top-nav-unlogin").show();
+                        $("#index-content-user").hide();
+                        
                     }
 
                 },

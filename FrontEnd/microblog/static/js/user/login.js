@@ -63,6 +63,8 @@ var login={
                         $("#login-warn").text(data.message);
                     }
                }
+                
+            
             });  
         },
         //获取 rsa modulus  exponent
@@ -81,6 +83,8 @@ var login={
                    login.rsa.exponent = data.data.exponent;
                    
                }
+                
+                 
             })    
         },
     },
