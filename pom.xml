@@ -20,6 +20,8 @@
         <module>microblog-common</module>
         <module>microblog-gateway</module>
         <module>microblog-search</module>
+        <module>microblog-cas</module>
+        <module>microblog-chat</module>
 
     </modules>
     <packaging>pom</packaging>

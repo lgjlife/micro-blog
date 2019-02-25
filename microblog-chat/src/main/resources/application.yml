@@ -1,0 +1,9 @@
+server:
+  port: 8000
+logging:
+  level:
+    com.cloud: debug
+spring:
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html

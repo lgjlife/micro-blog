@@ -66,6 +66,9 @@ var login={
                 
             
             });  
+            
+            
+            
         },
         //获取 rsa modulus  exponent
         "requestmModulusAndExponent":function(){

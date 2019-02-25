@@ -60,8 +60,30 @@
         <!-- type="post" identity="true" :  ORDER = AFTER -->
         <!-- type="pre" identity="false"(only  the value) : ORDER = BEFORE -->
         <!-- 配置需要生成的表 ，如果需要执行时返回主键，就设置generatedKey-->
-        <table tableName="user" >
+        <!--<table tableName="user" >
             <generatedKey column="user_id" sqlStatement="MySql" type="post" identity="true"/>
+        </table>-->
+
+        <table tableName="blog" >
+            <generatedKey column="blog_id" sqlStatement="MySql" type="post" identity="true"/>
         </table>
+        <table tableName="blog_img" >
+            <generatedKey column="img_id" sqlStatement="MySql" type="post" identity="true"/>
+        </table>
+        <table tableName="blog_comment" >
+            <generatedKey column="comment_id" sqlStatement="MySql" type="post" identity="true"/>
+        </table>
+        <table tableName="blog_collect" >
+            <generatedKey column="collect_id" sqlStatement="MySql" type="post" identity="true"/>
+        </table>
+        <table tableName="blog_repost" >
+            <generatedKey column="repost_id" sqlStatement="MySql" type="post" identity="true"/>
+        </table>
+        <table tableName="blog_like" >
+            <generatedKey column="like_id" sqlStatement="MySql" type="post" identity="true"/>
+        </table>
+
+
+
     </context>
 </generatorConfiguration>

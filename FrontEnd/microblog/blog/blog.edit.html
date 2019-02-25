@@ -13,32 +13,49 @@
 
 
          <link rel="stylesheet" type="text/css" href="blog.edit.css">
-         <script src="blog.edit.js"></script>    
+         <script src="blog.edit.js"></script>
     </head>
     <body>
        
-        <div id="content-blog-edit">
+        <div id="blog-edit-block">
             <span style="display: block">有什么新鲜事想告诉大家?</span>
             <div>
-                <textarea id="content-blog-edit-input" rows="10" cols="30">
-                </textarea>
+                <textarea id="blog-edit-input" rows="10" cols="30"></textarea>
             </div>
 
 
+
+
+
+
             <a href="#">表情</a>
-            <a href="#">图片</a>
+            <a href="javascript:void(0)" id="blog-edit-img-select">图片</a>
             <a href="#">视频</a>
             <a href="#">话题</a>
             <a href="#">头条文章</a>
             <a href="#">定时发</a>
 
-            <select style="height: 30px;">
-                <option value="public">公开</option>
-                <option value="freinds">好友圈</option>
-                <option value="private">仅自己可见</option>
-                <option value="group">群可见</option>
+            <select id="blog-type-select" style="height: 30px;">
+                <option value="PUBLIC">公开</option>
+                <option value="FREINDS">好友圈</option>
+                <option value="PRIVATE">仅自己可见</option>
+                <option value="GROUP">群可见</option>
             </select>
-            <button>发布</button>
+            <button id="publish-btn">发布</button>
+            <span id="display"></span>
+
+
+        </div>
+
+        <div id="img-preview"style="display:none;">
+            <input id="blog-edit-img-input" name="file" type="file"  style="display:none;" multiple />
+            <ul id="blog-edit-img-list-ul" >
+                <!--<li>
+                    <img src="../static/img/header/2.jpg" width="40px" height="40px"   class="blog-img-list">
+                    <span>sdafadsf.jpg</span>
+                    <button class="delete-img-btn">删除</button>
+                </li>-->
+            </ul>
 
         </div>
     </body>

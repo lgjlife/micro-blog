@@ -42,7 +42,7 @@ var info={
                     var jsonData = JSON.stringify(data);
                     console.log(jsonData);
                     
-                    $("#info-header-img").attr("src","../static"+data.data.headerUrl);
+                    
                     
                     $("#info-nick-name-input").val(data.data.nickName);
                     $("#info-phone-input").val(data.data.phoneNum);
@@ -128,6 +128,9 @@ var info={
         
         var files = $("#head-file").prop('files');
         console.log("上传的文件个数 = " + files.length);
+        console.log("files.val = " + files[0].type);
+        console.log("files.val = " + files[0].name);
+
         
          if (files && files.length > 0) {
 
@@ -141,7 +144,7 @@ var info={
             var URL = window.URL || window.webkitURL;
 
             var imgURL = URL.createObjectURL(file);
-
+             console.log("imgURL = " + imgURL);
             $("#img-change").attr("src",imgURL);
          } 
         //打开预览窗口

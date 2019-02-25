@@ -15,7 +15,15 @@ public enum BlogReturnCode implements  ReturnCode{
 
 
     BLOG_QUERY_SUCCESS(10,"博文查询成功"),
-    BLOG_QUERY_FAIL(10,"博文查询失败")
+    BLOG_QUERY_FAIL(11,"博文查询失败"),
+    BLOG_SUBMIT_SUCCESS(12,"博文发布成功"),
+    BLOG_SUBMIT_FAIL(13,"博文发布失败"),
+    BLOG_COLLECT_SUCCESS(14,"博文收藏成功"),
+    BLOG_COLLECT_FAIL(15,"博文收藏失败"),
+    BLOG_REPOST_SUCCESS(16,"博文转发成功"),
+    BLOG_REPOST_FAIL(17,"博文转发失败"),
+    BLOG_LIKE_SUCCESS(18,"博文点赞成功"),
+    BLOG_LIKE_FAIL(19,"博文点赞失败")
     ;
 
 
