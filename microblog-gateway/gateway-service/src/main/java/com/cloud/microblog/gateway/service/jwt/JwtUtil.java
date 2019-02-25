@@ -12,7 +12,7 @@ import java.util.Date;
 @Slf4j
 public class JwtUtil {
     // 过期时间5分钟
-    private static final long EXPIRE_TIME = 5 * 60 * 1000;
+    private static final long EXPIRE_TIME = 10 * 1000;
 
     /**
      * 校验token是否正确
@@ -85,9 +85,23 @@ public class JwtUtil {
 
         log.debug("name = {}" , getName);
 
+        int count  = 0;
 
-        boolean result = JwtUtil.verify(token,user,password);
-        log.debug("verify result = {} ",result);
+        while (true){
+
+            try{
+                boolean result = JwtUtil.verify(token,user,password);
+
+                log.debug("verify result = {} ,time = {}s",result,count++);
+
+                Thread.sleep(1000);
+
+            }
+            catch(Exception ex){
+                ex.printStackTrace();
+            }
+        }
+
     }
 }
 

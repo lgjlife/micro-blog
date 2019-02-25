@@ -10,11 +10,11 @@
 
 ├─── FrontEnd 前端项目文件,nginx 配置文件
 
-├─── img README.md 文件所用图片
+├─── img  README.md文件所用图片
 
-├─── microblog-center 注册中心应用 port: 8001
+├─── microblog-common 公共实现类
 
-├─── microblog-common 公共类
+├─── microblog-chat 私信应用
 
 ├─── microblog-config 配置中心应用
 
@@ -25,16 +25,24 @@
      ├─── microblog-gateway-service     网关服务层
      
      ├─── microblog-gateway-dao         网关数据层
+     
+├─── microblog-support  
 
-├─── microblog-hystrix  hystrix 监控应用
+     ├─── microblog-hystrix  hystrix 监控应用
+     
+     ├─── microblog-sleuth
+     
+     ├─── microblog-admin  监控
+     
+     ├─── microblog-center 注册中心应用 port: 8001
+     
+     ├─── zipkin-server  zipkin 监控
 
 ├─── microblog-scheduler 任务调度应用
 
 ├─── microblog-search 搜索应用
 
 ├─── mysql 数据库文件
-
-├─── zipkin-server  zipkin 监控
 
 ├─── github 上传脚本
 
@@ -60,6 +68,29 @@
 * 日志： log4j2
 * 日志聚合： kafka
 * 前端:Html,Javascript,css,jquery
+
+### Controller打印请求日志
+* 使用AOP实现
+* [切面类定义](https://github.com/lgjlife/micro-blog/blob/master/microblog-common/src/main/java/com/cloud/microblog/common/aop/syslog/aspect/PrintUrlAspect.java)
+* 如何使用：
+
+1.启动类注解扫描路径(com.cloud.microblog.common) 
+
+```$xslt
+@ComponentScan(basePackages = {"com.cloud.microblog.gateway.*","com.cloud.microblog.common"})
+```
+2. Controller方法上使用
+```$xslt
+@PrintUrlAnno
+@PostMapping("/login")
+public BaseResult login(@RequestBody Map<String, Object> requestMap){
+}
+```
+3.输出
+```
+访问  com.cloud.microblog.chat.controller.UserController  method = userList  路径 = /user/list  描述：
+```
+* 获取方法执行时间： @PrintUseTimeAspect   
 
 ## 前端页面
 ![首页](https://github.com/lgjlife/micro-blog/blob/master/img/index.png)
