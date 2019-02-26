@@ -79,7 +79,7 @@
 ```$xslt
 @ComponentScan(basePackages = {"com.cloud.microblog.gateway.*","com.cloud.microblog.common"})
 ```
-2. Controller方法上使用
+2.Controller方法上使用
 ```$xslt
 @PrintUrlAnno
 @PostMapping("/login")
@@ -88,7 +88,7 @@ public BaseResult login(@RequestBody Map<String, Object> requestMap){
 ```
 3.输出
 ```
-访问  com.cloud.microblog.chat.controller.UserController  method = userList  路径 = /user/list  描述：
+访问  com.cloud.microblog.chat.controller.UserController  method = login  路径 = /user/login  描述：
 ```
 * 获取方法执行时间： @PrintUseTimeAspect   
 

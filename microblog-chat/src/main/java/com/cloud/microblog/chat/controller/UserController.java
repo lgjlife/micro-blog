@@ -29,12 +29,7 @@ public class UserController {
 
         List<ChatUserDto> chatUserDtos = userService.list();
 
-        try{
-            Thread.sleep(5000);
-        }
-        catch(Exception ex){
-            ex.printStackTrace();
-        }
+
         result = new WebResult(ChatReturn.CHAT_USER_LIST_SUCCESS,chatUserDtos);
 
         return  result;

@@ -1,18 +1,18 @@
 package com.cloud.microblog.gateway.filter;
 
+import com.cloud.microblog.gateway.constants.AuthConstants;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 @Component
 @Slf4j
-public class PreZuulFilter extends ZuulFilter {
+public class TokenFilter  extends ZuulFilter {
 
     @Override
     public String filterType() {
@@ -21,7 +21,7 @@ public class PreZuulFilter extends ZuulFilter {
 
     @Override
     public int filterOrder() {
-        return 0;
+        return 100;
     }
 
     @Override
@@ -32,28 +32,23 @@ public class PreZuulFilter extends ZuulFilter {
     @Override
     public Object run() throws ZuulException {
 
-        log.debug("PreZuulFilter...");
+        System.out.println("sadasfdsfaffdssdfadfsa");
+
+        log.debug("TokenFilter" );
+
 
         RequestContext currentContext = RequestContext.getCurrentContext();
         HttpServletRequest request = currentContext.getRequest();
-        HttpServletResponse response = currentContext.getResponse();
 
-        Cookie[] cookies = request.getCookies();
-        if(cookies == null){
-            log.debug("cookies is null");
+        String headerToken = request.getHeader(AuthConstants.HEADER_TOKEN_KEY);
+        if(!StringUtils.isEmpty(headerToken)){
+            log.debug("headerToken = {}" , headerToken);
         }
 
-        else{
-            for(Cookie cookie : cookies){
-                log.debug("cookie = " + cookie.getValue());
-            }
+        String paramToken = request.getParameter(AuthConstants.PARAM_TOKEN_KEY);
+        if(!StringUtils.isEmpty(paramToken)){
+            log.debug("paramToken = {}" , paramToken);
         }
-
-
-        log.debug("ContextPath:{},ServletPath:{}",request.getContextPath(),request.getServletPath());
-        /*if(true){
-            throw  new NullPointerException();
-        }*/
         return null;
     }
 }

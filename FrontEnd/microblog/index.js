@@ -82,7 +82,55 @@ $(function(){
         
     })
 
+    $("#Header-TOKEN").click(function () {
+        $.ajax({
+            type: "GET",
+            url: "/auth/token/check",
+            headers: {'Authorization': "Header-TOKEN  - i am a token"},
+            success: function(data,status){
+                console.log("/auth/token/check 返回 status : "+status)
 
+
+            },
+            error:function(data,status){
+                console.log("/token/check 返回 status : "+status);
+            }
+
+        });
+    })
+
+    $("#GET-TOKEN").click(function () {
+        $.ajax({
+            type: "GET",
+            url: "/auth/token/check?token=GET-TOKEN-123456789",
+            success: function(data,status){
+                console.log("/token/check 返回 status : "+status)
+
+
+            },
+            error:function(data,status){
+                console.log("/token/check 返回 status : "+status);
+            }
+
+        });
+    })
+
+    $("#POST-TOKEN").click(function () {
+        $.ajax({
+            type: "post",
+            url: "/auth/token/check",
+            headers: {'Authorization': "POST-TOKEN-i am a token"},
+            success: function(data,status){
+                console.log("/token/check 返回 status : "+status)
+
+
+            },
+            error:function(data,status){
+                console.log("/token/check 返回 status : "+status);
+            }
+
+        });
+    })
     
     
   /*  $("#headlogin").load(function(){

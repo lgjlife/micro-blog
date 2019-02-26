@@ -1,12 +1,13 @@
-package com.cloud.microblog.gateway.interceptor;
+package com.cloud.microblog.chat.interceptor;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-//@Configuration
-public class WebSecurityConfig extends WebMvcConfigurationSupport {
+@Configuration
+public class WebSecurityConfig extends WebMvcConfigurerAdapter {
 
     /**
      * 登录session key

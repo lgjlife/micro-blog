@@ -23,6 +23,7 @@
         <module>microblog-cas</module>
         <module>microblog-chat</module>
         <module>microblog-support</module>
+        <module>microblog-auth</module>
 
     </modules>
     <packaging>pom</packaging>
