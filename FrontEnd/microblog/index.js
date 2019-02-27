@@ -131,6 +131,60 @@ $(function(){
 
         });
     })
+
+        $("#NON-TOKEN").click(function () {
+        $.ajax({
+            type: "post",
+            url: "/auth/token/check",
+            success: function(data,status){
+                console.log("/token/check 返回 status : "+status)
+
+
+            },
+            complete:function(XHR, TS){
+                console.log("complete");
+                var url = XHR.getResponseHeader("redirectUrl");
+                console.log("redirectUrl = " + url);
+                redirectHandle(url);
+
+
+            },
+            error:function(data,status){
+
+                var jsonData = JSON.stringify(data);
+                console.log(jsonData);
+                console.log("/token/check 返回 status : "+status);
+            }
+
+        });
+    })
+
+    $("#UNAUTH").click(function () {
+        $.ajax({
+            type: "post",
+            url: "/unauth",
+            success: function(data,status){
+                console.log("/token/check 返回 status : "+status)
+
+                var win = window;
+                while(win != win.top){
+                    win = win.top;
+                }
+                win.location.href = "/user/login.html";
+
+            },
+
+            error:function(data,status){
+
+                var jsonData = JSON.stringify(data);
+                console.log(jsonData);
+                console.log("/token/check 返回 status : "+status);
+            }
+
+        });
+    })
+
+
     
     
   /*  $("#headlogin").load(function(){

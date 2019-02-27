@@ -57,18 +57,24 @@ zuul:
     search:
       path: /search/**
       url: http://localhost:8700
+    #认证系统
     auth:
       path: /auth/**
       url: http://localhost:8773
+    #私信系统
+    chat:
+      path: /chat/**
+      url: http://localhost:8000
+
+
+
     resource:
       path: /resource/**
       url: http://localhost:7002
     web:
       path: /cloud-web/**
       url: http://localhost:7005
-    chat:
-      path: /chat/**
-      url: http://localhost:8000
+
   # 用户模块
     user-api:
       path: /server-api/**

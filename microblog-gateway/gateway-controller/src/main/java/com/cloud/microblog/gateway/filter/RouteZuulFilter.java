@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@Component
+//@Component
 @Slf4j
 public class RouteZuulFilter extends ZuulFilter {
 

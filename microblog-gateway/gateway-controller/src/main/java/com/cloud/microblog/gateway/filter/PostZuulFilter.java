@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @Component
 @Slf4j
@@ -28,6 +29,7 @@ public class PostZuulFilter extends ZuulFilter {
         return true;
     }
 
+
     @Override
     public Object run() throws ZuulException {
 
@@ -39,6 +41,26 @@ public class PostZuulFilter extends ZuulFilter {
 
         log.debug("ContextPath:{},ServletPath:{}",request.getContextPath(),request.getServletPath());
 
+
+
+
+
         return null;
+    }
+
+    private void sendRedirect(HttpServletResponse response, String redirectUrl){
+        try {
+
+            log.debug("redirectUrl = {}",redirectUrl);
+           // response.setHeader(HttpHeaders.LOCATION, redirectUrl);
+           // response.setStatus(HttpStatus.MOVED_PERMANENTLY.value());
+
+            response.sendRedirect(redirectUrl);
+            response.flushBuffer();
+
+
+        } catch (IOException ex) {
+            log.error("Could not redirect to: " + redirectUrl, ex);
+        }
     }
 }

@@ -10,7 +10,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@Component
+//@Component
 @Slf4j
 public class PreZuulFilter extends ZuulFilter {
 
@@ -37,7 +37,6 @@ public class PreZuulFilter extends ZuulFilter {
         RequestContext currentContext = RequestContext.getCurrentContext();
         HttpServletRequest request = currentContext.getRequest();
         HttpServletResponse response = currentContext.getResponse();
-
         Cookie[] cookies = request.getCookies();
         if(cookies == null){
             log.debug("cookies is null");
@@ -51,9 +50,9 @@ public class PreZuulFilter extends ZuulFilter {
 
 
         log.debug("ContextPath:{},ServletPath:{}",request.getContextPath(),request.getServletPath());
-        /*if(true){
+        if(true){
             throw  new NullPointerException();
-        }*/
+        }
         return null;
     }
 }
