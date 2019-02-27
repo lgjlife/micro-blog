@@ -1,4 +1,4 @@
-package com.cloud.microblog.gateway.service.jwt;
+package com.cloud.microblog.auth.jwt;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
@@ -12,8 +12,8 @@ import java.util.Date;
 @Slf4j
 public class JwtUtil {
     // 过期时间5分钟
-    private static final long EXPIRE_TIME = 10 * 1000;
-
+    private static final String secret = "0x123456789";
+    private static final long EXPIRE_TIME_MINUTE = 10;
     /**
      * 校验token是否正确
      *
@@ -21,7 +21,7 @@ public class JwtUtil {
      * @param secret 用户的密码
      * @return 是否正确
      */
-    public static boolean verify(String token, String username, String secret) {
+    public static boolean verify(String token, String username) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             JWTVerifier verifier = JWT.require(algorithm)
@@ -58,7 +58,7 @@ public class JwtUtil {
      */
     public static String sign(String username, String secret) {
 
-        Date date = new Date(System.currentTimeMillis() + EXPIRE_TIME);
+        Date date = new Date(System.currentTimeMillis() + EXPIRE_TIME_MINUTE*1000*60);
         Algorithm algorithm = Algorithm.HMAC256(secret);
         // 附带username信息
         return JWT.create()
@@ -90,7 +90,7 @@ public class JwtUtil {
         while (true){
 
             try{
-                boolean result = JwtUtil.verify(token,user,password);
+                boolean result = JwtUtil.verify(token,user);
 
                 log.debug("verify result = {} ,time = {}s",result,count++);
 

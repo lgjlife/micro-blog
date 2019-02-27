@@ -1,2 +1,6 @@
 server:
   port: 8773
+
+spring:
+  application:
+    name: auth-app
