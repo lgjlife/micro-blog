@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="#" />
+    <title>监控页面</title>
+
+    <script src="../static/js/jquery/jquery-3.3.1.js"></script>
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap/bootstrap.css">
+    <script src="../static/css/bootstrap/bootstrap.js"></script>
+
+
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <script src="index.js"></script>
+
+</head>
+<body>
+
+    <div id="menu">
+        <ul>
+            <li> <a href="javascript:void(0)" id="menu-center-select">注册中心</a></li>
+            <li> <a href="javascript:void(0)" id="menu-swagger-select">接口文档</a></li>
+            <li> <a href="javascript:void(0)" id="menu-admin-select">服务监控</a></li>
+            <li> <a href="javascript:void(0)" id="menu-zipkin-select">链路监控</a></li>
+            <li> <a href="javascript:void(0)" id="menu-druid-select">数据库监控</a></li>
+        </ul>
+    </div>
+    <div id="display">
+        <iframe src="http://localhost:8001" id="display-center"  class="display-module" style="display: block"></iframe>
+        <iframe src="http://localhost:7300/center" id="display-swagger" class="display-module"></iframe>
+        <iframe src="http://localhost:7300/center" id="display-admin" class="display-module"></iframe>
+        <iframe src="http://localhost:7300/center" id="display-zipkin" class="display-module"></iframe>
+        <iframe src="http://localhost:7300/center" id="display-druid" class="display-module"></iframe>
+    </div>
+
+</body>
+</html>

@@ -141,14 +141,27 @@ $(function(){
 
 
             },
-            complete:function(XHR, TS){
+            /*complete:function(XHR, TS){
                 console.log("complete");
                 var url = XHR.getResponseHeader("redirectUrl");
                 console.log("redirectUrl = " + url);
-                redirectHandle(url);
+
+                var enable = XHR.getResponseHeader("enableRedirect");
+
+                if((enable == "true") && (url != "")){
+                    var win = window;
+                    while(win != win.top){
+                        win = win.top;
+                    }
+                    win.location.href = url;
+                }
+                console.log("enableRedirect = " + enable);
 
 
-            },
+             //
+
+
+            },*/
             error:function(data,status){
 
                 var jsonData = JSON.stringify(data);
@@ -184,10 +197,38 @@ $(function(){
         });
     })
 
+    $("#NOTNEEDFILTER").click(function () {
+        $.ajax({
+            type: "post",
+            url: "/chat/notNeedFilter",
+            success: function(data,status){
+                console.log("/chat/notNeedFilter 返回 status : "+status)
 
-    
-    
-  /*  $("#headlogin").load(function(){
-        console.log("headlogin onload;");
-    })*/
+            },
+
+
+
+        });
+    })
+
+    $("#NEEDFILTER").click(function () {
+        $.ajax({
+            type: "post",
+            url: "/chat/needFilter",
+            success: function(data,status){
+                console.log("/chat/needFilter 返回 status : "+status)
+
+            },
+
+
+
+        });
+    })
+
+
+
+
+    /*  $("#headlogin").load(function(){
+          console.log("headlogin onload;");
+      })*/
 })

@@ -4,19 +4,18 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.cloud.microblog</groupId>
-    <artifactId>cloud-admin-server</artifactId>
+    <artifactId>cloud-admin-client</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>cloud-admin-server</name>
+    <name>cloud-admin-client</name>
     <description>Demo project for Spring Boot</description>
 
     <parent>
-        <artifactId>cloud-admin</artifactId>
+        <artifactId>microblog-admin</artifactId>
         <groupId>com.cloud.microblog</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -27,8 +26,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
             <groupId>de.codecentric</groupId>
-            <artifactId>spring-boot-admin-starter-server</artifactId>
+            <artifactId>spring-boot-admin-starter-client</artifactId>
         </dependency>
 
         <dependency>
@@ -36,7 +39,6 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
 
     <dependencyManagement>

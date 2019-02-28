@@ -1,0 +1,28 @@
+html,body,#content{
+    width: 100%;
+    height: 100%;
+    margin:0;
+    padding:0;
+}
+
+#menu{
+    height: 100%;
+    width: 15%;
+    background-color: #CCCCCC;
+    float: left;
+
+}
+
+
+#display{
+    width: 85%;
+    height: 100%;
+    background-color: #00FFFF;
+    float: left;
+}
+
+.display-module{
+    height: 100%;
+    width: 100%;
+    display: none;
+}

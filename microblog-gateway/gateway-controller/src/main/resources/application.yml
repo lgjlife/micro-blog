@@ -65,6 +65,12 @@ zuul:
     chat:
       path: /chat/**
       url: http://localhost:8000
+    # 服务注册中心
+    # 访问注册中心，使用的是url,否则会报错
+    # com.netflix.client.ClientException: Load balancer does not have available server for client
+    center:
+      path: /center/**
+      url: http://localhost:8001
 
 
 
@@ -87,9 +93,7 @@ zuul:
     scheduler-quartz-api:
       path: /scheduler-quartz-api/**
       serviceId: scheduler-quartz
-  # 服务注册中心
-  # 访问注册中心，使用的是url,否则会报错
-  # com.netflix.client.ClientException: Load balancer does not have available server for client
+
     eureka-server-api:
       path: /eureka-server-api/**
       url: http://localhost:8001/
@@ -99,3 +103,10 @@ logging:
       com.cloud: debug
       org.apache.shiro.session.mgt: error
       com.cloud.microblog.gateway.service.shiro.config: error
+auth:
+  chat:
+    name: chat
+    paths:
+      - /chat/needFilter
+      - /chat/**
+      - /chat/user
