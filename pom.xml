@@ -7,20 +7,13 @@
     <artifactId>microblog</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <modules>
-        <module>microblog-center</module>
         <module>microblog-config</module>
-        <module>microblog-admin</module>
-        <module>microblog-zuul</module>
-        <module>microblog-filesystem</module>
         <module>microblog-scheduler</module>
         <module>microblog-consumer</module>
         <module>microblog-provider</module>
-        <module>microblog-hystrix</module>
-        <module>microblog-sleuth</module>
         <module>microblog-common</module>
         <module>microblog-gateway</module>
         <module>microblog-search</module>
-        <module>microblog-cas</module>
         <module>microblog-chat</module>
         <module>microblog-support</module>
         <module>microblog-auth</module>

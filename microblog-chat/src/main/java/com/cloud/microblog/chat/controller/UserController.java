@@ -7,6 +7,7 @@ import com.cloud.microblog.chat.service.UserService;
 import com.cloud.microblog.common.aop.syslog.anno.PrintUrlAnno;
 import com.cloud.microblog.common.result.BaseResult;
 import com.cloud.microblog.common.result.WebResult;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,6 +22,7 @@ public class UserController {
     @Autowired
     UserService  userService;
 
+    @ApiOperation(value = "/user/list")
     @PrintUrlAnno
     @RequestMapping("/list")
     public BaseResult userList(){

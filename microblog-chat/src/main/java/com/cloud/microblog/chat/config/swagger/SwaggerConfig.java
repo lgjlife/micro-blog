@@ -1,4 +1,4 @@
-package com.cloud.microblog.gateway.config.swagger;
+package com.cloud.microblog.chat.config.swagger;
 
 
 import org.springframework.context.annotation.Bean;
@@ -21,8 +21,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * @See:
  * @create: 2018-11-19 14:19
  **/
-
-
 @EnableSwagger2                // Swagger的开关，表示已经启用Swagger
 @Configuration                 // 声明当前配置类
 public class SwaggerConfig {
@@ -33,7 +31,7 @@ public class SwaggerConfig {
                 .apiInfo(apiInfo())
                 .select()
                 //为当前包路径
-                .apis(RequestHandlerSelectors.basePackage("com.cloud.microblog.gateway.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.cloud.microblog.chat.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }
@@ -41,7 +39,7 @@ public class SwaggerConfig {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 //页面标题
-                .title("microblog API 文档")
+                .title("私信模块")
                 //创建人
                 .contact(new Contact("lgj-blog", "https://blog.csdn.net/u011676300", ""))
                 //版本号
