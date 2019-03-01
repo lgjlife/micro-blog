@@ -1,6 +1,7 @@
 package com.cloud.microblog.user.service.service;
 
 import com.cloud.microblog.common.code.UserReturnCode;
+import com.cloud.microblog.common.result.BaseResult;
 
 import java.util.Map;
 
@@ -53,7 +54,7 @@ public interface UserService {
      * @return:
      *
     */
-    UserReturnCode login(String name, String password);
+    BaseResult login(String name, String password);
 
 
 

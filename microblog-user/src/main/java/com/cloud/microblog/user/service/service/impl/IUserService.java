@@ -3,6 +3,7 @@ package com.cloud.microblog.user.service.service.impl;
 
 import com.cloud.microblog.common.aop.usetime.anno.PrintUseTimeAnno;
 import com.cloud.microblog.common.code.UserReturnCode;
+import com.cloud.microblog.common.result.BaseResult;
 import com.cloud.microblog.common.utils.UserRegexUtil;
 import com.cloud.microblog.common.utils.encrypt.rsa.RSAKeyFactory;
 import com.cloud.microblog.common.utils.encrypt.rsa.RSAUtil;
@@ -12,6 +13,7 @@ import com.cloud.microblog.user.dao.mapper.UserMapper;
 import com.cloud.microblog.user.dao.model.User;
 import com.cloud.microblog.user.service.config.utils.RedisStringUtil;
 import com.cloud.microblog.user.service.constants.UserRedisKeyUtil;
+import com.cloud.microblog.user.service.rpc.TokenClient;
 import com.cloud.microblog.user.service.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
@@ -46,6 +48,11 @@ public class IUserService implements UserService {
 
     @Autowired
     RedisStringUtil redisStringUtil;
+
+
+    @Autowired
+    TokenClient  tokenClient;
+
 
     //RedisTemplate<String, Object> redisTemplate;
     /**
@@ -192,7 +199,7 @@ public class IUserService implements UserService {
      *
      */
     @Override
-    public UserReturnCode login(String name,  String encPassword) {
+    public BaseResult login(String name, String encPassword) {
 
         User user = null;
         //获取原始密码
@@ -219,7 +226,7 @@ public class IUserService implements UserService {
         }
 
         if(user == null){
-            return  UserReturnCode.ACCOUNT_NOT_REGISTER;
+            return new BaseResult(UserReturnCode.ACCOUNT_NOT_REGISTER.getCode(),UserReturnCode.ACCOUNT_NOT_REGISTER.getMessage());
         }
 
 
@@ -228,10 +235,14 @@ public class IUserService implements UserService {
         String resultPassword = new Md5Hash(password,random,3).toString();
         if(user.getLoginPassword().equals(resultPassword)){
             log.debug("{}-密码验证正确,用户登录成功");
-            return UserReturnCode.LOGIN_SUCCESS;
         }
 
-        return UserReturnCode.LOGIN_PASSWORD_ERR;
+        String token = tokenClient.queryToken(user.getUserId());
+        log.debug("token = {}",token);
+
+        return new BaseResult(UserReturnCode.LOGIN_SUCCESS.getCode(),
+                UserReturnCode.LOGIN_SUCCESS.getMessage(),
+                token);
     }
 
 
@@ -369,8 +380,8 @@ public class IUserService implements UserService {
         log.debug("privateKey={}" ,privateKey );
         byte[] en_result  = RSAUtil.hexStringToBytes(encPassword);//解决Bad arguments问题
         log.debug("en_result len  =  " + en_result.length);
-
         try{
+
             byte[] decPasswordByte = RSAUtil.decrypt(privateKey,en_result);
 
             log.debug("decPasswordByte.len = {}",decPasswordByte.length );

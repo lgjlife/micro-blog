@@ -7,9 +7,7 @@ import com.cloud.microblog.common.result.BaseResult;
 import com.cloud.microblog.common.result.WebResult;
 import com.cloud.microblog.common.utils.UserRegexUtil;
 import com.cloud.microblog.user.service.config.utils.RedisStringUtil;
-import com.cloud.microblog.user.service.constants.UserRedisKeyUtil;
 import com.cloud.microblog.user.service.service.UserService;
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,10 +68,8 @@ public class UserController {
                 +"  imgVerificationCode = " + imgVerificationCode
         );
         //登录请求
-        UserReturnCode returnCode =  userService.login(loginName,loginPassword);
-        result = new WebResult(returnCode);
-        return   result ;
-    }
+        return userService.login(loginName,loginPassword);
+     }
 
     /**
      *功能描述
@@ -204,63 +200,5 @@ public class UserController {
         return   result ;
     }
 
-
-    @PrintUrlAnno
-    @GetMapping("/redis")
-    public BaseResult redis(){
-        test();
-        return   null ;
-    }
-
-
-    void test(){
-
-        Redis tt = new Redis("aa",123);
-
-        redisStringUtil.set(UserRedisKeyUtil.TEST_KEY.getPrefix(),
-                tt,
-                UserRedisKeyUtil.TEST_KEY.getTimeout());
-
-        Redis  ttt = (Redis)redisStringUtil.get(UserRedisKeyUtil.TEST_KEY.getPrefix());
-
-        log.debug("tt = {}",ttt);
-
-
-    }
-
 }
 
-
-@Data
-class Redis{
-    String name;
-    int data;
-
-   /* public Redis() {
-    }*/
-
-    public Redis(String name, int data) {
-        this.name = name;
-        this.data = data;
-    }
-}
-
-class SRedis extends Redis{
-
-
-    public SRedis() {
-        super("",1);
-    }
-
-    public SRedis(String name, int data) {
-        super(name, data);
-    }
-
-    @Override
-    public String toString() {
-        return "SRedis{" +
-                "name='" + name + '\'' +
-                ", data=" + data +
-                '}';
-    }
-}
