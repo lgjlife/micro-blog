@@ -59,11 +59,11 @@ var register={
     //请求url
     "requestUrl":{
         //注册提交
-       "registerSubmitUrl":"/user/register",
+       "registerSubmitUrl":"/user/user/register",
         //获取手机或者邮箱验证码
-       "getVerificationCodeUrl":"/user/verification/code",
+       "getVerificationCodeUrl":"/user/user/verification/code",
        //获取 rsa modulus  exponent
-        "requestmModulusAndExponentUrl":"/user/key",
+        "requestmModulusAndExponentUrl":"/user/user/key",
     },
  
     //向服务端ajax请求
@@ -136,7 +136,6 @@ var register={
                type: "post",
                url : register.requestUrl.getVerificationCodeUrl,
                contentType : "application/json;charset=utf-8",
-               //数据格式是json串,传进一个person
                data : jsonData,
                dataType: "json",
                success:function(data,status){
@@ -148,10 +147,16 @@ var register={
         },
         //获取 rsa modulus  exponent
         "requestmModulusAndExponent":function(){
+            var sendData ={"name":""};
+            sendData.name = $("#register-name-input").val();
+            var jsonData = JSON.stringify(sendData);
             $.ajax({
                type: "get",
                url : register.requestUrl.requestmModulusAndExponentUrl,
-               contentType : "application/json;charset=utf-8",      
+               contentType : "application/json;charset=utf-8",
+               data:  {
+                   name: $("#register-name-input").val()
+               },
                dataType: "json",
                success:function(data,status){
                    console.log("data = " + data.message + "  status = " + status);
@@ -337,6 +342,8 @@ $(function(){
     $("#get-verification-code").click(function(){
          register.request.getVerificationCode();   
          register.request.requestmModulusAndExponent();
+
+         $("#register-kaptcha").click();
     });
     
      /**

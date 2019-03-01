@@ -17,6 +17,7 @@
         <module>microblog-chat</module>
         <module>microblog-support</module>
         <module>microblog-auth</module>
+        <module>microblog-user</module>
 
     </modules>
     <packaging>pom</packaging>

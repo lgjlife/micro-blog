@@ -16,9 +16,12 @@
         <script src="register.js"></script>
         <!-- 自定义正则表达式-->
         <script src="../static/js/common/regex.js"></script>
-        
-      
-        
+
+
+        <!-- rsa 加密 -->
+        <script src="../static/js/security/Barrett.js"></script>
+        <script src="../static/js/security/BigInt.js"></script>
+        <script src="../static/js/security/RSA.js"></script>
     </head>
     <body>
         <div id="register-title">
@@ -67,7 +70,7 @@
                  <span class="register-lable">图片验证码</span>
                  <input type="text" id = "register-img-verification-code-input"  placeholder="验证码">
                  <img id="register-kaptcha" title="点击更换" alt="验证图片"
-                            src="/kaptcha" onclick="this.src=this.src+'?d=100'"
+                            src="/user/kaptcha" onclick="this.src='/user/kaptcha'+'?d=100'+ '&userName=' + $('#register-name-input').val()"
                             style="vertical-align: middle;"  height="30" width="120">
                  <div style="display: none" id="register-img-verification-code-input-warn">
                     <span style="color: red" id="register-img-verification-code-input-warn-disp"></span>

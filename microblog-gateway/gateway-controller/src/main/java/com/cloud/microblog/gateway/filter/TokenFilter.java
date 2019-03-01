@@ -2,6 +2,7 @@ package com.cloud.microblog.gateway.filter;
 
 import com.cloud.microblog.gateway.auth.AuthFilterService;
 import com.cloud.microblog.gateway.constants.AuthConstants;
+import com.cloud.microblog.gateway.constants.FilterOrderConstants;
 import com.cloud.microblog.gateway.utils.RedirectUtil;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
@@ -12,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 @Component
 @Slf4j
@@ -29,13 +29,14 @@ public class TokenFilter  extends ZuulFilter {
 
     @Override
     public int filterOrder() {
-        return 100;
+        return FilterOrderConstants.TOKEN_FILTER_ORDER;
     }
 
     @Override
     public boolean shouldFilter() {
 
        HttpServletRequest request =  RequestContext.getCurrentContext().getRequest();
+       //通过路径判断是否需要验证Token
        return authFilterService.needFilter(request);
     }
 
@@ -47,7 +48,7 @@ public class TokenFilter  extends ZuulFilter {
 
         RequestContext currentContext = RequestContext.getCurrentContext();
         HttpServletRequest request = currentContext.getRequest();
-        HttpServletResponse response = currentContext.getResponse();
+
         String headerToken = request.getHeader(AuthConstants.HEADER_TOKEN_KEY);
         if(!StringUtils.isEmpty(headerToken)){
             log.debug("headerToken = {}" , headerToken);
@@ -57,14 +58,12 @@ public class TokenFilter  extends ZuulFilter {
         if(!StringUtils.isEmpty(paramToken)){
             log.debug("paramToken = {}" , paramToken);
         }
-
+        //token 不存在，则重定向到登录页面
         if((StringUtils.isEmpty(headerToken)) && (StringUtils.isEmpty(paramToken))){
           //  currentContext.setSendZuulResponse(false);
             RedirectUtil.redirect(currentContext,"/user/login.html");
 
         }
-
-
         return null;
     }
 

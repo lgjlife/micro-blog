@@ -41,7 +41,7 @@ public class SwaggerConfig {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 //页面标题
-                .title("microblog API 文档")
+                .title("microblog  网关 API 文档")
                 //创建人
                 .contact(new Contact("lgj-blog", "https://blog.csdn.net/u011676300", ""))
                 //版本号

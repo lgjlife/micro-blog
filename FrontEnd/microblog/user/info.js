@@ -1,9 +1,9 @@
 var info={
     
     "requestUrl":{
-        "fileUploadUrl":"/user/info/head-img",
-        "queryUserInfoUrl":"/user/info" ,
-        "requestSettingUrl":"/user/info/setting" ,
+        "fileUploadUrl":"/user/user/info/head-img",
+        "queryUserInfoUrl":"/user/user/info" ,
+        "requestSettingUrl":"/user/user/info/setting" ,
     },
     "request":{
         /**

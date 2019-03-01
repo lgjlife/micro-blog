@@ -36,7 +36,7 @@ public class ShiroSessionDao extends CachingSessionDAO {
         log.debug("keys = " + keys);
 
         try{
-            redisTemplate.opsForValue().set(getKey(session.getId().toString()),session);
+         //   redisTemplate.opsForValue().set(getKey(session.getId().toString()),session);
         }
         catch(Exception ex){
 
@@ -58,7 +58,7 @@ public class ShiroSessionDao extends CachingSessionDAO {
         log.debug("doDelete,session({})",session.getId());
 
         try{
-            redisTemplate.delete(getKey(session.getId().toString()));
+          //  redisTemplate.delete(getKey(session.getId().toString()));
         }
         catch(Exception ex){
             log.debug("Exception:{}--{}",ex.getCause(),ex.getMessage());
@@ -88,7 +88,7 @@ public class ShiroSessionDao extends CachingSessionDAO {
         log.info(session.getId()+"");
 
         try{
-            redisTemplate.opsForValue().set(getKey(session.getId().toString()),session);
+          //  redisTemplate.opsForValue().set(getKey(session.getId().toString()),session);
         }
         catch(Exception ex){
             log.debug("Exception:{}--{}",ex.getCause(),ex.getMessage());
@@ -111,7 +111,7 @@ public class ShiroSessionDao extends CachingSessionDAO {
         Session session = null;
 
         try{
-            session =  (Session)redisTemplate.opsForValue().get(getKey(serializable.toString()));
+        //    session =  (Session)redisTemplate.opsForValue().get(getKey(serializable.toString()));
         }
         catch(Exception ex){
             ex.printStackTrace();

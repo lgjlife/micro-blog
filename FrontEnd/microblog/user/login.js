@@ -2,9 +2,9 @@ var login={
     //登录名称类型 phone / email
     "loginNameType":"phone",
     "requestUrl":{
-       "loginSubmitUrl":"/user/login",
+       "loginSubmitUrl":"/user/user/login",
         //获取 rsa modulus  exponent
-        "requestmModulusAndExponentUrl":"/user/key",
+        "requestmModulusAndExponentUrl":"/user/user/key",
     },
     "rsa":{
         "modulus":"",
@@ -76,14 +76,22 @@ var login={
                type: "get",
                url : login.requestUrl.requestmModulusAndExponentUrl,
                contentType : "application/json;charset=utf-8",      
-               dataType: "json",
-               success:function(data,status){
+               data:  {
+                    name: $("#login-name-input").val()
+                },
+                async: false,
+                dataType: "json",
+                success:function(data,status){
+
+
                    console.log("data = " + data.message + "  status = " + status);
                    console.log("modulus  = " + data.data.modulus);
                    console.log("exponent  = " + data.data.exponent);
                    
                    login.rsa.modulus = data.data.modulus;
                    login.rsa.exponent = data.data.exponent;
+
+                    login.request.loginSubmit();
                    
                }
                 
@@ -194,7 +202,7 @@ var login={
 
 $(function(){
     
-    login.request.requestmModulusAndExponent();
+
     /**
     * 选择登录方式
     */
@@ -219,7 +227,9 @@ $(function(){
     $("#login-submit-btn").click(function(){
         console.log("login-submit-btn click")
         if(login.checkAllInput() == true){
-            login.request.loginSubmit();
+
+            login.request.requestmModulusAndExponent();
+
         }
     });
 });

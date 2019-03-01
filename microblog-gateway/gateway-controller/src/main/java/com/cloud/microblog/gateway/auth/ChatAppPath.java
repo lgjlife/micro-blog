@@ -7,6 +7,12 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 
+/**
+ *功能描述 
+ * @author lgj
+ * @Description  读取yml 文件中的路径配置，该路径将会验证Token
+ * @date 2/28/19
+*/
 @Slf4j
 @Component
 @ConfigurationProperties(prefix = "auth.chat")

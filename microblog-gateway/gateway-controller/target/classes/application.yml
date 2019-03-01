@@ -72,38 +72,23 @@ zuul:
       path: /center/**
       url: http://localhost:8001
 
+    # 用户模块
+    user:
+      url: http://localhost:8002
+     # serviceId: user
+      path: /user/**
 
 
-    resource:
-      path: /resource/**
-      url: http://localhost:7002
-    web:
-      path: /cloud-web/**
-      url: http://localhost:7005
-
-  # 用户模块
-    user-api:
-      path: /server-api/**
-      serviceId: Auth-User
-  # 用户服务提供者
-    authprovider-api:
-      path: /security-provider-api/**
-      serviceId: security-provider
-  # 任务调度中心
-    scheduler-quartz-api:
-      path: /scheduler-quartz-api/**
-      serviceId: scheduler-quartz
-
-    eureka-server-api:
-      path: /eureka-server-api/**
-      url: http://localhost:8001/
 logging:
   level:
       org.springframework.security: debug
       com.cloud: debug
       org.apache.shiro.session.mgt: error
       com.cloud.microblog.gateway.service.shiro.config: error
+
+# 需要验证Token的路径
 auth:
+  #私信chat应用
   chat:
     name: chat
     paths:

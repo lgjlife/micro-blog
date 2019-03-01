@@ -9,6 +9,12 @@ import org.springframework.stereotype.Component;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ *功能描述 
+ * @author lgj
+ * @Description    配置哪些路径需要验证Token
+ * @date 2/28/19
+*/
 @Component
 public class AuthPathResource  implements ApplicationContextAware {
 
