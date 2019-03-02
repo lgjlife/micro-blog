@@ -95,3 +95,8 @@ auth:
       - /chat/needFilter
       - /chat/**
       - /chat/user
+  user:
+    name: user
+    paths:
+      - /user/user/info/**
+      - /user/user/info

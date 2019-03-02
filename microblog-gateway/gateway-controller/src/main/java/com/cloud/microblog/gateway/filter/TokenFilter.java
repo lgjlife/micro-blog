@@ -1,14 +1,13 @@
 package com.cloud.microblog.gateway.filter;
 
+import com.cloud.microblog.common.token.TokenUtil;
+import com.cloud.microblog.common.token.jwt.JwtUtil;
 import com.cloud.microblog.gateway.auth.AuthFilterService;
-import com.cloud.microblog.gateway.constants.AuthConstants;
 import com.cloud.microblog.gateway.constants.FilterOrderConstants;
-import com.cloud.microblog.gateway.utils.RedirectUtil;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -49,22 +48,22 @@ public class TokenFilter  extends ZuulFilter {
         RequestContext currentContext = RequestContext.getCurrentContext();
         HttpServletRequest request = currentContext.getRequest();
 
-        String headerToken = request.getHeader(AuthConstants.HEADER_TOKEN_KEY);
-        if(!StringUtils.isEmpty(headerToken)){
-            log.debug("headerToken = {}" , headerToken);
-        }
+        String token = null;
+        try{
+            //从请求中获取token
+            token = TokenUtil.getTokenFromRequest(request);
+            log.debug("token = {}",token);
+            //校验Token
+           log.debug("JwtUtil.verify = {}",JwtUtil.verify(token));
 
-        String paramToken = request.getParameter(AuthConstants.PARAM_TOKEN_KEY);
-        if(!StringUtils.isEmpty(paramToken)){
-            log.debug("paramToken = {}" , paramToken);
         }
-        //token 不存在，则重定向到登录页面
-        if((StringUtils.isEmpty(headerToken)) && (StringUtils.isEmpty(paramToken))){
-          //  currentContext.setSendZuulResponse(false);
-            RedirectUtil.redirect(currentContext,"/user/login.html");
-
+        catch(Exception ex){
+            ex.printStackTrace();
+          //  RedirectUtil.redirect(currentContext,"/user/login.html");
         }
         return null;
+        //token 存在 ，不做处理，在
+
     }
 
 

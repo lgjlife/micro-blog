@@ -21,14 +21,17 @@ public class AuthPathResource  implements ApplicationContextAware {
     @Autowired
     ChatAppPath chatAppPath;
 
+    @Autowired
+    UserAppPath userAppPath;
+
     private Map<String , AbsAppPath>  pathMap = new HashMap();
 
 
     @Override
     public void setApplicationContext(ApplicationContext ctx) throws BeansException {
         pathMap.put(chatAppPath.getName(),chatAppPath);
+        pathMap.put(userAppPath.getName(),userAppPath);
     }
-
 
     public Map<String, AbsAppPath> getPathMap() {
         return pathMap;

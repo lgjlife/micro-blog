@@ -8,11 +8,6 @@ var token={
 }
 $(function () {
 
-    $(document).ajaxStart(function (event, xhr, settings) {
-        console.log("ajaxStart")
-
-    })
-
     $(document).ajaxSend(function (event, xhr, settings) {
         console.log("ajaxSend")
         var tokenVal = token.getToken();

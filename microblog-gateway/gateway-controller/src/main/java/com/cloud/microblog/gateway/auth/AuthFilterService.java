@@ -39,13 +39,15 @@ public class AuthFilterService {
             List<String> paths = pathMap.get(key).getPaths();
             for(String path:paths){
 
-                log.debug("matcher path = {}",path);
+              //  log.debug("matcher path = {}",path);
                 if(matcher.match(servletPath,path)==true){
+                    log.debug("拦截{}",servletPath);
                     return true;
                 }
             }
 
         }
+        log.debug("不拦截{}",servletPath);
         return  false;
     }
 }

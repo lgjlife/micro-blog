@@ -1,29 +1,54 @@
 package com.cloud.microblog.user.service.service.impl;
 
+import com.cloud.microblog.common.code.ReturnCode;
+import com.cloud.microblog.common.code.UserReturnCode;
+import com.cloud.microblog.common.token.jwt.JWTClaimsKey;
+import com.cloud.microblog.common.utils.UserRegexUtil;
+import com.cloud.microblog.user.dao.mapper.UserMapper;
+import com.cloud.microblog.user.dao.model.User;
+import com.cloud.microblog.user.service.config.utils.RedisStringUtil;
+import com.cloud.microblog.user.service.constants.UserRedisKeyUtil;
+import com.cloud.microblog.user.service.service.UserInfoService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.util.*;
 
 @Slf4j
 @Service
-public class IUserInfoService // implements UserInfoService
+public class IUserInfoService  implements UserInfoService
 {
-/*
+
+    @Autowired
+    HttpServletRequest request;
+
+    @Autowired
+    RedisStringUtil redisStringUtil;
+
+
     @Autowired
     UserMapper userMapper;
 
     @Override
     public User userInfo() {
-        User user = (User) SessionUtils.get(UserSessionKeyUtil.CURRENT_LOGIN_USER_KEY);
-
-        if(user != null){
-            log.debug("user info = " + user);
-        }
-        else {
-            log.debug("user is null  ");
-        }
-        return  user;
+        return  getUser();
     }
 
+    /**
+     *功能描述
+     * @author lgj
+     * @Description  保存用户信息 设置
+     * @date 3/2/19
+     * @param:
+     * @return:
+     *
+    */
     @Override
     public ReturnCode saveSetting(Map<String, Object> map) {
 
@@ -35,18 +60,25 @@ public class IUserInfoService // implements UserInfoService
 
         log.debug("info = {}"+ map.values());
 
-        *//*if(!UserRegexUtil.isMobile(phone)){
+        if(!UserRegexUtil.isMobile(phone)){
             return UserReturnCode.FORMAT_PHONE_NUM_ERR;
         }
         else if(!UserRegexUtil.isEmail(email)){
             return UserReturnCode.FORMAT_EMAIL_ERR;
-        }*//*
-        User user = (User) SessionUtils.get(UserSessionKeyUtil.CURRENT_LOGIN_USER_KEY);
+        }
+        User user = getUser();
+        user.setNickName(nickName);
+        user.setPhoneNum(phone);
+        user.setEmail(email);
         if(user != null){
             map.put("userId",user.getUserId());
             userMapper.updateInfoByPrimaryKey(map);
             User user1 = userMapper.selectByPrimaryKey(user.getUserId());
-            SessionUtils.set(UserSessionKeyUtil.CURRENT_LOGIN_USER_KEY,user1);
+
+            redisStringUtil.set(UserRedisKeyUtil.LOGIN_USER_KEY.getPrefix()+user1.getUserId(),
+                    user1,
+                    UserRedisKeyUtil.LOGIN_USER_KEY.getTimeout());
+
 
             return UserReturnCode.INFO_RESET_SUCCESS;
         }
@@ -58,7 +90,7 @@ public class IUserInfoService // implements UserInfoService
 
     }
 
-    *//**
+    /**
      *功能描述
      * @author lgj
      * @Description  上传头像处理
@@ -66,7 +98,7 @@ public class IUserInfoService // implements UserInfoService
      * @param:
      * @return:
      *
-    *//*
+    */
 
     @Override
     @Transactional
@@ -105,7 +137,7 @@ public class IUserInfoService // implements UserInfoService
             String savePath = staticPath + subPath;
 
             //数据保存
-            User user = (User)SessionUtils.get(UserSessionKeyUtil.CURRENT_LOGIN_USER_KEY);
+            User user = getUser();
             if(user != null){
                 HashMap<String,Object> map = new HashMap<String,Object> ();
                 map.put("userId",user.getUserId());
@@ -113,7 +145,9 @@ public class IUserInfoService // implements UserInfoService
                 userMapper.updateInfoByPrimaryKey(map);
 
                 user.setHeaderUrl(subPath);
-                SessionUtils.set(UserSessionKeyUtil.CURRENT_LOGIN_USER_KEY,user);
+                redisStringUtil.set(UserRedisKeyUtil.LOGIN_USER_KEY.getPrefix()+user.getUserId(),
+                        user,
+                        UserRedisKeyUtil.LOGIN_USER_KEY.getTimeout());
                 File newfile = new File(savePath);
                 log.debug("newfile={}", newfile.getAbsolutePath());
                 file.transferTo(newfile);
@@ -127,11 +161,36 @@ public class IUserInfoService // implements UserInfoService
         throw  new NullPointerException();
     }
 
+    /**
+     *功能描述
+     * @author lgj
+     * @Description  获取随机字符串作为图片命名   随机数（0-10000）- 当前时间的时间戳
+     * @date 3/1/19
+     * @param:
+     * @return:
+     *
+    */
     private String  getRandomFileName(){
         String random = String.valueOf(new Random().nextInt(10000));
         String timestamp = String.valueOf(new Date().getTime());
 
         return  random+"-"+timestamp;
 
-    }*/
+    }
+
+
+    private  User  getUser(){
+        Long id = (Long)request.getAttribute(JWTClaimsKey.userId);
+        User user = null;
+
+        user =  (User)redisStringUtil.get(UserRedisKeyUtil.LOGIN_USER_KEY.getPrefix()+id);
+        if(user == null){
+            user = userMapper.selectByPrimaryKey(id);
+            redisStringUtil.set(UserRedisKeyUtil.LOGIN_USER_KEY.getPrefix()+id,
+                    user,
+                    UserRedisKeyUtil.LOGIN_USER_KEY.getTimeout());
+        }
+
+        return  user;
+    }
 }

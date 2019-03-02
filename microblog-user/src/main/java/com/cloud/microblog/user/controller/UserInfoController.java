@@ -1,8 +1,21 @@
 package com.cloud.microblog.user.controller;
 
+import com.cloud.microblog.common.aop.syslog.anno.PrintUrlAnno;
+import com.cloud.microblog.common.code.ReturnCode;
+import com.cloud.microblog.common.code.UserReturnCode;
+import com.cloud.microblog.common.result.BaseResult;
+import com.cloud.microblog.common.result.WebResult;
+import com.cloud.microblog.user.dao.model.User;
+import com.cloud.microblog.user.service.service.UserInfoService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
 
 /**
  *功能描述
@@ -16,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class UserInfoController {
 
-    /*@Autowired
+    @Autowired
     UserInfoService userInfoService;
 
 
@@ -67,5 +80,5 @@ public class UserInfoController {
         ReturnCode returnCode = userInfoService.saveSetting(map);
         BaseResult result = new WebResult(returnCode);
         return   result ;
-    }*/
+    }
 }

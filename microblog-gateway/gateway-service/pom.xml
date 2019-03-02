@@ -24,6 +24,12 @@
             <artifactId>java-jwt</artifactId>
             <version>3.7.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.cloud.microblog</groupId>
+            <artifactId>microblog-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
 
     </dependencies>
 

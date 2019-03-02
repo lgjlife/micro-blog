@@ -56,7 +56,7 @@
                  <span class="login-lable">验证码</span>
                  <input type="text" id = "login-img-verification-code-input"  placeholder="验证码" value="asdd">
                  <img id="login-kaptcha" title="点击更换" alt="验证图片"
-                            src="/kaptcha" onclick="this.src=this.src+'?d=100'"
+                      src="/user/kaptcha" onclick="this.src='/user/kaptcha'+'?d=100'+ '&userName=' + $('#login-name-input').val()"
                             style="vertical-align: middle;"  height="30" width="120">
                  <div style="display: none" id="login-img-verification-code-input-warn">
                     <span style="color: red" id="login-img-verification-code-input-warn-disp"></span>

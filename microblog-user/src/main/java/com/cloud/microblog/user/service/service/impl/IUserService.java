@@ -4,6 +4,8 @@ package com.cloud.microblog.user.service.service.impl;
 import com.cloud.microblog.common.aop.usetime.anno.PrintUseTimeAnno;
 import com.cloud.microblog.common.code.UserReturnCode;
 import com.cloud.microblog.common.result.BaseResult;
+import com.cloud.microblog.common.token.jwt.JWTClaimsKey;
+import com.cloud.microblog.common.token.jwt.JwtUtil;
 import com.cloud.microblog.common.utils.UserRegexUtil;
 import com.cloud.microblog.common.utils.encrypt.rsa.RSAKeyFactory;
 import com.cloud.microblog.common.utils.encrypt.rsa.RSAUtil;
@@ -225,6 +227,7 @@ public class IUserService implements UserService {
             user = userMapper.selectByEmail(name);
         }
 
+        //帐号未注册
         if(user == null){
             return new BaseResult(UserReturnCode.ACCOUNT_NOT_REGISTER.getCode(),UserReturnCode.ACCOUNT_NOT_REGISTER.getMessage());
         }
@@ -237,12 +240,38 @@ public class IUserService implements UserService {
             log.debug("{}-密码验证正确,用户登录成功");
         }
 
-        String token = tokenClient.queryToken(user.getUserId());
-        log.debug("token = {}",token);
+        //远程获取token
+       // String token = tokenClient.queryToken(user.getUserId());
 
+        String token =  createToken(user.getUserId());
+        log.debug("token.length={},token = {}",token.length(),token);
         return new BaseResult(UserReturnCode.LOGIN_SUCCESS.getCode(),
                 UserReturnCode.LOGIN_SUCCESS.getMessage(),
                 token);
+    }
+
+    public  String createToken( Long id){
+
+        Map<String,String> claims = new HashMap<>();
+        claims.put(JWTClaimsKey.userId,String.valueOf(id));
+        String  token =  JwtUtil.createJwt(claims);
+        log.debug("id = {},token = {} ",id,token);
+
+        /*try{
+            boolean result = JwtUtil.verify(token);
+            log.debug("JWTUtil.verify result = {}",result);
+
+             result = JwtUtil.verify(token);
+            log.debug("JWTUtil.verify result = {}",result);
+
+             result = JwtUtil.verify(token);
+            log.debug("JWTUtil.verify result = {}",result);
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }*/
+
+        return  token;
     }
 
 

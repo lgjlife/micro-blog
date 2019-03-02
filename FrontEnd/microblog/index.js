@@ -10,7 +10,7 @@ var index={
         },
     },
     "requestUrl":{
-       "queryUserInfoUrl":"/user/info", 
+       "queryUserInfoUrl":"/user/user/info",
        "requestLogoutUrl":"/user/logout", 
     },
     "request":{
@@ -19,7 +19,6 @@ var index={
             $.ajax({
                 type: "GET",
                 url: index.requestUrl.queryUserInfoUrl,
-                headers: {'Authorization': "i am a token"},
                 success: function(data,status){
                     console.log("queryUserInfo 返回 status : "+status)
                     if(data.code == index.return.QUERY_USER_INFO_SUCCESS.code ){
@@ -73,8 +72,13 @@ var index={
 
 
 $(function(){
-    console.log("queryUserInfo....")
-    index.request.queryUserInfo();
+
+    if(token.getToken() != ""){
+        console.log("token = " + token.getToken())
+        index.request.queryUserInfo();
+
+    }
+
     
     $("#logout").click(function(){
         console.log("logout");
