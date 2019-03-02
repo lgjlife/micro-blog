@@ -146,29 +146,6 @@ public class IUserService implements UserService {
 
         String privateModulus = privateKey.getModulus().toString();
         String privateExponent = privateKey.getPrivateExponent().toString();
-       /*// BigInteger
-
-        RSAPrivateKey privateKey1 = null;
-
-        try{
-            privateKey1 =  RSAUtil.generateRSAPrivateKey(new BigInteger(privateModulus).toByteArray(),
-                    new BigInteger(privateExponent).toByteArray());
-        }
-        catch(Exception ex){
-            ex.printStackTrace();
-        }
-
-        String enc = "123456";
-        try{
-            byte[] encPassword = RSAUtil.encrypt(publicKey,enc.getBytes());
-            byte[] result = RSAUtil.decrypt(privateKey1,encPassword);
-            log.debug("result = " + new String(result));
-
-        }
-        catch(Exception ex){
-            ex.printStackTrace();
-        }*/
-
 
         redisStringUtil.set(UserRedisKeyUtil.KEYPAIR_PRIVATE_MODULUS_KEY.getPrefix()+name,
                 privateModulus,
@@ -177,11 +154,6 @@ public class IUserService implements UserService {
         redisStringUtil.set(UserRedisKeyUtil.KEYPAIR_PRIVATE_EXPONENT_KEY.getPrefix()+name,
                 privateExponent,
                 UserRedisKeyUtil.KEYPAIR_PRIVATE_EXPONENT_KEY.getTimeout());
-
-
-
-      //  SessionUtils.set(UserSessionKeyUtil.REGISTER_AES_KEYPAIR_KEY,keyPair);
-
         Map map = new HashMap();
         map.put("modulus",modulus);
         map.put("exponent",exponent);

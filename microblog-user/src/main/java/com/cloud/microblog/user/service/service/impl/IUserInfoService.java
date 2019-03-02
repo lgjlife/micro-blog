@@ -2,7 +2,6 @@ package com.cloud.microblog.user.service.service.impl;
 
 import com.cloud.microblog.common.code.ReturnCode;
 import com.cloud.microblog.common.code.UserReturnCode;
-import com.cloud.microblog.common.token.jwt.JWTClaimsKey;
 import com.cloud.microblog.common.utils.UserRegexUtil;
 import com.cloud.microblog.user.dao.mapper.UserMapper;
 import com.cloud.microblog.user.dao.model.User;
@@ -37,7 +36,7 @@ public class IUserInfoService  implements UserInfoService
 
     @Override
     public User userInfo() {
-        return  getUser();
+        return  getUser(getUserId());
     }
 
     /**
@@ -66,7 +65,7 @@ public class IUserInfoService  implements UserInfoService
         else if(!UserRegexUtil.isEmail(email)){
             return UserReturnCode.FORMAT_EMAIL_ERR;
         }
-        User user = getUser();
+        User user = getUser(getUserId());
         user.setNickName(nickName);
         user.setPhoneNum(phone);
         user.setEmail(email);
@@ -137,7 +136,7 @@ public class IUserInfoService  implements UserInfoService
             String savePath = staticPath + subPath;
 
             //数据保存
-            User user = getUser();
+            User user = getUser(getUserId());
             if(user != null){
                 HashMap<String,Object> map = new HashMap<String,Object> ();
                 map.put("userId",user.getUserId());
@@ -179,18 +178,25 @@ public class IUserInfoService  implements UserInfoService
     }
 
 
-    private  User  getUser(){
-        Long id = (Long)request.getAttribute(JWTClaimsKey.userId);
-        User user = null;
+    private  User  getUser(long userId){
 
-        user =  (User)redisStringUtil.get(UserRedisKeyUtil.LOGIN_USER_KEY.getPrefix()+id);
+
+        User user =  (User)redisStringUtil.get(UserRedisKeyUtil.LOGIN_USER_KEY.getPrefix()+userId);
         if(user == null){
-            user = userMapper.selectByPrimaryKey(id);
-            redisStringUtil.set(UserRedisKeyUtil.LOGIN_USER_KEY.getPrefix()+id,
+            user = userMapper.selectByPrimaryKey(userId);
+            redisStringUtil.set(UserRedisKeyUtil.LOGIN_USER_KEY.getPrefix()+userId,
                     user,
                     UserRedisKeyUtil.LOGIN_USER_KEY.getTimeout());
         }
 
         return  user;
+    }
+
+
+    private  Long  getUserId(){
+        String userId = request.getHeader("userId");
+        log.debug("userId = " + userId);
+
+        return Long.valueOf(userId);
     }
 }

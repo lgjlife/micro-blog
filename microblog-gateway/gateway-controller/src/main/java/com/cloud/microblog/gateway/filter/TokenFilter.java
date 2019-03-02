@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 @Component
 @Slf4j
@@ -54,7 +55,28 @@ public class TokenFilter  extends ZuulFilter {
             token = TokenUtil.getTokenFromRequest(request);
             log.debug("token = {}",token);
             //校验Token
-           log.debug("JwtUtil.verify = {}",JwtUtil.verify(token));
+           if(JwtUtil.verify(token)){
+               log.debug("Token 正常");
+               String userId = JwtUtil.getClaim(token,"userId");
+               currentContext.addZuulRequestHeader("userId",userId);
+
+               currentContext.addZuulRequestHeader("Authorization",token);
+               Map<String, String> headers =  currentContext.getZuulRequestHeaders();
+
+               headers.forEach((key,val)->log.debug("{}--{}",key,val));
+               request.setAttribute("Authorization",token);
+
+              String tokenAttr =  (String)request.getAttribute("Authorization");
+
+              log.debug("tokenAttr = " + tokenAttr);
+
+               currentContext.setRequest(request);
+
+               currentContext.addZuulRequestHeader("Authorization1",token);
+               currentContext.addZuulRequestHeader("aaa",token);
+
+
+           }
 
         }
         catch(Exception ex){

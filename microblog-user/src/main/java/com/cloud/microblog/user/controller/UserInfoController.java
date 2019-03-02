@@ -33,6 +33,11 @@ public class UserInfoController {
     UserInfoService userInfoService;
 
 
+    @Autowired
+    private  HttpServletRequest request;
+
+
+
     @PrintUrlAnno
     @PostMapping("/img")
     @ResponseBody
@@ -60,7 +65,11 @@ public class UserInfoController {
 
     @PrintUrlAnno
     @GetMapping
-    public BaseResult queryCurrentLoginInfo(){
+    public BaseResult queryCurrentLoginInfo(HttpServletRequest request){
+
+
+
+
         BaseResult result = null;
         User user =  userInfoService.userInfo();
         if(user  == null){
@@ -80,5 +89,13 @@ public class UserInfoController {
         ReturnCode returnCode = userInfoService.saveSetting(map);
         BaseResult result = new WebResult(returnCode);
         return   result ;
+    }
+
+
+    private  Long  getUserId(){
+        String userId = request.getHeader("userId");
+        log.debug("userId = " + userId);
+
+        return Long.valueOf(userId);
     }
 }

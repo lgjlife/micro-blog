@@ -56,9 +56,9 @@ var login={
                         $("#login-success-disp").show();
                         $("#login-warn").hide();
                         var tokenVal = data.data;
-
-                        token.setToken(tokenVal);
-                        console.log("token = " + token.getToken());
+                        console.log("token = " + tokenVal);
+                        tokenUtil.setToken(tokenVal);
+                        console.log("token = " + tokenUtil.getToken());
 
                     }
                     else{

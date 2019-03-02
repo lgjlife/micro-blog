@@ -24,7 +24,7 @@ public class JwtUtil {
 
     // 过期时间5分钟
     private static final String secret = "0x123456789";
-    private static final long EXPIRE_TIME_MINUTE = 10;
+    private static final long EXPIRE_TIME_MINUTE = 100;
 
 
     /**

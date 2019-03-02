@@ -72,167 +72,25 @@ var index={
 
 
 $(function(){
-
-    if(token.getToken() != ""){
-        console.log("token = " + token.getToken())
+//
+    //console.log("token = " + tokenUtil.getToken());
+    /**
+     *  如果存在token 则 获取用户信息
+     */
+    if(((tokenUtil.getToken() != null)) && (tokenUtil.getToken() != "") ){
+        console.log("获取用户信息")
         index.request.queryUserInfo();
-
+    }
+    else{
+        console.log("token not found");
     }
 
-    
+    /**
+     *  退出登录操作 ，移除token，并刷新页面
+     */
     $("#logout").click(function(){
         console.log("logout");
-        index.request.requestLogout();
-        
+        tokenUtil.removeToken();
+        window.location.reload();
     })
-
-    $("#Header-TOKEN").click(function () {
-        $.ajax({
-            type: "GET",
-            url: "/auth/token/check",
-            headers: {'Authorization': "Header-TOKEN  - i am a token"},
-            success: function(data,status){
-                console.log("/auth/token/check 返回 status : "+status)
-
-
-            },
-            error:function(data,status){
-                console.log("/token/check 返回 status : "+status);
-            }
-
-        });
-    })
-
-    $("#GET-TOKEN").click(function () {
-        $.ajax({
-            type: "GET",
-            url: "/auth/token/check?token=GET-TOKEN-123456789",
-            success: function(data,status){
-                console.log("/token/check 返回 status : "+status)
-
-
-            },
-            error:function(data,status){
-                console.log("/token/check 返回 status : "+status);
-            }
-
-        });
-    })
-
-    $("#POST-TOKEN").click(function () {
-        $.ajax({
-            type: "post",
-            url: "/auth/token/check",
-            headers: {'Authorization': "POST-TOKEN-i am a token"},
-            success: function(data,status){
-                console.log("/token/check 返回 status : "+status)
-
-
-            },
-            error:function(data,status){
-                console.log("/token/check 返回 status : "+status);
-            }
-
-        });
-    })
-
-        $("#NON-TOKEN").click(function () {
-        $.ajax({
-            type: "post",
-            url: "/auth/token/check",
-            success: function(data,status){
-                console.log("/token/check 返回 status : "+status)
-
-
-            },
-            /*complete:function(XHR, TS){
-                console.log("complete");
-                var url = XHR.getResponseHeader("redirectUrl");
-                console.log("redirectUrl = " + url);
-
-                var enable = XHR.getResponseHeader("enableRedirect");
-
-                if((enable == "true") && (url != "")){
-                    var win = window;
-                    while(win != win.top){
-                        win = win.top;
-                    }
-                    win.location.href = url;
-                }
-                console.log("enableRedirect = " + enable);
-
-
-             //
-
-
-            },*/
-            error:function(data,status){
-
-                var jsonData = JSON.stringify(data);
-                console.log(jsonData);
-                console.log("/token/check 返回 status : "+status);
-            }
-
-        });
-    })
-
-    $("#UNAUTH").click(function () {
-        $.ajax({
-            type: "post",
-            url: "/unauth",
-            success: function(data,status){
-                console.log("/token/check 返回 status : "+status)
-
-                var win = window;
-                while(win != win.top){
-                    win = win.top;
-                }
-                win.location.href = "/user/login.html";
-
-            },
-
-            error:function(data,status){
-
-                var jsonData = JSON.stringify(data);
-                console.log(jsonData);
-                console.log("/token/check 返回 status : "+status);
-            }
-
-        });
-    })
-
-    $("#NOTNEEDFILTER").click(function () {
-        $.ajax({
-            type: "post",
-            url: "/chat/notNeedFilter",
-            success: function(data,status){
-                console.log("/chat/notNeedFilter 返回 status : "+status)
-
-            },
-
-
-
-        });
-    })
-
-    $("#NEEDFILTER").click(function () {
-        $.ajax({
-            type: "post",
-            url: "/chat/needFilter",
-            success: function(data,status){
-                console.log("/chat/needFilter 返回 status : "+status)
-
-            },
-
-
-
-        });
-    })
-
-
-
-
-    /*  $("#headlogin").load(function(){
-          console.log("headlogin onload;");
-      })*/
 })

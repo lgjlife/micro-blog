@@ -1,8 +1,5 @@
 package com.cloud.microblog.user.controller.interceptor;
 
-import com.cloud.microblog.common.token.TokenUtil;
-import com.cloud.microblog.common.token.jwt.JWTClaimsKey;
-import com.cloud.microblog.common.token.jwt.JWTUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -25,21 +22,31 @@ public class RequestInterceptor extends HandlerInterceptorAdapter {
 
         log.debug("RequestInterceptor....");
 
-        Long userId = null;
+        String tokenAttr =  (String)request.getHeader("Authorization1");
+        log.debug("tokenAttr = " + tokenAttr);
+        String aaa = request.getHeader("aaa");
+        log.debug("aaa = " + aaa);
+
+        String userId = request.getHeader("userId");
+        log.debug("userId = " + userId);
+
+       /* Long userId = null;
         try{
             String token =  TokenUtil.getTokenFromRequest(request);
 
-            String id = JWTUtil.getClaim(token, JWTClaimsKey.userId);
+            request.setAttribute(JWTClaimsKey.userId,2);
+
+            String id = JwtUtil.getClaim(token, JWTClaimsKey.userId);
             if(id != null){
                 userId =  Long.valueOf(id);
-                request.setAttribute(JWTClaimsKey.userId,userId);
+                request.setAttribute(JWTClaimsKey.userId,2);
 
                 log.debug("当前登录的用户id = {}",userId);
             }
         }
         catch(Exception ex){
             log.debug("ex = " + ex.getMessage());
-        }
+        }*/
 
 
 
