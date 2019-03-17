@@ -33,7 +33,7 @@ public class SwaggerConfig {
                 .apiInfo(apiInfo())
                 .select()
                 //为当前包路径
-                .apis(RequestHandlerSelectors.basePackage("com.cloud.microblog.cloudzuul.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.cloud.microblog.gateway.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }
@@ -41,7 +41,7 @@ public class SwaggerConfig {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 //页面标题
-                .title("Cloud-Frame RESTful API 文档")
+                .title("microblog  网关 API 文档")
                 //创建人
                 .contact(new Contact("lgj-blog", "https://blog.csdn.net/u011676300", ""))
                 //版本号

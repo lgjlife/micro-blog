@@ -2,8 +2,10 @@ package com.cloud.microblog.gateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * @program: cloud-parent
@@ -14,10 +16,12 @@ import org.springframework.context.annotation.ComponentScan;
  * @create: 2018-12-10 17:13
  **/
 
+@EnableScheduling
 @EnableZuulProxy
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.cloud.microblog.gateway","com.cloud.microblog.common"})
-public class GatewayApplication {
+@EnableDiscoveryClient
+@ComponentScan(basePackages = {"com.cloud.microblog.gateway.*","com.cloud.microblog.common"})
+public class GatewayApplication  {
 
     public static void main(String[] args) {
 

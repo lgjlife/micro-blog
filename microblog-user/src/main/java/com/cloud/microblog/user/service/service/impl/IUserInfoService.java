@@ -197,6 +197,8 @@ public class IUserInfoService  implements UserInfoService
         String userId = request.getHeader("userId");
         log.debug("userId = " + userId);
 
+
+
         return Long.valueOf(userId);
     }
 }
