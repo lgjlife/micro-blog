@@ -12,8 +12,10 @@ import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +28,10 @@ public class ElasticsearchController {
 
     @Autowired
     TransportClient elasticsearchClient;
+
+    @Autowired
+    ElasticsearchTemplate elasticsearchTemplate;
+
 
 
     @PrintUrlAnno
@@ -44,6 +50,7 @@ public class ElasticsearchController {
                     .field("word_count", book.getWordCount())
                     .endObject();
 
+
             //创建文档
             IndexResponse indexResponse = elasticsearchClient
                     .prepareIndex("book","novel")
@@ -60,6 +67,7 @@ public class ElasticsearchController {
 
 
             SearchResponse  searchResponse =  elasticsearchClient.prepareSearch("book")
+
                     .setTypes("novel")
                     .setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
                     .setFrom(0)
@@ -80,15 +88,22 @@ public class ElasticsearchController {
     @PrintUrlAnno
     @RequestMapping("/delete")
     public void delete(HttpServletRequest request){
-
-
         log.info("/ela/delete");
     }
 
+    @PrintUrlAnno
     @RequestMapping("/query")
-    public void query(){
+    public SearchResponse query(@RequestParam("query") String query){
 
-        log.info("/ela/query");
+        log.debug("query {}",query);
+        SearchResponse  searchResponse =  elasticsearchClient.prepareSearch(query)
+                .setTypes("novel")
+                .setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
+                .setFrom(0)
+                .setSize(5)
+                .get();
+        return searchResponse;
+
 
     }
 

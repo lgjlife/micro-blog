@@ -7,12 +7,11 @@ import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.TransportAddress;
 import org.elasticsearch.transport.client.PreBuiltTransportClient;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 import java.net.InetAddress;
 
 @Slf4j
-@Configuration
+//@Configuration
 public class ElasticsearchConfig {
 
     @Bean

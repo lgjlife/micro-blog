@@ -51,11 +51,10 @@
         </dependency>
         <dependency>
             <groupId>com.cloud.microblog</groupId>
-            <artifactId>common</artifactId>
+            <artifactId>microblog-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
-
     </dependencies>
 
     <build>

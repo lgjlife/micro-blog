@@ -7,3 +7,11 @@ spring:
     prefix: classpath:/templates/
     suffix: .html
     cache: false
+  data:
+    elasticsearch:
+      cluster-name: elasticsearch
+      cluster-nodes: 127.0.0.1:9300
+
+logging:
+  level:
+    com.cloud: debug
