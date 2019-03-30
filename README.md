@@ -68,10 +68,36 @@
 * 日志： log4j2
 * 日志聚合： kafka
 * 前端:Html,Javascript,css,jquery
+### 如何启动项目
+1. 安装Redis并启动
+2. 安装Mysql并启动，导入sql文件
+3. 安装RabbitMQ并启动
+4. 安装elasticsearch并启动
+5. 安装nginx，配置文件，并启动
+6. 配置
+
+    6.1  配置Mysql用户名和密码
+    
+    6.2  配置Redis用户名和密码
+    
+    6.3  配置RabbitMq 
+    
+    6.4  配置elasticsearch
+    
+    6.5  配置nginx
+    
+6. 启动项目
+7. 访问路径
+
+    7.1 [首页:http://localhost:7300/index.html](http://localhost:7300/index.html)
+    
+    7.2 [监控页面:http://localhost:7300/monitor/index.html](http://localhost:7300/monitor/index.html)
+
+
 ### 数据库文件
-每次git提交时都会执行数据库备份操作，备份类位于[数据库备份类]()。
-备份的文件存放于[数据库备份文件 目录：mysql/all]()，最新日期为最新的操作，文件名称(xxx/mysql/all/microblog-sql-all-2019-03-30-16:22:33.sql)。
-[工程目录：mysql 存放各个模块的sql文件]()
+每次git提交时都会执行数据库备份操作，备份类位于[数据库备份类](https://github.com/lgjlife/micro-blog/blob/master/microblog-common%2Fsrc%2Fmain%2Fjava%2Fcom%2Fcloud%2Fmicroblog%2Fcommon%2Fbackup%2FMysqlBackupUtil.java)。
+备份的文件存放于[数据库备份文件 目录：mysql/all](https://github.com/lgjlife/micro-blog/tree/master/mysql/all)，最新日期为最新的操作，文件名称(xxx/mysql/all/microblog-sql-all-2019-03-30-16:22:33.sql)。
+[工程目录：mysql 存放各个模块的sql文件](https://github.com/lgjlife/micro-blog/tree/master/mysql)
 
 请选择日期最新备份文件进行数据库导入操作。
 ```java
