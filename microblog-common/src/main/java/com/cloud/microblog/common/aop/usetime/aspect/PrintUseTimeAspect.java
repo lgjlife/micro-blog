@@ -20,7 +20,7 @@ import java.util.Date;
  * @date: 9/7/18 
 */ 
 @Aspect
-@Component
+//@Component
 @Slf4j
 public class PrintUseTimeAspect {
 

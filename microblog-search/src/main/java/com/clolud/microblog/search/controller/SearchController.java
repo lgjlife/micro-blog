@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
@@ -20,7 +19,7 @@ import java.util.Map;
  * @Description  搜索 controller
  * @date 3/30/19
 */
-@RestController
+//@RestController
 @RequestMapping("/search")
 public class SearchController {
 
@@ -28,10 +27,10 @@ public class SearchController {
     private ElasticsearchTemplate elasticsearchTemplate;
 
 
-    @Autowired
+ //   @Autowired
     UserSearchService userSearchService;
 
-    @Autowired
+  //  @Autowired
     BlogSearchService blogSearchService;
 
 

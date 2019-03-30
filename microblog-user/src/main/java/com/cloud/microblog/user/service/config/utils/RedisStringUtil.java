@@ -17,7 +17,7 @@ public class RedisStringUtil {
 
         redisTemplate.opsForValue().set(key,value,timeout, TimeUnit.MINUTES);
 
-        Object
+       // Object
     }
 
 

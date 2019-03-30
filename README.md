@@ -86,12 +86,12 @@
     
     6.5  配置nginx
     
-6. 启动项目
-7. 访问路径
+7. 启动项目
+8. 访问路径
 
-    7.1 [首页:http://localhost:7300/index.html](http://localhost:7300/index.html)
+    8.1 [首页:http://localhost:7300/index.html](http://localhost:7300/index.html)
     
-    7.2 [监控页面:http://localhost:7300/monitor/index.html](http://localhost:7300/monitor/index.html)
+    8.2 [监控页面:http://localhost:7300/monitor/index.html](http://localhost:7300/monitor/index.html)
 
 
 ### 数据库文件
@@ -112,11 +112,25 @@ mysql> source xxx/mysql/all/microblog-sql-all-2019-03-30-16:22:33.sql
 * [切面类定义](https://github.com/lgjlife/micro-blog/blob/master/microblog-common/src/main/java/com/cloud/microblog/common/aop/syslog/aspect/PrintUrlAspect.java)
 * 如何使用：
 
-1.启动类注解扫描路径(com.cloud.microblog.common) 
-
-```$xslt
-@ComponentScan(basePackages = {"com.cloud.microblog.gateway.*","com.cloud.microblog.common"})
+1.引入pom
+```xml
+<dependency>
+    <groupId>com.cloud.microblog</groupId>
+    <artifactId>microblog-common</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <scope>compile</scope>
+</dependency>
 ```
+2.application.yml配置
+```yaml
+microblog:
+  common:
+    # 使能打印访问Url，在Controller方法上添加注解@PrintUrlAnno
+    printUrlEnable: true
+    # 使能打印方法执行耗时，在方法上添加注解@PrintUseTimeAnno
+    printUseTimeEnable: true
+```
+
 2.Controller方法上使用
 ```$xslt
 @PrintUrlAnno

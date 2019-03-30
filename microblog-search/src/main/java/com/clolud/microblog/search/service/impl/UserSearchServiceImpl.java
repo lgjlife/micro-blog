@@ -14,11 +14,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+//@Service
 @Slf4j
 public class UserSearchServiceImpl  implements UserSearchService {
 

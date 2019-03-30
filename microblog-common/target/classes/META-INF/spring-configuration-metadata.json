@@ -1,0 +1,37 @@
+{
+  "groups": [
+    {
+      "name": "ignore",
+      "type": "com.cloud.microblog.common.bean.FilterIgnorePropertiesConfig",
+      "sourceType": "com.cloud.microblog.common.bean.FilterIgnorePropertiesConfig"
+    },
+    {
+      "name": "microblog.common",
+      "type": "com.cloud.microblog.common.properties.CommonProperties",
+      "sourceType": "com.cloud.microblog.common.properties.CommonProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "ignore.clients",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "com.cloud.microblog.common.bean.FilterIgnorePropertiesConfig"
+    },
+    {
+      "name": "ignore.urls",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "com.cloud.microblog.common.bean.FilterIgnorePropertiesConfig"
+    },
+    {
+      "name": "microblog.common.print-url-enable",
+      "type": "java.lang.String",
+      "sourceType": "com.cloud.microblog.common.properties.CommonProperties"
+    },
+    {
+      "name": "microblog.common.print-use-time-enable",
+      "type": "java.lang.String",
+      "sourceType": "com.cloud.microblog.common.properties.CommonProperties"
+    }
+  ],
+  "hints": []
+}
