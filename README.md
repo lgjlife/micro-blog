@@ -68,7 +68,19 @@
 * 日志： log4j2
 * 日志聚合： kafka
 * 前端:Html,Javascript,css,jquery
+### 数据库文件
+每次git提交时都会执行数据库备份操作，备份类位于[数据库备份类]()。
+备份的文件存放于[数据库备份文件 目录：mysql/all]()，最新日期为最新的操作，文件名称(xxx/mysql/all/microblog-sql-all-2019-03-30-16:22:33.sql)。
+[工程目录：mysql 存放各个模块的sql文件]()
 
+请选择日期最新备份文件进行数据库导入操作。
+```java
+mysql -uroot -p
+mysql> create database microblog
+mysql> use microblog
+//xxx/mysql/all/microblog-sql-all-2019-03-30-16:22:33.sql 为备份文件本身的目录
+mysql> source xxx/mysql/all/microblog-sql-all-2019-03-30-16:22:33.sql
+```
 ### Controller打印请求日志
 * 使用AOP实现
 * [切面类定义](https://github.com/lgjlife/micro-blog/blob/master/microblog-common/src/main/java/com/cloud/microblog/common/aop/syslog/aspect/PrintUrlAspect.java)
