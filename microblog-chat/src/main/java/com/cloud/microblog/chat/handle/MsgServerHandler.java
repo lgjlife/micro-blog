@@ -72,7 +72,7 @@ public class MsgServerHandler extends ChannelHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         log.info("正在读取来自客户端的数据.........");
-        //TestUser user1 = (TestUser) msg;
+        //TestUser user1 = (TestUser) sms;
         log.info("客户端的数据：" + msg);
 
         TestUser user = new TestUser("我来自服务端", 18, 222);

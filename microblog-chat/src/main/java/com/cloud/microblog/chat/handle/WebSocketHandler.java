@@ -77,7 +77,7 @@ public class WebSocketHandler extends SimpleChannelInboundHandler<Object> {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         log.info("客户端发来信息 + " + ctx.channel().remoteAddress());
-        //   log.info("msg = " + msg);
+        //   log.info("sms = " + sms);
 
         if (msg instanceof FullHttpRequest) {
             log.info("传统接入");

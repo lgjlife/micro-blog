@@ -71,10 +71,10 @@ public class TimeServerHandler extends ChannelHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        // super.channelRead(ctx, msg);
+        // super.channelRead(ctx, sms);
 
         log.info("TimeServerHandler  channelRead");
-       /* ByteBuf  buf = (ByteBuf) msg;
+       /* ByteBuf  buf = (ByteBuf) sms;
         log.info("readableBytes = " + buf.readableBytes());
         byte[] rec = new byte[buf.readableBytes()];
 

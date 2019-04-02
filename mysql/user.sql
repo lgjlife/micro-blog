@@ -22,6 +22,7 @@ CREATE TABLE `user`(
     PRIMARY KEY (`user_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT="用户表";
 
+insert into  user (nick_name,login_password) values ("asd","sadas");
 /*用户粉丝表
 * 一对多，一个用户有多个粉丝
 */
