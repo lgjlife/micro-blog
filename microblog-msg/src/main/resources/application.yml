@@ -20,3 +20,9 @@ microblog:
     # 使能打印方法执行耗时，在方法上添加注解@PrintUseTimeAnno
     printUseTimeEnable: true
 
+rabbitmq:
+  producer:
+    host: 127.0.0.1
+    port: 5672
+    name: lgj
+    password: lgj
