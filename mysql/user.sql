@@ -15,8 +15,9 @@ CREATE TABLE `user`(
    `email` VARCHAR(30) COMMENT "电子邮箱",
    `email_active` TINYINT DEFAULT NULL COMMENT "邮箱是否激活",
    `phone_num` VARCHAR(20)  DEFAULT NULL  COMMENT "电话号码",
-   `register_time` DATETIME DEFAULT NULL COMMENT "注册时间",
+   `register_time` TIMESTAMP DEFAULT  CURRENT_TIMESTAMP COMMENT "注册时间",
    `last_login_time` DATETIME DEFAULT NULL COMMENT "最后登录时间",
+   `update_time` TIMESTAMP DEFAULT  CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "注册时间",
    `login_nums`  INT DEFAULT NULL COMMENT "登录次数",
     PRIMARY KEY (`user_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT="用户表";

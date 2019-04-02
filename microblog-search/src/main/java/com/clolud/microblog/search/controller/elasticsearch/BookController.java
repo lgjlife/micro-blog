@@ -26,6 +26,7 @@ import java.util.*;
 public class BookController {
 
     @Autowired
+
     BookDao bookDao;
 
 
@@ -80,14 +81,16 @@ public class BookController {
         // 分数、分页
         SearchQuery searchQuery = new NativeSearchQueryBuilder().withPageable(pageable)
                 .withQuery(functionScoreQueryBuilder)//.build();
-                .withHighlightBuilder(new HighlightBuilder()
+               /* .withHighlightBuilder(new HighlightBuilder()
                         .preTags(preTag)
-                        .postTags(postTag))
+                        .postTags(postTag))*/
                 .withHighlightFields(field)
                 .build();
 
-        Page<Book> searchPageResults = bookDao.search(searchQuery);
+       // log.info("searchQuery = " + searchQuery);
 
+        Page<Book> searchPageResults = bookDao.search(searchQuery);
+        log.info("result = " + searchPageResults.getContent());
         return searchPageResults.getContent();
 
     }

@@ -1,6 +1,7 @@
 package com.cloud.microblog.user.dao.mapper;
 
 import com.cloud.microblog.user.dao.model.User;
+
 import java.util.List;
 import java.util.Map;
 
@@ -44,7 +45,6 @@ public interface UserMapper {
      * @mbggenerated
      */
     int updateByPrimaryKey(User record);
-
 
     Long selectIdByPhone(String phone);
     Long selectIdByEmail(String email);

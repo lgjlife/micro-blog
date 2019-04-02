@@ -9,7 +9,6 @@ import org.elasticsearch.index.query.QueryStringQueryBuilder;
 import org.elasticsearch.index.query.functionscore.FunctionScoreQueryBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
@@ -53,14 +52,16 @@ public class UserSearchServiceImpl  implements UserSearchService {
         // 分数、分页
         SearchQuery searchQuery = new NativeSearchQueryBuilder().withPageable(pageable)
                 .withQuery(functionScoreQueryBuilder)//.build();
-                .withHighlightBuilder(new HighlightBuilder()
+
+              /*  .withHighlightBuilder(new HighlightBuilder()
                         .preTags(preTag)
-                        .postTags(postTag))
+                        .postTags(postTag))*/
                 .withHighlightFields(field)
                 .build();
 
-        Page<User> searchPageResults = userRepository.search(searchQuery);
+       // Page<User> searchPageResults = userRepository.search(searchQuery);
 
-        return searchPageResults.getContent();
+      //  return searchPageResults.getContent();
+        return  null;
     }
 }

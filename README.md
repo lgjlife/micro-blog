@@ -12,7 +12,7 @@
 
 ├─── img  README.md文件所用图片
 
-├─── microblog-common 公共实现类
+├─── microblog-common 公共实现类,配置为SpringBoot-starter
 
 ├─── microblog-chat 私信应用
 
@@ -131,14 +131,14 @@ microblog:
     printUseTimeEnable: true
 ```
 
-2.Controller方法上使用
+3.Controller方法上使用
 ```$xslt
 @PrintUrlAnno
 @PostMapping("/login")
 public BaseResult login(@RequestBody Map<String, Object> requestMap){
 }
 ```
-3.输出
+4.输出
 ```
 访问  com.cloud.microblog.chat.controller.UserController  method = login  路径 = /user/login  描述：
 ```

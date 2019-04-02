@@ -263,31 +263,86 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
   `user_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '用户ID',
-  `user_number` bigint(20) DEFAULT NULL COMMENT '用户编号',
-  `nick_name` varchar(30) DEFAULT NULL COMMENT '昵称',
-  `login_password` varchar(50) NOT NULL COMMENT '登录密码',
-  `salt` varchar(50) DEFAULT NULL COMMENT '登录密码盐',
-  `actual_name` varchar(100) DEFAULT NULL COMMENT '真实姓名',
-  `gender` varchar(10) DEFAULT NULL COMMENT '性别',
-  `age` tinyint(3) unsigned DEFAULT NULL COMMENT '年龄',
-  `header_url` varchar(50) DEFAULT NULL COMMENT '头像URL',
-  `status` tinyint(4) DEFAULT NULL COMMENT '状态',
-  `email` varchar(30) DEFAULT NULL COMMENT '电子邮箱',
-  `email_active` tinyint(4) DEFAULT NULL COMMENT '邮箱是否激活',
-  `phone_num` varchar(20) DEFAULT NULL COMMENT '电话号码',
-  `register_time` datetime DEFAULT NULL COMMENT '注册时间',
-  `last_login_time` datetime DEFAULT NULL COMMENT '最后登录时间',
-  `login_nums` int(11) DEFAULT NULL COMMENT '登录次数',
+  `user_number` bigint(20) NOT NULL  DEFAULT 0 COMMENT '用户编号',
+  `nick_name` varchar(30) NOT NULL  DEFAULT '' COMMENT '昵称',
+  `login_password` varchar(50) NOT NULL  DEFAULT '' COMMENT '登录密码',
+  `salt` varchar(50) NOT NULL  DEFAULT '' COMMENT '登录密码盐',
+  `actual_name` varchar(100) NOT NULL  DEFAULT '' COMMENT '真实姓名',
+  `gender` varchar(10) NOT NULL  DEFAULT '' COMMENT '性别',
+  `age` tinyint(3) unsigned NOT NULL  DEFAULT 0 COMMENT '年龄',
+  `header_url` varchar(50) NOT NULL  DEFAULT '' COMMENT '头像URL',
+  `status` tinyint(4) NOT NULL  DEFAULT 1 COMMENT '状态',
+  `email` varchar(30) NOT NULL  DEFAULT '' COMMENT '电子邮箱',
+  `email_active` tinyint(4) NOT NULL  DEFAULT 0 COMMENT '邮箱是否激活',
+  `phone_num` varchar(20) NOT NULL  DEFAULT '' COMMENT '电话号码',
+  `register_time` datetime NOT NULL  DEFAULT '2019-02-20 21:56:06' COMMENT '注册时间',
+  `last_login_time` datetime NOT NULL  DEFAULT '2019-02-20 21:56:06' COMMENT '最后登录时间',
+  `login_nums` int(11) NOT NULL  DEFAULT  0 COMMENT '登录次数',
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='用户表';
 /*!40101 SET character_set_client = @saved_cs_client */;
+INSERT INTO `user` VALUES (1,1,'中国速读法反攻倒算','77671e8c7374b54bdbfe9b8624aeaf43','b4faae8a1ff14432496e526a3c1d2229',
+'','',1,'/img/header/5597-1550725481498.jpg',1,'非常阿瑟斯的',1,'13925716753','2019-02-20 21:56:06','2019-02-20 21:56:06',1);
+INSERT INTO `user` VALUES (2,1,'中国速读法反攻倒算','77671e8c7374b54bdbfe9b8624aeaf43','b4faae8a1ff14432496e526a3c1d2229',
+'','',1,'/img/header/5597-1550725481498.jpg',1,'非常三个地方',1,'13925716753','2019-02-20 21:56:06','2019-02-20 21:56:06',1);
+INSERT INTO `user` VALUES (3,1,'中国速读法反攻倒算','77671e8c7374b54bdbfe9b8624aeaf43','b4faae8a1ff14432496e526a3c1d2229',
+'','',1,'/img/header/5597-1550725481498.jpg',1,'非常速度更算法',1,'13925716753','2019-02-20 21:56:06','2019-02-20 21:56:06',1);
+INSERT INTO `user` VALUES (4,1,'中国速读法反攻倒算','77671e8c7374b54bdbfe9b8624aeaf43','b4faae8a1ff14432496e526a3c1d2229',
+'','',1,'/img/header/5597-1550725481498.jpg',1,'非常的活动',1,'13925716753','2019-02-20 21:56:06','2019-02-20 21:56:06',1);
+INSERT INTO `user` VALUES (5,1,'中国速读法反攻倒算','77671e8c7374b54bdbfe9b8624aeaf43','b4faae8a1ff14432496e526a3c1d2229',
+'','',1,'/img/header/5597-1550725481498.jpg',1,'非常算法大给',1,'13925716753','2019-02-20 21:56:06','2019-02-20 21:56:06',1);
+INSERT INTO `user` VALUES (6,1,'中国速读法反攻倒算','77671e8c7374b54bdbfe9b8624aeaf43','b4faae8a1ff14432496e526a3c1d2229',
+'','',1,'/img/header/5597-1550725481498.jpg',1,'非常分公司的',1,'13925716753','2019-02-20 21:56:06','2019-02-20 21:56:06',1);
+
+
+
+
 
 --
 -- Dumping data for table `user`
 --
+DROP TABLE IF EXISTS `user_demo`;
+CREATE TABLE `user_demo`(
+   `user_id` BIGINT   AUTO_INCREMENT COMMENT "用户ID",
+   `user_number` BIGINT  DEFAULT NULL COMMENT "用户编号",
+   `nick_name`  VARCHAR(30) DEFAULT NULL COMMENT "昵称" ,
+   `login_password` VARCHAR(50) NOT NULL COMMENT "登录密码",
+   `salt` VARCHAR(50) DEFAULT NULL COMMENT "登录密码盐",
+   `actual_name` VARCHAR(100) DEFAULT NULL COMMENT "真实姓名",
+   `gender`  VARCHAR(10) DEFAULT NULL COMMENT "性别",
+   `age`  TINYINT UNSIGNED DEFAULT NULL  COMMENT "年龄",
+   `header_url` VARCHAR(50) DEFAULT NULL COMMENT "头像URL",
+   /*0:未注册，1：已注册，2：登录状态，3：离线状态，4,禁止登录状态，5：注销状态）*/
+   `status` TINYINT DEFAULT NULL COMMENT "状态",
+   `email` VARCHAR(30) COMMENT "电子邮箱",
+   `email_active` TINYINT DEFAULT NULL COMMENT "邮箱是否激活",
+   `phone_num` VARCHAR(20)  DEFAULT NULL  COMMENT "电话号码",
+   `register_time` TIMESTAMP DEFAULT  CURRENT_TIMESTAMP COMMENT "注册时间",
+   `last_login_time` DATETIME DEFAULT NULL COMMENT "最后登录时间",
+   `update_time` TIMESTAMP DEFAULT  CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "注册时间",
+   `login_nums`  INT DEFAULT NULL COMMENT "登录次数",
+    PRIMARY KEY (`user_id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT="用户表";
+INSERT INTO `user_demo` VALUES (4,NULL,'阿斯顿','77671e8c7374b54bdbfe9b8624aeaf43',
+'b4faae8a1ff14432496e526a3c1d2229',NULL,NULL,NULL,'/img/header/5597-1550725481498.jpg',NULL,'',NULL,'13925716753','2019-02-20 21:56:06',NULL,'2019-02-20 21:56:06',NULL);
+
+INSERT INTO `user_demo` VALUES (6,NULL,'速读法反攻倒算','77671e8c7374b54bdbfe9b8624aeaf43','b4faae8a1ff14432496e526a3c1d2229',NULL,NULL,NULL,'/img/header/5597-1550725481498.jpg',NULL,'',NULL,'13925716753','2019-02-20 21:56:06',NULL,'2019-02-20 21:56:06',NULL);
+
+INSERT INTO `user_demo` VALUES (7,NULL,'中国阿斯顿','77671e8c7374b54bdbfe9b8624aeaf43',
+'b4faae8a1ff14432496e526a3c1d2229',NULL,NULL,NULL,'/img/header/5597-1550725481498.jpg',NULL,'',NULL,'13925716753','2019-02-20 21:56:06',NULL,'2019-02-20 21:56:06',NULL);
+
+
+
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (4,NULL,'嘻嘻嘻哈哈哈','77671e8c7374b54bdbfe9b8624aeaf43',
+'b4faae8a1ff14432496e526a3c1d2229',NULL,NULL,NULL,'/img/header/5597-1550725481498.jpg',NULL,'',NULL,'13925716753','2019-02-20 21:56:06',NULL,NULL)
+
+INSERT INTO `user` VALUES (6,NULL,'苏大幅广告放大','77671e8c7374b54bdbfe9b8624aeaf43',
+'b4faae8a1ff14432496e526a3c1d2229',NULL,NULL,NULL,'/img/header/5597-1550725481498.jpg',NULL,'',NULL,'13925716753','2019-02-20 21:56:06',NULL,NULL)
+
+
 INSERT INTO `user` VALUES (1,NULL,'飞扬的天空','77671e8c7374b54bdbfe9b8624aeaf43','b4faae8a1ff14432496e526a3c1d2229',NULL,NULL,NULL,'/img/header/5597-1550725481498.jpg',NULL,'',NULL,'13925716753','2019-02-20 21:56:06',NULL,NULL),(2,NULL,NULL,'3d0c1695ea18510fc6c78b9dda8add64','b9bea755e2629418489a8ab748c6aad5',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'13925716752','2019-03-01 01:55:35',NULL,NULL),(3,NULL,NULL,'2247573f3259c6a9587ea44837b136cd','8f51952619b0d97a88f16bca9cd4f16b',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'13925716751','2019-03-01 02:19:12',NULL,NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -302,3 +357,19 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2019-03-30 16:36:40
+
+DROP TABLE IF EXISTS `location`;
+CREATE TABLE `location`(
+   `id` BIGINT   AUTO_INCREMENT COMMENT "用户ID",
+   `mail` BIGINT  DEFAULT NULL COMMENT "用户编号",
+   `address`  VARCHAR(30) DEFAULT NULL COMMENT "昵称" ,
+   `eaddress`  VARCHAR(80) DEFAULT NULL COMMENT "昵称" ,
+    PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT="用户表";
+
+insert into location values(1,532701,"广东省深圳市宝安区","guangdong shenzhen baoan");
+insert into location values(2,532702,"广东省深圳市宝安区","guangdong shenzhen baoan");
+insert into location values(3,532703,"广东省深圳市龙岗区","guangdong longgang baoan");
+insert into location values(4,532704,"广东省深圳市龙岗区","guangdong longgang baoan");
+insert into location values(5,532705,"广东省深圳市福田区","guangdong futian baoan");
+insert into location values(6,532706,"广东省深圳市福田区","guangdong futian baoan");

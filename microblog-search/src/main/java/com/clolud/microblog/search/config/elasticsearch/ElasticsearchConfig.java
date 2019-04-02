@@ -8,8 +8,6 @@ import org.elasticsearch.common.transport.TransportAddress;
 import org.elasticsearch.transport.client.PreBuiltTransportClient;
 import org.springframework.context.annotation.Bean;
 
-import java.net.InetAddress;
-
 @Slf4j
 //@Configuration
 public class ElasticsearchConfig {
@@ -20,7 +18,7 @@ public class ElasticsearchConfig {
         PreBuiltTransportClient client = null;
 
         log.info("ElasticsearchConfig  配置");
-        TransportAddress  node = new TransportAddress(InetAddress.getByName("localhost"),9300);
+        TransportAddress  node = null; //new TransportAddress(InetAddress.getByName("localhost"),9300);
         //es集群配置（自定义配置） 连接自己安装的集群名称
         Settings settings = Settings.builder()
                 .put("cluster.name","elasticsearch")

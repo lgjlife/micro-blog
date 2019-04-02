@@ -67,7 +67,6 @@ public class ElasticsearchController {
 
 
             SearchResponse  searchResponse =  elasticsearchClient.prepareSearch("book")
-
                     .setTypes("novel")
                     .setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
                     .setFrom(0)

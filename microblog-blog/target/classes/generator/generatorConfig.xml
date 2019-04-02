@@ -65,6 +65,12 @@
         <table tableName="blog" >
             <generatedKey column="blog_id" sqlStatement="MySql" type="post" identity="true"/>
         </table>
+
+        <table tableName="blog1" >
+            <generatedKey column="blog_id1" sqlStatement="MySql" type="post" identity="true"/>
+        </table>
+
+
         <table tableName="blog_img" >
             <generatedKey column="img_id" sqlStatement="MySql" type="post" identity="true"/>
         </table>

@@ -1,6 +1,12 @@
 server:
   port: 8700
 
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8001/eureka/
+
 spring:
     #spring-thymeleaf模板配置-------------------------------------------------
   thymeleaf:
@@ -10,11 +16,15 @@ spring:
   data:
     elasticsearch:
       cluster-name: elasticsearch
-      cluster-nodes: 127.0.0.1:9300
+      cluster-nodes: 127.0.0.1:9300,127.0.0.1:9301
+  application:
+    name: search
 
 logging:
   level:
     com.cloud: debug
+    org: debug
+    org.apache: error
 
 microblog:
   common:
@@ -22,3 +32,4 @@ microblog:
     printUrlEnable: true
     # 使能打印方法执行耗时，在方法上添加注解@PrintUseTimeAnno
     printUseTimeEnable: true
+

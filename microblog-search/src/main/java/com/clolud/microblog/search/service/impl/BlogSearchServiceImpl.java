@@ -9,12 +9,10 @@ import org.elasticsearch.index.query.QueryStringQueryBuilder;
 import org.elasticsearch.index.query.functionscore.FunctionScoreQueryBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -55,14 +53,14 @@ public class BlogSearchServiceImpl implements BlogSearchService {
         // 分数、分页
         SearchQuery searchQuery = new NativeSearchQueryBuilder().withPageable(pageable)
                 .withQuery(functionScoreQueryBuilder)//.build();
-                .withHighlightBuilder(new HighlightBuilder()
+                /*.withHighlightBuilder(new HighlightBuilder()
                         .preTags(preTag)
-                        .postTags(postTag))
+                        .postTags(postTag))*/
                 .withHighlightFields(field)
                 .build();
 
-        Page<Blog> searchPageResults = blogRepository.search(searchQuery);
+       // Page<Blog> searchPageResults = blogRepository.search(searchQuery);
 
-        return searchPageResults.getContent();
+        return null;// searchPageResults.getContent();
     }
 }

@@ -90,9 +90,9 @@ public class IBlogService implements BlogService {
         //写入数据库
         Blog blog = new Blog();
         blog.setContent(blogText);
-        blog.setCreateTime(new Date());
-        blog.setPublishTime(new Date());
-        blog.setType(blogType);
+      //  blog.setCreateTime(new Date());
+       // blog.setPublishTime(new Date());
+       // blog.setType(blogType);
         blog.setIsOriginal("true");
         blog.setUserId(UserUtil.getUserId(request));
         long blogId = blogMapper.insert(blog);

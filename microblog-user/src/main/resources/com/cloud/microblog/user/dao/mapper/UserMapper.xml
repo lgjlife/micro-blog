@@ -21,6 +21,7 @@
     <result column="phone_num" jdbcType="VARCHAR" property="phoneNum" />
     <result column="register_time" jdbcType="TIMESTAMP" property="registerTime" />
     <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="login_nums" jdbcType="INTEGER" property="loginNums" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
@@ -43,14 +44,14 @@
       salt, actual_name, gender, 
       age, header_url, status, 
       email, email_active, phone_num, 
-      register_time, last_login_time, login_nums
-      )
+      register_time, last_login_time, update_time, 
+      login_nums)
     values (#{userNumber,jdbcType=BIGINT}, #{nickName,jdbcType=VARCHAR}, #{loginPassword,jdbcType=VARCHAR}, 
       #{salt,jdbcType=VARCHAR}, #{actualName,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, 
       #{age,jdbcType=TINYINT}, #{headerUrl,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, 
       #{email,jdbcType=VARCHAR}, #{emailActive,jdbcType=TINYINT}, #{phoneNum,jdbcType=VARCHAR}, 
-      #{registerTime,jdbcType=TIMESTAMP}, #{lastLoginTime,jdbcType=TIMESTAMP}, #{loginNums,jdbcType=INTEGER}
-      )
+      #{registerTime,jdbcType=TIMESTAMP}, #{lastLoginTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{loginNums,jdbcType=INTEGER})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.cloud.microblog.user.dao.model.User">
     <!--
@@ -72,6 +73,7 @@
       phone_num = #{phoneNum,jdbcType=VARCHAR},
       register_time = #{registerTime,jdbcType=TIMESTAMP},
       last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
       login_nums = #{loginNums,jdbcType=INTEGER}
     where user_id = #{userId,jdbcType=BIGINT}
   </update>
@@ -82,7 +84,7 @@
     -->
     select user_id, user_number, nick_name, login_password, salt, actual_name, gender, 
     age, header_url, status, email, email_active, phone_num, register_time, last_login_time, 
-    login_nums
+    update_time, login_nums
     from user
     where user_id = #{userId,jdbcType=BIGINT}
   </select>
@@ -93,7 +95,7 @@
     -->
     select user_id, user_number, nick_name, login_password, salt, actual_name, gender, 
     age, header_url, status, email, email_active, phone_num, register_time, last_login_time, 
-    login_nums
+    update_time, login_nums
     from user
   </select>
 
