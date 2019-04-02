@@ -18,6 +18,7 @@
         <module>microblog-user</module>
         <module>microblog-blog</module>
         <module>microblog-gateway</module>
+        <module>microblog-msg</module>
     </modules>
     <packaging>pom</packaging>
 
