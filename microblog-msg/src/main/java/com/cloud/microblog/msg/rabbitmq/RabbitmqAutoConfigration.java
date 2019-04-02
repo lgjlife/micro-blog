@@ -25,7 +25,7 @@ public class RabbitmqAutoConfigration {
     RabbitmqConsumerProperties rabbitmqProperties;
 
     @Bean
-    public RabbitmqConsumer producer(){
+    public RabbitmqConsumer rabbitmqConsumer(){
         RabbitmqConsumer consumer = new RabbitmqConsumer(rabbitmqProperties);
         consumer.registerConsumerHandle(mailConsumerHandle());
         return  consumer;
@@ -39,6 +39,6 @@ public class RabbitmqAutoConfigration {
 
     @PostConstruct
     public void   init(){
-        log.debug("rabbitmqProperties = " + rabbitmqProperties.toString());
+        log.debug("rocketProperties = " + rabbitmqProperties.toString());
     }
 }

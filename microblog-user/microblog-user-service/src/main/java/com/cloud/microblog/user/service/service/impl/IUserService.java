@@ -4,6 +4,7 @@ package com.cloud.microblog.user.service.service.impl;
 import com.cloud.microblog.common.aop.usetime.anno.PrintUseTimeAnno;
 import com.cloud.microblog.common.code.UserReturnCode;
 import com.cloud.microblog.common.dto.MailDto;
+import com.cloud.microblog.common.dto.PhoneVerifCodeDto;
 import com.cloud.microblog.common.result.BaseResult;
 import com.cloud.microblog.common.token.jwt.JWTClaimsKey;
 import com.cloud.microblog.common.token.jwt.JwtUtil;
@@ -16,6 +17,8 @@ import com.cloud.microblog.user.service.config.utils.RedisStringUtil;
 import com.cloud.microblog.user.service.constants.UserRedisKeyUtil;
 import com.cloud.microblog.user.service.rabbitmq.PublishConfig;
 import com.cloud.microblog.user.service.rabbitmq.RabbitmqProducer;
+import com.cloud.microblog.user.service.rocketmq.RocketmqProducer;
+import com.cloud.microblog.user.service.rocketmq.RocketmqPublishConfig;
 import com.cloud.microblog.user.service.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
@@ -55,15 +58,23 @@ public class IUserService implements UserService {
     RabbitmqProducer  rabbitmqProducer;
 
 
+    @Autowired
+    RocketmqProducer rocketmqProducer;
+
 
    // @Autowired
   //  TokenClient  tokenClient;
 
-    PublishConfig mailPublishConfig =  PublishConfig.builder()
+    private  PublishConfig mailPublishConfig =  PublishConfig.builder()
             .exchangeName("USER_MAIL_EXCHANGE_NAME")
             .queueName("USER_MAIL_QUEUE_NAME")
             .bingKey("USER_MAIL_ROUTING_KEY")
             .routingkey("USER_MAIL_ROUTING_KEY")
+            .build();
+
+    private RocketmqPublishConfig phonePublishConfig = RocketmqPublishConfig.builder()
+            .topic("PHONE_VERIFY_CODE_TOPIC")
+            .tags("PHONE_VERIFY_CODE_TAGS")
             .build();
 
     //RedisTemplate<String, Object> redisTemplate;
@@ -83,6 +94,9 @@ public class IUserService implements UserService {
             // TODO  使用消息中间件处理
             Date start = new Date();
          //   SmsUtil.sendSms(phone,code);
+
+            PhoneVerifCodeDto phoneVerifCodeDto = PhoneVerifCodeDto.builder().phone(phone).code(code).build();
+            rocketmqProducer.publish(phoneVerifCodeDto,phonePublishConfig);
             Date end = new Date();
             log.debug("向手机号({})发送验证码:({})",phone,code);
             log.info("短信花费时间：" + (end.getTime() - start.getTime()));

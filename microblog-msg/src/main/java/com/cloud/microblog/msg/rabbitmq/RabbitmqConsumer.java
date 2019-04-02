@@ -12,9 +12,9 @@ import java.io.IOException;
  *功能描述 
  * @author lgj
  * @Description  rabbitmq 消费者
- *      RabbitmqConsumerProperties properties = new RabbitmqConsumerProperties();
- *      RabbitmqConsumer consumer = new RabbitmqConsumer(properties);
- *      ConsumerHandle  consumerHandle = new MailConsumerHandle();
+ *      RocketmqConsumerProperties properties = new RocketmqConsumerProperties();
+ *      RocketmqConsumer consumer = new RocketmqConsumer(properties);
+ *      ConsumerHandle  consumerHandle = new PhoneVerifyCodeConsumerHandle();
  *      consumer.registerConsumerHandle(consumerHandle);
  *
  * @date 4/3/19

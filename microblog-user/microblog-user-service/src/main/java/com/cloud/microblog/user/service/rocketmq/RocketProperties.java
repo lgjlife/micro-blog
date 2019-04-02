@@ -1,4 +1,4 @@
-package com.cloud.microblog.user.service.rabbitmq;
+package com.cloud.microblog.user.service.rocketmq;
 
 
 import lombok.Data;
@@ -14,12 +14,14 @@ import org.springframework.context.annotation.Configuration;
 */
 @Data
 @Configuration
-@ConfigurationProperties(prefix = "rabbitmq.producer")
-public class RabbitmqProperties {
+@ConfigurationProperties(prefix = "rocketmq.producer")
+public class RocketProperties {
 
-    private String host = "localhost";
-    private int port = 5672;
+    private String address = "localhost:9876";
     private String name = "lgj";
     private String password = "lgj";
+
+
+
 
 }

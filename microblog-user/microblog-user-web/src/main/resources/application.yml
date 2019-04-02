@@ -39,3 +39,6 @@ rabbitmq:
     port: 5672
     name: lgj
     password: lgj
+
+rocketmq:
+  address: localhost:9876

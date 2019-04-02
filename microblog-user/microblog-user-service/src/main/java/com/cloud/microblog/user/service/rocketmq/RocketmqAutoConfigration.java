@@ -1,7 +1,6 @@
-package com.cloud.microblog.user.service.rabbitmq;
+package com.cloud.microblog.user.service.rocketmq;
 
 
-import com.utils.serialization.ProtostuffSerializeUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -19,17 +18,16 @@ import javax.annotation.PostConstruct;
 */
 @Slf4j
 @Configuration
-@EnableConfigurationProperties(RabbitmqProperties.class)
-public class RabbitmqAutoConfigration {
+@EnableConfigurationProperties(RocketProperties.class)
+public class RocketmqAutoConfigration {
 
     @Autowired
-    RabbitmqProperties rabbitmqProperties;
+    RocketProperties rocketProperties;
 
     @Bean
-    public RabbitmqProducer producer(){
-        RabbitmqProducer producer = new RabbitmqProducer(rabbitmqProperties,
-                 new ProtostuffSerializeUtil());
-
+    public RocketmqProducer producer(){
+        RocketmqProducer producer = new RocketmqProducer(rocketProperties,"USER_PHONE_VERIFICATIONCODE_GROUP");
+        producer.create();
         return  producer;
 
     }
@@ -37,6 +35,6 @@ public class RabbitmqAutoConfigration {
 
     @PostConstruct
     public void   init(){
-        log.debug("rocketProperties = " + rabbitmqProperties.toString());
+        log.debug("rocketProperties = " + rocketProperties.toString());
     }
 }
