@@ -1,8 +1,6 @@
 package com.clolud.microblog.search.entity;
 
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 //@Document(indexName = "index_blog1", type = "blog1")
 public class Blog1 {
     /**
@@ -12,7 +10,7 @@ public class Blog1 {
      * @mbggenerated
      */
   //  @Id
-    @JsonProperty("blog_id1")
+    //@JsonProperty("blog_id1")
     private Long blogId1;
 
     /**
@@ -21,7 +19,7 @@ public class Blog1 {
      *
      * @mbggenerated
      */
-    @JsonProperty("user_id1")
+   // @JsonProperty("user_id1")
     private Integer userId1;
 
     /**
