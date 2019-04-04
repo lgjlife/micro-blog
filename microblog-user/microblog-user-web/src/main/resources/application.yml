@@ -42,3 +42,11 @@ rabbitmq:
 
 rocketmq:
   address: localhost:9876
+
+
+microblog:
+  common:
+    # 使能打印访问Url，在Controller方法上添加注解@PrintUrlAnno
+    printUrlEnable: true
+    # 使能打印方法执行耗时，在方法上添加注解@PrintUseTimeAnno
+    printUseTimeEnable: true

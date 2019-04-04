@@ -1,6 +1,6 @@
 package com.clolud.microblog.search.service;
 
-import com.cloud.microblog.blog.dao.model.Blog;
+import com.clolud.microblog.search.entity.Blog;
 
 import java.util.List;
 

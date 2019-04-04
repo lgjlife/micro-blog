@@ -1,0 +1,21 @@
+package com.miccroblog.blog.controller;
+
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.context.annotation.ComponentScan;
+
+@EnableFeignClients
+//扫描 mapper 文件
+@MapperScan("com.microblog.blog.dao.mapper")
+@EnableDiscoveryClient
+@SpringBootApplication
+@ComponentScan("com.miccroblog.blog.*")
+public class BlogApplication {
+
+    public static void main(String args[]){
+        SpringApplication.run(BlogApplication.class,args);
+    }
+}

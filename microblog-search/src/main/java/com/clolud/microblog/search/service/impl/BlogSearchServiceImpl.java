@@ -1,8 +1,8 @@
 package com.clolud.microblog.search.service.impl;
 
 import com.clolud.microblog.search.dao.BlogRepository;
+import com.clolud.microblog.search.entity.Blog;
 import com.clolud.microblog.search.service.BlogSearchService;
-import com.cloud.microblog.blog.dao.model.Blog;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.QueryStringQueryBuilder;
