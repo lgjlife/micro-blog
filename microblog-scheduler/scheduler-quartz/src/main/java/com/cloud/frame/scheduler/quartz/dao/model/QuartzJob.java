@@ -1,4 +1,4 @@
-package com.cloud.microblog.scheduler.quartz.dao.model;
+package com.microblog.scheduler.quartz.dao.model;
 
 import java.util.Date;
 

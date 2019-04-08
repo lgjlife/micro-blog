@@ -56,4 +56,13 @@
     select img_id, blog_id, img_url
     from blog_img
   </select>
+
+
+  <!-- -->
+  <select id="selectBlogId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select img_id, blog_id, img_url
+    from blog_img
+    where blog_id = #{blogId,jdbcType=BIGINT}
+  </select>
+
 </mapper>

@@ -17,16 +17,16 @@ CREATE TABLE `quartz_job` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='任务表';
 
 insert into `quartz_job` (name,description,cron,job_class,job_group,status,create_time,create_by,finish_time,finish_by)
- values ("定时任务1","我是定时任务1","0/10 * * * * ?","com.cloud.microblog.scheduler.quartz.job.HelloJob","group1","停止"
+ values ("定时任务1","我是定时任务1","0/10 * * * * ?","com.microblog.scheduler.quartz.job.HelloJob","group1","停止"
         ,"2018-11-15 00:00","张三","2018-11-25 00:00","李四");
 insert into `quartz_job` (name,description,cron,job_class,job_group,status,create_time,create_by,finish_time,finish_by)
- values ("定时任务2","我是定时任务2","0/10 * * * * ?","com.cloud.microblog.scheduler.quartz.job.HelloJob","group2","停止"
+ values ("定时任务2","我是定时任务2","0/10 * * * * ?","com.microblog.scheduler.quartz.job.HelloJob","group2","停止"
         ,"2018-11-15 00:00","张三","2018-11-25 00:00","李四");
 insert into `quartz_job` (name,description,cron,job_class,job_group,status,create_time,create_by,finish_time,finish_by)
- values ("定时任务3","我是定时任务3","0/10 * * * * ?","com.cloud.microblog.scheduler.quartz.job.HelloJob","group3","停止"
+ values ("定时任务3","我是定时任务3","0/10 * * * * ?","com.microblog.scheduler.quartz.job.HelloJob","group3","停止"
         ,"2018-11-15 00:00","张三","2018-11-25 00:00","李四");
 insert into `quartz_job` (name,description,cron,job_class,job_group,status,create_time,create_by,finish_time,finish_by)
- values ("定时任务4","我是定时任务4","0/10 * * * * ?","com.cloud.microblog.scheduler.quartz.job.HelloJob","group4","停止"
+ values ("定时任务4","我是定时任务4","0/10 * * * * ?","com.microblog.scheduler.quartz.job.HelloJob","group4","停止"
         ,"2018-11-15 00:00","张三","2018-11-25 00:00","李四");
 
 delete from quartz_job where id  < 1000;

@@ -1,4 +1,4 @@
-package com.cloud.microblog.scheduler.quartz.code;
+package com.microblog.scheduler.quartz.code;
 
 /**
  * @program: shiro

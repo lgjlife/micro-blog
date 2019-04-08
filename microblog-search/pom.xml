@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.cloud.microblog</groupId>
+        <groupId>com.microblog</groupId>
         <artifactId>microblog</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
@@ -15,7 +15,7 @@
         <relativePath/> &lt;!&ndash; lookup parent from repository &ndash;&gt;
     </parent>-->
 
-    <groupId>com.cloud.microblog</groupId>
+    <groupId>com.microblog</groupId>
     <artifactId>microblog-search</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <properties>
@@ -52,31 +52,31 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.cloud.microblog</groupId>
+            <groupId>com.microblog</groupId>
             <artifactId>cloud-consumer-feign</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.cloud.microblog</groupId>
+            <groupId>com.microblog</groupId>
             <artifactId>microblog-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.cloud.microblog</groupId>
+            <groupId>com.microblog</groupId>
             <artifactId>microblog-blog</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.cloud.microblog</groupId>
+            <groupId>com.microblog</groupId>
             <artifactId>microblog-user</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.cloud.microblog</groupId>
+            <groupId>com.microblog</groupId>
             <artifactId>microblog.user.dao</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
@@ -89,6 +89,28 @@
             <artifactId>commons-beanutils</artifactId>
             <version>1.9.3</version>
         </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-openfeign -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <version>2.1.0.RELEASE</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-netflix-ribbon -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+            <version>2.0.1.RELEASE</version>
+        </dependency>
+
+        <!--eureka-client -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+            <version>2.1.0.RELEASE</version>
+        </dependency>
+
 
 
 

@@ -1,4 +1,4 @@
-package com.cloud.microblog.scheduler.quartz.config;
+package com.microblog.scheduler.quartz.config;
 
 import org.quartz.Scheduler;
 import org.quartz.spi.JobFactory;

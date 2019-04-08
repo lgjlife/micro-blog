@@ -18,6 +18,9 @@ management:
 
 #zuul 路由配置
 zuul:
+  host:
+    connect-timeout-millis: 7000
+    socket-timeout-millis: 10000
   routes:
     #搜索系统
     search:
@@ -27,30 +30,35 @@ zuul:
     auth:
       path: /auth/**
       url: http://localhost:8773
+    blog:
+      path: /blog/**
+      url: http://localhost:8703
     #私信系统
-    chat:
-      path: /chat/**
-      url: http://localhost:8000
+  #  chat:
+   #   path: /chat/**
+    #  url: http://localhost:8001
     # 服务注册中心
     # 访问注册中心，使用的是url,否则会报错
     # com.netflix.client.ClientException: Load balancer does not have available server for client
     center:
       path: /center/**
       url: http://localhost:8001
+    #  serviceId: center
 
     # 用户模块
     user:
       url: http://localhost:8002
-      # serviceId: user
+      # serviceId: MICROBLOG-USER
       path: /user/**
-
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
 
 logging:
   level:
     org.springframework.security: debug
-    com.cloud: debug
+    com.microblog: debug
     org.apache.shiro.session.mgt: error
-    com.cloud.microblog.gateway.service.shiro.config: error
 
 # 需要验证Token的路径
 auth:
@@ -67,3 +75,11 @@ auth:
     paths:
       - /user/user/info/**
       - /user/user/info
+    # 用户模块应用
+  blog:
+    name: blog
+    paths:
+      - /blog/blog/submit/**
+      - /blog/blog/submit
+    exclude:
+      - /blog/blog/list

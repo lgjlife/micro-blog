@@ -1,6 +1,6 @@
-package com.cloud.microblog.scheduler.quartz.service;
+package com.microblog.scheduler.quartz.service;
 
-import com.cloud.microblog.scheduler.quartz.result.BaseResult;
+import com.microblog.scheduler.quartz.result.BaseResult;
 
 /**
  * @program: top-parent

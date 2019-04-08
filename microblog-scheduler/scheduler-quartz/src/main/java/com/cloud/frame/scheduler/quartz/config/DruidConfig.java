@@ -1,4 +1,4 @@
-package com.cloud.microblog.scheduler.quartz.config;
+package com.microblog.scheduler.quartz.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.support.http.StatViewServlet;

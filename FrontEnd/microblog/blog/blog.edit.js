@@ -1,6 +1,6 @@
 var edit = {
     "requestUrl":{
-        "submitBlogUrl": "/blog/submit"
+        "submitBlogUrl": "/blog/blog/submit"
     },
 
     "request":{

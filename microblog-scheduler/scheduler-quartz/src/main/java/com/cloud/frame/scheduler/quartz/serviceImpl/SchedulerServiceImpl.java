@@ -1,13 +1,13 @@
-package com.cloud.microblog.scheduler.quartz.serviceImpl;
+package com.microblog.scheduler.quartz.serviceImpl;
 
-import com.cloud.microblog.scheduler.quartz.code.SchedulerReturnCode;
-import com.cloud.microblog.scheduler.quartz.config.JobDesc;
-import com.cloud.microblog.scheduler.quartz.dao.mapper.QuartzJobMapper;
-import com.cloud.microblog.scheduler.quartz.dao.model.QuartzJob;
-import com.cloud.microblog.scheduler.quartz.job.HelloJob1;
-import com.cloud.microblog.scheduler.quartz.result.BaseResult;
-import com.cloud.microblog.scheduler.quartz.result.WebResult;
-import com.cloud.microblog.scheduler.quartz.service.SchedulerService;
+import com.microblog.scheduler.quartz.code.SchedulerReturnCode;
+import com.microblog.scheduler.quartz.config.JobDesc;
+import com.microblog.scheduler.quartz.dao.mapper.QuartzJobMapper;
+import com.microblog.scheduler.quartz.dao.model.QuartzJob;
+import com.microblog.scheduler.quartz.job.HelloJob1;
+import com.microblog.scheduler.quartz.result.BaseResult;
+import com.microblog.scheduler.quartz.result.WebResult;
+import com.microblog.scheduler.quartz.service.SchedulerService;
 import org.quartz.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

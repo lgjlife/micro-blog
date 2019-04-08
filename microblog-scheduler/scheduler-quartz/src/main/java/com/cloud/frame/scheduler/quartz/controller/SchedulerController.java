@@ -1,8 +1,8 @@
-package com.cloud.microblog.scheduler.quartz.controller;
+package com.microblog.scheduler.quartz.controller;
 
-import com.cloud.microblog.scheduler.quartz.result.BaseResult;
-import com.cloud.microblog.scheduler.quartz.service.SchedulerService;
-import com.cloud.microblog.scheduler.quartz.serviceImpl.ScheduleTriggerServiceImpl;
+import com.microblog.scheduler.quartz.result.BaseResult;
+import com.microblog.scheduler.quartz.service.SchedulerService;
+import com.microblog.scheduler.quartz.serviceImpl.ScheduleTriggerServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;

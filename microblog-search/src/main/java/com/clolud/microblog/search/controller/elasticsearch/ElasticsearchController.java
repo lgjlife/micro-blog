@@ -2,7 +2,7 @@ package com.clolud.microblog.search.controller.elasticsearch;
 
 
 import com.clolud.microblog.search.pojo.Book;
-import com.cloud.microblog.common.aop.syslog.anno.PrintUrlAnno;
+import com.microblog.common.aop.syslog.anno.PrintUrlAnno;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexResponse;

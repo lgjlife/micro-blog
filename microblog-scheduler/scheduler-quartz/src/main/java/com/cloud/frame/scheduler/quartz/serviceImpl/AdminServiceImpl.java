@@ -1,8 +1,8 @@
-package com.cloud.microblog.scheduler.quartz.serviceImpl;
+package com.microblog.scheduler.quartz.serviceImpl;
 
-import com.cloud.microblog.scheduler.quartz.dao.mapper.AdminMapper;
-import com.cloud.microblog.scheduler.quartz.dao.model.Admin;
-import com.cloud.microblog.scheduler.quartz.service.AdminService;
+import com.microblog.scheduler.quartz.dao.mapper.AdminMapper;
+import com.microblog.scheduler.quartz.dao.model.Admin;
+import com.microblog.scheduler.quartz.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

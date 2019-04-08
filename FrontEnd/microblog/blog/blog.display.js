@@ -1,22 +1,23 @@
 var blog={
     "staticPath":"../static",
     "paging":{
-        "start": 0,
+        "start": 1,
         "limit": 10,  
     },
     "type":{
         "PRIVATE": "PRIVATE",
         "ALL": "ALL",
+        "PUBLIC": "PUBLIC",
     },
     "requestUrl": {
-       "requestBlogUrl": "/blog/list",
+       "requestBlogUrl": "/blog/blog/list",
     },
     
     "request":{
         "requestBlog":function(type){
-            var sendData ={"start":"","limit":"","type":""};
-            sendData.start = blog.paging.start; 
-            sendData.limit = blog.paging.limit;
+            var sendData ={"page":"","count":"","type":""};
+            sendData.page = blog.paging.start;
+            sendData.count = blog.paging.limit;
             sendData.type = type; 
                     
             var jsonData = JSON.stringify(sendData);
@@ -32,7 +33,7 @@ var blog={
                    console.log(data.message);
                    
                    var jsonData = JSON.stringify(data);
-                  //  console.log(jsonData);
+                    console.log(jsonData);
                    
                 /*for(var dat in data.data){
                      console.log(data.data[dat]);
@@ -155,7 +156,7 @@ var blog={
 
 $(function(){
     
-    blog.request.requestBlog(blog.type.ALL);
+    blog.request.requestBlog(blog.type.PUBLIC);
     
     console.log("test blog length = " ,blog.test.length);
    // blog.displayBlog(blog.test);

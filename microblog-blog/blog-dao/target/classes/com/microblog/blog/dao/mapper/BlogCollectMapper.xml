@@ -60,4 +60,12 @@
     select collect_id, blog_id, user_id, create_time
     from blog_collect
   </select>
+
+  <!-- 用户自定义-->
+  <select id="selectCountByBlogId" resultType="java.lang.Long" parameterType="java.lang.Long" >
+    select count(#{blogId})
+    from blog_collect
+  </select>
+
+
 </mapper>

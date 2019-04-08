@@ -1,4 +1,4 @@
-package com.cloud.microblog.cloudconfigclient;
+package com.microblog.cloudconfigclient;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

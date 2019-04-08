@@ -1,4 +1,4 @@
-package com.cloud.microblog.scheduler.quartz.job;
+package com.microblog.scheduler.quartz.job;
 
 import org.quartz.*;
 import org.slf4j.Logger;

@@ -1,4 +1,4 @@
-package com.cloud.microblog.consumer.aop.syslog.anno;
+package com.microblog.consumer.aop.syslog.anno;
 
 import java.lang.annotation.*;
 

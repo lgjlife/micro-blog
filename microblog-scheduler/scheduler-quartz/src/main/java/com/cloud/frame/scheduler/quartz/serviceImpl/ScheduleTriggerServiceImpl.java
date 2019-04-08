@@ -1,7 +1,7 @@
-package com.cloud.microblog.scheduler.quartz.serviceImpl;
+package com.microblog.scheduler.quartz.serviceImpl;
 
-import com.cloud.microblog.scheduler.quartz.dao.mapper.QuartzJobMapper;
-import com.cloud.microblog.scheduler.quartz.dao.model.QuartzJob;
+import com.microblog.scheduler.quartz.dao.mapper.QuartzJobMapper;
+import com.microblog.scheduler.quartz.dao.model.QuartzJob;
 import org.quartz.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +22,7 @@ import java.util.List;
 @Service
 public class ScheduleTriggerServiceImpl {
 
-    private  static  final Logger log = LoggerFactory.getLogger(com.cloud.microblog.scheduler.quartz.serviceImpl.SchedulerServiceImpl.class);
+    private  static  final Logger log = LoggerFactory.getLogger(com.microblog.scheduler.quartz.serviceImpl.SchedulerServiceImpl.class);
 
 
     @Autowired

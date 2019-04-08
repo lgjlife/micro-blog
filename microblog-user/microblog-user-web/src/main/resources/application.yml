@@ -9,12 +9,13 @@ eureka:
 
 logging:
   level:
-    com.cloud: debug
+    com.microblog: debug
+    org.apache.ibatis: debug
 spring:
   application:
-    name: user
+    name: microblog-user
   mybatis:
-    mapper-locations: com.cloud.microblog.user.dao.mapper
+    mapper-locations: com.microblog.user.dao.mapper
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource    # 配置当前要使用的数据源的操作类型
     driver-class-name: com.mysql.cj.jdbc.Driver      # 配置MySQL的驱动程序类

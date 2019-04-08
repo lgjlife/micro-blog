@@ -1,7 +1,7 @@
-package com.cloud.microblog.consumerFeign.controller;
+package com.microblog.consumerFeign.controller;
 
-import com.cloud.microblog.consumerFeign.aop.syslog.anno.PrintUrlAnno;
-import com.cloud.microblog.consumerFeign.service.serviceImpl.feign.FeignServiceImpl;
+import com.microblog.consumerFeign.aop.syslog.anno.PrintUrlAnno;
+import com.microblog.consumerFeign.service.serviceImpl.feign.FeignServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

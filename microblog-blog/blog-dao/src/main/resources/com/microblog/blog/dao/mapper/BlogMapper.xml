@@ -78,13 +78,13 @@
     from blog
     where 1 =1
     <if test="userId != null and userId != ''">
-      and  user_id = userId
+      and  user_id = #{userId}
     </if>
 
     <if test="type != null and type != ''">
       and  type = #{type,jdbcType=BIGINT}
     </if>
-     oeder by publish_time desc
+     order by publish_time desc
      limit #{start},#{count}
   </select>
 

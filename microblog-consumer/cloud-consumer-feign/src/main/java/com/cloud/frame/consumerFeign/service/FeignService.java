@@ -1,6 +1,6 @@
-package com.cloud.microblog.consumerFeign.service;
+package com.microblog.consumerFeign.service;
 
-import com.cloud.microblog.consumerFeign.config.feign.FeignConfig;
+import com.microblog.consumerFeign.config.feign.FeignConfig;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;

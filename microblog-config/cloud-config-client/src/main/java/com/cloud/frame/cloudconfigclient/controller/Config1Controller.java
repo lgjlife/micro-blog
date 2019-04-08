@@ -1,4 +1,4 @@
-package com.cloud.microblog.cloudconfigclient.controller;
+package com.microblog.cloudconfigclient.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

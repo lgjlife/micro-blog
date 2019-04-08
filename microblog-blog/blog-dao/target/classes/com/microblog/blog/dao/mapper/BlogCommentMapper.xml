@@ -62,4 +62,13 @@
     select comment_id, blog_id, user_id, publish_time, content
     from blog_comment
   </select>
+
+  <!--  自定义-->
+
+  <select id="selectCountByBlogId" resultType="java.lang.Long" parameterType="java.lang.Long" >
+    select count(#{blogId})
+    from blog_comment
+  </select>
+
+
 </mapper>

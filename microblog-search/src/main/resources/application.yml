@@ -18,11 +18,11 @@ spring:
       cluster-name: elasticsearch
       cluster-nodes: 127.0.0.1:9300,127.0.0.1:9301
   application:
-    name: search
+    name: microblog-search
 
 logging:
   level:
-    com.cloud: debug
+    com.clolud.microblog: debug
     org: debug
     org.apache: error
 

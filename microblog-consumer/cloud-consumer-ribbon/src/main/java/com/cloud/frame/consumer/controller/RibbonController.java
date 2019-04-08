@@ -1,7 +1,7 @@
-package com.cloud.microblog.consumer.controller;
+package com.microblog.consumer.controller;
 
-import com.cloud.microblog.consumer.aop.syslog.anno.PrintUrlAnno;
-import com.cloud.microblog.consumer.service.serviceImpl.ribbon.RibbonService;
+import com.microblog.consumer.aop.syslog.anno.PrintUrlAnno;
+import com.microblog.consumer.service.serviceImpl.ribbon.RibbonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

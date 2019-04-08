@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>microblog-user</artifactId>
-        <groupId>com.cloud.microblog</groupId>
+        <groupId>com.microblog</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -24,7 +24,7 @@
 
 
         <dependency>
-            <groupId>com.cloud.microblog</groupId>
+            <groupId>com.microblog</groupId>
             <artifactId>microblog-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
@@ -67,7 +67,7 @@
             <version>3.8.1</version>
         </dependency>
         <dependency>
-            <groupId>com.cloud.microblog</groupId>
+            <groupId>com.microblog</groupId>
             <artifactId>microblog.user.dao</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>

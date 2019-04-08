@@ -1,4 +1,4 @@
-package com.cloud.microblog.scheduler.quartz.controller;
+package com.microblog.scheduler.quartz.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

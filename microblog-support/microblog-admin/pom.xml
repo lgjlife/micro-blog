@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.cloud.microblog</groupId>
+    <groupId>com.microblog</groupId>
     <artifactId>microblog-admin </artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
@@ -13,7 +13,7 @@
 
     <parent>
         <artifactId>microblog-support</artifactId>
-        <groupId>com.cloud.microblog</groupId>
+        <groupId>com.microblog</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modules>

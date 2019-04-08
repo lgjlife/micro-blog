@@ -62,4 +62,12 @@
     select repost_id, blog_id, user_id, create_time, content
     from blog_repost
   </select>
+
+
+  <select id="selectCountByBlogId" resultType="java.lang.Long" parameterType="java.lang.Long" >
+    select count(#{blogId})
+    from blog_repost
+  </select>
+
+
 </mapper>

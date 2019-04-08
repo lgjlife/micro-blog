@@ -115,7 +115,7 @@ mysql> source xxx/mysql/all/microblog-sql-all-2019-03-30-16:22:33.sql
 1.引入pom
 ```xml
 <dependency>
-    <groupId>com.cloud.microblog</groupId>
+    <groupId>com.microblog</groupId>
     <artifactId>microblog-common</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <scope>compile</scope>
@@ -140,7 +140,7 @@ public BaseResult login(@RequestBody Map<String, Object> requestMap){
 ```
 4.输出
 ```
-访问  com.cloud.microblog.chat.controller.UserController  method = login  路径 = /user/login  描述：
+访问  com.microblog.chat.controller.UserController  method = login  路径 = /user/login  描述：
 ```
 * 获取方法执行时间： @PrintUseTimeAspect   
 

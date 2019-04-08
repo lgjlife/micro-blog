@@ -4,8 +4,8 @@ package com.clolud.microblog.search.controller.elasticsearch;
 import com.clolud.microblog.search.dao.Book;
 import com.clolud.microblog.search.entity.Blog;
 import com.clolud.microblog.search.entity.UserDemo;
-import com.cloud.microblog.common.aop.syslog.anno.PrintUrlAnno;
-import com.cloud.microblog.user.dao.model.User;
+import com.microblog.common.aop.syslog.anno.PrintUrlAnno;
+import com.microblog.user.dao.model.User;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
@@ -170,36 +170,23 @@ public class UserDemoController {
                 for (SearchHit searchHit : searchResponse.getHits().getHits()) {
                     Map<String, Object> smap = searchHit.getSourceAsMap();
                     Map<String, HighlightField> hmap = searchHit.getHighlightFields();
-                    Map<String, HighlightField> hmap1 = searchHit.getHighlightFields();
-                   T user =  (T)create(smap,hmap);
+                    T user =  (T)create(smap,hmap);
                     resluts.add(user);
-                  //  chunk.add((T)createEsDoc(smap,hmap));
                 }
 
                 AggregatedPage<T> result=new AggregatedPageImpl<T>(resluts,pageable,searchResponse.getHits().getTotalHits());
-
-
                 return result;
             }
         });
-
-
-      //  log.info("userDemos len  ={} , {} ",users.size(), users);
         return users.getContent();
     }
 
     private User create(Map<String, Object> smap ,  Map<String, HighlightField> hmaps ){
 
         User user =  new User();
-        /*for(Map<String, HighlightField> field:hmaps){
-            smap.put(field.getName(),field.getFragments());
-        }*/
         hmaps.forEach((k,v)->{
             smap.put(v.getName(),v.getFragments());
         });
-
-
-
         try{
             log.info("smap = " + smap);
 
@@ -214,8 +201,8 @@ public class UserDemoController {
                     String dateStr = (String)o;
 
                     log.info("dateStr = " + dateStr);
-                    dateStr =  "2019-02-20";  //"yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-                    SimpleDateFormat spdt = new SimpleDateFormat("yyyy-MM-dd");
+                   // dateStr =  "2019-02-25 12:01:02.000Z";  //"yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+                    SimpleDateFormat spdt = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
                     try {
                         T date = (T)spdt.parse(dateStr);
 
@@ -243,6 +230,24 @@ public class UserDemoController {
         return  user;
     }
 
+    public static void main(String args[]){
+        SimpleDateFormat spdt = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+
+        System.out.println(spdt.format(new Date()));
+
+
+        try{
+            String dateStr =  "2019-02-25T12:01:02.000Z";  //"yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+            System.out.println(sdf.parse(dateStr).toString());
+        }
+        catch(Exception ex){
+            log.error(ex.getMessage());
+        }
+
+
+
+    }
 
 
 
@@ -271,6 +276,14 @@ public class UserDemoController {
 
         log.info("Location len  ={} , {} ",blogs.size(), blogs);
         return blogs;
+    }
+
+    @PrintUrlAnno
+    @GetMapping("/delete/{id}")
+    public void delete(@PathVariable("id") String id){
+        String result = elasticsearchTemplate.delete("index_user","user",id);
+        log.debug("result = " + result);
+        log.info("result = " + result);
     }
 
 }

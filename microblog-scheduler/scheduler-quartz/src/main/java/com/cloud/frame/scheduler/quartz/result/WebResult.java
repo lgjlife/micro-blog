@@ -1,6 +1,6 @@
-package com.cloud.microblog.scheduler.quartz.result;
+package com.microblog.scheduler.quartz.result;
 
-import com.cloud.microblog.scheduler.quartz.code.ReturnCode;
+import com.microblog.scheduler.quartz.code.ReturnCode;
 import lombok.Getter;
 import lombok.Setter;
 

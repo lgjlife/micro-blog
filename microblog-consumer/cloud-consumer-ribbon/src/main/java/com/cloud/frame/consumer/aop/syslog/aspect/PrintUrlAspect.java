@@ -1,7 +1,7 @@
-package com.cloud.microblog.consumer.aop.syslog.aspect;
+package com.microblog.consumer.aop.syslog.aspect;
 
 
-import com.cloud.microblog.consumer.aop.syslog.anno.PrintUrlAnno;
+import com.microblog.consumer.aop.syslog.anno.PrintUrlAnno;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;

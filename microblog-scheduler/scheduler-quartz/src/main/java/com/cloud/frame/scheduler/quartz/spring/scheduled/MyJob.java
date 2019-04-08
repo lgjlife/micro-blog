@@ -1,4 +1,4 @@
-package com.cloud.microblog.scheduler.quartz.spring.scheduled;
+package com.microblog.scheduler.quartz.spring.scheduled;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

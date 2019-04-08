@@ -1,4 +1,4 @@
-package com.cloud.microblog.consumer.service.serviceImpl.ribbon;
+package com.microblog.consumer.service.serviceImpl.ribbon;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.slf4j.Logger;

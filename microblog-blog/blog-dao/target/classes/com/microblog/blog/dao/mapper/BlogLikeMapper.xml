@@ -60,4 +60,11 @@
     select like_id, blog_id, user_id, create_time
     from blog_like
   </select>
+
+  <select id="selectCountByBlogId" resultType="java.lang.Long" parameterType="java.lang.Long" >
+    select count(#{blogId})
+    from blog_like
+  </select>
+
+
 </mapper>

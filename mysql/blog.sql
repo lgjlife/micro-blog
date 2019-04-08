@@ -17,6 +17,7 @@ CREATE TABLE `blog`(
     index(`user_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT="博客表";
 
+select * from blog where 1=1 and user_id=3;
 
 /**
 * 博客图片表

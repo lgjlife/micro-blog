@@ -41,14 +41,14 @@
         `````.xml 放置在src/main/resources/下
         -->
         <!-- targetPackage  生成文件存放的目录-->
-        <javaModelGenerator targetPackage="com.cloud.microblog.user.dao.model"
+        <javaModelGenerator targetPackage="com.microblog.user.dao.model"
                             targetProject="src/main/java/">
             <!-- 判断是否对数据库查询结果进行trim操作 -->
             <!-- = true则 this.userName = userName == null ? null : userName.trim(); -->
             <property name="trimStrings" value="false" />
         </javaModelGenerator>
         <!-- 设置生成Mapper.xml文件的属性 位置 可选-->
-        <sqlMapGenerator targetPackage="com.cloud.microblog.user.dao.mapper"
+        <sqlMapGenerator targetPackage="com.microblog.user.dao.mapper"
                          targetProject="src/main/resources"/>
         <!-- 用于设置 接口类的属性-->
         <!--
@@ -60,7 +60,7 @@
                 1.ANNOTATEDMAPPER 基于注解的MAPPER接口，不会有对应的XML文件
                 2.XMLMAPPER 所有的方法都在XML中，接口调用依赖XML文件
         -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.cloud.microblog.user.dao.mapper"
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.microblog.user.dao.mapper"
                              targetProject="src/main/java"/>
         <!-- os_favorites  os_receipt_address  os_receipt_address os_user_login   -->
         <!-- 可以配置多个table,每个表单独配置-->
@@ -71,8 +71,12 @@
             <generatedKey column="user_id" sqlStatement="MySql" type="post" identity="true"/>
         </table>-->
 
-        <table tableName="user" >
+        <!--<table tableName="user" >
             <generatedKey column="user_id" sqlStatement="MySql" type="post" identity="true"/>
+        </table>-->
+
+        <table tableName="user_delete" >
+            <generatedKey column="id" sqlStatement="MySql" type="post" identity="true"/>
         </table>
 
 

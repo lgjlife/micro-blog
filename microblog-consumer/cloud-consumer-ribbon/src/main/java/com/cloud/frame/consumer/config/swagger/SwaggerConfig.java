@@ -1,4 +1,4 @@
-package com.cloud.microblog.consumer.config.swagger;
+package com.microblog.consumer.config.swagger;
 
 
 import org.springframework.context.annotation.Bean;
@@ -31,7 +31,7 @@ public class SwaggerConfig {
                 .apiInfo(apiInfo())
                 .select()
                 //为当前包路径
-                .apis(RequestHandlerSelectors.basePackage("com.cloud.microblog.provider.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.microblog.provider.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }

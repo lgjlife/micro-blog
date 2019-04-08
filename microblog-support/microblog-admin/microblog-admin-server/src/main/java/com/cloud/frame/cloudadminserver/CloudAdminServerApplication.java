@@ -1,4 +1,4 @@
-package com.cloud.microblog.cloudadminserver;
+package com.microblog.cloudadminserver;
 
 import de.codecentric.boot.admin.server.config.EnableAdminServer;
 import org.springframework.boot.SpringApplication;

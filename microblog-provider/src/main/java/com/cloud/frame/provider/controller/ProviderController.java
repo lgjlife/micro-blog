@@ -1,6 +1,6 @@
-package com.cloud.microblog.provider.controller;
+package com.microblog.provider.controller;
 
-import com.cloud.microblog.provider.aop.syslog.anno.PrintUrlAnno;
+import com.microblog.provider.aop.syslog.anno.PrintUrlAnno;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 

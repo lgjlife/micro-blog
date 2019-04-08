@@ -2,7 +2,7 @@ package com.clolud.microblog.search.service.impl;
 
 import com.clolud.microblog.search.dao.UserRepository;
 import com.clolud.microblog.search.service.UserSearchService;
-import com.cloud.microblog.user.dao.model.User;
+import com.microblog.user.dao.model.User;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.QueryStringQueryBuilder;
