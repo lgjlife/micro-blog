@@ -1,49 +1,27 @@
-package com.microblog.blog.service.log;
+package com.microblog.log.config;
 
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.AppenderBase;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Slf4j
-@Component
+//@Component
 public class KafkaAppender extends AppenderBase<ILoggingEvent> {
 
+    AtomicInteger count = new AtomicInteger(0);
 
     @Override
-    public void start() {
+    protected void append(ILoggingEvent event) {
 
-
-        super.start();
-        System.out.println("start.........");
-
-        new Thread(){
-
-            @Override
-            public void run() {
-                super.run();
-                try{
-                    Thread.sleep(2000);
-                    log.debug("123");
-                    System.out.println("Thread...");
-                }
-                catch(Exception ex){
-                    log.error(ex.getMessage());
-                }
-            }
-        }.start();
-
-    }
-
-    @Override
-    protected void append(ILoggingEvent iLoggingEvent) {
-
-        LogPojo logPojo = getLogPojo(iLoggingEvent);
+        LogPojo logPojo = getLogPojo(event);
         System.out.println(logPojo);
+        System.out.println("count = " + count.addAndGet(1));
 
+      //  event = null;
     }
 
     private  LogPojo getLogPojo(ILoggingEvent event){
@@ -60,11 +38,5 @@ public class KafkaAppender extends AppenderBase<ILoggingEvent> {
                 .build();
 
         return  logPojo;
-
-
     }
-
-
-
-
 }

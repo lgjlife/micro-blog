@@ -1,4 +1,4 @@
-package com.microblog.blog.service.log;
+package com.microblog.log.config;
 
 
 import lombok.Builder;

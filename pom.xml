@@ -19,6 +19,7 @@
         <module>microblog-blog</module>
         <module>microblog-gateway</module>
         <module>microblog-msg</module>
+        <module>microblog-log</module>
     </modules>
     <packaging>pom</packaging>
 

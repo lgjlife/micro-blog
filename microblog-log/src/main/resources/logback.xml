@@ -27,11 +27,11 @@
         </encoder>
     </appender>
 
-    <!--<appender name="KafkaAppender" class="com.microblog.log.config.KafkaAppender">
-    </appender>-->
+    <appender name="KafkaAppender" class="com.microblog.log.config.KafkaAppender">
+    </appender>
 
     <root level="debug">
-    <!--    <appender-ref ref="KafkaAppender"/>-->
+        <appender-ref ref="KafkaAppender"/>
         <appender-ref ref="console"/>
     </root>
 
