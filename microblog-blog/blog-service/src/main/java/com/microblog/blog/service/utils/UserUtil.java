@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 public class UserUtil {
 
     public  static   Long  getUserId(HttpServletRequest request){
-        String userId = request.getHeader("userId");
+        Long userId =  (Long)request.getAttribute("userId");
         log.debug("userId = " + userId);
-        return Long.valueOf(userId);
+        return userId;
     }
 
 }

@@ -151,6 +151,7 @@ public class BlogServiceImpl implements BlogService {
         blog.setUserId(UserUtil.getUserId(request));
         long blogId = blogMapper.insert(blog);
 
+        log.debug("blogId = {}",blogId);
 
 
         //取得request中的所有文件名
@@ -161,6 +162,7 @@ public class BlogServiceImpl implements BlogService {
         }
 
         List<BlogImg> blogImgs = new LinkedList<BlogImg>();
+        Map<String,MultipartFile> savePaths =  new HashMap<String,MultipartFile>();
         //处理图片
 
         byte  fileCount = 0;
@@ -183,31 +185,45 @@ public class BlogServiceImpl implements BlogService {
             //创建文件夹
             File saveFile = new File(staticPath+imgPath);
             if (!saveFile.exists()) {
-                log.debug("path:{} not exists,create dir",staticPath+imgPath);
-                saveFile.mkdir();
+                log.debug("path:{} not exists,create dir",saveFile);
+              //  saveFile.mk
+                boolean result = saveFile.mkdirs();
+                log.debug("saveFile  result = {}" , result);
                 log.debug("saveFile.exists? {}", saveFile.exists());
             }
 
             String subPath = imgPath + "/" + getRandomFileName() + suffix;
             String savePath = staticPath + subPath;
-
+            savePaths.put(savePath,file);
             //数据保存
 
             BlogImg blogImg = new BlogImg();
-            blogImg.setBlogId(blogId);
+            blogImg.setBlogId(blog.getBlogId());
             blogImg.setImgUrl(subPath);
             blogImgs.add(blogImg);
-
-
-            try{
-                File newfile = new File(savePath);
-                file.transferTo(newfile);
-            }
-            catch(Exception ex){
-                ex.printStackTrace();
-                return  BlogReturnCode.BLOG_SUBMIT_FAIL;
-            }
         }
+
+        try{
+
+            blogImgMapper.insertList(blogImgs);
+            savePaths.forEach((k,v)->{
+
+                try{
+                    File newfile = new File(k);
+                    v.transferTo(newfile);
+                }
+                catch(Exception ex){
+                    log.error("保存图片失败:{}",ex.getMessage());
+                }
+
+            });
+
+        }
+        catch(Exception ex){
+            log.error("上传图片失败:{}",ex.getMessage());
+            return  BlogReturnCode.BLOG_SUBMIT_FAIL;
+        }
+
 
 
         return  BlogReturnCode.BLOG_SUBMIT_SUCCESS;

@@ -1,4 +1,4 @@
-package com.microblog.blog.controller.web;
+package com.microblog.blog.web.controller;
 
 
 import com.microblog.common.aop.syslog.anno.PrintUrlAnno;

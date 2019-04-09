@@ -88,6 +88,14 @@
         </dependency>
 
 
+        <!--java.lang.NoSuchMethodError: com.netflix.servo.monitor.Monitors.isObjectRegistered -->
+
+        <dependency>
+            <groupId>com.netflix.servo</groupId>
+            <artifactId>servo-core</artifactId>
+            <version>0.12.7</version>
+        </dependency>
+
     </dependencies>
 
 </project>

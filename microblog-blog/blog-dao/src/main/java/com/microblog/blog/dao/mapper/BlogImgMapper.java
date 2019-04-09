@@ -48,4 +48,5 @@ public interface BlogImgMapper {
 
 
     List<BlogImg> selectBlogId(@Param("blogId") Long blogId);
+    int insertList(List<BlogImg> record);
 }

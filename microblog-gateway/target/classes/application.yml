@@ -6,7 +6,7 @@ eureka:
       defaultZone: http://localhost:8001/eureka/
 spring:
   application:
-    name: gateway
+    name: microblog-gateway
 management:
   endpoint:
     health:

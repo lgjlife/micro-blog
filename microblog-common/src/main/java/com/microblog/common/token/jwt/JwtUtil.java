@@ -56,16 +56,13 @@ public class JwtUtil {
     * @return: 
     *
    */
-    public static boolean verify(String token) {
-        try {
-            Algorithm algorithm = Algorithm.HMAC256(secret);
-            JWTVerifier verifier = JWT.require(algorithm)
-                    .build();
-            DecodedJWT jwt = verifier.verify(token);
-            return true;
-        } catch (Exception exception) {
-            return false;
-        }
+    public static boolean verify(String token) throws Exception {
+
+        Algorithm algorithm = Algorithm.HMAC256(secret);
+        JWTVerifier verifier = JWT.require(algorithm)
+                .build();
+        DecodedJWT jwt = verifier.verify(token);
+        return true;
     }
 
     /**

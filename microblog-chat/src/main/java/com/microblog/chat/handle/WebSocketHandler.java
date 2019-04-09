@@ -36,7 +36,7 @@ public class WebSocketHandler extends SimpleChannelInboundHandler<Object> {
             ctx.channel().writeAndFlush(tws);
 
         } else if (o instanceof WebSocketFrame) {
-            log.info("web socket 接入");
+            log.info("controller socket 接入");
         }
     }
 
@@ -83,7 +83,7 @@ public class WebSocketHandler extends SimpleChannelInboundHandler<Object> {
             log.info("传统接入");
             handleHttpRequest(ctx, (FullHttpRequest) msg);
         } else if (msg instanceof WebSocketFrame) {
-            log.info("web socket 接入");
+            log.info("controller socket 接入");
             handleWebSocketFrame(ctx, (WebSocketFrame) msg);
         }
 

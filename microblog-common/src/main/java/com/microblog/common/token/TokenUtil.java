@@ -30,7 +30,6 @@ public class TokenUtil {
         String token;
 
         if(!StringUtils.isEmpty(token = request.getHeader(AuthConstants.HEADER_TOKEN_KEY))){
-            log.debug("token.length={},headerToken = {}" ,token.length(), token);
             return token;
         }
         else  if(!StringUtils.isEmpty(token = request.getParameter(AuthConstants.PARAM_TOKEN_KEY))){

@@ -65,4 +65,25 @@
     where blog_id = #{blogId,jdbcType=BIGINT}
   </select>
 
+  <insert id="insertList" parameterType="java.util.List" >
+    <selectKey resultType="java.lang.Long" keyProperty="imgId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+
+    insert into blog_img (blog_id, img_url)
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+
+      (
+        #{item.blogId,jdbcType=BIGINT},
+        #{item.imgUrl,jdbcType=VARCHAR}
+      )
+    </foreach>
+
+
+
+  </insert>
+
+
+
 </mapper>

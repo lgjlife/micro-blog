@@ -1,4 +1,4 @@
-package com.microblog.blog.controller.config;
+package com.microblog.blog.web.config;
 
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 

@@ -4,6 +4,7 @@ import com.microblog.common.token.TokenUtil;
 import com.microblog.common.token.jwt.JwtUtil;
 import com.microblog.gateway.auth.AuthFilterService;
 import com.microblog.gateway.constants.FilterOrderConstants;
+import com.microblog.gateway.utils.RedirectUtil;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
@@ -53,6 +54,7 @@ public class TokenFilter  extends ZuulFilter {
         try{
             //从请求中获取token
             token = TokenUtil.getTokenFromRequest(request);
+            log.debug("");
            //校验Token
            if(JwtUtil.verify(token)){
                log.debug("Token ={}",token);
@@ -82,8 +84,8 @@ public class TokenFilter  extends ZuulFilter {
 
         }
         catch(Exception ex){
-            ex.printStackTrace();
-          //  RedirectUtil.redirect(currentContext,"/user/login.html");
+            log.debug("解析Token 出现错误，请重新登录！" + ex.getMessage());
+            RedirectUtil.redirect(currentContext,"/user/login.html");
         }
         return null;
         //token 存在 ，不做处理，在

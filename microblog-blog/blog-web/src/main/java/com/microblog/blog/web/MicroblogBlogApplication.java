@@ -1,4 +1,4 @@
-package com.microblog.blog.controller;
+package com.microblog.blog.web;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
