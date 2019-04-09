@@ -199,8 +199,8 @@ public class IUserInfoService  implements UserInfoService
 
 
     private  Long  getUserId(){
-        String userId = request.getHeader("userId");
+        Long userId =  (Long)request.getAttribute("userId");
         log.debug("userId = " + userId);
-        return Long.valueOf(userId);
+        return userId;
     }
 }

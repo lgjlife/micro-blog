@@ -1,5 +1,6 @@
 package com.microblog.user.web.interceptor;
 
+import com.microblog.common.token.jwt.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -22,33 +23,36 @@ public class RequestInterceptor extends HandlerInterceptorAdapter {
 
         log.debug("RequestInterceptor....");
 
-        String tokenAttr =  (String)request.getHeader("Authorization1");
-        log.debug("tokenAttr = " + tokenAttr);
+        String token =  (String)request.getHeader("token");
+
+        if (token != null){
+            log.debug("token = " + token);
+            Long uId = Long.valueOf(JwtUtil.getClaim(token,"userId"));
+            log.debug("token userId = " + uId);
+            request.setAttribute("userId",uId);
+        }
+
+       /* Enumeration<String> names = request.getHeaderNames();
+        while (names.hasMoreElements()){
+            log.debug("HeaderNames = " + names.nextElement());
+        }*/
+
+
+
+
+      /*  String Authorization =  (String)request.getHeader("authorization");
+        log.debug("Authorization = " + Authorization);
+
+        String Authorization1 =  (String)request.getHeader("authorization1");
+        log.debug("Authorization1 = " + Authorization1);
         String aaa = request.getHeader("aaa");
         log.debug("aaa = " + aaa);
 
         String userId = request.getHeader("userId");
         log.debug("userId = " + userId);
 
-       /* Long userId = null;
-        try{
-            String token =  TokenUtil.getTokenFromRequest(request);
 
-            request.setAttribute(JWTClaimsKey.userId,2);
-
-            String id = JwtUtil.getClaim(token, JWTClaimsKey.userId);
-            if(id != null){
-                userId =  Long.valueOf(id);
-                request.setAttribute(JWTClaimsKey.userId,2);
-
-                log.debug("当前登录的用户id = {}",userId);
-            }
-        }
-        catch(Exception ex){
-            log.debug("ex = " + ex.getMessage());
-        }*/
-
-
+*/
 
 
         return true;

@@ -79,6 +79,7 @@ public class JwtUtil {
     */
     public static String getClaim(String token,String key) {
         try {
+            log.debug("key = {},getClaim token = {}",key, token);
             DecodedJWT jwt = JWT.decode(token);
             return jwt.getClaim(key).asString();
         } catch (JWTDecodeException e) {

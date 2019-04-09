@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Map;
 
 @Component
 //@Slf4j
@@ -54,27 +53,29 @@ public class TokenFilter  extends ZuulFilter {
         try{
             //从请求中获取token
             token = TokenUtil.getTokenFromRequest(request);
-            log.debug("token = {}",token);
-            //校验Token
+           //校验Token
            if(JwtUtil.verify(token)){
-               log.debug("Token 正常");
-               String userId = JwtUtil.getClaim(token,"userId");
+               log.debug("Token ={}",token);
+               currentContext.addZuulRequestHeader("token",token);
+
+              /* String userId = JwtUtil.getClaim(token,"userId");
                currentContext.addZuulRequestHeader("userId",userId);
 
-               currentContext.addZuulRequestHeader("Authorization",token);
+               currentContext.addZuulRequestHeader("authorization",token);
                Map<String, String> headers =  currentContext.getZuulRequestHeaders();
 
                headers.forEach((key,val)->log.debug("{}--{}",key,val));
                request.setAttribute("Authorization",token);
 
-              String tokenAttr =  (String)request.getAttribute("Authorization");
+              String tokenAttr =  (String)request.getAttribute("authorization");
 
               log.debug("tokenAttr = " + tokenAttr);
 
                currentContext.setRequest(request);
 
-               currentContext.addZuulRequestHeader("Authorization1",token);
-               currentContext.addZuulRequestHeader("aaa",token);
+               currentContext.addZuulRequestHeader("token",token);
+               currentContext.addZuulRequestHeader("authorization1",token);
+               currentContext.addZuulRequestHeader("aaa",token);*/
 
 
            }

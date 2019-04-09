@@ -7,10 +7,10 @@ import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 
 @EnableEurekaServer
 @SpringBootApplication
-public class CenterApplication {
+public class MicroblogCenterApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(CenterApplication.class, args);
+        SpringApplication.run(MicroblogCenterApplication.class, args);
     }
 }
 //--spring.profiles.active=peer1

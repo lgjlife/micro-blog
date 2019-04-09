@@ -16,9 +16,9 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableDiscoveryClient
 @SpringBootApplication
 @ComponentScan(basePackages={"com.microblog.user"})
-public class UserWebApplication {
+public class MicroblogUserWebApplication {
     public static void main(String args[]) {
-        SpringApplication.run(UserWebApplication.class, args);
+        SpringApplication.run(MicroblogUserWebApplication.class, args);
 
     }
 }

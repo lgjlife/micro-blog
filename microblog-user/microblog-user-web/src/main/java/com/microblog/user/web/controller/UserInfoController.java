@@ -65,7 +65,7 @@ public class UserInfoController {
 
     @PrintUrlAnno
     @GetMapping
-    public BaseResult queryCurrentLoginInfo(HttpServletRequest request){
+    public BaseResult queryCurrentLoginInfo(){
         BaseResult result = null;
         User user =  userInfoService.userInfo();
         if(user  == null){
@@ -98,9 +98,8 @@ public class UserInfoController {
 
 
     private  Long  getUserId(){
-        String userId = request.getHeader("userId");
+        Long userId =  (Long)request.getAttribute("userId");
         log.debug("userId = " + userId);
-
-        return Long.valueOf(userId);
+        return userId;
     }
 }

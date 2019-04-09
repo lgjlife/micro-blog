@@ -81,5 +81,6 @@ auth:
     paths:
       - /blog/blog/submit/**
       - /blog/blog/submit
+      - /blog/blog/list
     exclude:
       - /blog/blog/list

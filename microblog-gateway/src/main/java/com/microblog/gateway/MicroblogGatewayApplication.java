@@ -21,10 +21,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 @EnableDiscoveryClient
 @ComponentScan(basePackages = {"com.microblog.gateway.*", "com.microblog.common"})
-public class GatewayApplication  {
+public class MicroblogGatewayApplication {
 
     public static void main(String[] args) {
 
-        SpringApplication.run(GatewayApplication.class,args);
+        SpringApplication.run(MicroblogGatewayApplication.class,args);
     }
 }
