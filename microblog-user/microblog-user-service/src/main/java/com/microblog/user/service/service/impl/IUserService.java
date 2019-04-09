@@ -244,19 +244,28 @@ public class IUserService implements UserService {
         //远程获取token
        // String token = tokenClient.queryToken(user.getUserId());
 
-        String token =  createToken(user.getUserId());
+        Map<String,String> map = new HashMap<>();
+        map.put(JWTClaimsKey.userId,String.valueOf(user.getUserId()));
+        map.put(JWTClaimsKey.nickName,String.valueOf(user.getNickName()));
+        String token =  createToken(map);
         log.debug("token.length={},token = {}",token.length(),token);
         return new BaseResult(UserReturnCode.LOGIN_SUCCESS.getCode(),
                 UserReturnCode.LOGIN_SUCCESS.getMessage(),
                 token);
     }
 
-    public  String createToken( Long id){
+    public  String createToken(Map<String,String> maps){
 
         Map<String,String> claims = new HashMap<>();
-        claims.put(JWTClaimsKey.userId,String.valueOf(id));
+
+        maps.forEach((k,v)->{
+            claims.put(k,v);
+
+        });
+
+
         String  token =  JwtUtil.createJwt(claims);
-        log.debug("id = {},token = {} ",id,token);
+     //   log.debug("id = {},token = {} ",id,token);
 
         /*try{
             boolean result = JwtUtil.verify(token);

@@ -14,4 +14,10 @@ public class UserUtil {
         return userId;
     }
 
+    public  static   String  getNickName(HttpServletRequest request){
+        String nickName =  (String) request.getAttribute("nickName");
+        log.debug("nickName = " + nickName);
+        return nickName;
+    }
+
 }

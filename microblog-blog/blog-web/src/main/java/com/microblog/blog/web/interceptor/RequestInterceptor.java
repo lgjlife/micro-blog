@@ -30,6 +30,7 @@ public class RequestInterceptor extends HandlerInterceptorAdapter {
             Long uId = Long.valueOf(JwtUtil.getClaim(token,"userId"));
             log.debug("token userId = " + uId);
             request.setAttribute("userId",uId);
+            request.setAttribute("nickName",JwtUtil.getClaim(token,"nickName"));
         }
 
        /* Enumeration<String> names = request.getHeaderNames();

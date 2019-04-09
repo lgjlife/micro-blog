@@ -89,9 +89,9 @@ var blog={
                 
                 
             var imgDisplay = "";
-            /* for(var j = 0; j < data[i].blogImg.length ;j++ ){                 
+            for(var j = 0; j < data[i].blogImg.length ;j++ ){
                  imgDisplay += "<img src='" + blog.staticPath + data[i].blogImg[j] + "' class='blog-content-img' >";
-             }*/
+             }
             
    
             console.log("imgDisplay = " + imgDisplay + " i = i");

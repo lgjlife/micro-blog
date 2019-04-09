@@ -56,17 +56,17 @@ var edit = {
             }
 
         }
-       // console.log("start = " + start + "   end = " + end);
+        console.log("start = " + start + "   end = " + end);
         if((start != -1)&&(end != -1)&&(end > start)){
 
             var text1="";
             if(start != 0){
-                 text1 = text.substring(0,start-1);
+                 text1 = text.substring(0,start);
             }
 
             var text2 = text.substring(start,end+1);
-            var text3 = text.substring(end+2,text.length-1);
-            //console.log("text2 = " + text2);
+            var text3 = text.substring(end+1,text.length);
+            console.log("text2 = " + text2);
             text2 = "<a href='javascript:void(0)' style='color:red'>" + text2 + "</a>";
 
             resultText = text1 +  text2 + text3;

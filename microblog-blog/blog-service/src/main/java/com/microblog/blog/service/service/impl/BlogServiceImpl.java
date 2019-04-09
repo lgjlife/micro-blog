@@ -5,6 +5,7 @@ import com.microblog.blog.dao.model.*;
 import com.microblog.blog.service.dto.BlogInfoDto;
 import com.microblog.blog.service.feign.UserFeignService;
 import com.microblog.blog.service.service.BlogService;
+import com.microblog.blog.service.utils.ImgMarkUtil;
 import com.microblog.blog.service.utils.UserUtil;
 import com.microblog.common.code.BlogReturnCode;
 import com.microblog.common.code.ReturnCode;
@@ -12,6 +13,7 @@ import com.microblog.user.dao.model.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -209,39 +211,42 @@ public class BlogServiceImpl implements BlogService {
             savePaths.forEach((k,v)->{
 
                 try{
+                    //保存文件到本地
                     File newfile = new File(k);
                     v.transferTo(newfile);
+
+                    //添加水印
+                    int dot =  k.lastIndexOf("."); //k = abc.jps
+                    String prefix = k.substring(0,dot); // abc
+                    String suffix = k.substring(dot,k.length()); // .jpg
+                    String descPath = prefix+"-copy" + suffix;
+                    File source = new File(k);
+                    File desc = new File(descPath);
+                    int result = FileCopyUtils.copy(source,desc);
+                    ImgMarkUtil.markImageByString(descPath,k,"@"+UserUtil.getNickName(request));
+
+
                 }
                 catch(Exception ex){
                     log.error("保存图片失败:{}",ex.getMessage());
                 }
-
             });
-
         }
         catch(Exception ex){
             log.error("上传图片失败:{}",ex.getMessage());
             return  BlogReturnCode.BLOG_SUBMIT_FAIL;
         }
-
-
-
         return  BlogReturnCode.BLOG_SUBMIT_SUCCESS;
-
-
-
     }
 
     @Override
     public ReturnCode collect(long blogId) {
-
  
         BlogCollect blogCollect = new BlogCollect();
         blogCollect.setBlogId(blogId);
         blogCollect.setUserId(UserUtil.getUserId(request));
         blogCollect.setCreateTime(new Date());
         blogCollectMapper.insert(blogCollect);
-
 
         return BlogReturnCode.BLOG_COLLECT_SUCCESS;
     }
@@ -297,4 +302,14 @@ public class BlogServiceImpl implements BlogService {
 
 
 
+    public static void main(String args[]){
+
+        String k = "acd.jpg";
+        int dot =  k.lastIndexOf(".");
+        String prex = k.substring(0,dot);
+        String last = k.substring(dot,k.length());
+
+        System.out.println("prex = " + prex);
+        System.out.println("last = " + last);
+    }
 }
