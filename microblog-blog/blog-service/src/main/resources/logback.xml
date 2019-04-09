@@ -2,6 +2,15 @@
 <configuration>
     <property name="pattern" value="%d{yyyyMMdd:HH:mm:ss.SSS} [%thread] %-5level  %msg%n"/>
 
+    <property name="CONSOLE_LOG_PATTERN"
+              value="%blue(%date{yyyy-MM-dd HH:mm:ss}) | %highlight(%-5level) | %boldYellow(%thread) | %boldGreen(%logger) | %magenta(%msg%n)"/>
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder charset="UTF-8">
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
 
     <!--
         Appender: 设置日志信息的去向,常用的有以下几个
@@ -18,16 +27,12 @@
         </encoder>
     </appender>
 
-    <appender name="KafkaAppender" class="com.microblog.blog.service.log.KafkaAppender">
-        <!-- 字符串System.out（默认）或者System.err -->
-       <!-- <target>System.out</target>
-        &lt;!&ndash; 对记录事件进行格式化 &ndash;&gt;
-        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <pattern>${pattern}</pattern>
-        </encoder>-->
-    </appender>
+    <!--<appender name="KafkaAppender" class="com.microblog.blog.service.log.KafkaAppender">
+    </appender>-->
+
     <root level="debug">
-        <appender-ref ref="KafkaAppender"/>
+    <!--    <appender-ref ref="KafkaAppender"/>-->
+        <appender-ref ref="console"/>
     </root>
 
 </configuration>

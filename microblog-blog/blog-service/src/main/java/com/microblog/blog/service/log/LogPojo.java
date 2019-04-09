@@ -6,6 +6,8 @@ import lombok.Builder;
 @Builder
 public class LogPojo {
 
+    private  Long id;
+
     private  String datetime;
 
     private  String level;
