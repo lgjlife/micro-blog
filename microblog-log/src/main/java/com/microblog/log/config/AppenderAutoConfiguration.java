@@ -11,8 +11,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 /**
@@ -26,16 +25,27 @@ import java.util.Map;
 public class AppenderAutoConfiguration {
 
     @Autowired
-    ApplicationContext applicationContext;
+    ApplicationContext context;
 
     @PostConstruct
     public void init(){
 
 
-        Map<String, Object> annos = applicationContext.getBeansWithAnnotation(EnableKafkaLog.class);
-        if(annos.size() == 0){
-         //   return;
+        Map<String, Object> annoClz = context.getBeansWithAnnotation(EnableKafkaLog.class);
+        if(annoClz.size() == 0){
+            log.info("Un Enable  the log send to kafka, if you want send ,please use  @EnableKafkaLog ");
+            return;
         }
+
+        EnableKafkaLog anno = annoClz.values().iterator().next().getClass().getAnnotation(EnableKafkaLog.class);
+        if(anno == null){
+            log.info("Un Enable  the log send to kafka, if you want send ,please use  @EnableKafkaLog ");
+            return;
+        }
+        String brokerAddress =  anno.brokerAddress();
+        String applicationName = anno.applicationName();
+
+        log.debug("brokerAddress = {},applicationName={}",brokerAddress,applicationName);
         log.info("AppenderAutoConfiguration.....");
         KafkaAppender kafkaAppender =  new KafkaAppender();
         kafkaAppender.setName("KafkaAppender");
