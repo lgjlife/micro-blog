@@ -11,6 +11,7 @@
 
     <artifactId>microblog-common</artifactId>
 
+    <packaging>pom</packaging>
 
     <dependencies>
         <dependency>

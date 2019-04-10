@@ -2,6 +2,7 @@ package com.microblog.log.config;
 
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.AppenderBase;
+import com.microblog.log.pojo.LogPojo;
 import lombok.extern.slf4j.Slf4j;
 
 import java.text.SimpleDateFormat;

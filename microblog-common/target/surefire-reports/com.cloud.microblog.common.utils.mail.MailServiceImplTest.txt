@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.cloud.microblog.common.utils.mail.MailServiceImplTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 18.155 s - in com.cloud.microblog.common.utils.mail.MailServiceImplTest

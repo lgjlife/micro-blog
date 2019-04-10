@@ -8,14 +8,21 @@ import lombok.extern.slf4j.Slf4j;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.Map;
 
 
+/**
+ *功能描述
+ * @author lgj
+ * @Description  存在bug，会多次调用append 方法，改用xml方式配置
+ * @date 4/10/19
+*/
 @Slf4j
-//@Configuration
+@Configuration
 public class AppenderAutoConfiguration {
 
     @Autowired
@@ -24,22 +31,25 @@ public class AppenderAutoConfiguration {
     @PostConstruct
     public void init(){
 
+
         Map<String, Object> annos = applicationContext.getBeansWithAnnotation(EnableKafkaLog.class);
         if(annos.size() == 0){
-            return;
+         //   return;
         }
-
-        System.out.println("AppenderAutoConfiguration");
+        log.info("AppenderAutoConfiguration.....");
         KafkaAppender kafkaAppender =  new KafkaAppender();
         kafkaAppender.setName("KafkaAppender");
         LoggerContext context =(LoggerContext) LoggerFactory.getILoggerFactory();
         List<Logger> loggers = context.getLoggerList();
 
+
         loggers.forEach((v)->{
 
-          //  v.
 
-          //  v.addAppender(kafkaAppender);
+            if(v.getName().equals("ROOT")){
+                System.out.println(v.getName());
+                v.addAppender(kafkaAppender);
+            }
         });
         kafkaAppender.start();
     //     System.out.println(loggers);
