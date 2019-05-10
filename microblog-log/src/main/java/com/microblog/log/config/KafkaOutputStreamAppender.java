@@ -17,7 +17,6 @@ public class KafkaOutputStreamAppender<ILoggingEvent> extends OutputStreamAppend
     @Override
     protected void append(ILoggingEvent event) {
         super.append(event);
-
         System.out.println(event);
     }
 

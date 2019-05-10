@@ -44,14 +44,6 @@ public class KafkaAppender extends UnsynchronizedAppenderBase<ILoggingEvent> {
 
     }
 
-    public static void main(String args[]){
-
-
-
-       // System.out.println(logPojo);
-
-       // String obj = JSONObject.toJSONString(logPojo,true);
-    }
     @Override
     protected void append(ILoggingEvent event) {
 
