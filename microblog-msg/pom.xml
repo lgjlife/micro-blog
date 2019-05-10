@@ -39,12 +39,7 @@
             <scope>provided</scope>
         </dependency>
 
-        <dependency>
-            <groupId>com.microblog</groupId>
-            <artifactId>microblog-common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
+
 
 
         <!--eureka-client -->
@@ -105,9 +100,18 @@
             <artifactId>serialization</artifactId>
             <version>1.0.0</version>
         </dependency>
-
-
-
+        <dependency>
+            <groupId>com.microblog</groupId>
+            <artifactId>microblog-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.microblog</groupId>
+            <artifactId>microblog-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
 
 
     </dependencies>

@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@EnableKafkaLog
+@EnableKafkaLog(brokerAddress = "localhost:9092,localhost:9093")
 @SpringBootApplication
 public class MicroblogLogApplication {
 
@@ -26,9 +26,7 @@ class MyThread extends  Thread{
 
         int i = 0;
        while (true){
-
-
-
+           System.out.println("loging......");
            log.info("MyThread ..." + i ++);
            try{
                Thread.sleep(4000);

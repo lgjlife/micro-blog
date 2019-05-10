@@ -27,11 +27,23 @@
         </encoder>
     </appender>
 
-    <!--<appender name="KafkaAppender" class="com.microblog.log.config.KafkaAppender">
-    </appender>-->
+  　<appender name="KafkaAppender" class="com.microblog.log.config.KafkaAppender">
+        <topic>application-log</topic>
+        <producerCfg>bootstrap.servers=localhost:9092,localhost:9093</producerCfg>
+        <producerCfg>acks=all</producerCfg>
+        <producerCfg>request.timeout.ms=2000</producerCfg>
+        <producerCfg>transaction.timeout.ms=2000</producerCfg>
+        <producerCfg>max.block.ms=2000</producerCfg>
+        <producerCfg>retries=0</producerCfg>
+        <producerCfg>batch.size=16</producerCfg>
+        <producerCfg>linger.ms=5</producerCfg>
+        <producerCfg>buffer.memory=33554432</producerCfg>
+        <producerCfg>key.serializer=org.apache.kafka.common.serialization.StringSerializer</producerCfg>
+        <producerCfg>value.serializer=org.apache.kafka.common.serialization.StringSerializer</producerCfg>
+    </appender>
 
     <root level="debug">
-      <!--  <appender-ref ref="KafkaAppender"/>-->
+        <appender-ref ref="KafkaAppender"/>
         <appender-ref ref="console"/>
     </root>
 

@@ -2,11 +2,12 @@ package com.microblog.common.aop.syslog.aspect;
 
 
 import com.microblog.common.aop.syslog.anno.PrintUrlAnno;
-import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -23,11 +24,10 @@ import java.lang.reflect.Method;
  * @date: 9/7/18 
 */ 
 @Aspect
-//@Component
-@Slf4j
 public class PrintUrlAspect {
 
 
+	private  static final Logger log = LoggerFactory.getLogger(PrintUrlAspect.class);
 
 	/**
 	 * 定义切点

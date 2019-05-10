@@ -1,2 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.microblog.common.aop.syslog.PrintUrlConfig,\
-com.microblog.common.aop.usetime.PrintUseTimeConfig
