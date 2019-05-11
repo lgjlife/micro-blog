@@ -1,6 +1,9 @@
 package com.microblog.log.anno;
 
 
+import com.microblog.log.config.AppenderAutoConfiguration;
+import org.springframework.context.annotation.Import;
+
 import java.lang.annotation.*;
 
 
@@ -10,8 +13,7 @@ import java.lang.annotation.*;
 @Documented
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
+@Import({AppenderAutoConfiguration.class})
 public @interface EnableKafkaLog {
 
-    String brokerAddress() default  "localhost:9092";
-    String applicationName() default  "EnableKafkaLog";
 }

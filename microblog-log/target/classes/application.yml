@@ -5,3 +5,8 @@ server:
 logging:
   level:
     org.apache.kafka:  error
+
+logappender:
+  topic: application-log
+  kafkaCfg:
+    retries: 2

@@ -3,6 +3,7 @@ package com.microblog.log.config;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.UnsynchronizedAppenderBase;
 import com.alibaba.fastjson.JSONObject;
+import com.microblog.log.kafka.LogKafkaProducer;
 import com.microblog.log.pojo.LogPojo;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +20,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class KafkaAppender extends UnsynchronizedAppenderBase<ILoggingEvent> {
 
 
-    protected String topic = null;
+    protected String topic = "application-log";
     protected Map<String,Object> producerCfg =  new HashMap<String, Object>();
 
     LogKafkaProducer producer ;
@@ -35,13 +36,7 @@ public class KafkaAppender extends UnsynchronizedAppenderBase<ILoggingEvent> {
     @Override
     public void start() {
         super.start();
-
         producer = new LogKafkaProducer(producerCfg);
-
-        System.out.println("topic = " + topic);
-        System.out.println("producerCfg = " + producerCfg);
-
-
     }
 
     @Override
