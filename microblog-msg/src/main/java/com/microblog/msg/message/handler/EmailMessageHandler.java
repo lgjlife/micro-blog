@@ -6,14 +6,27 @@ import com.utils.serialization.JdkSerializeUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import org.apache.rocketmq.common.message.MessageExt;
+import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.List;
 import java.util.concurrent.*;
 
+
+/**
+ *功能描述
+ * @author lgj
+ * @Description  邮件发送处理类
+ * @date 5/12/19
+*/
 @Slf4j
 public class EmailMessageHandler implements MessageHandler{
 
     private AbstractSerialize serialize = new JdkSerializeUtil();
+    private RedisTemplate redisTemplate;
+
+    public EmailMessageHandler(RedisTemplate redisTemplate) {
+        this.redisTemplate = redisTemplate;
+    }
 
     /***
      * 执行任务的线程池
@@ -50,7 +63,7 @@ public class EmailMessageHandler implements MessageHandler{
     /**
      *功能描述
      * @author lgj
-     * @Description  执行具体发送短信的线程
+     * @Description  执行具体发送邮件的线程
      * @date 5/12/19
      */
     private class EmailSendHandle implements Callable{
@@ -67,9 +80,9 @@ public class EmailMessageHandler implements MessageHandler{
             long curTimestamp = System.currentTimeMillis();
 
             if(mailDto.getEffectiveTimeMs() != null){
-                //null 设置有效时间
+                //非null 说明设置有效时间
                 if((curTimestamp - mailDto.getTimeStamp()) > mailDto.getEffectiveTimeMs()){
-                    //超过短信的有效时间,丢弃消息，返回消费成功
+                    //超过邮件的有效时间,丢弃消息，返回消费成功
                     return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
 
                 }
@@ -79,8 +92,26 @@ public class EmailMessageHandler implements MessageHandler{
 
             try{
                 log.debug("发送短信：{}",mailDto);
-                //调用发短信操作
+                //调用发邮件操作
+                //消息幂等处理
                 // SmsUtil.sendMsg(smsDto.getPhone(),smsDto.getCode());
+                String value = (String)redisTemplate.opsForValue().get(mailDto.getId());
+                if(value == null){
+                    //消息未消费过
+                    try{
+
+                        // SmsUtil.sendMsg(smsDto.getPhone(),smsDto.getCode());
+                        //这里要是写入失败怎么办????
+                        redisTemplate.opsForValue().set(mailDto.getId(),"",mailDto.getEffectiveTimeMs(),TimeUnit.MICROSECONDS);
+                        return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
+                    }
+                    catch(Exception ex){
+                        log.error(ex.getMessage());
+                        return ConsumeConcurrentlyStatus.RECONSUME_LATER;
+                    }
+
+                }
+                //消息消费过,直接返回消费成功
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
             }
             catch(Exception ex){

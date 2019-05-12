@@ -61,7 +61,6 @@ public class MqConsumer {
                 return handler.handler(msgs);
             }
         });
-
         pushConsumer.start();
     }
 }
