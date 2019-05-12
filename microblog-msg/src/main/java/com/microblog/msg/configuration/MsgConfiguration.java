@@ -16,7 +16,7 @@ public class MsgConfiguration {
 
     @Bean(name = "SMSMqConsumer")
     public MqConsumer SMSMqConsumer(){
-        MqConsumer consumer = new MqConsumer("microblog-sms-group","localhost:9876");
+        MqConsumer consumer = new MqConsumer("microblog-msg-group","localhost:9876");
         try{
             consumer.createPushConsumer();
             consumer.pushDataHandler("microblog-sms-topic","*",new SMSMessageHandler());
@@ -38,6 +38,7 @@ public class MsgConfiguration {
         }
         catch(Exception ex){
             log.error(ex.getMessage());
+            ex.printStackTrace();
         }
 
 
@@ -47,7 +48,7 @@ public class MsgConfiguration {
 
     @Bean
     public MqProducer mqProducer(){
-        MqProducer producer = new MqProducer("microblog-sms-group","localhost:9876");
+        MqProducer producer = new MqProducer("microblog-msg-group","localhost:9876");
 
         try{
 
@@ -58,6 +59,7 @@ public class MsgConfiguration {
         }
         catch(Exception ex){
             log.error(ex.getMessage());
+            ex.printStackTrace();
         }
         return  null;
 

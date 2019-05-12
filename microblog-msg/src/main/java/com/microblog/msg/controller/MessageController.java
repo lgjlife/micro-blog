@@ -18,4 +18,10 @@ public class MessageController {
         smsService.sendSms();
     }
 
+    @RequestMapping("/email")
+    public void sendEmail(){
+        smsService.sendEmail();
+    }
+
+
 }

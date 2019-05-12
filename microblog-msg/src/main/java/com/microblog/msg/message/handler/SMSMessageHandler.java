@@ -29,7 +29,7 @@ public class SMSMessageHandler implements MessageHandler {
     @Override
     public ConsumeConcurrentlyStatus handler(List<MessageExt> msgs) {
 
-        log.debug("The msgs size is {}",msgs.size() );
+        log.debug("sms:The msgs size is {}",msgs.size() );
 
         Future<ConsumeConcurrentlyStatus> future = null;
         for(MessageExt msg:msgs){
@@ -54,7 +54,7 @@ public class SMSMessageHandler implements MessageHandler {
      * @Description  执行具体发送短信的线程
      * @date 5/12/19
     */
-    class SMSSendHandle implements Callable{
+    private class SMSSendHandle implements Callable{
 
         private SMSDto smsDto;
 
@@ -74,8 +74,6 @@ public class SMSMessageHandler implements MessageHandler {
                     return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
 
                 }
-
-
             }
 
             try{
