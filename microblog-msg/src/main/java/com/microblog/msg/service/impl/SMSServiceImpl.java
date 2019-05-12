@@ -1,6 +1,5 @@
 package com.microblog.msg.service.impl;
 
-import com.microblog.common.dto.MailDto;
 import com.microblog.common.dto.SMSDto;
 import com.microblog.msg.message.producer.MqProducer;
 import com.microblog.msg.service.SMSService;
@@ -19,12 +18,13 @@ public class SMSServiceImpl implements SMSService {
     @Override
     public void sendSms() {
 
-        for(int i = 0; i< 10; i++){
+        for(int i = 0; i< 2; i++){
 
             SMSDto smsDto = new SMSDto();
+            smsDto.setId(200);
             smsDto.setPhone("13925716752");
             smsDto.setCode("123456");
-            smsDto.setEffectiveTimeMs(1000);
+            smsDto.setEffectiveTimeMs(1000*60);
             smsDto.setTimeStamp(System.currentTimeMillis());
             try{
                 mqProducer.asyncSend("microblog-sms-topic","",smsDto);
@@ -37,25 +37,6 @@ public class SMSServiceImpl implements SMSService {
 
     }
 
-    @Override
-    public void sendEmail() {
 
-        for(int i = 0; i< 10; i++){
-
-            MailDto mailDto = new MailDto();
-            mailDto.setTitle("注册验证码");
-            mailDto.setTo("xxxx@163.com");
-            mailDto.setTimeStamp(System.currentTimeMillis());
-            mailDto.setEffectiveTimeMs(1000);
-            try{
-                mqProducer.asyncSend("microblog-email-topic","",mailDto);
-            }
-            catch(Exception ex){
-                log.error(ex.getMessage());
-            }
-        }
-
-
-    }
 
 }

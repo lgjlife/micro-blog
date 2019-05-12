@@ -6,6 +6,8 @@ import com.utils.serialization.JdkSerializeUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import org.apache.rocketmq.common.message.MessageExt;
+import org.redisson.api.RLock;
+import org.redisson.api.RedissonClient;
 import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.List;
@@ -24,6 +26,8 @@ public class SMSMessageHandler implements MessageHandler {
     private AbstractSerialize serialize = new JdkSerializeUtil();
 
     private RedisTemplate redisTemplate;
+
+    private RedissonClient redissonClient;
 
 
     public SMSMessageHandler(RedisTemplate redisTemplate) {
@@ -94,23 +98,42 @@ public class SMSMessageHandler implements MessageHandler {
                 //调用发短信　操作
                 //消息幂等处理
 
-                String value = (String)redisTemplate.opsForValue().get(smsDto.getId());
+                long id = smsDto.getId();
+                RLock lock = redissonClient.getLock("lock:sms");
+                String value = null;
+                try{
+                    lock.lock(20,TimeUnit.SECONDS);
+                    value = (String)redisTemplate.opsForValue().get(id);
+                    if(value == null){
+                        //消息未消费过
+                        redisTemplate.opsForValue().set(id,"",smsDto.getEffectiveTimeMs(),TimeUnit.MILLISECONDS);
+                    }
+                }
+                catch(Exception ex){
+                    log.error(ex.getMessage());
+                }
+                finally{
+                    lock.unlock();
+                }
+
                 if(value == null){
+                    log.debug("消息未被消费过");
                     //消息未消费过
                     try{
-
                         // SmsUtil.sendMsg(smsDto.getPhone(),smsDto.getCode());
                         //这里要是写入失败怎么办????
-                        redisTemplate.opsForValue().set(smsDto.getId(),"",smsDto.getEffectiveTimeMs(),TimeUnit.MICROSECONDS);
-                        return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
+                       return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
                     }
                     catch(Exception ex){
                         log.error(ex.getMessage());
+                        //消息消费失败，需要把redis中的消息删除
+                        redisTemplate.delete(id);
                         return ConsumeConcurrentlyStatus.RECONSUME_LATER;
                     }
 
                 }
                 //消息消费过,直接返回消费成功
+                log.debug("消息已经消费过");
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
 
 
@@ -123,5 +146,9 @@ public class SMSMessageHandler implements MessageHandler {
         }
 
 
+    }
+
+    public void setRedissonClient(RedissonClient redissonClient) {
+        this.redissonClient = redissonClient;
     }
 }

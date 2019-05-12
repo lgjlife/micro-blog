@@ -6,6 +6,7 @@ import com.microblog.msg.message.handler.EmailMessageHandler;
 import com.microblog.msg.message.handler.SMSMessageHandler;
 import com.microblog.msg.message.producer.MqProducer;
 import lombok.extern.slf4j.Slf4j;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,6 +24,9 @@ public class MsgConfiguration {
 
     @Autowired
     RedisTemplate redisTemplate;
+
+    @Autowired
+    RedissonClient redissonClient;
 
     /**
      *功能描述 
@@ -114,6 +118,7 @@ public class MsgConfiguration {
     @Bean
     public SMSMessageHandler smsMessageHandler(){
         SMSMessageHandler smsMessageHandler = new SMSMessageHandler(redisTemplate);
+        smsMessageHandler.setRedissonClient(redissonClient);
         return smsMessageHandler;
     }
 
@@ -129,6 +134,7 @@ public class MsgConfiguration {
     @Bean
     public EmailMessageHandler emailMessageHandler(){
         EmailMessageHandler emailMessageHandler = new EmailMessageHandler(redisTemplate);
+        emailMessageHandler.setRedissonClient(redissonClient);
         return emailMessageHandler;
     }
 

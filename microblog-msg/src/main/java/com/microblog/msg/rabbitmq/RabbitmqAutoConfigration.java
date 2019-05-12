@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
 
@@ -17,7 +16,7 @@ import javax.annotation.PostConstruct;
  * @date 4/2/19
 */
 @Slf4j
-@Configuration
+//@Configuration
 @EnableConfigurationProperties(RabbitmqConsumerProperties.class)
 public class RabbitmqAutoConfigration {
 

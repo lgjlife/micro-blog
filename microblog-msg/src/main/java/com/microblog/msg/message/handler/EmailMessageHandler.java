@@ -6,6 +6,8 @@ import com.utils.serialization.JdkSerializeUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import org.apache.rocketmq.common.message.MessageExt;
+import org.redisson.api.RLock;
+import org.redisson.api.RedissonClient;
 import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.List;
@@ -23,6 +25,7 @@ public class EmailMessageHandler implements MessageHandler{
 
     private AbstractSerialize serialize = new JdkSerializeUtil();
     private RedisTemplate redisTemplate;
+    private RedissonClient redissonClient;
 
     public EmailMessageHandler(RedisTemplate redisTemplate) {
         this.redisTemplate = redisTemplate;
@@ -94,24 +97,42 @@ public class EmailMessageHandler implements MessageHandler{
                 log.debug("发送短信：{}",mailDto);
                 //调用发邮件操作
                 //消息幂等处理
-                // SmsUtil.sendMsg(smsDto.getPhone(),smsDto.getCode());
-                String value = (String)redisTemplate.opsForValue().get(mailDto.getId());
+                long id = mailDto.getId();
+                RLock lock = redissonClient.getLock("lock:sms");
+                String value = null;
+                try{
+                    lock.lock(20,TimeUnit.SECONDS);
+                    value = (String)redisTemplate.opsForValue().get(id);
+                    if(value == null){
+                        //消息未消费过
+                        redisTemplate.opsForValue().set(id,"",mailDto.getEffectiveTimeMs(),TimeUnit.MILLISECONDS);
+                    }
+                }
+                catch(Exception ex){
+                    log.error(ex.getMessage());
+                }
+                finally{
+                    lock.unlock();
+                }
+
                 if(value == null){
+                    log.debug("消息未被消费过");
                     //消息未消费过
                     try{
-
                         // SmsUtil.sendMsg(smsDto.getPhone(),smsDto.getCode());
                         //这里要是写入失败怎么办????
-                        redisTemplate.opsForValue().set(mailDto.getId(),"",mailDto.getEffectiveTimeMs(),TimeUnit.MICROSECONDS);
                         return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
                     }
                     catch(Exception ex){
                         log.error(ex.getMessage());
+                        //消息消费失败，需要把redis中的消息删除
+                        redisTemplate.delete(id);
                         return ConsumeConcurrentlyStatus.RECONSUME_LATER;
                     }
 
                 }
                 //消息消费过,直接返回消费成功
+                log.debug("消息已经消费过");
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
             }
             catch(Exception ex){
@@ -122,5 +143,9 @@ public class EmailMessageHandler implements MessageHandler{
         }
 
 
+    }
+
+    public void setRedissonClient(RedissonClient redissonClient) {
+        this.redissonClient = redissonClient;
     }
 }
