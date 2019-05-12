@@ -1,14 +1,19 @@
 package com.microblog.common.utils.encrypt.rsa;
 
+import com.microblog.common.aop.syslog.PrintUrlConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.security.KeyPair;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 
-@Slf4j
+//@Slf4j
 public class RSAUtilTest {
+
+    private static final Logger log = LoggerFactory.getLogger(RSAUtilTest.class);
 
     @Test
     public  void encrypt() throws  Exception{

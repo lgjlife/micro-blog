@@ -1,5 +1,6 @@
 package com.microblog.common.token.jwt;
 
+import com.microblog.common.utils.sms.SmsUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.jose4j.jwk.RsaJsonWebKey;
 import org.jose4j.jwk.RsaJwkGenerator;
@@ -8,6 +9,8 @@ import org.jose4j.jws.JsonWebSignature;
 import org.jose4j.jwt.JwtClaims;
 import org.jose4j.jwt.consumer.JwtConsumer;
 import org.jose4j.jwt.consumer.JwtConsumerBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -21,9 +24,10 @@ import java.util.Map;
  * @Description  jwt 工具类
  * @date 2/27/19
 */
-@Slf4j
-public class JWTUtil {
+//@Slf4j
 
+public class JWTUtil {
+    private static final Logger log = LoggerFactory.getLogger(JWTUtil.class);
     //
     private static RsaJsonWebKey rsaJsonWebKey ;
 

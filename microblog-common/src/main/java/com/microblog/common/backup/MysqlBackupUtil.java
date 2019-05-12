@@ -2,6 +2,8 @@ package com.microblog.common.backup;
 
 
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.text.DateFormat;
@@ -14,11 +16,11 @@ import java.util.Date;
  * @Description   数据库备份
  * @date 3/30/19
 */
-@Slf4j
+//@Slf4j
 public class MysqlBackupUtil {
 
 
-
+    private static final Logger log = LoggerFactory.getLogger(MysqlBackupUtil.class);
     //MySQL数据库所在服务器地址IP
     private  String hostIP  = "localhost";
     //进入数据库所需要的用户名

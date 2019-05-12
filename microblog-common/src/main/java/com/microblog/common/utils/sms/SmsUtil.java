@@ -9,7 +9,6 @@ import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
-import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,10 +26,11 @@ import java.util.Date;
  * 备注:Demo工程编码采用UTF-8
  * 国际短信发送请勿参照此DEMO
  */
-@Slf4j
+
+//@Slf4j
 public class SmsUtil {
 
-	private final static Logger logger = LoggerFactory.getLogger("SmsDemo.class");	
+    private static final Logger log = LoggerFactory.getLogger(SmsUtil.class);
     //产品名称:云通信短信API产品,开发者无需替换
     static final String product = "Dysmsapi";
     //产品域名,开发者无需替换
@@ -71,7 +71,7 @@ public class SmsUtil {
         //可选:outId为提供给业务方扩展字段,最终在短信回执消息中将此值带回给调用者
         request.setOutId("yourOutIdaa");
 
-        logger.debug("发送短信");
+        log.debug("发送短信");
         //hint 此处可能会抛出异常，注意catch
         SendSmsResponse sendSmsResponse = null;
 		try {
@@ -82,10 +82,10 @@ public class SmsUtil {
 		}
 		if(sendSmsResponse.getCode() != null)
 		{
-			 logger.debug("sendSmsResponse code = "  +  sendSmsResponse.getCode());
+			 log.debug("sendSmsResponse code = "  +  sendSmsResponse.getCode());
 		}
 		else {
-			logger.debug("sendSmsResponse code = null");
+			log.debug("sendSmsResponse code = null");
 		}
 		//查明细
         if(sendSmsResponse.getCode() != null && sendSmsResponse.getCode().equals("OK")) {
@@ -147,20 +147,14 @@ public class SmsUtil {
 
     public static void main(String[] args) throws ClientException, InterruptedException 
     {
-        sendMsg("13925716752","123456");
+       // sendMsg("13925716752","123456");
     }
 
-    public static  void sendMsg(String phoneNum,String code ) {
-        try {
-            Date start = new Date();
-
-            sendSms(phoneNum,code);
-            Date end = new Date();
-            logger.debug("发送短信{}-{}成功,总共耗时{}",phoneNum,code,(end.getTime() - start.getTime()));
-
-        } catch (Exception e) {
-            logger.debug("发送短信{}-{}失败",phoneNum,code);
-        }
+    public static  void sendMsg(String phoneNum,String code ) throws Exception {
+        Date start = new Date();
+        sendSms(phoneNum,code);
+        Date end = new Date();
+        log.debug("发送短信{}-{}成功,总共耗时{}",phoneNum,code,(end.getTime() - start.getTime()));
     }
 
 }

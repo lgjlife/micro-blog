@@ -14,11 +14,11 @@ import lombok.Data;
 @Builder
 public class PhoneVerifCodeDto {
 
-
-
+    private   long id;
+    private   long timeStamp;
     private   String phone;
+    private   String code;
+    private   int type;
 
-
-    private   String  code;
 
 }

@@ -11,7 +11,7 @@ spring:
 
 logging:
   level:
-    com.cloud: debug
+    com.microblog: debug
 
 microblog:
   common:

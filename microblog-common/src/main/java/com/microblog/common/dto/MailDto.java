@@ -15,6 +15,9 @@ import lombok.Data;
 public class MailDto {
 
 
+    private   long id;
+    private   long timeStamp;
+
     /*邮件接收者*/
     private   String to;
 

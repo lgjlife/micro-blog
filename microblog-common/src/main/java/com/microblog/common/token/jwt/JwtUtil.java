@@ -8,6 +8,8 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -22,6 +24,7 @@ import java.util.Map;
 @Slf4j
 public class JwtUtil {
 
+    private static final Logger log = LoggerFactory.getLogger(JwtUtil.class);
     // 过期时间5分钟
     private static final String secret = "0x123456789";
     private static final long EXPIRE_TIME_MINUTE = 100;

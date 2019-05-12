@@ -22,7 +22,7 @@ import java.util.Map;
 /**
  *功能描述
  * @author lgj
- * @Description  存在bug，会多次调用append 方法，改用xml方式配置
+ * @Description
  * @date 4/10/19
 */
 @Slf4j
@@ -38,19 +38,11 @@ public class AppenderAutoConfiguration {
 
     @PostConstruct
     public void init(){
-        System.out.println("+++++++++++++++++++++++++");
        Map<String, Object> annoClz = context.getBeansWithAnnotation(EnableKafkaLog.class);
         if(annoClz.size() == 0){
             log.warn("Un Enable  the log send to kafka, if you want send ,please use  @EnableKafkaLog ");
             return;
         }
-        /*
-        EnableKafkaLog anno = annoClz.values().iterator().next().getClass().getAnnotation(EnableKafkaLog.class);
-        if(anno == null){
-            log.warn("Un Enable  the log send to kafka, if you want send ,please use  @EnableKafkaLog ");
-            return;
-        }*/
-
         System.out.println("properties = " + properties);
 
         Map<String ,Object> kafkacfg = LogKafkaProducer.defaultConfig();
@@ -69,6 +61,7 @@ public class AppenderAutoConfiguration {
         kafkaOutputStreamAppender.setEncoder(new LogstashEncoder());
 
 
+        //使用Java方式拦截Logger多次调用的问题，只给ROOT logger添加Appender
         loggers.stream().filter((v)->{
             return v.getName().equals("ROOT");
         }).forEach((v)->{

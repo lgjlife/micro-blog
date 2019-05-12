@@ -1,7 +1,10 @@
 package com.microblog.common.token;
 
+import com.microblog.common.utils.sms.SmsUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 public class TokenUtil {
 
-
+    private static final Logger log = LoggerFactory.getLogger(TokenUtil.class);
     /**
      *功能描述 
      * @author lgj
