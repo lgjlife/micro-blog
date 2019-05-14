@@ -24,5 +24,6 @@ public interface BlogService {
     ReturnCode repost(long blogId, String content);
     ReturnCode comment(long blogId, String content);
     ReturnCode like(long blogId);
+    ReturnCode unLike(long blogId);
 
 }

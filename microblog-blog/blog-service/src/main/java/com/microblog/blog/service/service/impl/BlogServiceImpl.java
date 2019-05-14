@@ -6,12 +6,15 @@ import com.microblog.blog.service.dto.BlogInfoDto;
 import com.microblog.blog.service.feign.UserFeignService;
 import com.microblog.blog.service.service.BlogService;
 import com.microblog.blog.service.utils.ImgMarkUtil;
+import com.microblog.blog.service.utils.RedisKeyUtils;
 import com.microblog.blog.service.utils.UserUtil;
 import com.microblog.common.code.BlogReturnCode;
 import com.microblog.common.code.ReturnCode;
 import com.microblog.user.dao.model.User;
 import lombok.extern.slf4j.Slf4j;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -32,6 +35,11 @@ import java.util.*;
 @Service
 public class BlogServiceImpl implements BlogService {
 
+    @Autowired
+    RedisTemplate redisTemplate;
+
+    @Autowired
+    RedissonClient redissonClient;
 
     @Autowired
     HttpServletRequest  request;
@@ -279,6 +287,15 @@ public class BlogServiceImpl implements BlogService {
         return BlogReturnCode.BLOG_COLLECT_SUCCESS;
     }
 
+    /**
+     *功能描述
+     * @author lgj
+     * @Description 点赞操作
+     * @date 5/14/19
+     * @param:
+     * @return:
+     *
+    */
     @Override
     public ReturnCode like(long blogId) {
 
@@ -286,10 +303,29 @@ public class BlogServiceImpl implements BlogService {
         blogLike.setBlogId(blogId);
         blogLike.setUserId(UserUtil.getUserId(request));
         blogLike.setCreateTime(new Date());
-        blogLikeMapper.insert(blogLike);
+
+
+        redisTemplate.opsForValue().increment(RedisKeyUtils.getBlogLikeCount(blogId,new Date().getDate()));
+
+
+        //blogLikeMapper.insert(blogLike);
 
 
         return BlogReturnCode.BLOG_COLLECT_SUCCESS;
+    }
+
+    /**
+     *功能描述
+     * @author lgj
+     * @Description 取消点赞操作
+     * @date 5/14/19
+     * @param:
+     * @return:
+     *
+    */
+    @Override
+    public ReturnCode unLike(long blogId) {
+        return null;
     }
 
     private String  getRandomFileName(){
@@ -302,14 +338,5 @@ public class BlogServiceImpl implements BlogService {
 
 
 
-    public static void main(String args[]){
 
-        String k = "acd.jpg";
-        int dot =  k.lastIndexOf(".");
-        String prex = k.substring(0,dot);
-        String last = k.substring(dot,k.length());
-
-        System.out.println("prex = " + prex);
-        System.out.println("last = " + last);
-    }
 }

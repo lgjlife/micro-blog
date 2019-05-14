@@ -51,23 +51,27 @@
 ## 使用工具和技术
 ### 工具
 * 开发环境： IDEA
+* 项目构建：　Maven
 * 前端开发工具： Brackets
-* 版本管理： git
+* 版本管理： Git
 * 思维导图软件： MindMaster
 ### 技术
-* 核心框架： Spring Cloud , Spring ,Spring MVC
+* 核心框架： Spring ,Spring MVC, Spring Boot, Spring Cloud 
 * 持久层： Mybatis
 * 数据库： MySQL
 * 数据库连接池： Druid
 * 缓存： Redis
-* 代理服务器： nginx
-* 安全框架： shiro
-* 网络通信： netty
-* 消息中间件： RabbitMQ
+* 分布式锁：　Redisson
+* 反向代理服务器： Nginx
+* 认证方式:  JWT
+* 网络通信： Netty
+* 消息中间件： RocketMQ
 * 搜索：elasticsearch
-* 日志： log4j2
-* 日志聚合： kafka
+* 日志： Logback
+* 日志聚合： Kafka + Logstash + elasticsearch + Kibana
 * 前端:Html,Javascript,css,jquery
+
+
 ### 如何启动项目
 1. 安装Redis并启动
 2. 安装Mysql并启动，导入sql文件
