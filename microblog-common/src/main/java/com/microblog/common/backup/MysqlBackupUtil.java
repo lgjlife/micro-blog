@@ -1,7 +1,6 @@
 package com.microblog.common.backup;
 
 
-import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -59,16 +58,16 @@ public class MysqlBackupUtil {
         fileName =  getFileName();
         log.debug("save path = " + savePath + fileName);
         try {
+
             printWriter = new PrintWriter(new OutputStreamWriter(new FileOutputStream(savePath + fileName), "utf8"));
             Process process = Runtime.getRuntime().exec(" mysqldump -h" + hostIP + " -u" + userName + " -p" + password + " --set-charset=UTF8 " + databaseName);
-
-            InputStream in = process.getInputStream();
-            byte[] result = new byte[50];
-
-            int len  = 0;
-            while ((len = in.read(result,0,result.length)) != -1){
-                System.out.println(new String(result));
+            InputStreamReader inputStreamReader = new InputStreamReader(process.getInputStream(), "utf8");
+            bufferedReader = new BufferedReader(inputStreamReader);
+            String line;
+            while((line = bufferedReader.readLine())!= null){
+                printWriter.println(line);
             }
+            printWriter.flush();
             if(process.waitFor() == 0){//0 表示线程正常终止。
                 return true;
             }

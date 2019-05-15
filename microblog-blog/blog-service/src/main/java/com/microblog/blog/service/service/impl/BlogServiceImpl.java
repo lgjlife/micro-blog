@@ -167,10 +167,8 @@ public class BlogServiceImpl implements BlogService {
         //取得request中的所有文件名
         fileList = multiRequest.getFiles("blog-img");
         if (fileList == null || fileList.size() <= 0) {
-
            return BlogReturnCode.BLOG_SUBMIT_SUCCESS;
         }
-
         List<BlogImg> blogImgs = new LinkedList<BlogImg>();
         Map<String,MultipartFile> savePaths =  new HashMap<String,MultipartFile>();
         //处理图片
@@ -303,8 +301,6 @@ public class BlogServiceImpl implements BlogService {
         blogLike.setBlogId(blogId);
         blogLike.setUserId(UserUtil.getUserId(request));
         blogLike.setCreateTime(new Date());
-
-
         redisTemplate.opsForValue().increment(RedisKeyUtils.getBlogLikeCount(blogId,new Date().getDate()));
 
 

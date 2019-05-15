@@ -130,10 +130,11 @@ public class IUserService implements UserService {
             String content = "本次验证码为：" + code+"." ;
             Date start = new Date();
             // TODO  使用消息中间件处理
-            MailDto mailDto = MailDto.builder().to(email)
-                    .title("Micro-Blog 验证码")
-                    .conent(content)
-                    .build();
+            MailDto mailDto = new  MailDto();
+            mailDto.setTo(email);
+            mailDto.setTitle("Micro-Blog 验证码");
+            mailDto.setConent(content);
+
             rabbitmqProducer.publish(mailDto,mailPublishConfig);
             log.debug("向邮箱({})发送验证码:({})",email,code);
             Date end = new Date();

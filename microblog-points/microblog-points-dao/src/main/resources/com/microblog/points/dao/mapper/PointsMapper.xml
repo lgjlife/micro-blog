@@ -56,4 +56,14 @@
     select points_id, user_id, points
     from points
   </select>
+
+  <!-- 自定义 -->
+  <select id="selectByUserId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select points_id, user_id, points
+    from points
+    where user_id = #{userId,jdbcType=BIGINT}
+  </select>
+
+
+
 </mapper>

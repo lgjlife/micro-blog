@@ -43,4 +43,8 @@ public interface PointsMapper {
      * @mbg.generated
      */
     int updateByPrimaryKey(Points record);
+
+
+    Points selectByUserId(Long userId);
+
 }
