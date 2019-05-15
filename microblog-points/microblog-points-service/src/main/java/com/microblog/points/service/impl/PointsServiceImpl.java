@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class PointsServiceImpl implements PointsService {
 
-
     private PointsStrategy pointsStrategy = new PointsStrategyImpl();
 
     @Autowired
@@ -41,7 +40,6 @@ public class PointsServiceImpl implements PointsService {
             points.setUserId(userId);
             points.setPoints(pointCount);
             pointsMapper.insert(points);
-
         }
         else {
             long currentPointCount = points.getPoints()+pointCount;
@@ -54,5 +52,24 @@ public class PointsServiceImpl implements PointsService {
 
 
         return true;
+    }
+
+    /**
+     *功能描述
+     * @author lgj
+     * @Description 　获取用户的积分数
+     * @date 5/15/19
+     * @param:
+     * @return:
+     *
+    */
+    @Override
+    public long queryPoints(long userId) {
+
+        Points points = pointsMapper.selectByUserId(userId);
+        if(points == null){
+            return  0;
+        }
+        return points.getPoints();
     }
 }

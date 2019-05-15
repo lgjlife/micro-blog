@@ -5,10 +5,14 @@ import com.microblog.points.service.PointsService;
 import com.microblog.points.service.message.consumer.MqConsumer;
 import com.microblog.points.service.message.handler.PointsMessageHandler;
 import com.microblog.points.service.message.producer.MqProducer;
+import com.microblog.points.service.utils.IdempotencyHandler;
+import com.microblog.points.service.utils.IdempotencyHandlerImpl;
 import lombok.extern.slf4j.Slf4j;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.core.RedisTemplate;
 
 /**
  *功能描述 
@@ -23,6 +27,13 @@ public class MsgConfiguration {
 
     @Autowired
     private PointsService pointsService;
+
+    @Autowired
+    RedissonClient redissonClient;
+
+    @Autowired
+    RedisTemplate redisTemplate;
+
 
     /**
      *功能描述 
@@ -77,7 +88,16 @@ public class MsgConfiguration {
     PointsMessageHandler pointsMessageHandler(){
 
         PointsMessageHandler handler = new PointsMessageHandler(pointsService);
+        handler.setIdempotencyHandler(idempotencyHandler());
         return handler;
+    }
+
+    @Bean
+    IdempotencyHandler idempotencyHandler(){
+        IdempotencyHandler handler = new IdempotencyHandlerImpl();
+        ((IdempotencyHandlerImpl) handler).setRedissonClient(redissonClient);
+        ((IdempotencyHandlerImpl) handler).setRedisTemplate(redisTemplate);
+        return  handler;
     }
 
 }

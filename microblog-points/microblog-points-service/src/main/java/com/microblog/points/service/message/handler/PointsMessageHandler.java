@@ -2,6 +2,7 @@ package com.microblog.points.service.message.handler;
 
 import com.microblog.common.module.points.PointsDto;
 import com.microblog.points.service.PointsService;
+import com.microblog.points.service.utils.IdempotencyHandler;
 import com.utils.serialization.AbstractSerialize;
 import com.utils.serialization.JdkSerializeUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +25,8 @@ public class PointsMessageHandler implements MessageHandler{
     private AbstractSerialize serialize = new JdkSerializeUtil();
     private PointsService pointsService;
 
+    private IdempotencyHandler idempotencyHandler;
+
     /***
      * 执行任务的线程池
      */
@@ -44,14 +47,27 @@ public class PointsMessageHandler implements MessageHandler{
         log.debug("Email:The msgs size is {}",msgs.size() );
 
         Future<ConsumeConcurrentlyStatus> future = null;
+
+        PointsDto pointsDto = null;
         for(MessageExt msg:msgs){
             byte[] body =  msg.getBody();
-            PointsDto pointsDto = serialize.deserialize(body,null);
-            future =  taskExecutor.submit(new PointsMessageHandler.PointsSendHandle(pointsDto));
+            pointsDto = serialize.deserialize(body,null);
+
+            if(idempotencyHandler.checkConsumption(pointsDto.getMessageId(),1,TimeUnit.HOURS)){
+                //消息未被处理
+                future =  taskExecutor.submit(new PointsMessageHandler.PointsSendHandle(pointsDto));
+            }
+            else {
+                //消息已经表被处理
+                return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
+            }
+
         }
         try{
-
             ConsumeConcurrentlyStatus status = future.get();
+            if(status == ConsumeConcurrentlyStatus.RECONSUME_LATER){
+                idempotencyHandler.reDelete(pointsDto.getUserId());
+            }
             return status;
         }
         catch(Exception ex){
@@ -89,5 +105,9 @@ public class PointsMessageHandler implements MessageHandler{
             }
         }
 
-        }
     }
+
+    public void setIdempotencyHandler(IdempotencyHandler idempotencyHandler) {
+        this.idempotencyHandler = idempotencyHandler;
+    }
+}
