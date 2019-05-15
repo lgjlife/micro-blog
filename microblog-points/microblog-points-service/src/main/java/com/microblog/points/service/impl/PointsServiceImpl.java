@@ -34,13 +34,25 @@ public class PointsServiceImpl implements PointsService {
     */
     @Override
     public boolean handlePoints(long userId,String addType) {
-        int pointCount = pointsStrategy.getPoints(addType);
+        long pointCount = pointsStrategy.getPoints(addType);
         Points points =  pointsMapper.selectByUserId(userId);
-        long currentPointCount = points.getPoints()+pointCount;
-        if(currentPointCount < 0){
-            currentPointCount = 0;
+        if(points == null){
+            points = new Points();
+            points.setUserId(userId);
+            points.setPoints(pointCount);
+            pointsMapper.insert(points);
+
         }
-        points.setPoints(currentPointCount);
+        else {
+            long currentPointCount = points.getPoints()+pointCount;
+            if(currentPointCount < 0){
+                currentPointCount = 0;
+            }
+            points.setPoints(currentPointCount);
+            pointsMapper.updateByPrimaryKey(points);
+        }
+
+
         return true;
     }
 }
