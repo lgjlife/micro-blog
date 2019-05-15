@@ -28,29 +28,12 @@
                 <groupId>org.mybatis.generator</groupId>
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
                 <version>1.3.7</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>com.microblog</groupId>
-                        <artifactId>mybatis-plugin</artifactId>
-                        <version>0.0.1-SNAPSHOT</version>
-                    </dependency>
-                </dependencies>
                 <configuration>
                     <!--注意这里的 resources/generator/generatorConfig.xml 要与你上面的命名和放置的位置匹配-->
                     <configurationFile>${basedir}/src/main/resources/generator/generatorConfig.xml</configurationFile>
                     <overwrite>true</overwrite>
                     <verbose>true</verbose>
                 </configuration>
-                <!--<executions>
-                    <execution>
-                        <id>Generate MyBatis Artifacts</id>
-                        &lt;!&ndash; 该配置可避免maven install或者package时候运行该插件，导致本地mapper重新生成 &ndash;&gt;
-                        <phase>deploy</phase>
-                        <goals>
-                           &lt;!&ndash; <goal>generate</goal>&ndash;&gt;
-                        </goals>
-                    </execution>
-                </executions>-->
             </plugin>
 
         </plugins>
