@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-@FeignClient(name="microblog-user",configuration = FeignConfig.class)
+@FeignClient(name="microblog-blog",configuration = FeignConfig.class)
 public interface BlogLikeService {
 
    /* @RequestMapping(value = "/user/info/query",method = RequestMethod.GET)

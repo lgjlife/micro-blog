@@ -114,6 +114,21 @@
         </dependency>
 
 
+        <!--消息中间件 rocketmq -->
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-client</artifactId>
+            <version>4.3.0</version>
+        </dependency>
+
+        <!-- 自定义序列化框架-->
+        <dependency>
+            <groupId>com.utils</groupId>
+            <artifactId>serialization</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+
 
     </dependencies>
 

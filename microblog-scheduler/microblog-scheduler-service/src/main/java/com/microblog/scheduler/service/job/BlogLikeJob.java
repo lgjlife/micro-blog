@@ -1,8 +1,11 @@
 package com.microblog.scheduler.service.job;
 
-import org.quartz.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.microblog.scheduler.service.message.producer.MqProducer;
+import lombok.extern.slf4j.Slf4j;
+import org.quartz.Job;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
 
@@ -14,24 +17,24 @@ import java.util.Date;
  * @See:
  * @create: 2018-11-20 11:34
  **/
+
+@Slf4j
 public class BlogLikeJob extends AbstractJob implements Job {
 
-    public static String description = "我是HelloJob";
+    @Autowired
+    private MqProducer mqProducer;
 
-
-    private  static  final Logger log = LoggerFactory.getLogger(BlogLikeJob.class);
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
 
         log.info("BlogLikeJob 任务正在运行....，" + "当前时间 = " + new Date().toString());
+        try{
+            mqProducer.asyncSend("message:blog:like:import:enable",null,"");
+        }
+        catch(Exception ex){
+            log.error(ex.getMessage());
+        }
 
 
-        JobKey key = jobExecutionContext.getJobDetail().getKey();
-
-        JobDataMap dataMap = jobExecutionContext.getJobDetail().getJobDataMap();
-
-        String jobSays = dataMap.getString("mykey");
-
-        log.info("mydata = " + jobSays);
     }
 }
