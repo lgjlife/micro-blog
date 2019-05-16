@@ -12,6 +12,14 @@
 
 ├─── img  README.md文件所用图片
 
+├─── microblog-blog 网关应用
+
+     ├─── blog-dao
+     
+     ├─── blog-service
+     
+     ├─── blog-web
+     
 ├─── microblog-common 公共实现类,配置为SpringBoot-starter
 
 ├─── microblog-chat 私信应用
@@ -25,8 +33,31 @@
      ├─── microblog-gateway-service     网关服务层
      
      ├─── microblog-gateway-dao         网关数据层
+ 
+├─── microblog-log 日志模块
+
+├─── microblog-msg 邮件和短信处理应用
+
+├─── microblog-points 积分应用
+
+    ├─── microblog-points-dao
+
+    ├─── microblog-points-service
+
+    ├─── microblog-points-web
      
-├─── microblog-support  
+
+├─── microblog-scheduler 任务调度应用
+
+     ├─── microblog-scheduler-dao 
+     
+     ├─── microblog-scheduler-service
+     
+     ├─── microblog-scheduler-web
+
+├─── microblog-search 搜索应用
+
+├─── microblog-support  spring cloud 配套服务
 
      ├─── microblog-hystrix  hystrix 监控应用
      
@@ -38,11 +69,23 @@
      
      ├─── zipkin-server  zipkin 监控
 
-├─── microblog-scheduler 任务调度应用
-
-├─── microblog-search 搜索应用
-
 ├─── mysql 数据库文件
+      
+      ├─── all 整个工程的sql文件
+      
+           ├───  microblog-sql-all-xxxx-xx-xx-xx:xx:xx.sql
+           
+      ├───　blog.sql 微博相关的sql
+      
+      ├───　job.sql　 定时任务
+      
+      ├───　points.sql  积分应用　
+      
+      ├───　quartz.sql  quartz本身的sql
+      
+      ├───　user.sql  用户相关
+
+├─── 项目的一些启动脚本          
 
 ├─── github 上传脚本
 
