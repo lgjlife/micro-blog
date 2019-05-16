@@ -29,7 +29,7 @@ public class BlogLikeJob extends AbstractJob implements Job {
 
         log.info("BlogLikeJob 任务正在运行....，" + "当前时间 = " + new Date().toString());
         try{
-            mqProducer.asyncSend("message:blog:like:import:enable",null,"");
+            mqProducer.asyncSend("message:blog:like:import:enable","like.import.enable","");
         }
         catch(Exception ex){
             log.error(ex.getMessage());

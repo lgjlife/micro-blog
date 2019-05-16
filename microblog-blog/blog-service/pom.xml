@@ -74,11 +74,20 @@
             <version>2.0.1.RELEASE</version>
         </dependency>
 
-        <!--<dependency>
-            <groupId>com.github.danielwegener</groupId>
-            <artifactId>logback-kafka-appender</artifactId>
-            <version>0.2.0-RC1</version>
-        </dependency>-->
+        <!--消息中间件 rocketmq -->
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-client</artifactId>
+            <version>4.3.0</version>
+        </dependency>
+
+        <!-- 自定义序列化框架-->
+        <dependency>
+            <groupId>com.utils</groupId>
+            <artifactId>serialization</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
 
         <dependency>
             <groupId>org.apache.kafka</groupId>
