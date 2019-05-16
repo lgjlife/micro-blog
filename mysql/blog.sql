@@ -80,7 +80,7 @@ CREATE TABLE `blog_repost`(
  */
 DROP TABLE IF EXISTS `blog_like`;
 CREATE TABLE `blog_like`(
-   `like_id` BIGINT   AUTO_INCREMENT COMMENT "转发ID",
+   `like_id` BIGINT   AUTO_INCREMENT COMMENT "点赞ID",
    `blog_id` BIGINT   COMMENT "博客ID",
    `user_id` BIGINT   COMMENT "点赞用户ID",
    `create_time` DATETIME DEFAULT NULL COMMENT "创建时间",

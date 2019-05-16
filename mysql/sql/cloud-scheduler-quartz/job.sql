@@ -7,7 +7,7 @@ CREATE TABLE `quartz_job` (
   `cron` varchar(30) DEFAULT "" COMMENT '时间表达式',
   `job_class` varchar(80) DEFAULT "" COMMENT '任名称',
   `job_group` varchar(30) DEFAULT "" COMMENT '任务组别',
-  `status` enum('停止','运行','暂停') DEFAULT '停止' COMMENT '状态',
+  `status` enum('stop','running','waiting') DEFAULT 'stop' COMMENT '状态',
   `create_time` DATETIME COMMENT '创建时间',
   `create_by` varchar(30) DEFAULT "" COMMENT '创建人',
   `finish_time` DATETIME COMMENT '结束时间',
