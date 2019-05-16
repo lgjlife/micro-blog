@@ -53,4 +53,11 @@ public class QuartzConfiguration {
         return  scheduler;
     }
 
+    @Bean
+    public SchedulerHandle schedulerHandle()throws IOException{
+        SchedulerHandle schedulerHandle = new SchedulerHandle(scheduler());
+        return schedulerHandle;
+
+    }
+
 }

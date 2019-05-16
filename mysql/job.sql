@@ -16,8 +16,13 @@ CREATE TABLE `quartz_job` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='任务表';
 
+delete from quartz_job where id > 0;
+insert into `quartz_job` (status)
+ values ("stop");
+
+delete from quartz_job where id > 0;
 insert into `quartz_job` (name,description,cron,job_class,job_group,status,create_time,create_by,finish_time,finish_by)
- values ("定时任务1","我是定时任务1","0/10 * * * * ?","com.microblog.scheduler.quartz.job.HelloJob","group1","停止"
+ values ("定时任务1","我是定时任务1","0/10 * * * * ?","com.microblog.scheduler.quartz.job.HelloJob","group1","stop"
         ,"2018-11-15 00:00","张三","2018-11-25 00:00","李四");
 insert into `quartz_job` (name,description,cron,job_class,job_group,status,create_time,create_by,finish_time,finish_by)
  values ("定时任务2","我是定时任务2","0/10 * * * * ?","com.microblog.scheduler.quartz.job.HelloJob","group2","停止"

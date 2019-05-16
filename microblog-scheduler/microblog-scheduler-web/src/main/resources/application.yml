@@ -11,7 +11,7 @@ spring:
     name: microblog-scheduler
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource    # 配置当前要使用的数据源的操作类型
-    driver-class-name: com.mysql.jdbc.Driver      # 配置MySQL的驱动程序类
+    driver-class-name: com.mysql.cj.jdbc.Driver      # 配置MySQL的驱动程序类
     url: jdbc:mysql://localhost:3306/microblog?characterEncoding=utf-8           # 数据库连接地址
     username: root                                  # 数据库用户名
     password: 563739007                            # 数据库连接密码
@@ -28,7 +28,7 @@ spring:
     # type: com.alibaba.druid.pool.DruidDataSource
   #  driver-class-name: com.mysql.jdbc.Driver
   mybatis:
-    mapper-locations: com.microblog.scheduler.quartz.dao.mapper.*
+    mapper-locations: com.microblog.scheduler.dao.mapper.*
     configuration:
       log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 

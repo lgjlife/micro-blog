@@ -392,4 +392,22 @@ public class QuartzJob {
     public void setFinishBy(String finishBy) {
         this.finishBy = finishBy;
     }
+
+
+    @Override
+    public String toString() {
+        return "QuartzJob{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", cron='" + cron + '\'' +
+                ", jobClass='" + jobClass + '\'' +
+                ", jobGroup='" + jobGroup + '\'' +
+                ", status='" + status + '\'' +
+                ", createTime=" + createTime +
+                ", createBy='" + createBy + '\'' +
+                ", finishTime=" + finishTime +
+                ", finishBy='" + finishBy + '\'' +
+                '}';
+    }
 }

@@ -1,60 +1,51 @@
 package com.microblog.scheduler.service.configuration;
 
 
+import com.microblog.scheduler.dao.mapper.QuartzJobMapper;
 import com.microblog.scheduler.dao.model.QuartzJob;
-import com.microblog.scheduler.service.job.JobFactory;
+import com.microblog.scheduler.service.configuration.quartz.SchedulerHandle;
 import lombok.extern.slf4j.Slf4j;
-import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 
+/**
+ *功能描述
+ * @author lgj
+ * @Description  启动时从数据库中获取任务列表执行
+ * @date 5/16/19
+*/
 @Slf4j
 @Configuration
 public class JobConfiguration {
 
 
     @Autowired
-    private Scheduler scheduler;
+    private SchedulerHandle schedulerHandle;
+
+    @Autowired
+    QuartzJobMapper quartzJobMapper;
 
 
     @PostConstruct
     public void initJob(){
+        List<QuartzJob> jobs =  quartzJobMapper.selectAll();
+        if(CollectionUtils.isEmpty(jobs)){
+            log.info("Scheduler can not find one Job to be do!");
+            return;
+        }
 
-        QuartzJob job = JobFactory.quartzJob();
-
-        log.debug("create job !");
-        try {
-            TriggerKey triggerKey =
-                    TriggerKey.triggerKey(job.getJobClass(), job.getJobGroup());
-            CronTrigger trigger = (CronTrigger) scheduler.getTrigger(triggerKey);
-
-            JobDetail jobDetail = null;
+        for(QuartzJob job:jobs){
             try {
-                //创建JobDetail（数据库中job_name存的任务全路径，这里就可以动态的把任务注入到JobDetail中）
-                jobDetail = JobBuilder.newJob((Class<? extends org.quartz.Job>) Class.forName(job.getJobClass()))
-                        .withIdentity(job.getJobClass(), job.getJobGroup()).build();
+                schedulerHandle.addJod(job);
 
-                //表达式调度构建器
-                CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(job
-                        .getCron());
-
-                //按新的cronExpression表达式构建一个新的trigger
-                trigger = TriggerBuilder.newTrigger().withIdentity(job.getJobClass(), job.getJobGroup())
-                        .withSchedule(scheduleBuilder).build();
-
-                //把trigger和jobDetail注入到调度器
-                scheduler.scheduleJob(jobDetail, trigger);
-            } catch (ClassNotFoundException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+            } catch (Exception ex) {
+                log.error("发生异常："+ex.getMessage());
+                ex.printStackTrace();
             }
-
-        } catch (Exception ex) {
-            log.error("发生异常："+ex.getMessage());
-        } finally {
-
         }
 
     }

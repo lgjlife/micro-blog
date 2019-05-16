@@ -5,14 +5,14 @@ import com.microblog.scheduler.dao.model.QuartzJob;
 
 import java.util.Date;
 
-public class JobFactory {
+public class SchedulerJobFactory {
 
 
-    public static QuartzJob quartzJob(){
+    public static QuartzJob helloJob(){
 
         QuartzJob job = new QuartzJob();
 
-        job.setId(1);
+       // job.setId(1);
         job.setName("hello");
         job.setDescription("hello word");
         job.setCron("0/5 * * * * ?");
