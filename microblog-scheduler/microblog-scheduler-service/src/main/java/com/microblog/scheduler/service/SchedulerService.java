@@ -5,9 +5,12 @@ import com.microblog.scheduler.dao.mapper.QuartzJobMapper;
 import com.microblog.scheduler.dao.model.QuartzJob;
 import com.microblog.scheduler.service.configuration.quartz.SchedulerHandle;
 import com.microblog.scheduler.service.job.SchedulerJobFactory;
+import com.microblog.scheduler.service.job.dto.JobState;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Map;
 
 @Slf4j
 @Service
@@ -28,6 +31,17 @@ public class SchedulerService {
 
         log.info("job = " + job);
         quartzJobMapper.insert(job);
+    }
+
+    public Map<String, JobState> queryJob(){
+        try{
+            return schedulerHandle.queryJob();
+        }
+        catch(Exception ex){
+            log.error(ex.getMessage());
+            return null;
+        }
+
     }
 
     public void func(){

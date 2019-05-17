@@ -1,8 +1,16 @@
 package com.microblog.scheduler.service.configuration.quartz;
 
 import com.microblog.scheduler.dao.model.QuartzJob;
+import com.microblog.scheduler.service.job.dto.JobState;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.*;
+import org.quartz.impl.matchers.GroupMatcher;
+import org.quartz.utils.Key;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 
 /**
@@ -54,11 +62,58 @@ public class SchedulerHandle {
         CronTrigger trigger = (CronTrigger) scheduler.getTrigger(triggerKey);
         //按新的cronExpression表达式构建一个新的trigger
         trigger = TriggerBuilder.newTrigger().withIdentity(job.getJobClass(), job.getJobGroup())
-                .withSchedule(scheduleBuilder.withMisfireHandlingInstructionDoNothing()).build();
+                .withSchedule(scheduleBuilder.withMisfireHandlingInstructionDoNothing()).endAt(job.getFinishTime()).build();
 
         //把trigger和jobDetail注入到调度器
         scheduler.scheduleJob(jobDetail, trigger);
         return true;
+
+    }
+
+    public Map<String, JobState>   queryJob()throws SchedulerException{
+
+        Map<String, JobState> jobStateMap = new HashMap<>();
+
+        List<String> groupNames =  scheduler.getTriggerGroupNames();
+
+        log.info("groupNames = " + groupNames);
+        for(String groupName:groupNames){
+
+            GroupMatcher matcher =  GroupMatcher.groupEquals(groupName);
+            Set<Key> jobKeys = scheduler.getJobKeys(matcher);
+
+            for(Key jobKey:jobKeys){
+
+
+                JobDetail jobDetail =  scheduler.getJobDetail((JobKey)jobKey);
+
+                log.info("JobKey = [{}]--[{}]",jobKey.getGroup(),jobKey.getName());
+
+
+            }
+            Set<TriggerKey> triggerKeys = scheduler.getTriggerKeys(matcher);
+            for(TriggerKey triggerKey:triggerKeys){
+                CronTrigger trigger = (CronTrigger)scheduler.getTrigger(triggerKey);
+                trigger.getCronExpression();
+                Trigger.TriggerState state = scheduler.getTriggerState(triggerKey);
+
+                log.info("state = " +  state);
+
+                Key jobKey = trigger.getJobKey();
+                JobState jobState = new JobState();
+                jobState.setGroup(jobKey.getGroup());
+                jobState.setName(jobKey.getName());
+                jobState.setState(state.toString());
+
+                jobStateMap.put(jobState.getKey(),jobState);
+
+
+            }
+
+
+        }
+
+        return jobStateMap;
 
     }
 
