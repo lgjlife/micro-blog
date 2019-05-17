@@ -4,6 +4,7 @@ import com.microblog.blog.dao.model.BlogLike;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface BlogLikeMapper {
     /**
@@ -48,5 +49,8 @@ public interface BlogLikeMapper {
 
 
     Long selectCountByBlogId(@Param("blogId") Long blogId);
+
+    Long insertMap(@Param("likeMaps") Map<String, BlogLike> likeMaps);
+    Long deleteMap(@Param("unLikeMaps") Map<String, BlogLike> unLikeMaps);
 
 }

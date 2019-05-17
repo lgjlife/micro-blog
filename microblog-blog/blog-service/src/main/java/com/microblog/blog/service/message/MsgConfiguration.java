@@ -1,10 +1,12 @@
 package com.microblog.blog.service.message;
 
 
+import com.microblog.blog.service.handler.BlogLikeHandler;
 import com.microblog.blog.service.message.consumer.MqConsumer;
 import com.microblog.blog.service.message.handler.BlogLikeImportMessageHandler;
 import com.microblog.blog.service.message.producer.MqProducer;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -18,6 +20,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class MsgConfiguration {
 
+    @Autowired
+    private BlogLikeHandler blogLikeHandler;
+
     /**
      *功能描述 
      * @author lgj
@@ -27,8 +32,8 @@ public class MsgConfiguration {
      * @return: 
      *
     */
-    @Bean(name = "blogConsumer")
-    public MqConsumer SMSMqConsumer(){
+    @Bean(name = "LikeImportConsumer")
+    public MqConsumer LikeImportMqConsumer(){
         MqConsumer consumer = new MqConsumer("microblog-blog-group","localhost:9876");
         try{
             consumer.createPushConsumer();
@@ -68,10 +73,9 @@ public class MsgConfiguration {
     @Bean
     BlogLikeImportMessageHandler blogLikeImportMessageHandler(){
 
-        BlogLikeImportMessageHandler handler = new BlogLikeImportMessageHandler();
+        BlogLikeImportMessageHandler handler = new BlogLikeImportMessageHandler(blogLikeHandler);
         return handler;
     }
-
 
 
 }

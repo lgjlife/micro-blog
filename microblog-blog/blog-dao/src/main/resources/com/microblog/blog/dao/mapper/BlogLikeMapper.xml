@@ -61,10 +61,40 @@
     from blog_like
   </select>
 
+  <!-- 自定义　-->
   <select id="selectCountByBlogId" resultType="java.lang.Long" parameterType="java.lang.Long" >
     select count(#{blogId})
     from blog_like
   </select>
+  <insert id="insertMap" >
+
+
+    insert into blog_like (blog_id, user_id, create_time
+    )
+    values
+    <foreach collection="likeMaps" item="blogLike" index="key" separator=",">
+      (#{blogLike.blogId,jdbcType=BIGINT},
+      #{blogLike.userId,jdbcType=BIGINT},
+       #{blogLike.createTime,jdbcType=TIMESTAMP}
+      )
+    </foreach>
+
+
+  </insert>
+
+
+  <delete id="deleteMap"  >
+    delete from blog_like
+    where blog_id in
+    <foreach collection="unLikeMaps" item="blogUnLike" index="key" separator="," open="(" close=")">
+      #{blogUnLike.blogId,jdbcType=BIGINT}
+    </foreach>
+    and user_id in
+    <foreach collection="unLikeMaps" item="blogUnLike" index="key" separator="," open="(" close=")">
+      #{blogUnLike.userId,jdbcType=BIGINT}
+    </foreach>
+  </delete>
+
 
 
 </mapper>
