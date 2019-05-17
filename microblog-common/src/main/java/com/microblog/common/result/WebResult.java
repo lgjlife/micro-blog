@@ -15,4 +15,7 @@ public class WebResult extends BaseResult{
     public WebResult(ReturnCode code, Object object) {
         super(code.getCode(), code.getMessage(),object);
     }
+
+
+
 }

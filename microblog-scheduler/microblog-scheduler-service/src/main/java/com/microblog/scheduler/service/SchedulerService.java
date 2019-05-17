@@ -1,9 +1,11 @@
 package com.microblog.scheduler.service;
 
 
+import com.microblog.common.code.ReturnCode;
 import com.microblog.scheduler.dao.mapper.QuartzJobMapper;
 import com.microblog.scheduler.dao.model.QuartzJob;
 import com.microblog.scheduler.service.anno.QuartzJobAnno;
+import com.microblog.scheduler.service.code.SchedulerReturnCode;
 import com.microblog.scheduler.service.configuration.quartz.SchedulerHandle;
 import com.microblog.scheduler.service.context.SchedulerContext;
 import com.microblog.scheduler.service.job.SchedulerJobFactory;
@@ -16,7 +18,6 @@ import org.reflections.scanners.TypeAnnotationsScanner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -75,12 +76,6 @@ public class SchedulerService {
     }
 
     public List<String> queryJobClass(){
-
-        if(CollectionUtils.isEmpty(SchedulerContext.getQuartzJobClass()) == false){
-
-            return SchedulerContext.getQuartzJobClass();
-        }
-
         Reflections reflections = new Reflections("com",
                 new TypeAnnotationsScanner(),
                 new SubTypesScanner());
@@ -115,24 +110,28 @@ public class SchedulerService {
     }
 
 
-    public void deleteJob( )   {
+    public ReturnCode deleteJob(String jobGroup, String jobClass)   {
         QuartzJob job = SchedulerJobFactory.helloJob();
         try{
-            schedulerHandle.deleteJob(job);
+            schedulerHandle.deleteJob(jobGroup,jobClass);
+            return SchedulerReturnCode.JOB_DELETE_SUCCESS;
         }
         catch(Exception ex){
             log.error(ex.getMessage());
+            return SchedulerReturnCode.JOB_DELETE_FAIL;
         }
 
     }
 
-    public void pauseJob( )  {
+    public ReturnCode pauseJob( String jobGroup,String jobClass)  {
         QuartzJob job = SchedulerJobFactory.helloJob();
         try{
-            schedulerHandle.pauseJob(job);
+            schedulerHandle.pauseJob(jobGroup,jobClass);
+            return SchedulerReturnCode.JOB_PAUSE_SUCCESS;
         }
         catch(Exception ex){
             log.error(ex.getMessage());
+            return SchedulerReturnCode.JOB_PAUSE_FAIL;
         }
 
     }
@@ -148,13 +147,15 @@ public class SchedulerService {
 
     }
 
-    public void resumeJob( )  {
+    public ReturnCode resumeJob( String jobGroup,String jobClass)  {
         QuartzJob job = SchedulerJobFactory.helloJob();
         try{
-            schedulerHandle.resumeJob(job);
+            schedulerHandle.resumeJob(jobGroup,jobClass);
+            return SchedulerReturnCode.JOB_STARTUP_SUCCESS;
         }
         catch(Exception ex){
             log.error(ex.getMessage());
+            return SchedulerReturnCode.JOB_STARTUP_FAIL;
         }
     }
 

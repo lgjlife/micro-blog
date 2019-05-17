@@ -126,8 +126,8 @@ public class SchedulerHandle {
      * @return:
      *
     */
-    public boolean deleteJob(QuartzJob job) throws SchedulerException{
-        JobKey jobKey = JobKey.jobKey(job.getJobClass(),job.getJobGroup());
+    public boolean deleteJob(String jobGroup,String jobClass) throws SchedulerException{
+        JobKey jobKey = JobKey.jobKey(jobClass,jobGroup);
 
         if(scheduler.checkExists(jobKey)){
             log.debug("deleteJob:[{}],Exist!",jobKey.toString());
@@ -147,10 +147,10 @@ public class SchedulerHandle {
      * @return:
      *
     */
-    public void pauseJob(QuartzJob job) throws SchedulerException{
+    public void pauseJob(String jobGroup,String jobClass) throws SchedulerException{
 
-        JobKey jobKey = JobKey.jobKey(job.getJobClass(),job.getJobGroup());
-        TriggerKey triggerKey = TriggerKey.triggerKey(job.getJobClass(), job.getJobGroup());
+        JobKey jobKey = JobKey.jobKey(jobClass,jobGroup);
+        TriggerKey triggerKey = TriggerKey.triggerKey(jobClass, jobGroup);
         if(scheduler.checkExists(jobKey)){
             log.debug("pauseJob:[{}],Exist!",jobKey.toString());
             scheduler.pauseJob(jobKey);
@@ -175,9 +175,9 @@ public class SchedulerHandle {
      * @return: 
      *
     */
-    public void resumeJob(QuartzJob job) throws SchedulerException{
-        JobKey jobKey = JobKey.jobKey(job.getJobClass(),job.getJobGroup());
-        TriggerKey triggerKey = TriggerKey.triggerKey(job.getJobClass(), job.getJobGroup());
+    public void resumeJob(String jobGroup,String jobClass) throws SchedulerException{
+        JobKey jobKey = JobKey.jobKey(jobClass,jobGroup);
+        TriggerKey triggerKey = TriggerKey.triggerKey(jobClass, jobGroup);
         if(scheduler.checkExists(jobKey)){
             log.debug("resumeJob:[{}],Exist!",jobKey.toString());
             scheduler.resumeJob(jobKey);

@@ -5,7 +5,7 @@
 }
 
 #scheduler-display-add-class-list-div{
-    width: 60%;
+    width: fit-content;
     height: 400px;
     float: left;
 }

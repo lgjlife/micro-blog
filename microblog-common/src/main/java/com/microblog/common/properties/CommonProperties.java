@@ -12,6 +12,4 @@ public class CommonProperties {
 
     private String printUseTimeEnable;
 
-
-
 }

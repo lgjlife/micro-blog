@@ -133,9 +133,12 @@
             <artifactId>reflections</artifactId>
             <version>0.9.9-RC2</version>
         </dependency>
-
-
-
+        <dependency>
+            <groupId>com.microblog</groupId>
+            <artifactId>microblog-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
 
 
     </dependencies>

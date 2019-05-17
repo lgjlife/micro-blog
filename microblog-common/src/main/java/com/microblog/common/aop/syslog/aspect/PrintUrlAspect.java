@@ -69,8 +69,6 @@ public class PrintUrlAspect {
 			}
             //获取SyslogAnno注解值
             String description  = method.getAnnotation(PrintUrlAnno.class).description();
-
-
 			//打印请求路径
 			log.info("\r\n 访问  " + joinPoint.getTarget().getClass().getName() //类名称
             		+  "  method = " + methodName

@@ -30,6 +30,8 @@ public class BlogSearchServiceImpl implements BlogSearchService {
     @Override
     public List<Blog> search(int page, int count, String query) {
 
+
+
         String preTag = "<font color=‘#dd4b39‘>";//google的色值
         String postTag = "</font>";
 
