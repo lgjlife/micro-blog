@@ -28,4 +28,12 @@ $(function () {
         $("#display-druid").show();
     })
 
+
+    $("#menu-scheduler-select").click(function () {
+        $(".display-module").hide();
+        $("#display-scheduler").show();
+    })
+
+
+
 })

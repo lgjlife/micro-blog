@@ -1,12 +1,13 @@
 package com.microblog.scheduler.web.controller;
 
+import com.microblog.scheduler.dao.model.QuartzJob;
 import com.microblog.scheduler.service.SchedulerService;
-import com.microblog.scheduler.service.job.dto.JobState;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Map;
+import java.util.List;
 
 @RestController
 @RequestMapping("/scheduler")
@@ -22,8 +23,8 @@ public class SchedulerController {
         schedulerService.createJob();
     }
 
-    @RequestMapping("/query")
-    public Map<String, JobState> queryJob(){
+    @GetMapping("/list")
+    public List<QuartzJob> queryJob(){
         return schedulerService.queryJob();
     }
 

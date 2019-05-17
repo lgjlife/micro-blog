@@ -7,9 +7,11 @@ import com.microblog.scheduler.service.configuration.quartz.SchedulerHandle;
 import com.microblog.scheduler.service.job.SchedulerJobFactory;
 import com.microblog.scheduler.service.job.dto.JobState;
 import lombok.extern.slf4j.Slf4j;
+import org.quartz.Trigger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -33,15 +35,32 @@ public class SchedulerService {
         quartzJobMapper.insert(job);
     }
 
-    public Map<String, JobState> queryJob(){
+    public List<QuartzJob> queryJob(){
+
+        List<QuartzJob> quartzJobs = null;
         try{
-            return schedulerHandle.queryJob();
+            Map<String, JobState> jobStateMap =  schedulerHandle.queryJob();
+
+            quartzJobs = quartzJobMapper.selectAll();
+
+            quartzJobs.forEach((v)->{
+
+                JobState jobState =  jobStateMap.get(v.getJobGroup()+"."+v.getJobClass());
+                if(jobState == null){
+                    v.setStatus(Trigger.TriggerState.NONE.toString());
+                }
+                else {
+                    v.setStatus(jobState.getState());
+                }
+
+            });
         }
         catch(Exception ex){
             log.error(ex.getMessage());
             return null;
         }
 
+        return quartzJobs;
     }
 
     public void func(){

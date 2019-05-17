@@ -33,6 +33,9 @@ zuul:
     blog:
       path: /blog/**
       url: http://localhost:8703
+    scheduler:
+      path: /scheduler/**
+      url: http://localhost:8108
     #私信系统
   #  chat:
    #   path: /chat/**

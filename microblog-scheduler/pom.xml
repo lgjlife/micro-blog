@@ -11,7 +11,5 @@
 
     <artifactId>microblog-scheduler</artifactId>
     <packaging>pom</packaging>
-    <modules>
-        <module>scheduler-quartz</module>
-    </modules>
+
 </project>

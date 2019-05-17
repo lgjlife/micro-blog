@@ -24,6 +24,7 @@
             <li> <a href="javascript:void(0)" id="menu-admin-select">服务监控</a></li>
             <li> <a href="javascript:void(0)" id="menu-zipkin-select">链路监控</a></li>
             <li> <a href="javascript:void(0)" id="menu-druid-select">数据库监控</a></li>
+            <li> <a href="javascript:void(0)" id="menu-scheduler-select">任务中心</a></li>
         </ul>
     </div>
     <div id="display">
@@ -32,6 +33,7 @@
         <iframe src="http://localhost:7300/center" id="display-admin" class="display-module"></iframe>
         <iframe src="http://localhost:7300/center" id="display-zipkin" class="display-module"></iframe>
         <iframe src="http://localhost:7300/center" id="display-druid" class="display-module"></iframe>
+        <iframe src="http://localhost:7300/scheduler/scheduler.html" id="display-scheduler" class="display-module" onload="load()"></iframe>
     </div>
 
 </body>
