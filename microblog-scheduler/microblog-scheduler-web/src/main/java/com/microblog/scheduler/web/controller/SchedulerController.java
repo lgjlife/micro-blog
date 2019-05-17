@@ -28,6 +28,11 @@ public class SchedulerController {
         return schedulerService.queryJob();
     }
 
+    @GetMapping("/job/class/list")
+    public List<String> queryJobClass(){
+        return schedulerService.queryJobClass();
+    }
+
 
     @RequestMapping("/add")
     public void addJob(){

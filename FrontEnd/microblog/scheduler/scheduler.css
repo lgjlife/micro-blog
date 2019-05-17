@@ -1,0 +1,16 @@
+
+#scheduler-display-add-div{
+    width: 30%;
+    float: left;
+}
+
+#scheduler-display-add-class-list-div{
+    width: 60%;
+    height: 400px;
+    float: left;
+}
+
+#scheduler-display-add-class-list{
+    height: inherit;
+    overflow: auto;
+}

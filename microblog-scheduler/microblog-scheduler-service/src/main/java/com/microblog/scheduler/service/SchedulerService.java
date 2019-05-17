@@ -3,16 +3,25 @@ package com.microblog.scheduler.service;
 
 import com.microblog.scheduler.dao.mapper.QuartzJobMapper;
 import com.microblog.scheduler.dao.model.QuartzJob;
+import com.microblog.scheduler.service.anno.QuartzJobAnno;
 import com.microblog.scheduler.service.configuration.quartz.SchedulerHandle;
+import com.microblog.scheduler.service.context.SchedulerContext;
 import com.microblog.scheduler.service.job.SchedulerJobFactory;
 import com.microblog.scheduler.service.job.dto.JobState;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.Trigger;
+import org.reflections.Reflections;
+import org.reflections.scanners.SubTypesScanner;
+import org.reflections.scanners.TypeAnnotationsScanner;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 @Slf4j
 @Service
@@ -21,6 +30,8 @@ public class SchedulerService {
     @Autowired
     private SchedulerHandle schedulerHandle;
 
+    @Autowired
+    ApplicationContext context;
 
     @Autowired
     QuartzJobMapper quartzJobMapper;
@@ -61,6 +72,30 @@ public class SchedulerService {
         }
 
         return quartzJobs;
+    }
+
+    public List<String> queryJobClass(){
+
+        if(CollectionUtils.isEmpty(SchedulerContext.getQuartzJobClass()) == false){
+
+            return SchedulerContext.getQuartzJobClass();
+        }
+
+        Reflections reflections = new Reflections("com",
+                new TypeAnnotationsScanner(),
+                new SubTypesScanner());
+
+
+        Set<Class<?>> quartzJobs = reflections.getTypesAnnotatedWith(QuartzJobAnno.class);
+        if(quartzJobs != null){
+            CopyOnWriteArrayList<String> jobClassList = new CopyOnWriteArrayList<String>();
+            for(Class job:quartzJobs){
+                jobClassList.add(job.getName());
+            }
+            SchedulerContext.setQuartzJobClass(jobClassList);
+            return jobClassList;
+        }
+        return null;
     }
 
     public void func(){

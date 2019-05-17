@@ -1,5 +1,6 @@
 package com.microblog.scheduler.service.job;
 
+import com.microblog.scheduler.service.anno.QuartzJobAnno;
 import com.microblog.scheduler.service.message.producer.MqProducer;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.Job;
@@ -17,7 +18,7 @@ import java.util.Date;
  * @See:
  * @create: 2018-11-20 11:34
  **/
-
+@QuartzJobAnno
 @Slf4j
 public class BlogLikeJob extends AbstractJob implements Job {
 

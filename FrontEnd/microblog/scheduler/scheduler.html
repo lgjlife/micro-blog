@@ -18,34 +18,99 @@
 
          <script src="../common/token.js"></script>-->
 
+        <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+        <link rel="stylesheet" type="text/css" href="scheduler.css">
     </head>
     <body>
-        任务中心
-        <table border="1" id="scheduler-job-table">
-            <tr>
-                <th>ID</th>
-                <th>名称</th>
-                <th>描述</th>
-                <th>表达式</th>
-                <th>任务组</th>
-                <th>任务类</th>
-                <th>任务状态</th>
-                <th>创建时间</th>
-                <th>创建人</th>
-            </tr>
-            <!--<tr class="scheduler-job-list">
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>-->
 
-        </table>
+        <h1>任务中心</h1>
+        <div>
+            <ul class="nav nav-tabs">
+                <li class="active scheduler-job-nav">
+                    <a href="javascript:void(0)" id="scheduler-job-list-btn">任务列表</a>
+                </li>
+                <li class="scheduler-job-nav">
+                    <a href="javascript:void(0)" id="scheduler-job-add-btn">添加任务</a>
+                </li>
+                <li class="scheduler-job-nav">
+                    <a href="javascript:void(0)" id="scheduler-job-manager-btn">任务操作</a>
+                </li>
+            </ul>
+        </div>
+
+        <div>
+            <div id="scheduler-display-list" class="scheduler-display">
+                <h2>任务列表</h2>
+                <table border="1" id="scheduler-job-table">
+                    <tr>
+                        <th>ID</th>
+                        <th>名称</th>
+                        <th>描述</th>
+                        <th>表达式</th>
+                        <th>任务组</th>
+                        <th>任务类</th>
+                        <th>任务状态</th>
+                        <th>创建时间</th>
+                        <th>创建人</th>
+                    </tr>
+                </table>
+            </div>
+            <div id="scheduler-display-add" class="scheduler-display" style="display:none;">
+                <h2>添加任务</h2>
+                <div id="scheduler-display-add-div">
+                    <form role="form">
+                        <div class="form-group">
+                            <label for="scheduler-add-name">名称</label>
+                            <input type="text" class="form-control" id="scheduler-add-name" placeholder="任务名称">
+                        </div>
+                        <div class="form-group">
+                            <label for="scheduler-add-desc">描述</label>
+                            <input type="text" class="form-control" id="scheduler-add-desc" placeholder="任务描述">
+                        </div>
+                        <div class="form-group">
+                            <label for="scheduler-add-cron">表达式</label>
+                            <input type="text" class="form-control" id="scheduler-add-cron" placeholder="表达式">
+                            <a href="http://cron.qqe2.com/">表达式生成</a>
+                        </div>
+                        <div class="form-group">
+                            <label for="scheduler-add-group">任务组</label>
+                            <input type="text" class="form-control" id="scheduler-add-group" placeholder="任务组">
+                        </div>
+                        <div class="form-group">
+                            <label for="scheduler-add-jobClass">任务类</label>
+                            <input type="text" class="form-control" id="scheduler-add-jobClass" placeholder="任务类">
+                            <a id="scheduler-get-jobClass-btn" href="javascript:void(0)">获取任务类</a>
+                        </div>
+                        <div class="form-group">
+                            <label for="scheduler-add-startup-time">启动时间</label>
+                            <input type="text" class="form-control" id="scheduler-add-startup-time" placeholder="任务开始执行时间(ms的时间戳)">
+                            <a href="https://tool.lu/timestamp/">时间戳生成</a>
+                        </div>
+
+                        <button type="scheduler-add-submit" class="btn btn-default">提交</button>
+                    </form>
+                </div>
+                <div id="scheduler-display-add-class-list-div">
+                    <h4>任务类列表</h4>
+                    <div id="scheduler-display-add-class-list">
+                        <ul class="list-group" id="scheduler-display-add-class-ul">
+                            <li class="list-group-item job-class-list">免费域名注册</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+            <div id="scheduler-display-manager" class="scheduler-display" style="display:none;">
+                <h2>任务管理</h2>
+            </div>
+
+        </div>
+
+
     </body>
 </html>

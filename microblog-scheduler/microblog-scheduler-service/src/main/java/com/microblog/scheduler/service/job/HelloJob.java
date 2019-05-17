@@ -1,6 +1,7 @@
 package com.microblog.scheduler.service.job;
 
 import com.microblog.scheduler.service.SchedulerService;
+import com.microblog.scheduler.service.anno.QuartzJobAnno;
 import org.quartz.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +17,8 @@ import java.util.Date;
  * @See:
  * @create: 2018-11-20 11:34
  **/
+
+@QuartzJobAnno
 public class HelloJob extends AbstractJob implements Job {
 
     @Autowired
