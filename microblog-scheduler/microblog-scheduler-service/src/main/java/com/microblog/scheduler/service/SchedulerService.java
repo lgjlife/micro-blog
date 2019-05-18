@@ -19,9 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 @Slf4j
@@ -38,6 +36,13 @@ public class SchedulerService {
     QuartzJobMapper quartzJobMapper;
 
 
+
+    public void createJob(QuartzJob job){
+        job.setJobGroup(new Random().nextInt(1000)+"");
+        job.setCreateTime(new Date());
+        quartzJobMapper.insert(job);
+
+    }
     public void  createJob(){
 
         log.info("SchedulerService addScheduler....");
@@ -72,6 +77,7 @@ public class SchedulerService {
             return null;
         }
 
+        log.info("quartzJobs = " + quartzJobs);
         return quartzJobs;
     }
 

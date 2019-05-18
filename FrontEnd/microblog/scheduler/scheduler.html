@@ -64,6 +64,8 @@
                         <th>任务状态</th>
                         <th>创建时间</th>
                         <th>创建人</th>
+                        <th>启动时间</th>
+                        <th>结束时间</th>
                     </tr>
                 </table>
             </div>
@@ -73,29 +75,34 @@
                     <form role="form">
                         <div class="form-group">
                             <label for="scheduler-add-name">名称</label>
-                            <input type="text" class="form-control" id="scheduler-add-name" placeholder="任务名称">
+                            <input type="text" class="form-control" id="scheduler-add-name" placeholder="任务名称" value="定时任务">
                         </div>
                         <div class="form-group">
                             <label for="scheduler-add-desc">描述</label>
-                            <input type="text" class="form-control" id="scheduler-add-desc" placeholder="任务描述">
+                            <input type="text" class="form-control" id="scheduler-add-desc" placeholder="任务描述" value="我是一个定时任务">
                         </div>
                         <div class="form-group">
                             <label for="scheduler-add-cron">表达式</label>
-                            <input type="text" class="form-control" id="scheduler-add-cron" placeholder="表达式">
+                            <input type="text" class="form-control" id="scheduler-add-cron" placeholder="表达式" value="0/5 * * * * ?">
                             <a href="http://cron.qqe2.com/">表达式生成</a>
                         </div>
                         <div class="form-group">
                             <label for="scheduler-add-group">任务组</label>
-                            <input type="text" class="form-control" id="scheduler-add-group" placeholder="任务组">
+                            <input type="text" class="form-control" id="scheduler-add-group" placeholder="任务组" value="my-group">
                         </div>
                         <div class="form-group">
                             <label for="scheduler-add-jobClass">任务类</label>
-                            <input type="text" class="form-control" id="scheduler-add-jobClass" placeholder="任务类">
+                            <input type="text" class="form-control" id="scheduler-add-jobClass" placeholder="任务类" value="com.microblog.scheduler.service.job.HelloJob" >
                             <a id="scheduler-get-jobClass-btn" href="javascript:void(0)">获取任务类</a>
                         </div>
                         <div class="form-group">
                             <label for="scheduler-add-startup-time">启动时间</label>
-                            <input type="text" class="form-control" id="scheduler-add-startup-time" placeholder="任务开始执行时间(ms的时间戳)">
+                            <input type="text" class="form-control" id="scheduler-add-startup-time" placeholder="任务开始执行时间(ms的时间戳)" value="2019-5-19 9:00:00">
+                            <a href="https://tool.lu/timestamp/">时间戳生成</a>
+                        </div>
+                        <div class="form-group">
+                            <label for="scheduler-add-startup-time">结束时间</label>
+                            <input type="text" class="form-control" id="scheduler-add-endAt-time" placeholder="任务开始执行时间(ms的时间戳)" value="2019-5-29 19:00:00">
                             <a href="https://tool.lu/timestamp/">时间戳生成</a>
                         </div>
 

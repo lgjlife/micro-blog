@@ -7,6 +7,7 @@ import com.microblog.common.result.WebResult;
 import com.microblog.scheduler.dao.model.QuartzJob;
 import com.microblog.scheduler.service.SchedulerService;
 import com.microblog.scheduler.service.code.SchedulerReturnCode;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
+
+@Slf4j
 @RestController
 @RequestMapping("/scheduler")
 public class SchedulerController {
@@ -22,9 +25,12 @@ public class SchedulerController {
     private SchedulerService schedulerService;
 
 
-    @RequestMapping("/create")
-    public void create(){
-        schedulerService.createJob();
+    @PrintUrlAnno
+    @RequestMapping("/job")
+    public void create(@RequestBody QuartzJob job){
+
+        log.info("job = " + job);
+        schedulerService.createJob(job);
     }
 
     @PrintUrlAnno

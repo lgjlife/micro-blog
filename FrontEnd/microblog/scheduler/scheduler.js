@@ -108,6 +108,11 @@ var scheduler={
                     stateText = "<td style='background-color: wheat;'>"+"</td>"
                 }
 
+                createTime = timeStamp2String(result[i].createTime);
+                startAt = timeStamp2String(result[i].startAt);
+                endAt = timeStamp2String(result[i].endAt);
+                console.log("createTime = " + result[i].createTime + "  startAt = " +result[i].startAt +  " endAt = " +result[i].endAt  )
+                console.log("createTime = " + createTime + "  startAt = " +startAt +  " endAt = " +endAt  )
 
                 var item = JSON.stringify(result[i]);
                 console.log("item = " + item);
@@ -122,6 +127,8 @@ var scheduler={
                     + "<td>" + result[i].status + "</td>"
                     + "<td>" + result[i].createTime + "</td>"
                     + "<td>" + result[i].createBy + "</td>"
+                    + "<td>" + result[i].startAt + "</td>"
+                    + "<td>" + result[i].endAt + "</td>"
                     + "</tr>"
 
                // console.log(text);
@@ -176,6 +183,12 @@ var scheduler={
                 + "</tr><tr>"
                 + "<td>"+ "创建人" +"</td>"
                 + "<td>"+ item.createBy +"</td>"
+                + "</tr><tr>"
+                + "<td>"+ "启动时间" +"</td>"
+                + "<td>"+ item.startAt +"</td>"
+                + "</tr><tr>"
+                + "<td>"+ "结束时间" +"</td>"
+                + "<td>"+ item.endAt +"</td>"
                 + "</tr>"
 
             //console.log("job = " + item);
@@ -187,6 +200,24 @@ var scheduler={
         }
     }
 }
+function timeStamp2String(time){
+
+    var d = new Date(time);
+
+    var times=d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+
+
+    /*var datetime = new Date();
+    datetime.setTime(time);
+    var year = datetime.getFullYear();
+    var month = datetime.getMonth() + 1 < 10 ? "0" + (datetime.getMonth() + 1) : datetime.getMonth() + 1;
+    var date = datetime.getDate() < 10 ? "0" + datetime.getDate() : datetime.getDate();
+    var hour = datetime.getHours()< 10 ? "0" + datetime.getHours() : datetime.getHours();
+    var minute = datetime.getMinutes()< 10 ? "0" + datetime.getMinutes() : datetime.getMinutes();
+    var second = datetime.getSeconds()< 10 ? "0" + datetime.getSeconds() : datetime.getSeconds();
+    return year + "-" + month + "-" + date+" "+hour+":"+minute+":"+second;*/
+}
+
 
 /**
  *  任务添加
@@ -208,20 +239,22 @@ $(function () {
     })
 
     $("#scheduler-add-submit").click(function () {
-        var requestData = {"name":"","description":"","cron":"","jobGroup":"","jobClass":"","startupTime":""};
+        var requestData = {"name":"","description":"","cron":"","jobGroup":"","jobClass":"","startAt":"","endAt":""};
         requestData.name = $("#scheduler-add-name").val() ;
         requestData.description = $("#scheduler-add-desc").val();
         requestData.cron = $("#scheduler-add-cron").val();
         requestData.jobGroup = $("#scheduler-add-group").val();
         requestData.jobClass = $("#scheduler-add-jobClass").val();
-        requestData.startupTime = $("#scheduler-add-startup-time").val();
+        requestData.startAt = $("#scheduler-add-startup-time").val();
+        requestData.endAt = $("#scheduler-add-endAt-time").val();
 
         if((requestData.name == "")
             || (requestData.description == "")
             || (requestData.cron == "")
             || (requestData.jobGroup == "")
             || (requestData.jobClass == "")
-            || (requestData.startupTime == "")){
+            || (requestData.startAt == "")
+            || (requestData.endAt == "")){
             alert("输入不能为空,请输入所有数据!");
             return;
         }

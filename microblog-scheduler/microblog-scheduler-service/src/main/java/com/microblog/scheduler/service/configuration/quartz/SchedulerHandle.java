@@ -62,7 +62,9 @@ public class SchedulerHandle {
         CronTrigger trigger = (CronTrigger) scheduler.getTrigger(triggerKey);
         //按新的cronExpression表达式构建一个新的trigger
         trigger = TriggerBuilder.newTrigger().withIdentity(job.getJobClass(), job.getJobGroup())
-                .withSchedule(scheduleBuilder.withMisfireHandlingInstructionDoNothing()).endAt(job.getFinishTime()).build();
+                .withSchedule(scheduleBuilder.withMisfireHandlingInstructionDoNothing())
+
+                .endAt(job.getEndAt()).build();
 
         //把trigger和jobDetail注入到调度器
         scheduler.scheduleJob(jobDetail, trigger);

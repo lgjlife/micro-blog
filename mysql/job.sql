@@ -10,8 +10,10 @@ CREATE TABLE `quartz_job` (
   `status` enum('stop','running','waiting') DEFAULT 'stop' COMMENT '状态',
   `create_time` DATETIME COMMENT '创建时间',
   `create_by` varchar(30) DEFAULT "" COMMENT '创建人',
-  `finish_time` DATETIME COMMENT '结束时间',
-  `finish_by` varchar(30) DEFAULT "" COMMENT '结束人',
+  `start_at` DATETIME COMMENT '开始时间',
+  `end_at` DATETIME COMMENT '结束时间',
+  `delete_time` DATETIME COMMENT '删除时间',
+  `delete_by` varchar(30) DEFAULT "" COMMENT '删除人',
   unique  index jod_index (`job_class`,`job_group`),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='任务表';
