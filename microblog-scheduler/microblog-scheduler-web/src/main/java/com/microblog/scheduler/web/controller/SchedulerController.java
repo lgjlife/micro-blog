@@ -1,7 +1,6 @@
 package com.microblog.scheduler.web.controller;
 
 import com.microblog.common.aop.syslog.anno.PrintUrlAnno;
-import com.microblog.common.code.ReturnCode;
 import com.microblog.common.result.BaseResult;
 import com.microblog.common.result.WebResult;
 import com.microblog.scheduler.dao.model.QuartzJob;
@@ -27,10 +26,10 @@ public class SchedulerController {
 
     @PrintUrlAnno
     @RequestMapping("/job")
-    public void create(@RequestBody QuartzJob job){
+    public BaseResult create(@RequestBody QuartzJob job){
 
         log.info("job = " + job);
-        schedulerService.createJob(job);
+        return schedulerService.createJob(job);
     }
 
     @PrintUrlAnno
@@ -47,16 +46,18 @@ public class SchedulerController {
         }
 
         if(type.equals("startup")){
-            ReturnCode returnCode = schedulerService.resumeJob(jobGroup,jobClass);
-            return new WebResult(returnCode);
+            return schedulerService.resumeJob(jobGroup,jobClass);
+
         }
         else if(type.equals("pause")){
-            ReturnCode returnCode = schedulerService.pauseJob(jobGroup,jobClass);
-            return new WebResult(returnCode);
+            return schedulerService.pauseJob(jobGroup,jobClass);
+
         }
         else if(type.equals("delete")){
-            ReturnCode returnCode = schedulerService.deleteJob(jobGroup,jobClass);
-            return new WebResult(returnCode);
+            return schedulerService.deleteJob(jobGroup,jobClass);
+        }
+        else if(type.equals("remove")){
+            return schedulerService.removeJob(jobGroup,jobClass);
         }
 
         return new WebResult(SchedulerReturnCode.NULL_PARAM);

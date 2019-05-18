@@ -1,7 +1,8 @@
 package com.microblog.scheduler.service;
 
 
-import com.microblog.common.code.ReturnCode;
+import com.microblog.common.result.BaseResult;
+import com.microblog.common.result.WebResult;
 import com.microblog.scheduler.dao.mapper.QuartzJobMapper;
 import com.microblog.scheduler.dao.model.QuartzJob;
 import com.microblog.scheduler.service.anno.QuartzJobAnno;
@@ -16,7 +17,6 @@ import org.reflections.Reflections;
 import org.reflections.scanners.SubTypesScanner;
 import org.reflections.scanners.TypeAnnotationsScanner;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -30,28 +30,41 @@ public class SchedulerService {
     private SchedulerHandle schedulerHandle;
 
     @Autowired
-    ApplicationContext context;
-
-    @Autowired
     QuartzJobMapper quartzJobMapper;
 
 
 
-    public void createJob(QuartzJob job){
-        job.setJobGroup(new Random().nextInt(1000)+"");
+    /**SchedulerHandle
+     *功能描述
+     * @author lgj
+     * @Description  创建任务
+     * @date 5/18/19
+     * @param:
+     * @return:
+     *
+    */
+    public BaseResult createJob(QuartzJob job){
+        job.setJobGroup(new Random().nextInt(1000)+"-Group");
         job.setCreateTime(new Date());
         quartzJobMapper.insert(job);
+        try{
+            schedulerHandle.addJod(job);
+            Trigger.TriggerState state = schedulerHandle.getTriggerState(job.getJobGroup(),job.getJobClass());
+            return new WebResult(SchedulerReturnCode.JOB_CREATE_SUCCESS,state.toString());
 
+        }
+        catch(Exception ex){
+            log.error(ex.getMessage());
+            return new WebResult(SchedulerReturnCode.JOB_CREATE_FAIL);
+        }
     }
-    public void  createJob(){
 
-        log.info("SchedulerService addScheduler....");
-        QuartzJob job = SchedulerJobFactory.helloJob();
-
-        log.info("job = " + job);
-        quartzJobMapper.insert(job);
-    }
-
+    /**
+     *功能描述
+     * @author lgj
+     * @Description  获取数据库中所有的任务和相应的运行状态
+     * @date 5/18/19
+    */
     public List<QuartzJob> queryJob(){
 
         List<QuartzJob> quartzJobs = null;
@@ -81,6 +94,12 @@ public class SchedulerService {
         return quartzJobs;
     }
 
+    /**
+     *功能描述
+     * @author lgj
+     * @Description 查询应用中的 被QuartzJobAnno注解的类
+     * @date 5/18/19
+    */
     public List<String> queryJobClass(){
         Reflections reflections = new Reflections("com",
                 new TypeAnnotationsScanner(),
@@ -91,6 +110,17 @@ public class SchedulerService {
         if(quartzJobs != null){
             CopyOnWriteArrayList<String> jobClassList = new CopyOnWriteArrayList<String>();
             for(Class job:quartzJobs){
+
+                Class<?>[] interfaces = job.getInterfaces();
+
+                for(Class interfacesClazz:interfaces){
+                    /*if(Job.class instanceof  interfacesClazz ){
+
+                    }*/
+
+                    log.info("interfacesClazz = " + interfacesClazz);
+                }
+
                 jobClassList.add(job.getName());
             }
             SchedulerContext.setQuartzJobClass(jobClassList);
@@ -116,32 +146,81 @@ public class SchedulerService {
     }
 
 
-    public ReturnCode deleteJob(String jobGroup, String jobClass)   {
+    /**
+     *功能描述
+     * @author lgj
+     * @Description  删除任务，包括数据库和quartz
+     * @date 5/18/19
+     * @param:
+     * @return:
+     *
+    */
+    public BaseResult deleteJob(String jobGroup, String jobClass){
+
+        Integer result = quartzJobMapper.deleteByGroupAndClass(jobGroup,jobClass);
+        try{
+            schedulerHandle.deleteJob(jobGroup,jobClass);
+            Trigger.TriggerState state = schedulerHandle.getTriggerState(jobGroup,jobClass);
+            return new WebResult(SchedulerReturnCode.JOB_DELETE_SUCCESS,state.toString());
+        }
+        catch(Exception ex){
+            log.error(ex.getMessage());
+            return new WebResult(SchedulerReturnCode.JOB_DELETE_FAIL);
+        }
+
+    }
+    /**
+     *功能描述
+     * @author lgj
+     * @Description 从quartz 中移除任务
+     * @date 5/18/19
+    */
+    public BaseResult removeJob(String jobGroup, String jobClass)   {
         QuartzJob job = SchedulerJobFactory.helloJob();
         try{
             schedulerHandle.deleteJob(jobGroup,jobClass);
-            return SchedulerReturnCode.JOB_DELETE_SUCCESS;
+            Trigger.TriggerState state = schedulerHandle.getTriggerState(jobGroup,jobClass);
+            return new WebResult(SchedulerReturnCode.JOB_REMOVE_SUCCESS,state.toString());
         }
         catch(Exception ex){
             log.error(ex.getMessage());
-            return SchedulerReturnCode.JOB_DELETE_FAIL;
+            return new WebResult(SchedulerReturnCode.JOB_REMOVE_FAIL);
         }
 
     }
 
-    public ReturnCode pauseJob( String jobGroup,String jobClass)  {
+    /**
+     *功能描述
+     * @author lgj
+     * @Description  暂停任务运行
+     * @date 5/18/19
+     * @param:
+     * @return:
+     *
+    */
+    public BaseResult pauseJob( String jobGroup,String jobClass)  {
         QuartzJob job = SchedulerJobFactory.helloJob();
         try{
             schedulerHandle.pauseJob(jobGroup,jobClass);
-            return SchedulerReturnCode.JOB_PAUSE_SUCCESS;
+            Trigger.TriggerState state = schedulerHandle.getTriggerState(jobGroup,jobClass);
+            return new WebResult(SchedulerReturnCode.JOB_PAUSE_SUCCESS,state.toString());
         }
         catch(Exception ex){
             log.error(ex.getMessage());
-            return SchedulerReturnCode.JOB_PAUSE_FAIL;
+            return new WebResult(SchedulerReturnCode.JOB_PAUSE_FAIL);
         }
 
     }
 
+    /**
+     *功能描述
+     * @author lgj
+     * @Description  暂停所有任务运行
+     * @date 5/18/19
+     * @param:
+     * @return:
+     *
+    */
     public void pauseAllJob( )  {
         QuartzJob job = SchedulerJobFactory.helloJob();
         try{
@@ -153,18 +232,37 @@ public class SchedulerService {
 
     }
 
-    public ReturnCode resumeJob( String jobGroup,String jobClass)  {
+    /**
+     *功能描述
+     * @author lgj
+     * @Description 恢复任务运行
+     * @date 5/18/19
+     * @param:
+     * @return:
+     *
+    */
+    public BaseResult resumeJob( String jobGroup,String jobClass)  {
         QuartzJob job = SchedulerJobFactory.helloJob();
         try{
             schedulerHandle.resumeJob(jobGroup,jobClass);
-            return SchedulerReturnCode.JOB_STARTUP_SUCCESS;
+            Trigger.TriggerState state = schedulerHandle.getTriggerState(jobGroup,jobClass);
+            return new WebResult(SchedulerReturnCode.JOB_STARTUP_SUCCESS,state.toString());
         }
         catch(Exception ex){
             log.error(ex.getMessage());
-            return SchedulerReturnCode.JOB_STARTUP_FAIL;
+            return new WebResult(SchedulerReturnCode.JOB_STARTUP_FAIL);
         }
     }
 
+    /**
+     *功能描述
+     * @author lgj
+     * @Description 　恢复所有任务运行
+     * @date 5/18/19
+     * @param:
+     * @return:
+     *
+    */
     public void resumeAllJob( )  {
 
         try{

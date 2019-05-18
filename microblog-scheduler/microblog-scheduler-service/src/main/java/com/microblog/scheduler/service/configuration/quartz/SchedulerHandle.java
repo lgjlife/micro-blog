@@ -63,7 +63,7 @@ public class SchedulerHandle {
         //按新的cronExpression表达式构建一个新的trigger
         trigger = TriggerBuilder.newTrigger().withIdentity(job.getJobClass(), job.getJobGroup())
                 .withSchedule(scheduleBuilder.withMisfireHandlingInstructionDoNothing())
-
+                .startAt(job.getStartAt())
                 .endAt(job.getEndAt()).build();
 
         //把trigger和jobDetail注入到调度器
@@ -140,6 +140,12 @@ public class SchedulerHandle {
         return false;
     }
 
+    public Trigger.TriggerState getTriggerState(String jobGroup, String jobClass) throws SchedulerException{
+        TriggerKey triggerKey = new TriggerKey(jobClass,jobGroup);
+        Trigger.TriggerState state = scheduler.getTriggerState(triggerKey);
+        return state;
+    }
+
     /**
      *功能描述
      * @author lgj
@@ -164,7 +170,6 @@ public class SchedulerHandle {
     public void pauseAllJob() throws SchedulerException{
         log.debug("pause　all Job");
         scheduler.pauseAll();
-
     }
 
 

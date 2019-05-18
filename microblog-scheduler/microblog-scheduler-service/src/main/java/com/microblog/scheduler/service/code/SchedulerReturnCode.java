@@ -16,6 +16,14 @@ public enum  SchedulerReturnCode implements ReturnCode {
     JOB_DELETE_SUCCESS(5,"任务删除成功!"),
     JOB_DELETE_FAIL(6,"任务删除失败!"),
 
+    JOB_CREATE_SUCCESS(7,"任务创建成功!"),
+    JOB_CREATE_FAIL(8,"任务创建失败!"),
+
+    JOB_REMOVE_SUCCESS(9,"任务移除成功!"),
+    JOB_REMOVE_FAIL(10,"任务移除失败!"),
+
+
+
     ;
 
     //代码
@@ -30,11 +38,19 @@ public enum  SchedulerReturnCode implements ReturnCode {
 
     @Override
     public Integer getCode() {
-        return null;
+        return code;
+    }
+
+    public void setCode(Integer code) {
+        this.code = code;
     }
 
     @Override
     public String getMessage() {
-        return null;
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

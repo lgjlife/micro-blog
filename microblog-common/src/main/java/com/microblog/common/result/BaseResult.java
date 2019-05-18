@@ -1,10 +1,8 @@
 package com.microblog.common.result;
 
-import lombok.Data;
-
 import java.io.Serializable;
 
-@Data
+
 public class BaseResult implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.CollectionUtils;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 
 /**
@@ -30,7 +29,7 @@ public class JobConfiguration {
     QuartzJobMapper quartzJobMapper;
 
 
-    @PostConstruct
+   // @PostConstruct
     public void initJob(){
         List<QuartzJob> jobs =  quartzJobMapper.selectAll();
         if(CollectionUtils.isEmpty(jobs)){

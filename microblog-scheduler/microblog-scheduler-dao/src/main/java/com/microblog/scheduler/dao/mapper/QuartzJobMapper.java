@@ -1,6 +1,8 @@
 package com.microblog.scheduler.dao.mapper;
 
 import com.microblog.scheduler.dao.model.QuartzJob;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 public interface QuartzJobMapper {
@@ -43,4 +45,6 @@ public interface QuartzJobMapper {
      * @mbg.generated
      */
     int updateByPrimaryKey(QuartzJob record);
+
+    int deleteByGroupAndClass(@Param("jobGroup") String jobGroup,@Param("jobClass") String jobClass);
 }

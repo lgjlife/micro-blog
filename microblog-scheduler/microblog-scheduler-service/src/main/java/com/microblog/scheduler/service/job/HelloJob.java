@@ -31,15 +31,8 @@ public class HelloJob extends AbstractJob implements Job {
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
 
-        log.info("Hello 任务正在运行....，" + "当前时间 = " + new Date().toString());
-        schedulerService.func();
 
         JobKey key = jobExecutionContext.getJobDetail().getKey();
-
-        JobDataMap dataMap = jobExecutionContext.getJobDetail().getJobDataMap();
-
-        String jobSays = dataMap.getString("mykey");
-
-        log.info("mydata = " + jobSays);
+        log.info("[{}] Hello 任务正在运行....，" + "当前时间 = {}",key,new Date().toString());
     }
 }

@@ -9,6 +9,63 @@ var scheduler={
         "jobManagerUrl": "/scheduler/scheduler/job/manager",
     },
 
+    /**
+     *  返回值
+     */
+    "return":{
+        "start":{
+            "success":{
+                "code":"1",
+                "desc":"任务启动成功",
+            },
+            "fail":{
+                "code":"2",
+                "desc":"任务启动失败",
+            }
+        },
+        "pause":{
+            "success":{
+                "code":"3",
+                "desc":"任务暂停成功",
+            },
+            "fail":{
+                "code":"4",
+                "desc":"任务暂停失败",
+            }
+        },
+        "delete":{
+            "success":{
+                "code":"5",
+                "desc":"任务删除成功",
+            },
+            "fail":{
+                "code":"6",
+                "desc":"任务删除失败",
+            }
+        },
+        "create":{
+            "success":{
+                "code":"7",
+                "desc":"任务创建成功",
+            },
+            "fail":{
+                "code":"8",
+                "desc":"任务创建失败",
+            }
+        },
+        "remove":{
+            "success":{
+                "code":"9",
+                "desc":"任务移除成功",
+            },
+            "fail":{
+                "code":"10",
+                "desc":"任务移除失败",
+            }
+        }
+    },
+
+
     "request":{
 
         /**
@@ -56,10 +113,32 @@ var scheduler={
                 data: jsonData,
                 success:function(data,status){
                     console.log("data = " + data);
+
+                    if(data.code == scheduler.return.create.success.code){
+                        //任务创建成功
+                        //进入任务列表显示页面
+                        $(".scheduler-job-nav").removeClass("active");
+                        $("#scheduler-job-list-btn").addClass("active");
+                        $(".scheduler-display").hide();
+                        $("#scheduler-display-list").show();
+                        scheduler.request.jobList();
+                    }
+                    if(data.code == scheduler.return.create.fail.code){
+                        //任务创建失败
+                        alert(data.message);
+
+                    }
+                },
+                error(xhr,status,error){
+                    alert("出现异常，请重试！");
                 }
 
             })
         },
+        /**
+         * 任务管理请求　启动，暂停，删除，移除
+         * @param jsonData
+         */
         "jobManager":function(jsonData){
             $.ajax({
                 url: scheduler.requestUrl.jobManagerUrl,
@@ -68,13 +147,28 @@ var scheduler={
                 dataType: "json",
                 data: jsonData,
                 success:function(data,status){
-                    console.log("data = " + data);
+                    if((data.code == scheduler.return.start.success.code)
+                    || (data.code == scheduler.return.pause.success.code)
+                    || (data.code == scheduler.return.remove.success.code)
+                    || (data.code == scheduler.return.delete.success.code)){
+                        //任务操作成功
+                        stateBtnColorSet(data.data);
+                    }
+                    else{
+                        //任务操作失败
+                        alert(data.message);
+
+                    }
+                },
+                error(xhr,status,error){
+                    alert("出现异常，请重试！");
                 }
 
             })
         },
 
     },
+
     /**
      *  显示，回写html页面
      */
@@ -107,12 +201,6 @@ var scheduler={
                 else{
                     stateText = "<td style='background-color: wheat;'>"+"</td>"
                 }
-
-                createTime = timeStamp2String(result[i].createTime);
-                startAt = timeStamp2String(result[i].startAt);
-                endAt = timeStamp2String(result[i].endAt);
-                console.log("createTime = " + result[i].createTime + "  startAt = " +result[i].startAt +  " endAt = " +result[i].endAt  )
-                console.log("createTime = " + createTime + "  startAt = " +startAt +  " endAt = " +endAt  )
 
                 var item = JSON.stringify(result[i]);
                 console.log("item = " + item);
@@ -200,23 +288,7 @@ var scheduler={
         }
     }
 }
-function timeStamp2String(time){
 
-    var d = new Date(time);
-
-    var times=d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
-
-
-    /*var datetime = new Date();
-    datetime.setTime(time);
-    var year = datetime.getFullYear();
-    var month = datetime.getMonth() + 1 < 10 ? "0" + (datetime.getMonth() + 1) : datetime.getMonth() + 1;
-    var date = datetime.getDate() < 10 ? "0" + datetime.getDate() : datetime.getDate();
-    var hour = datetime.getHours()< 10 ? "0" + datetime.getHours() : datetime.getHours();
-    var minute = datetime.getMinutes()< 10 ? "0" + datetime.getMinutes() : datetime.getMinutes();
-    var second = datetime.getSeconds()< 10 ? "0" + datetime.getSeconds() : datetime.getSeconds();
-    return year + "-" + month + "-" + date+" "+hour+":"+minute+":"+second;*/
-}
 
 
 /**
@@ -297,7 +369,7 @@ $(function () {
 
     })
     /**
-     * 　任务操作选项按钮
+     * 　任务管理选项按钮
      */
     $("#scheduler-job-manager-btn").click(function () {
         $(".scheduler-job-nav").removeClass("active");
@@ -307,13 +379,13 @@ $(function () {
     })
 
     /**
-     * 管理任务按钮
+     * 选中任务，进入任务管流页面
      */
     $("body").on("click",".job-list-manager-btn",function () {
 
         var item = $(this).parent().parent().attr("item");
         var job = JSON.parse(item);
-
+        stateBtnColorSet(job.status);
         $(".scheduler-job-nav").removeClass("active");
         $("#scheduler-job-manager-btn").addClass("active");
         $(".scheduler-display").hide();
@@ -324,33 +396,61 @@ $(function () {
 })
 
 /**
- * 任务管理
+ *  任务管理页面设置状态按钮颜色
+ * @param state
+ */
+function stateBtnColorSet(state){
+
+    console.log("state = " + state)
+    if(state == "NONE"){
+        $("#job-state-btn").css("background","black");
+    }
+    else if(state == "NORMAL"){
+        $("#job-state-btn").css("background","blue");
+    }
+    else if(state == "PAUSED"){
+        $("#job-state-btn").css("background","red");
+    }
+    else{
+        $("#job-state-btn").css("background","wheat");
+    }
+}
+/**
+ * 任务管理　页面操作
  */
 $(function () {
+
+
+
 
     /**
      * 任务启动
      */
     $("#job-startup-btn").click(function () {
-        $("#job-state-btn").css("background","#0000FF");
         scheduler.request.jobManager(buildMangerRequestData("startup"));
     })
     /**
-     * 任务删除
+     * 任务删除，删除数据库中的数据
      */
     $("#job-delete-btn").click(function () {
-       var deleteEnable =  confirm("是否要删除任务:"
+       var deleteEnable =  confirm("是否要删除任务?删除之后如果需要启动任务，需要重新添加！"
            + $("#scheduler-manager-display").attr("name"));
        if(deleteEnable == true){
            scheduler.request.jobManager(buildMangerRequestData("delete"));
        }
     })
+
+    /**
+     * 移除任务，不删除数据库中的数据
+     */
+    $("#job-remove-btn").click(function () {
+        scheduler.request.jobManager(buildMangerRequestData("remove"));
+    })
+
     /**
      *  任务暂停
      */
     $("#job-paused-btn").click(function () {
-
-        $("#job-state-btn").css("background","red");
         scheduler.request.jobManager(buildMangerRequestData("pause"));
     })
     function buildMangerRequestData(type) {

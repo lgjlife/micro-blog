@@ -86,4 +86,13 @@
     start_at, end_at, delete_time, delete_by
     from quartz_job
   </select>
+
+  <!--
+    -->
+  <delete id="deleteByGroupAndClass" >
+
+    delete from quartz_job
+    where job_group = #{jobGroup} and job_class = #{jobClass}
+  </delete>
+
 </mapper>

@@ -122,11 +122,18 @@
             <div id="scheduler-display-manager" class="scheduler-display" style="display:none;">
                 <h2>任务管理</h2>
                 <div>
+                    <button style="background-color: black;height: 20px;width: 20px"></button><span>未运行</span>
+                    <button style="background-color: blue;height: 20px;width: 20px"></button><span>正在运行</span>
+                    <button style="background-color: red;height: 20px;width: 20px"></button><span>暂停状态</span>
+                    <button style="background-color: wheat;height: 20px;width: 20px"></button><span>其他状态</span>
+                </div>
+                <div>
                     <div class="btn-group">
                         <!-- NONE,NORMAL,PAUSED,COMPLETE,ERROR,BLOCKED;-->
                         <button type="button" onclick="javascript:void(0)" class="btn btn-default" id="job-state-btn" >状态</button>
                         <button type="button" class="btn btn-default" id="job-startup-btn">启动</button>
                         <button type="button" class="btn btn-default" id="job-paused-btn">暂停</button>
+                        <button type="button" class="btn btn-default" id="job-remove-btn">移除</button>
                         <button type="button" class="btn btn-default" id="job-delete-btn">删除</button>
                     </div>
 
