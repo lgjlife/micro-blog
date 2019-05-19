@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 
 @EnableDiscoveryClient
-@MapperScan(basePackages = "com.microblog.scheduler.dao.mapper")
+@MapperScan(basePackages = "common.microblog.scheduler.dao.mapper")
 @SpringBootApplication
 @ComponentScan(basePackages = "com.microblog.*")
 public class MicroblogSchedulerWebApplication {

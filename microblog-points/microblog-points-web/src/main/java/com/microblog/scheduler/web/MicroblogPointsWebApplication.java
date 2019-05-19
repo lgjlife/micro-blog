@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 
-@MapperScan("com.microblog.user.dao.mapper")
+@MapperScan("common.microblog.user.dao.mapper")
 @EnableDiscoveryClient
 @SpringBootApplication
 public class MicroblogPointsWebApplication {

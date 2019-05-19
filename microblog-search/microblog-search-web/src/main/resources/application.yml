@@ -1,0 +1,30 @@
+server:
+  port: 8700
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8001/eureka/
+
+spring:
+  data:
+    elasticsearch:
+      cluster-name: elasticsearch
+      cluster-nodes: 127.0.0.1:9300,127.0.0.1:9301
+  application:
+    name: microblog-search
+
+logging:
+  level:
+    com.clolud.microblog: debug
+    org: debug
+    org.apache: error
+
+microblog:
+  common:
+    # 使能打印访问Url，在Controller方法上添加注解@PrintUrlAnno
+    printUrlEnable: true
+    # 使能打印方法执行耗时，在方法上添加注解@PrintUseTimeAnno
+    printUseTimeEnable: true
+

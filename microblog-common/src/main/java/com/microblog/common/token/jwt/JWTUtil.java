@@ -1,7 +1,6 @@
 package com.microblog.common.token.jwt;
 
-import com.microblog.common.utils.sms.SmsUtil;
-import lombok.extern.slf4j.Slf4j;
+
 import org.jose4j.jwk.RsaJsonWebKey;
 import org.jose4j.jwk.RsaJwkGenerator;
 import org.jose4j.jws.AlgorithmIdentifiers;
@@ -16,7 +15,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 
 /**
  *功能描述

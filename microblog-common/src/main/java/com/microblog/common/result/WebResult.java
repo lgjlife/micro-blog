@@ -1,5 +1,6 @@
 package com.microblog.common.result;
 
+
 import com.microblog.common.code.ReturnCode;
 import lombok.Data;
 

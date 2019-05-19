@@ -39,13 +39,13 @@ public class PrintUrlAspect {
 	 * execution语法：
 	 * （<修饰符模式>?<返回类型模式><方法名模式>(<参数模式>)<异常模式>）
 	 * 1.通过方法	签名定义切点： （public * *(..)）;匹配所有目标类的public 方法
-	 * 2.通过类定义切点 ： （* com.lanmei.user+.*(..)）:匹配user接口的所有方法，有+表示也匹配其 实现类
-	 * 3.通过类包定义切点： （* com.lanmei.user.*(..)）匹配com.lanmei.user包下的所有类的所有方法
-	 * 					 （* com.lanmei.user..*(..)）匹配com.lanmei.user包/子孙包下的所有类的所有方法
+	 * 2.通过类定义切点 ： （* common.lanmei.user+.*(..)）:匹配user接口的所有方法，有+表示也匹配其 实现类
+	 * 3.通过类包定义切点： （* common.lanmei.user.*(..)）匹配com.lanmei.user包下的所有类的所有方法
+	 * 					 （* common.lanmei.user..*(..)）匹配com.lanmei.user包/子孙包下的所有类的所有方法
 	 * 4.通过方法入参定义切点 * admin(String. *)）匹配方法admin的地一个参数为String ,第二个参数为任意类型的方法
 	 */
-	/*匹配 com.lanmei.os.controller本包及其子孙包的所有方法*/
-//	@Pointcut(value = "execution(* com.lanmei.*.controller..*(..))")
+	/*匹配 common.lanmei.os.controller本包及其子孙包的所有方法*/
+//	@Pointcut(value = "execution(* common.lanmei.*.controller..*(..))")
 	@Pointcut(value = "@annotation(com.cloud.microblog.provider.aop.syslog.anno.PrintUrlAnno)")
 	public void urlLogPointcut() {
 		

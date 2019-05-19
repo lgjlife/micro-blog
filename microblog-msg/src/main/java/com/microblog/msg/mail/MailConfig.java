@@ -12,8 +12,8 @@ public class MailConfig {
         JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
 
         javaMailSender.setDefaultEncoding("UTF-8");
-        javaMailSender.setHost("smtp.sina.com");
-        javaMailSender.setUsername("lanmeishop1@sina.com");
+        javaMailSender.setHost("smtp.sina.common");
+        javaMailSender.setUsername("lanmeishop1@sina.common");
         javaMailSender.setPassword("lanmei");
         javaMailSender.setProtocol("smtp");
         return javaMailSender;

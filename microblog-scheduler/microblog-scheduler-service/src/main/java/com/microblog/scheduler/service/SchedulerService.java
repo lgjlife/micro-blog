@@ -8,10 +8,10 @@ import com.microblog.scheduler.dao.model.QuartzJob;
 import com.microblog.scheduler.service.anno.QuartzJobAnno;
 import com.microblog.scheduler.service.code.SchedulerReturnCode;
 import com.microblog.scheduler.service.configuration.quartz.SchedulerHandle;
-import com.microblog.scheduler.service.context.SchedulerContext;
 import com.microblog.scheduler.service.job.SchedulerJobFactory;
 import com.microblog.scheduler.service.job.dto.JobState;
 import lombok.extern.slf4j.Slf4j;
+import org.quartz.Job;
 import org.quartz.Trigger;
 import org.reflections.Reflections;
 import org.reflections.scanners.SubTypesScanner;
@@ -22,6 +22,15 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+/**
+ *功能描述 
+ * @author lgj
+ * @Description   任务调度service
+ * @date 5/18/19
+ * @param: 
+ * @return: 
+ *
+*/
 @Slf4j
 @Service
 public class SchedulerService {
@@ -111,19 +120,10 @@ public class SchedulerService {
             CopyOnWriteArrayList<String> jobClassList = new CopyOnWriteArrayList<String>();
             for(Class job:quartzJobs){
 
-                Class<?>[] interfaces = job.getInterfaces();
-
-                for(Class interfacesClazz:interfaces){
-                    /*if(Job.class instanceof  interfacesClazz ){
-
-                    }*/
-
-                    log.info("interfacesClazz = " + interfacesClazz);
+                if( Job.class.isAssignableFrom(job)){
+                    jobClassList.add(job.getName());
                 }
-
-                jobClassList.add(job.getName());
             }
-            SchedulerContext.setQuartzJobClass(jobClassList);
             return jobClassList;
         }
         return null;
@@ -185,6 +185,29 @@ public class SchedulerService {
         catch(Exception ex){
             log.error(ex.getMessage());
             return new WebResult(SchedulerReturnCode.JOB_REMOVE_FAIL);
+        }
+
+    }
+    /**
+     *功能描述
+     * @author lgj
+     * @Description  注册任务
+     * @date 5/18/19
+     * @param:
+     * @return:
+     *
+    */
+    public BaseResult registerJob(String jobGroup, String jobClass)   {
+        QuartzJob job = quartzJobMapper.selectByGroupAndClass(jobGroup,jobClass);
+        try{
+            schedulerHandle.addJod(job);
+            Trigger.TriggerState state = schedulerHandle.getTriggerState(job.getJobGroup(),job.getJobClass());
+            return new WebResult(SchedulerReturnCode.JOB_CREATE_SUCCESS,state.toString());
+
+        }
+        catch(Exception ex){
+            log.error(ex.getMessage());
+            return new WebResult(SchedulerReturnCode.JOB_CREATE_FAIL);
         }
 
     }
@@ -272,10 +295,4 @@ public class SchedulerService {
             log.error(ex.getMessage());
         }
     }
-
-
-
-
-
-
 }

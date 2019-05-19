@@ -33,7 +33,7 @@ public class SwaggerConfig {
                 .apiInfo(apiInfo())
                 .select()
                 //为当前包路径
-                .apis(RequestHandlerSelectors.basePackage("com.microblog.gateway.controller"))
+                .apis(RequestHandlerSelectors.basePackage("common.microblog.gateway.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }

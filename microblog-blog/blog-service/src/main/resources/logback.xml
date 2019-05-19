@@ -27,7 +27,7 @@
         </encoder>
     </appender>
 
-    <!--<appender name="KafkaAppender" class="com.microblog.log.config.KafkaAppender">
+    <!--<appender name="KafkaAppender" class="common.microblog.log.config.KafkaAppender">
     </appender>-->
 
     <root level="debug">

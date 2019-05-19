@@ -70,7 +70,7 @@
         <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
 
         <!--<dependency>
-            <groupId>com.microblog</groupId>
+            <groupId>common.microblog</groupId>
             <artifactId>microblog-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>

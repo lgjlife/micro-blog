@@ -59,6 +59,9 @@ public class SchedulerController {
         else if(type.equals("remove")){
             return schedulerService.removeJob(jobGroup,jobClass);
         }
+        else if(type.equals("register")){
+            return schedulerService.registerJob(jobGroup,jobClass);
+        }
 
         return new WebResult(SchedulerReturnCode.NULL_PARAM);
 

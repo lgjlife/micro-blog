@@ -10,7 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @EnableFeignClients(basePackages="com.microblog.blog.service.feign")
 //扫描 mapper 文件
-@MapperScan("com.microblog.blog.dao.mapper")
+@MapperScan("common.microblog.blog.dao.mapper")
 @EnableDiscoveryClient
 @SpringBootApplication
 @ComponentScan("com.microblog.blog")

@@ -48,8 +48,8 @@ public class SchedulerHandle {
         JobDetail jobDetail = JobBuilder.newJob((Class<? extends org.quartz.Job>) Class.forName(job.getJobClass()))
                 .withIdentity(job.getJobClass(), job.getJobGroup()).build();
 
-        //hello-group.com.microblog.scheduler.dao.model.QuartzJob
-        //hello-group.com.microblog.scheduler.service.job.HelloJob
+        //hello-group.common.microblog.scheduler.dao.model.QuartzJob
+        //hello-group.common.microblog.scheduler.service.job.HelloJob
         log.info("job key = [{}]",jobDetail.getKey());
         if(scheduler.checkExists(jobDetail.getKey()) == true){
             log.info("job[{}] is exist!!",jobDetail.getKey());

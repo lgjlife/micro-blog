@@ -27,7 +27,7 @@
         </encoder>
     </appender>
 
-  <!--　<appender name="KafkaAppender" class="com.microblog.log.config.KafkaAppender">
+  <!--　<appender name="KafkaAppender" class="common.microblog.log.config.KafkaAppender">
         <topic>application-log</topic>
         <producerCfg>bootstrap.servers=localhost:9092,localhost:9093</producerCfg>
         <producerCfg>acks=all</producerCfg>

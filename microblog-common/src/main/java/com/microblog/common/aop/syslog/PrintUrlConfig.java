@@ -18,7 +18,7 @@ public class PrintUrlConfig {
     private static final Logger log = LoggerFactory.getLogger(PrintUrlConfig.class);
     @Bean
     @ConditionalOnProperty(prefix = "microblog.common", value = "printUrlEnable", havingValue = "true")
-    public  PrintUrlAspect printUrlAspect(){
+    public PrintUrlAspect printUrlAspect(){
 
         log.debug("PrintUrlAspect  create...........");
         return  new PrintUrlAspect();

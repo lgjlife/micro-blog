@@ -47,4 +47,7 @@ public interface QuartzJobMapper {
     int updateByPrimaryKey(QuartzJob record);
 
     int deleteByGroupAndClass(@Param("jobGroup") String jobGroup,@Param("jobClass") String jobClass);
+
+
+    QuartzJob selectByGroupAndClass(@Param("jobGroup") String jobGroup,@Param("jobClass") String jobClass);
 }

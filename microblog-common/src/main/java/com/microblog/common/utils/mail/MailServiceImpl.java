@@ -33,7 +33,7 @@ public class MailServiceImpl implements MailService {
     private JavaMailSenderImpl javaMailSender;
 
     //@Value("${spring.mail.username}")
-    private String from = "lanmeishop1@sina.com";
+    private String from = "lanmeishop1@sina.common";
 
 
     public static void main(String args[]){

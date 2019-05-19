@@ -198,6 +198,9 @@ var scheduler={
                 else if(result[i].status == "PAUSED"){
                     stateText = "<td style='background-color: red;'>"+"</td>"
                 }
+                else if(result[i].status == "COMPLETE"){
+                    stateText = "<td style='background-color: springgreen;'>"+"</td>"
+                }
                 else{
                     stateText = "<td style='background-color: wheat;'>"+"</td>"
                 }
@@ -408,8 +411,11 @@ function stateBtnColorSet(state){
     else if(state == "NORMAL"){
         $("#job-state-btn").css("background","blue");
     }
-    else if(state == "PAUSED"){
+    else if(state == "PAUSED"){　
         $("#job-state-btn").css("background","red");
+    }
+    else if(state == "COMPLETE"){
+        $("#job-state-btn").css("background","springgreen");
     }
     else{
         $("#job-state-btn").css("background","wheat");
@@ -419,9 +425,6 @@ function stateBtnColorSet(state){
  * 任务管理　页面操作
  */
 $(function () {
-
-
-
 
     /**
      * 任务启动
@@ -446,6 +449,13 @@ $(function () {
     $("#job-remove-btn").click(function () {
         scheduler.request.jobManager(buildMangerRequestData("remove"));
     })
+    /**
+     * 注册任务
+     */
+    $("#job-register-btn").click(function () {
+        scheduler.request.jobManager(buildMangerRequestData("register"));
+    })
+
 
     /**
      *  任务暂停

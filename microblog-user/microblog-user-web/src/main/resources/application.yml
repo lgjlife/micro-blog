@@ -15,7 +15,7 @@ spring:
   application:
     name: microblog-user
   mybatis:
-    mapper-locations: com.microblog.user.dao.mapper
+    mapper-locations: common.microblog.user.dao.mapper
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource    # 配置当前要使用的数据源的操作类型
     driver-class-name: com.mysql.cj.jdbc.Driver      # 配置MySQL的驱动程序类

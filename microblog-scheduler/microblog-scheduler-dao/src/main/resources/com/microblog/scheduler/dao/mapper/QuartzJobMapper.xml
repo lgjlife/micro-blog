@@ -90,9 +90,14 @@
   <!--
     -->
   <delete id="deleteByGroupAndClass" >
-
     delete from quartz_job
     where job_group = #{jobGroup} and job_class = #{jobClass}
   </delete>
 
+  <select id="selectByGroupAndClass"  resultMap="BaseResultMap">
+    select id, name, description, cron, job_class, job_group, status, create_time, create_by,
+    start_at, end_at, delete_time, delete_by
+    from quartz_job
+    where job_group = #{jobGroup} and job_class = #{jobClass}
+  </select>
 </mapper>

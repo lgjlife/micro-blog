@@ -25,7 +25,7 @@ public class EmailServiceImpl implements EmailService {
             MailDto mailDto = new MailDto();
             mailDto.setId(100);
             mailDto.setTitle("注册验证码");
-            mailDto.setTo("xxxx@163.com");
+            mailDto.setTo("xxxx@163.common");
             mailDto.setTimeStamp(System.currentTimeMillis());
             mailDto.setEffectiveTimeMs(1000*60);
             try{

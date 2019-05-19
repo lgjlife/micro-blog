@@ -8,7 +8,7 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/Mrlgj/Cloud-Frame
+          uri: https://github.common/Mrlgj/Cloud-Frame
           #Spring Cloud Config Server强制从远程存储库中提取
           force-pull: true
           search-paths: config-repo

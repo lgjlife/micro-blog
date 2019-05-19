@@ -12,7 +12,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 
 @EnableFeignClients
-@MapperScan("com.microblog.user.dao.mapper")
+@MapperScan("common.microblog.user.dao.mapper")
 @EnableDiscoveryClient
 @SpringBootApplication
 @ComponentScan(basePackages={"com.microblog.user"})
