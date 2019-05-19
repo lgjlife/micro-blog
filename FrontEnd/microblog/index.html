@@ -19,33 +19,39 @@
     <script src="/common/token.js"></script>
 
     <script src="index.js"></script>
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
 </head>
 <body>
-
     <!-- 顶部导航栏 -->
-    <div id="top-nav" class="top-nav-element">
-        <div id="top-nav-trademark">
-            <span>MicroBlog</span>
-        </div>
-        <div id="top-nav-search">
-            <input type="text"/><img src="static/img/common/serach.jpg" height="20px" width="20px"/>
-        </div>
-        <div id="top-nav-list">
-            <div id="top-nav-list-main">
-                <a href="index.html">首页</a>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">microblog</a>
             </div>
-            <div>
-                <div id="top-nav-unlogin">
-                    <a href="user/login.html">登录</a>
-                    <a href="user/register.html">注册</a>
+            <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search">
                 </div>
-                <div id="top-nav-login" style=" display: none">
-                    <a href="user/info.html" id="top-nav-login-name"></a>
-                    <a href="javascript:void(0)" id="logout">退出登录</a>
-                </div>
-            </div>            
-        </div>    
-    </div>
+                <button type="button" class="btn btn-default" id="head-search-btn">搜索</button>
+            </form>
+
+            <div class="navbar-header" id="top-nav-unlogin">
+                <a class="navbar-brand" href="javascript:void(0)" id="head-login-btn">登录</a>
+                <a class="navbar-brand" href="javascript:void(0)" id="head-register-btn">注册</a>
+            </div>
+            <div class="navbar-header" id="top-nav-login" style=" display: none">
+                <a class="navbar-brand" href="javascript:void(0)" id="head-info-btn"></a>
+                <a class="navbar-brand" href="javascript:void(0)" id="head-logout-btn">退出登录</a>
+            </div>
+        </div>
+    </nav>
+
     <!-- 内容页面 -->
     <div id="content">
          <!--###################################################### -->

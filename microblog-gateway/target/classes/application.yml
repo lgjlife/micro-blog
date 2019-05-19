@@ -42,7 +42,7 @@ zuul:
     #  url: http://localhost:8001
     # 服务注册中心
     # 访问注册中心，使用的是url,否则会报错
-    # com.netflix.client.ClientException: Load balancer does not have available server for client
+    # common.netflix.client.ClientException: Load balancer does not have available server for client
     center:
       path: /center/**
       url: http://localhost:8001

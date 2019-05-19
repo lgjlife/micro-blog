@@ -95,7 +95,10 @@ public class IUserService implements UserService {
             Date start = new Date();
          //   SmsUtil.sendSms(phone,code);
 
-            PhoneVerifCodeDto phoneVerifCodeDto = PhoneVerifCodeDto.builder().phone(phone).code(code).build();
+            PhoneVerifCodeDto phoneVerifCodeDto = new PhoneVerifCodeDto();
+            phoneVerifCodeDto.setCode(phone);
+            phoneVerifCodeDto.setCode(code);
+
             rocketmqProducer.publish(phoneVerifCodeDto,phonePublishConfig);
             Date end = new Date();
             log.debug("向手机号({})发送验证码:({})",phone,code);

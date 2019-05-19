@@ -28,7 +28,7 @@ var index={
                         $("#top-nav-unlogin").hide();
                         $("#top-nav-login").show();
 
-                        $("#top-nav-login-name").text(data.data.userId + " phone = " + data.data.phoneNum);
+                        $("#head-info-btn").text(data.data.nickName);
                         $("#index-header-img").attr("src","static"+data.data.headerUrl);
                         $("#index-content-user-name").text(data.data.nickName);
                         
@@ -70,7 +70,41 @@ var index={
         
 }
 
+$(function () {
 
+    //顶部搜索按钮
+    $("#head-search-btn").click(function () {
+
+        var searchVal = $("#head-search-input").val();
+        if((searchVal != null)&&(searchVal != '')){
+            //搜索
+            localStorage.setItem("searchVal",searchVal);
+
+        }
+        $(location).attr('href', '/search/search.html');
+    })
+    //顶部登录按钮
+    $("#head-login-btn").click(function () {
+        console.log("head-login-btn");
+        $(location).attr('href', '../user/login.html');
+    })
+    //顶部注册按钮
+    $("#head-register-btn").click(function () {
+        console.log("head-register-btn");
+        $(location).attr('href', '../user/register.html');
+    })
+
+    $("#head-info-btn").click(function () {
+        $(location).attr('href', '../user/info.html');
+    })
+
+    $(" #index-content-user-name").click(function () {
+        $(location).attr('href', '../user/info.html');
+    })
+
+
+
+})
 $(function(){
 //
     //console.log("token = " + tokenUtil.getToken());
@@ -85,10 +119,12 @@ $(function(){
         console.log("token not found");
     }
 
+    //启动的时候
+
     /**
      *  退出登录操作 ，移除token，并刷新页面
      */
-    $("#logout").click(function(){
+    $("#head-logout-btn").click(function(){
         console.log("logout");
         tokenUtil.removeToken();
         window.location.reload();

@@ -8,8 +8,6 @@
     <modules>
         <module>microblog-config</module>
         <module>microblog-scheduler</module>
-        <module>microblog-consumer</module>
-        <module>microblog-provider</module>
         <module>microblog-common</module>
         <module>microblog-search</module>
         <module>microblog-chat</module>
@@ -30,7 +28,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.1.0.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
 
     <properties>
@@ -85,7 +83,6 @@
             <artifactId>activation</artifactId>
             <version>1.1.1</version>
         </dependency>
-
         <!-- swagger 依赖 -->
         <dependency>
             <groupId>io.springfox</groupId>
