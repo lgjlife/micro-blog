@@ -1,7 +1,7 @@
 package com.microblog.search.service.impl;
 
 
-import com.microblog.search.service.handle.SearchResultMapperHandle;
+import com.microblog.search.service.elasticsearch.SearchResultMapperHandle;
 import com.microblog.search.service.pojo.SearchDemo;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.action.update.UpdateRequest;
