@@ -15,6 +15,7 @@ import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -40,9 +41,9 @@ public class SearchResultMapperHandle implements SearchResultMapper {
         if(searchHits.getHits().length <= 0){
             return  null;
         }
+        results = new ArrayList<>();
         for (SearchHit searchHit:searchHits){
 
-            results = new ArrayList<>();
             try{
 
                 Map<String, Object> resultMap = searchHit.getSourceAsMap();
@@ -53,7 +54,6 @@ public class SearchResultMapperHandle implements SearchResultMapper {
 
                 for(Field field:fields){
                     field.setAccessible(true);
-
                     PropertyDescriptor propertyDescriptor = new PropertyDescriptor(field.getName(),aClass);
                     Method setMethod = propertyDescriptor.getWriteMethod();
                     HighlightField highlightField = null ;
@@ -64,40 +64,11 @@ public class SearchResultMapperHandle implements SearchResultMapper {
                     else {
                         //field　不是高亮字段
                         Object value =(Object)resultMap.get(field.getName());
-
-                        if((field.getType() == Long.class) && (value.getClass() ==  Integer.class)){
-
-                            System.out.println("1");
-                             value = ((Integer)value).longValue();
-                         }
-
-                        else if((field.getType() == Byte.class) && (value.getClass() ==  Integer.class)){
-                            System.out.println("2");
-                            value = ((Integer)value).byteValue();
-                        }
-
-                        else if((field.getType() == Date.class) && (value.getClass() ==  String.class)){
-                            System.out.println("3");
-
-                            System.out.println("++原来的类型：" + field.getName() + "- " + field.getType()
-                                    + " 当前类型:" + value.getClass()
-                                    + "  值:" + value );
-
-                            DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
-                            value = (Date)format.parse((String) value);
-
-                        }
-
-                        System.out.println("原来的类型：" + field.getName() + "- " + field.getType()
-                                + " 当前类型:" + value.getClass()
-                                + "  值:" + value );
-
-
+                        value =  valueTypeExchang(field,value);
                         setMethod.invoke(instance,value);
                     }
 
                 }
-
                 results.add(instance);
             }
             catch(Exception ex){
@@ -105,8 +76,39 @@ public class SearchResultMapperHandle implements SearchResultMapper {
                 ex.printStackTrace();
             }
         }
+        //log.info("size = " + results.size() + "results:"+results);
         AggregatedPage page = new AggregatedPageImpl<T>(results);
         return page;
+    }
+
+    /**
+     *功能描述 
+     * @author lgj
+     * @Description  elasticsearch 返回来的是String或者Integer类型，需要转换为pojo对应的类型
+     * @date 5/20/19
+    */
+    private Object valueTypeExchang(Field field,Object value) throws ParseException {
+
+        /*System.out.println("原来的类型：" + field.getName() + "- " + field.getType()
+                + " 当前类型:" + value.getClass()
+                + "  值:" + value );*/
+
+        //Integer--> Long
+        if((field.getType() == Long.class) && (value.getClass() ==  Integer.class)){
+            value = ((Integer)value).longValue();
+        }
+        //Integer-->byte
+        else if((field.getType() == Byte.class) && (value.getClass() ==  Integer.class)){
+            value = ((Integer)value).byteValue();
+        }
+        //String--> Ｄate
+        else if((field.getType() == Date.class) && (value.getClass() ==  String.class)){
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
+            value = (Date)format.parse((String) value);
+
+        }
+
+        return value;
     }
 
     public static void main(String args[]){

@@ -19,6 +19,5 @@ import org.springframework.context.annotation.ComponentScan;
 public class MicroblogUserWebApplication {
     public static void main(String args[]) {
         SpringApplication.run(MicroblogUserWebApplication.class, args);
-
     }
 }

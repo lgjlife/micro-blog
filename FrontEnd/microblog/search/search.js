@@ -1,8 +1,19 @@
 var search={
 
+    /**
+     * 搜索类型
+     */
+    "searchType":"blog",
+
+    /**
+     * 请求路径
+     */
     "url":{
         "searchUrl":"/search/search/query"
     },
+    /**
+     * 执行ajax请求
+     */
     "request":{
         "searchData":{
 
@@ -29,7 +40,9 @@ var search={
                 dataType: "json",
                 data: jsonData,
                 success:function(data,status){
-                    console.log("data = " + data);
+                    console.log("message = " + data.message);
+                    console.log("message = " + data.message);
+                    search.display.displayUserList(data.data);
                 },
                 error(xhr,status,error){
                     alert("出现异常，请重试！");
@@ -42,17 +55,22 @@ var search={
     "return":{
 
     },
+    /**
+     * 根据数据进行显示
+     */
     "display":{
 
         "displayUserList":function (user) {
             console.log("displayUserList...");
             $("#search-content-display-user ul").text("");
+
+
             for(var i = 0; i < user.length ;i++){
 
                 var text = "<li class=‘user-list’>"
                     + "<div>"
                     + "    <div class='user-list-header-block'>"
-                    + "        <img src='" + user[i].img + "' class='user-header-img'>"
+                    + "        <img src='" + "../static/img/header/0.jpg" + "' class='user-header-img'>"
                     + "    </div>"
                     + "    <div>"
                     + "      <div>"
@@ -79,13 +97,13 @@ var search={
 
                 $("#search-content-display-user ul").append(text);
             }
-
-
-
         }
         
     },
 
+    /**
+     * 测试数据
+     */
     "testData":{
         "getUser":function () {
 
@@ -110,10 +128,7 @@ var search={
 
         }
     },
-
-
 }
-
 
 /**
  * 进入页面触发
@@ -123,7 +138,7 @@ $(function () {
     var currentQueryString = storage.getItem(storage.constants.currentQueryString);
 
     console.log("currentQueryString = " + currentQueryString);
-    $("#search-input").val(currentQueryString);
+    $("#search-search-input-block-input").val(currentQueryString);
     $("#search-select-blog-btn").css("color","blue");
     $("#search-select-user-btn").css("color","black");
 
@@ -145,10 +160,11 @@ $(function () {
         console.log("search-select-blog-btn ....");
         $("#search-select-blog-btn").css("color","blue");
         $("#search-select-user-btn").css("color","black");
-
+        search.searchType="blog";
         //执行搜索
         var currentQueryString = $("#search-search-input-block-input").val();
-        var searchData = search.request.searchData.getData("blog",currentQueryString);
+        storage.setItem(storage.constants.currentQueryString,currentQueryString);
+        var searchData = search.request.searchData.getData(search.searchType,currentQueryString);
         search.request.search(searchData);
 
     })
@@ -159,10 +175,21 @@ $(function () {
         console.log("search-select-user-btn ....");
         $("#search-select-blog-btn").css("color","black");
         $("#search-select-user-btn").css("color","blue");
+        search.searchType="user";
+        //执行搜索
+        var currentQueryString = $("#search-search-input-block-input").val();
+        storage.setItem(storage.constants.currentQueryString,currentQueryString);
+        var searchData = search.request.searchData.getData(search.searchType,currentQueryString);
+        search.request.search(searchData);
+
+    })
+
+    $("#search-search-input-block-btn").click(function () {
 
         //执行搜索
         var currentQueryString = $("#search-search-input-block-input").val();
-        var searchData = search.request.searchData.getData("user",currentQueryString);
+        storage.setItem(storage.constants.currentQueryString,currentQueryString);
+        var searchData = search.request.searchData.getData(search.searchType,currentQueryString);
         search.request.search(searchData);
 
     })

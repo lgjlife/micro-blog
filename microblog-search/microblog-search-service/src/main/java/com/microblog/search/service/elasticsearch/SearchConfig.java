@@ -66,7 +66,7 @@ public class SearchConfig {
 
         private Class clazz;
 
-        private String highlightColor = "#dd4b39";
+        private String highlightColor = "red";
 
         private String highlightField;
 

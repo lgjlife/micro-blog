@@ -18,7 +18,7 @@ public class UserSearchServiceImpl implements UserSearchService {
     private ElasticsearchHandler elasticsearchHandler;
 
     @Override
-    public Object queryUser(String queryString) {
+    public List<User>  queryUser(String queryString) {
 
         String[]  types = {"user"};
 
@@ -31,7 +31,7 @@ public class UserSearchServiceImpl implements UserSearchService {
         log.info("SearchConfig = " + searchConfig);
         List<User> users = elasticsearchHandler.query().search(searchConfig);
 
-        log.info("users = " + users);
+        log.info("搜索结果:[{}],users = {}",users.size(),  users);
 
         return users;
     }
