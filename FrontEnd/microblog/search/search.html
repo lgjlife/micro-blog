@@ -61,13 +61,74 @@
             <div id="search-content-display">
                 <!-- 搜索结果　微博-->
                 <div id="search-content-display-blog">
+                    <!-- 微波内容 -->
+                    <div id="blog-content-display">
+                        <ul id="blog-content-ul">
+                            <!-- ------------------------- -->
+                            <li class="blog-content-list">
+                                <div class="blog-content">
+                                    <div class="blog-content-user-info">
+                                        <div  class="blog-content-header-img">
+                                            <img src="../static/img/user/head/head.jpg" height="120px" width="120px">
+                                        </div>
+                                        <span  style="float: right"><a href="javascript:void(0);" onclick="$('.content-blog-menu').show();">操作</a></span>
 
+                                        <div>
+                                            <a href="#">谁知我心</a>
+                                            <span>2月15日 23:23</span>
+                                        </div>
+
+                                        <div id="content-blog-menu-show">
+
+                                        </div>
+                                        <div style="display: none;" class="content-blog-menu">
+                                            <a href="javascript:void(0);">帮上头条</a>
+                                            <a href="javascript:void(0);">屏蔽这条微博</a>
+                                            <a href="javascript:void(0);">屏蔽<span>xxxx</span></a>
+                                            <a href="javascript:void(0);">取消关注<span>xxxx</span></a>
+                                            <a href="javascript:void(0);">投诉</a>
+                                            <button onclick="$('.content-blog-menu').hide();">关闭</button>
+                                        </div>
+                                    </div>
+
+                                    微博内容显示
+                                    <div blog-content-word-div>
+                                        <span  class="blog-content-word">
+                                            小米9的好看，值得细细品味。
+
+                                            最难描述的是小米9颜色。远看天蓝色，安安静静的。换个角度，不同的光线下，就会呈现各种炫丽的彩虹色，还依稀闪现金属光泽。
+                                            这是纳米级激光全息工艺，加双层镀膜，才造就了这么独特的色彩，越看越好看！
+                                            附上小米9全息幻彩蓝版本的实拍图。
+                                        </span>
+                                    </div>
+                                      微博图片显示
+                                    <div class="blog-content-img-block"  >
+                                        <img src="../static/img/user/shouji.jpg" class="blog-content-img" >
+                                        <img src="../static/img/user/shouji.jpg" class="blog-content-img" >
+                                        <img src="../static/img/user/shouji.jpg" class="blog-content-img" >
+                                        <img src="../static/img/user/shouji.jpg" class="blog-content-img" >
+                                        <img src="../static/img/user/shouji.jpg" class="blog-content-img" >
+                                        <img src="../static/img/user/shouji.jpg" class="blog-content-img" >
+                                        <img src="../static/img/user/shouji.jpg" class="blog-content-img" >
+
+                                    </div>
+                                    // 微博底部信息显示
+                                    <div class="blog-">
+                                        <a href="javascript:void(0)">收藏(<span>100</span>)</a>
+                                        <a href="javascript:void(0)">转发(<span>100</span>)</a>
+                                        <a href="javascript:void(0)">评论(<span>100</span>)</a>
+                                        <a href="javascript:void(0)">点赞(<span>100</span>)</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
 
                 <!-- 搜索结果,用户-->
                 <div id="search-content-display-user">
                     <ul class="user-list-ul">
-                        <li class="user-list">
+                        <!--<li class="user-list">
                             <div>
                                 <div class="user-list-header-block">
                                     <img src="../static/img/header/0.jpg" class="user-header-img">
@@ -91,59 +152,8 @@
                                 </div>
                             </div>
 
-                        </li>
-                        <hr>
-                        <li class="user-list">
-                            <div>
-                                <div class="user-list-header-block">
-                                    <img src="../static/img/header/0.jpg">
-                                </div>
-                                <div>
-                                    <a href="javascript:void(0)" class="user-list-info-nickName">萨达</a>
-                                    <button type="button" class="user-list-concern-btn">关注</button>
-                                    <div>
-                                        <span>关注:</span><span>660</span>
-                                    </div>
-                                    <div>
-                                        <span>粉丝:</span><span>60</span>
-                                    </div>
-                                    <div>
-                                        <span>微博:</span><span>66</span>
-                                    </div>
+                        </li>-->
 
-                                </div>
-                                <div>
-                                    <span>简介:</span><span>直播北京突发事件，急事儿私信。只此一号，一个已婚的北京爷们儿用不正经的方式干着</span>
-                                </div>
-                            </div>
-
-                        </li>
-                        <hr style="background-color: #D2B48C;height: 1px">
-                        <li class="user-list">
-                            <div>
-                                <div class="user-list-header-block">
-                                    <img src="../static/img/header/0.jpg">
-                                </div>
-                                <div>
-                                    <a href="javascript:void(0)" class="user-list-info-nickName">萨达</a>
-                                    <button type="button" class="user-list-concern-btn">关注</button>
-                                    <div>
-                                        <span>关注:</span><span>660</span>
-                                    </div>
-                                    <div>
-                                        <span>粉丝:</span><span>60</span>
-                                    </div>
-                                    <div>
-                                        <span>微博:</span><span>66</span>
-                                    </div>
-
-                                </div>
-                                <div>
-                                    <span>简介:</span><span>直播北京突发事件，急事儿私信。只此一号，一个已婚的北京爷们儿用不正经的方式干着</span>
-                                </div>
-                            </div>
-
-                        </li>
                         <hr style="background-color: #D2B48C;height: 1px">
 
 

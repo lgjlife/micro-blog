@@ -1,10 +1,10 @@
 package com.microblog.search.service;
 
-import com.microblog.user.dao.model.User;
+import com.microblog.search.service.dto.SearchUserDto;
 
 import java.util.List;
 
 public interface UserSearchService {
 
-    List<User> queryUser(String queryString);
+    List<SearchUserDto> queryUser(String queryString);
 }

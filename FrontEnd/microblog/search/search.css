@@ -102,6 +102,7 @@ html,body,#content{
 搜索内容显示
  */
 
+
 #search-content-display{
     background-color: #F2F2F2;
 }
@@ -135,4 +136,70 @@ li { display:inline }
 }
 .user-list-header-block{
     float: left;
+}
+
+/**
+博客内容
+ */
+/*博客显示区块*/
+#blog-content-display{
+    background-color: azure;
+    margin-top: 5px;
+}
+/*博客  ul li*/
+#blog-content-display ul{
+    list-style: none;
+    padding-left:0px;
+}
+.blog-content-user-info{
+    height: auto;
+    background-color: blanchedalmond;
+}
+/*博客内容**/
+
+.blog-content-list{
+    margin-bottom: 12px;
+    border-width:1px;
+    border-color:darkgray;
+    border-style:inset;
+}
+.blog-content-word-div{
+    background-color: antiquewhite;
+}
+/*博客图片**/
+.blog-content-img{
+    height:auto;
+    width: 32%;
+    background-color: aqua;
+    margin-left: 1px;
+    margin-top: 1px;
+}
+.blog-content-img-block {
+    display: block;
+    height: auto;
+    background-color:antiquewhite;
+}
+/*图片*/
+/*.blog-content-img{
+   width: 33%;
+    height: auto;
+    margin: 1px;
+    float: left;
+}*/
+.blog-content-img-block>div {
+    width: 33%;
+    height: auto;
+    margin: 1px;
+    float: left;
+    background-color: orange;
+}
+
+#content-blog-menu-show{
+    float: right;
+}
+#content-blog-menu{
+    float: right;
+
+    z-index:100;
+
 }

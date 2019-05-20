@@ -6,9 +6,9 @@ import com.microblog.common.result.BaseResult;
 import com.microblog.common.result.WebResult;
 import com.microblog.search.service.BlogSearchService;
 import com.microblog.search.service.UserSearchService;
+import com.microblog.search.service.dto.SearchUserDto;
 import com.microblog.search.service.result.SearchReturnCode;
 import com.microblog.search.web.contants.SearchType;
-import com.microblog.user.dao.model.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
@@ -46,7 +46,7 @@ public class SearchController {
         }
 
         if(SearchType.USER.equals(type)){
-            List<User> result = userSearchService.queryUser(queryString);
+            List<SearchUserDto> result = userSearchService.queryUser(queryString);
             return new WebResult(SearchReturnCode.SEARCH_SUCCESS,result);
         }
         else if(SearchType.BLOG.equals(type)){
