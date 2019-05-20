@@ -165,7 +165,6 @@ var search={
                     + "  </li> ";
 
                 $("#blog-content-ul").append(blogText);
-
             }
             
 
@@ -270,6 +269,7 @@ $(function () {
         $("#search-select-blog-btn").css("color","blue");
         $("#search-select-user-btn").css("color","black");
         search.searchType="blog";
+        displayBlockSetect(search.searchType);
         //执行搜索
         var currentQueryString = $("#search-search-input-block-input").val();
         storage.setItem(storage.constants.currentQueryString,currentQueryString);
@@ -285,12 +285,12 @@ $(function () {
         $("#search-select-blog-btn").css("color","black");
         $("#search-select-user-btn").css("color","blue");
         search.searchType="user";
+        displayBlockSetect(search.searchType);
         //执行搜索
         var currentQueryString = $("#search-search-input-block-input").val();
         storage.setItem(storage.constants.currentQueryString,currentQueryString);
         var searchData = search.request.searchData.getData(search.searchType,currentQueryString);
         search.request.search(searchData);
-
     })
 
     $("#search-search-input-block-btn").click(function () {
@@ -298,10 +298,28 @@ $(function () {
         //执行搜索
         var currentQueryString = $("#search-search-input-block-input").val();
         storage.setItem(storage.constants.currentQueryString,currentQueryString);
+        displayBlockSetect(search.searchType);
         var searchData = search.request.searchData.getData(search.searchType,currentQueryString);
         search.request.search(searchData);
 
     })
+
+    /**
+     * 根据类型判断显示的是用户列表还是博客列表
+     * @param type
+     */
+    function displayBlockSetect(type) {
+
+        if("blog" == type){
+            $("#search-content-display-blog").show();
+            $("#search-content-display-user").hide();
+        }
+        if("user" == type){
+            $("#search-content-display-blog").hide();
+            $("#search-content-display-user").show();
+        }
+
+    }
 
 
 })

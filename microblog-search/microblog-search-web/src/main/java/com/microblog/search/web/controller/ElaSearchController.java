@@ -2,6 +2,7 @@ package com.microblog.search.web.controller;
 
 
 import com.microblog.common.aop.syslog.anno.PrintUrlAnno;
+import com.microblog.search.service.BlogSearchService;
 import com.microblog.search.service.impl.ElaSearchService;
 import com.microblog.search.service.pojo.SearchDemo;
 import com.microblog.search.service.pojo.SearchDemoFactory;
@@ -20,6 +21,8 @@ public class ElaSearchController {
 
     @Autowired
     private ElaSearchService elaSearchService;
+
+
 
 
     @PrintUrlAnno
