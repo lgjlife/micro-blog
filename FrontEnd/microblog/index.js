@@ -77,11 +77,9 @@ $(function () {
 
         var searchVal = $("#head-search-input").val();
         if((searchVal != null)&&(searchVal != '')){
-            //搜索
-            localStorage.setItem("searchVal",searchVal);
-
+            storage.setItem(storage.constants.currentQueryString,searchVal);
         }
-        $(location).attr('href', '/search/search.html');
+       $(location).attr('href', '/search/search.html');
     })
     //顶部登录按钮
     $("#head-login-btn").click(function () {

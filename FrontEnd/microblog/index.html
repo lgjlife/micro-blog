@@ -17,6 +17,8 @@
     <script src="/common/redirect.js"></script>
 
     <script src="/common/token.js"></script>
+    <script src="/common/local.storage.utils.js"></script>
+
 
     <script src="index.js"></script>
 
@@ -36,12 +38,13 @@
             </div>
             <form class="navbar-form navbar-left" role="search">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
+                    <input type="text" class="form-control" placeholder="Search" id="head-search-input">
                 </div>
                 <button type="button" class="btn btn-default" id="head-search-btn">搜索</button>
             </form>
 
             <div class="navbar-header" id="top-nav-unlogin">
+                <a class="navbar-brand" href="index.html" id="main-page">首页</a>
                 <a class="navbar-brand" href="javascript:void(0)" id="head-login-btn">登录</a>
                 <a class="navbar-brand" href="javascript:void(0)" id="head-register-btn">注册</a>
             </div>

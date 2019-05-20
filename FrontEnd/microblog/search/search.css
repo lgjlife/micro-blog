@@ -1,0 +1,138 @@
+
+html,body,#content{
+    width: 100%;
+    height: 100%;
+    margin:0;
+    padding:0;
+}
+
+/*
+搜索标题
+*/
+#search-title{
+    position: relative;
+    left: 40%;
+}
+/*******************************布局**********************************************/
+/**
+布局
+ */
+#search-left{
+    background-color: #0b2e13;
+    float: left;
+    width: 20%;
+    height: 100%;
+}
+#search-mid{
+    background-color: lightgreen;
+
+    float: left;
+    width: 60%;
+    height: 100%;
+}
+#search-right{
+    background-color: #0b2e13;
+}
+
+
+
+/********************************顶部导航栏*********************************************/
+/**
+顶部导航栏
+ */
+
+#search-head-nav{
+    background-color: #FFF0F5;
+    height: 50px;
+}
+
+.search-div{
+    position: relative;
+    left: 39%;
+}
+.search-nav-link{
+    font-size: 25px;
+}
+/*********************************搜索模块********************************************/
+/**
+搜索模块
+ */
+#search-search{
+    background-color: #F5DEB3;
+    height: 80px;
+
+}
+/*#search-search-input-block{
+    padding-top: 10px;
+}*/
+
+
+#search-search-input-block-a{
+    width: 130px;
+    font-size: 25px;
+    float: left;
+    margin-top: 5px;
+
+}
+#search-search-input-block-input{
+    width: 60%;
+    float: left;
+    margin-top: 10px;
+}
+#search-search-input-block-btn{
+    float: left;
+    width: 10%;
+    margin-top: 10px;
+}
+
+#search-search-select-block{
+    float: top;
+    padding-top: 40px;
+    padding-left:125px;
+
+    font-size: 28px;
+}
+#search-search-select-block a{
+    margin-right: 30px;
+}
+
+
+/*********************************搜索内容显示********************************************/
+/**
+搜索内容显示
+ */
+
+#search-content-display{
+    background-color: #F2F2F2;
+}
+
+#search-content-display-user ul{
+
+}
+#search-content-display-user hr{
+    padding-bottom: 0px;
+    margin-bottom: 4px;
+    background-color: #D2B48C;
+    height: 1px
+}
+#search-content-display-user li{
+    list-style-type: none;
+    padding-top: 0px;
+    margin-top: 0px;
+    padding-left: 0px;
+    margin-left: 0px;
+    height: 120px;
+    background-color: #71dd8a;
+}
+ul,li{ margin:0; padding:0; list-style:none; }
+li { display:inline }
+#search-content-display-user img{
+    height: inherit;
+    width: 120px;
+    padding-left: 0px;
+    margin-left: 0px;
+    background-color: red;
+}
+.user-list-header-block{
+    float: left;
+}

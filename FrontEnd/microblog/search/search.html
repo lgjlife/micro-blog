@@ -6,12 +6,161 @@
     <link rel="shortcut icon" href="#" />
     <title>搜索</title>
 
-    <script src="../../js/jquery/jquery-3.3.1.js"></script>
-    <link rel="stylesheet" type="text/css" href="../../css/bootstrap/bootstrap.css">
-    <script src="../../css/bootstrap/bootstrap.js"></script>
+    <script src="../static/js/jquery/jquery-3.3.1.js"></script>
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap/bootstrap.css">
+    <script src="../static/css/bootstrap/bootstrap.js"></script>
+
+    <script src="../common/local.storage.utils.js"></script>
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <script src="search.js"></script>
+    <link rel="stylesheet" type="text/css" href="search.css">
 </head>
     <body>
-        <h1>搜索页面</h1>
+       <!-- <h1 id="search-title">搜索页面</h1>-->
+
+        <!-- 顶部导航栏 -->
+        <div id="search-head-nav">
+            <div class="search-div" id="top-nav-unlogin">
+                <a class="search-nav-link" href="../index.html" id="main-page">首页</a>
+                <a class="search-nav-link" href="javascript:void(0)" id="head-login-btn">登录</a>
+                <a class="search-nav-link" href="javascript:void(0)" id="head-register-btn">注册</a>
+            </div>
+            <div class="search-div" id="top-nav-login" style=" display: none">
+                <a class="search-nav-link" href="javascript:void(0)" id="head-info-btn"></a>
+                <a class="search-nav-link" href="javascript:void(0)" id="head-logout-btn">退出登录</a>
+            </div>
+        </div>
+
+        <!-- 布局－左侧 -->
+        <div id="search-left">
+
+        </div>
+        <!-- 布局－中间 -->
+        <div id="search-mid">
+            <!-- 搜索-->
+            <div id="search-search">
+                <div id="search-search-input-block">
+                    <a id="search-search-input-block-a" href="../index.html">microblog</a>
+                    <input id="search-search-input-block-input">
+                    <button type="button" id="search-search-input-block-btn">搜索</button>
+                </div>
+                <div id="search-search-select-block">
+                    <a  href="javascript:void(0)" id="search-select-blog-btn">微博</a>
+
+                    <a  href="javascript:void(0)" id="search-select-user-btn">用户</a>
+
+                </div>
+
+            </div>
+            <!-- 搜索内容显示-->
+            <div id="search-content-display">
+                <!-- 搜索结果　微博-->
+                <div id="search-content-display-blog">
+
+                </div>
+
+                <!-- 搜索结果,用户-->
+                <div id="search-content-display-user">
+                    <ul class="user-list-ul">
+                        <li class="user-list">
+                            <div>
+                                <div class="user-list-header-block">
+                                    <img src="../static/img/header/0.jpg" class="user-header-img">
+                                </div>
+                                <div>
+                                    <a href="javascript:void(0)" class="user-list-info-nickName">萨达</a>
+                                    <button type="button" class="user-list-concern-btn">关注</button>
+                                    <div>
+                                        <span >关注:</span><span class="user-concern-count">660</span>
+                                    </div>
+                                    <div>
+                                        <span>粉丝:</span><span class="user-fans-count">60</span>
+                                    </div>
+                                    <div>
+                                        <span>微博:</span><span class="user-blog-count">66</span>
+                                    </div>
+
+                                </div>
+                                <div>
+                                    <span>简介:</span><span class="user-desc">直播北京突发事件，急事儿私信。只此一号，一个已婚的北京爷们儿用不正经的方式干着</span>
+                                </div>
+                            </div>
+
+                        </li>
+                        <hr>
+                        <li class="user-list">
+                            <div>
+                                <div class="user-list-header-block">
+                                    <img src="../static/img/header/0.jpg">
+                                </div>
+                                <div>
+                                    <a href="javascript:void(0)" class="user-list-info-nickName">萨达</a>
+                                    <button type="button" class="user-list-concern-btn">关注</button>
+                                    <div>
+                                        <span>关注:</span><span>660</span>
+                                    </div>
+                                    <div>
+                                        <span>粉丝:</span><span>60</span>
+                                    </div>
+                                    <div>
+                                        <span>微博:</span><span>66</span>
+                                    </div>
+
+                                </div>
+                                <div>
+                                    <span>简介:</span><span>直播北京突发事件，急事儿私信。只此一号，一个已婚的北京爷们儿用不正经的方式干着</span>
+                                </div>
+                            </div>
+
+                        </li>
+                        <hr style="background-color: #D2B48C;height: 1px">
+                        <li class="user-list">
+                            <div>
+                                <div class="user-list-header-block">
+                                    <img src="../static/img/header/0.jpg">
+                                </div>
+                                <div>
+                                    <a href="javascript:void(0)" class="user-list-info-nickName">萨达</a>
+                                    <button type="button" class="user-list-concern-btn">关注</button>
+                                    <div>
+                                        <span>关注:</span><span>660</span>
+                                    </div>
+                                    <div>
+                                        <span>粉丝:</span><span>60</span>
+                                    </div>
+                                    <div>
+                                        <span>微博:</span><span>66</span>
+                                    </div>
+
+                                </div>
+                                <div>
+                                    <span>简介:</span><span>直播北京突发事件，急事儿私信。只此一号，一个已婚的北京爷们儿用不正经的方式干着</span>
+                                </div>
+                            </div>
+
+                        </li>
+                        <hr style="background-color: #D2B48C;height: 1px">
+
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- 布局－右侧 -->
+        <div id="search-right">
+
+        </div>
+
+
+
+
+
+
 
 
     </body>
