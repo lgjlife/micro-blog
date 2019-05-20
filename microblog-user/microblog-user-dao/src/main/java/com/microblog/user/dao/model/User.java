@@ -1,6 +1,7 @@
 package com.microblog.user.dao.model;
 
 import lombok.ToString;
+import org.springframework.data.elasticsearch.annotations.Document;
 
 import java.util.Date;
 
@@ -11,6 +12,7 @@ import java.util.Date;
  */
 
 @ToString
+@Document(indexName="index_user")
 public class User {
     /**
      * Database Column Remarks:

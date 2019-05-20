@@ -1,9 +1,42 @@
 var search={
 
     "url":{
-
+        "searchUrl":"/search/search/query"
     },
     "request":{
+        "searchData":{
+
+            "data":{
+                //查询类型　blog , user
+                "type":"",
+                //查询字符串
+                "queryString":"",
+            },
+
+            "getData":function (type,queryString) {
+                search.request.searchData.data.type =  type;
+                search.request.searchData.data.queryString = queryString;
+
+                return JSON.stringify(search.request.searchData.data);
+            }
+        },
+        "search":function (jsonData) {
+            console.log("搜索:" + jsonData);
+            $.ajax({
+                url: search.url.searchUrl,
+                type: 'POST',
+                contentType : "application/json;charset=utf-8",
+                dataType: "json",
+                data: jsonData,
+                success:function(data,status){
+                    console.log("data = " + data);
+                },
+                error(xhr,status,error){
+                    alert("出现异常，请重试！");
+                }
+
+            })
+        }
 
     },
     "return":{
@@ -96,22 +129,45 @@ $(function () {
 
     search.display.displayUserList(search.testData.getUser());
 
+    var searchData = search.request.searchData.getData("blog",currentQueryString);
+    search.request.search(searchData);
+
 })
 
 /**
  * 选择搜索微博或者用户
  */
 $(function () {
+    /**
+     * 搜索博客
+     */
     $("#search-select-blog-btn").click(function () {
         console.log("search-select-blog-btn ....");
         $("#search-select-blog-btn").css("color","blue");
         $("#search-select-user-btn").css("color","black");
+
+        //执行搜索
+        var currentQueryString = $("#search-search-input-block-input").val();
+        var searchData = search.request.searchData.getData("blog",currentQueryString);
+        search.request.search(searchData);
+
     })
+    /**
+     * 搜索用户
+     */
     $("#search-select-user-btn").click(function () {
         console.log("search-select-user-btn ....");
         $("#search-select-blog-btn").css("color","black");
         $("#search-select-user-btn").css("color","blue");
+
+        //执行搜索
+        var currentQueryString = $("#search-search-input-block-input").val();
+        var searchData = search.request.searchData.getData("user",currentQueryString);
+        search.request.search(searchData);
+
     })
+
+
 })
 
 /*

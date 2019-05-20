@@ -1,12 +1,13 @@
 package com.microblog.search.service.elasticsearch;
 
 
-import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
+import lombok.ToString;
 
 
-@Getter
-@Builder
+@Data
+/*@Builder*/
+@ToString
 public class SearchConfig {
 
     /***
@@ -48,4 +49,87 @@ public class SearchConfig {
      * 查询type
      */
     private String[] types;
+
+    public static Builder builder(){
+        Builder builder = new Builder();
+        return builder;
+    }
+
+
+    public static class Builder{
+
+        private int page = 0;
+
+        private int count = 10;
+
+        private String queryString;
+
+        private Class clazz;
+
+        private String highlightColor = "#dd4b39";
+
+        private String highlightField;
+
+        private String[] feilds = {"*"};
+
+        private String[] types;
+
+
+
+
+        public Builder page(int page){
+            this.page = page;
+            return this;
+        }
+
+        public Builder count(int count){
+            this.count = count;
+            return this;
+        }
+
+        public Builder queryString(String queryString){
+            this.queryString = queryString;
+            return this;
+        }
+
+        public Builder clazz(Class clazz){
+            this.clazz = clazz;
+            return this;
+        }
+
+        public Builder highlightColor(String highlightColor){
+            this.highlightColor = highlightColor;
+            return this;
+        }
+
+        public Builder highlightField(String highlightField){
+            this.highlightField = highlightField;
+            return this;
+        }
+
+        public Builder feilds(String[] feilds){
+            this.feilds = feilds;
+            return this;
+        }
+
+        public Builder types(String[] types){
+            this.types = types;
+            return this;
+        }
+
+
+        public SearchConfig build(){
+            SearchConfig config = new SearchConfig();
+            config.setPage(this.page);
+            config.setCount(this.count);
+            config.setQueryString(this.queryString);
+            config.setClazz(this.clazz);
+            config.setHighlightColor(this.highlightColor);
+            config.setHighlightField(this.highlightField);
+            config.setFeilds(this.feilds);
+            config.setTypes(this.types);
+
+            return config;
+        }
+    }
 }

@@ -65,6 +65,7 @@ public class ElasticsearchQueryHandler {
                 .withFields(searchConfig.getFeilds())
                 //查询type
                 .withTypes(searchConfig.getTypes())
+
                 .build();
 
         List<T> result = null;

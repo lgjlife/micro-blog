@@ -105,6 +105,8 @@ var scheduler={
          * @param jsonData
          */
         "addJobSubmit":function(jsonData){
+
+
             $.ajax({
                 url: scheduler.requestUrl.createJobUrl,
                 type: 'PUT',
