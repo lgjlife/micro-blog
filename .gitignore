@@ -2,7 +2,7 @@ target
 !.mvn/wrapper/maven-wrapper.jar
 
 .mvn/
-.out
+out/
 
 ### STS ###
 .apt_generated

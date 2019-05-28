@@ -15,7 +15,7 @@ import org.springframework.context.annotation.ComponentScan;
 @MapperScan("com.microblog.user.dao.mapper")
 @EnableDiscoveryClient
 @SpringBootApplication
-@ComponentScan(basePackages={"com.microblog.user"})
+@ComponentScan(basePackages={"com.microblog.user","com.microblog.common"})
 public class MicroblogUserWebApplication {
     public static void main(String args[]) {
         SpringApplication.run(MicroblogUserWebApplication.class, args);

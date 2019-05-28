@@ -1,24 +1,30 @@
 package com.microblog.gateway.auth;
 
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import com.microblog.common.zk.ListenerEventHandler;
+import com.microblog.common.zk.ZkCli;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.curator.framework.recipes.cache.ChildData;
 import org.springframework.util.AntPathMatcher;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
-//@Slf4j
-@Component
+@Slf4j
 public class AuthFilterService {
 
-    @Autowired
-    AuthPathResource pathResource;
-    public  static Logger log = LoggerFactory.getLogger(AuthFilterService.class);
+
+    private ZkCli zkCli;
+
+    private final String rootPath = "/microblog";
+    private final String subPath = "/auth";
+
+    Map<String , List<String>> authPathMaps = new ConcurrentHashMap<>();
+
     /**
      *功能描述
      * @author lgj
@@ -31,13 +37,13 @@ public class AuthFilterService {
     public  boolean needFilter(HttpServletRequest request){
         String servletPath =  request.getServletPath();
         log.debug("servletPath={}",servletPath);
-        Map<String , AbsAppPath> pathMap = pathResource.getPathMap();
+
         AntPathMatcher matcher =  new AntPathMatcher();
 
-        Set<String> keys =  pathMap.keySet();
+        Set<String> keys =  authPathMaps.keySet();
 
         for(String key:keys){
-            List<String> paths = pathMap.get(key).getPaths();
+            List<String> paths = authPathMaps.get(key);
             for(String path:paths){
 
               //  log.debug("matcher path = {}",path);
@@ -50,5 +56,99 @@ public class AuthFilterService {
         }
         log.debug("不拦截{}",servletPath);
         return  false;
+    }
+
+
+
+    public void setListen(){
+
+        zkCli.setListener(new ListenerEventHandlerImpl(),getPath());
+    }
+
+    class ListenerEventHandlerImpl implements ListenerEventHandler {
+
+        @Override
+        public void addHandler(ChildData data) {
+
+            log.debug("ListenerEventHandlerImpl　addHandler");
+            byte[] body = data.getData();
+            String path = data.getPath();
+
+            Map<String , List<String>> pathMaps = ( Map<String , List<String>>)zkCli.byteToObject(body,Map.class);
+
+            pathMaps.forEach((k,v)->{
+                authPathMaps.put(k,v);
+            });
+
+            log.info("path ={},authPathMaps={}",path,authPathMaps);
+        }
+
+        @Override
+        public void removeHandler(ChildData data) {
+            log.debug("ListenerEventHandlerImpl　removeHandler");
+
+            byte[] body = data.getData();
+            String path = data.getPath();
+
+            Map<String , List<String>> pathMaps = ( Map<String , List<String>>)zkCli.byteToObject(body,Map.class);
+
+            pathMaps.forEach((k,v)->{
+                authPathMaps.remove(k);
+            });
+            log.info("path ={},authPathMaps={}",path,authPathMaps);
+        }
+
+        @Override
+        public void updateHandler(ChildData data) {
+            log.debug("ListenerEventHandlerImpl　updateHandler");
+
+            byte[] body = data.getData();
+            String path = data.getPath();
+
+            Map<String , List<String>> pathMaps = ( Map<String , List<String>>)zkCli.byteToObject(body,Map.class);
+
+            pathMaps.forEach((k,v)->{
+                authPathMaps.put(k,v);
+            });
+
+            log.info("path ={},authPathMaps={}",path,authPathMaps);
+
+        }
+    }
+
+
+    public void setZkCli(ZkCli zkCli) {
+        this.zkCli = zkCli;
+    }
+
+
+    private String getPath(){
+
+        return rootPath + subPath ;
+    }
+
+
+    public static void main(String args[]){
+
+        AntPathMatcher matcher =  new AntPathMatcher();
+
+        List<String> paths = new ArrayList<>();
+
+        //10000 -- 100ms
+        for(int i = 0; i< 10000; i++){
+            paths.add("/"+i + "/" + i);
+        }
+
+        long start = System.currentTimeMillis();
+        for(String path:paths){
+
+            matcher.match("/10000/10000",path);
+        }
+        long end = System.currentTimeMillis();
+
+        System.out.println("time = " + (end - start) + " ms");
+
+
+
     }
 }
