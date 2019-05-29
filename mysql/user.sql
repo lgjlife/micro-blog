@@ -77,8 +77,10 @@ CREATE TABLE `fans`(
 
 DROP TABLE IF EXISTS `concerns`;
 CREATE TABLE `concerns`(
-   `concerns_id` BIGINT   AUTO_INCREMENT COMMENT "关注ID",
+   `id` BIGINT   AUTO_INCREMENT COMMENT "关注ID",
    `user_id` BIGINT   COMMENT "用户ID",
-    PRIMARY KEY (`concerns_id`),
-    index(`user_id`)
+   `concern_id` BIGINT   COMMENT "关注ID",
+    PRIMARY KEY (`id`),
+    index(`user_id`),
+    index(`concern_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT="用户关注表";

@@ -13,7 +13,7 @@
         <property name="endingDelimiter" value="`"/>
         <!-- 设置生成Java文件的编码 GBK或者UTF-8 -->
         <property name="javaFileEncoding" value="UTF-8"/>
-        <plugin type="com.mybatis.plugin.OverwriteXmlPlugin"></plugin>
+
 
 
 
@@ -75,10 +75,16 @@
             <generatedKey column="user_id" sqlStatement="MySql" type="post" identity="true"/>
         </table>-->
 
-        <table tableName="user_delete" >
+        <!--<table tableName="user_delete" >
             <generatedKey column="id" sqlStatement="MySql" type="post" identity="true"/>
-        </table>
+        </table>-->
 
+        <table tableName="fans" >
+            <generatedKey column="fans_id" sqlStatement="MySql" type="post" identity="true"/>
+        </table>
+        <table tableName="concerns" >
+            <generatedKey column="concerns_id" sqlStatement="MySql" type="post" identity="true"/>
+        </table>
 
 
 

@@ -266,29 +266,9 @@ public class IUserService implements UserService {
             claims.put(k,v);
 
         });
-
-
         String  token =  JwtUtil.createJwt(claims);
-     //   log.debug("id = {},token = {} ",id,token);
-
-        /*try{
-            boolean result = JwtUtil.verify(token);
-            log.debug("JWTUtil.verify result = {}",result);
-
-             result = JwtUtil.verify(token);
-            log.debug("JWTUtil.verify result = {}",result);
-
-             result = JwtUtil.verify(token);
-            log.debug("JWTUtil.verify result = {}",result);
-        }
-        catch(Exception ex){
-            ex.printStackTrace();
-        }*/
-
         return  token;
     }
-
-
 
     /**
      *功能描述
