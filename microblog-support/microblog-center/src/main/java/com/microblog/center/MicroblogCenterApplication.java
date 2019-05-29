@@ -13,4 +13,3 @@ public class MicroblogCenterApplication {
         SpringApplication.run(MicroblogCenterApplication.class, args);
     }
 }
-//--spring.profiles.active=peer1
