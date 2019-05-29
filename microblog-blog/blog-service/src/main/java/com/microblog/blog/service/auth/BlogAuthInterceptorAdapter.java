@@ -6,6 +6,12 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *功能描述
+ * @author lgj
+ * @Description  登录拦截路径配置
+ * @date 5/29/19
+*/
 @Component
 public class BlogAuthInterceptorAdapter extends AuthInterceptorAdapter {
 

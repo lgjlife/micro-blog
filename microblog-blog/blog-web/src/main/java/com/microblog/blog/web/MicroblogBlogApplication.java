@@ -15,7 +15,6 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @ComponentScan(value={"com.microblog.blog","com.microblog.common"})
 public class MicroblogBlogApplication {
-
     public static void main(String args[]){
         SpringApplication.run(MicroblogBlogApplication.class,args);
     }

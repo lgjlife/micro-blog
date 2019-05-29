@@ -29,6 +29,8 @@ public class AuthFilterService {
      *功能描述
      * @author lgj
      * @Description  判断当前的路径是否需要校验token
+     *               还需要优化:1. “/blog/c” /blog/b  需要拦截，但"/blog/a" 不需要拦截  这种情况
+     *                        ２. 效率优化
      * @date 2/28/19
      * @param:
      * @return:
@@ -60,13 +62,37 @@ public class AuthFilterService {
 
 
 
+    /**
+     *功能描述
+     * @author lgj
+     * @Description  设置zk监听器
+     * @date 5/29/19
+     * @param:
+     * @return:
+     *
+    */
     public void setListen(){
 
         zkCli.setListener(new ListenerEventHandlerImpl(),getPath());
     }
 
+    /**
+     *功能描述
+     * @author lgj
+     * @Description　 　zk监听结果处理
+     * @date 5/29/19
+    */
     class ListenerEventHandlerImpl implements ListenerEventHandler {
 
+        /**
+         *功能描述
+         * @author lgj
+         * @Description  新增数据处理,在子应用启动时触发
+         * @date 5/29/19
+         * @param:
+         * @return:
+         *
+        */
         @Override
         public void addHandler(ChildData data) {
 
@@ -83,6 +109,17 @@ public class AuthFilterService {
             log.info("path ={},authPathMaps={}",path,authPathMaps);
         }
 
+        /**
+         *功能描述
+         * @author lgj
+         * @Description  移除数据处理，在子应用下线时处理
+         * 　　　　　　　　子应用下线时，需不需要移除拦截?需要!
+         *
+         * @date 5/29/19
+         * @param:
+         * @return:
+         *
+        */
         @Override
         public void removeHandler(ChildData data) {
             log.debug("ListenerEventHandlerImpl　removeHandler");

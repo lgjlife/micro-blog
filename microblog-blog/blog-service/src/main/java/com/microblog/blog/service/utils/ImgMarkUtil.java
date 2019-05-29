@@ -110,7 +110,7 @@ public class ImgMarkUtil {
     /**
      *功能描述
      * @author lgj
-     * @Description    给图片添加文字水印
+     * @Description    给图片添加文字水印　jmh测试平均耗时132ms
      * @date 3/17/19
      * @param:
      * @return:

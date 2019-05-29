@@ -114,6 +114,10 @@
 * 日志聚合： Kafka + Logstash + elasticsearch + Kibana
 * 前端:Html,Javascript,css,jquery
 
+## 设计思路
+
+### 登录拦截
+　整个系统中，有些url是不需要用户登录就可以访问的，有些是需要登录之后才能访问，因此需要进行路径拦截校验是否需要登录。
 
 ### 如何启动项目
 1. 安装Redis并启动
