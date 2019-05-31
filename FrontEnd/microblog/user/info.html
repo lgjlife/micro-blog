@@ -26,34 +26,118 @@
         
     </head>
     <body>
-       
-        <div id="info">
-            <div class="info-input-block">
-                <img src="../static/img/user/head/head.jpg" id="info-header-img" height="80px" width="80px">
-            </div>    
+    <!-- 顶部导航栏 -->
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">microblog</a>
+                </div>
+                <div class="navbar-header" id="top-nav-unlogin">
+                    <a class="navbar-brand" href="../index.html" id="main-page">首页</a>
+                    <a class="navbar-brand" href="javascript:void(0)" id="head-login-btn">登录</a>
+                    <a class="navbar-brand" href="javascript:void(0)" id="head-register-btn">注册</a>
+                </div>
+                <div class="navbar-header" id="top-nav-login" style=" display: none">
+                    <a class="navbar-brand" href="javascript:void(0)" id="head-info-btn"></a>
+                    <a class="navbar-brand" href="javascript:void(0)" id="head-logout-btn">退出登录</a>
+                </div>
+            </div>
+        </nav>
+        <div>
+            <div id="info-select-menu">
+                <ul>
+                    <li>
+                        <a class="info-select-menu-item" id="user-info-page-btn" href="javascript:void(0)">用户信息</a>
+                    </li>
+                    <li>
+                        <a class="info-select-menu-item" id="modify-info-page-btn" href="javascript:void(0)">修改信息</a>
+                    </li>
+                    <li>
+                        <a class="info-select-menu-item" id="concern-page-btn" href="javascript:void(0)">我的关注</a>
+                    </li>
+                    <li>
+                        <a class="info-select-menu-item" id="fan-page-btn" href="javascript:void(0)">我的粉丝</a>
+                    </li>
+                    <li>
+                        <a class="info-select-menu-item" id="collect-page-btn" href="javascript:void(0)">我的收藏</a>
+                    </li>
+                </ul>
+            </div>
             <div>
-                <a href="javascript:void(0)" id="modify-head">修改头像</a>
-            </div>
-            <div id="head-file-preview"style="display:none;">
-                <input id="head-file" name="file" type="file"  style="display:none;" />
-                <img src="" width="200px" height="200px" id="img-change">
-                <button id="head-file-save-btn">保存图片</button>
-            </div>
-            <div class="info-input-block">
-                <span class="info-lable">昵称</span>
-                <input type="text" id = "info-nick-name-input" value="">
-            </div>
-            <div class="info-input-block">
-                <span class="info-lable" >电话号码</span>
-                <input type="text" id = "info-phone-input" value="">
-            </div>
-            <div class="info-input-block">
-                <span class="info-lable">邮箱</span>
-                <input type="text" id = "info-email-input" value="">
-            </div>
-            <div class="info-input-block">
-                <button id="info-setting-btn">保存设置</button>
+                <!-- 用户信息 -->
+                <div>
+                    <img src="">
+
+
+                </div>
+
+                <!-- 修改信息-->
+                <div>
+                    <div class="info-input-block">
+                        <img src="../static/img/user/head/head.jpg" id="info-header-img" height="80px" width="80px">
+                    </div>
+                    <div>
+                        <a href="javascript:void(0)" id="modify-head">修改头像</a>
+                    </div>
+                    <div id="head-file-preview"style="display:none;">
+                        <input id="head-file" name="file" type="file"  style="display:none;" />
+                        <img src="" width="200px" height="200px" id="img-change">
+                        <button id="head-file-save-btn">保存图片</button>
+                    </div>
+                    <div class="info-input-block">
+                        <span class="info-lable">昵称</span>
+                        <input type="text" id = "info-nick-name-input" value="">
+                    </div>
+                    <div class="info-input-block">
+                        <span class="info-lable" >电话号码</span>
+                        <input type="text" id = "info-phone-input" value="">
+                    </div>
+                    <div class="info-input-block">
+                        <span class="info-lable">邮箱</span>
+                        <input type="text" id = "info-email-input" value="">
+                    </div>
+                    <div class="info-input-block">
+                        <button id="info-setting-btn">保存设置</button>
+                    </div>
+                </div>
+
+                <!--　我的关注 -->
+                <div>
+                    <ul>
+                        <li>
+                            <img src=""><a href="javascript:void(0)">s</a>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <img src=""><a href="javascript:void(0)">s</a>
+                        </li>
+                    </ul>
+
+                </div>
+
+                <!--　我的粉丝 -->
+                <div>
+                    <ul>
+                        <li>
+                            <img src=""><a href="javascript:void(0)">s</a>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <img src=""><a href="javascript:void(0)">s</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!--我的收藏 -->
+                <div>
+
+                </div>
+
+
             </div>
         </div>
+
     </body>
 </html>

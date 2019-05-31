@@ -179,3 +179,40 @@ var info={
     info.request.queryUserInfo();
      
 })
+
+/*
+左侧菜单选项
+ */
+$(function () {
+
+    $("#user-info-page-btn").click(function () {
+        console.log("user-info-page-btn click")
+        $(".info-select-menu-item").parent().removeClass("item-select");
+        $("#user-info-page-btn").parent().addClass("item-select")
+
+    })
+    $("#modify-info-page-btn").click(function () {
+        console.log("user-info-page-btn click")
+        $(".info-select-menu-item").parent().removeClass("item-select");
+        $("#modify-info-page-btn").parent().addClass("item-select")
+
+    })
+    $("#concern-page-btn").click(function () {
+        console.log("user-info-page-btn click")
+        $(".info-select-menu-item").parent().removeClass("item-select");
+        $("#concern-page-btn").parent().addClass("item-select")
+
+    })
+    $("#fan-page-btn").click(function () {
+        console.log("user-info-page-btn click")
+        $(".info-select-menu-item").parent().removeClass("item-select");
+        $("#fan-page-btn").parent().addClass("item-select")
+
+    })
+    $("#collect-page-btn").click(function () {
+        console.log("user-info-page-btn click")
+        $(".info-select-menu-item").parent().removeClass("item-select");
+        $("#collect-page-btn").parent().addClass("item-select")
+
+    })
+})

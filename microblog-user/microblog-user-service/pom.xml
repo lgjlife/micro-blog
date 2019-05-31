@@ -2,13 +2,21 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
+    <!--<parent>
         <artifactId>microblog-user</artifactId>
         <groupId>com.microblog</groupId>
         <version>0.0.1-SNAPSHOT</version>
+    </parent>-->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.0.RELEASE</version>
+        <relativePath/>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
 
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.microblog</groupId>
+    <version>0.0.1-SNAPSHOT</version>
     <artifactId>microblog.user.service</artifactId>
 
 
@@ -27,13 +35,15 @@
             <groupId>com.microblog</groupId>
             <artifactId>microblog-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
+            <scope>runtime</scope>
+            <type>pom</type>
         </dependency>
 
         <!--redis -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
+            <version>2.1.0.RELEASE</version>
         </dependency>
 
         <dependency>
@@ -53,6 +63,7 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
+            <version>5.1.46</version>
         </dependency>
 
         <dependency>
@@ -70,7 +81,8 @@
             <groupId>com.microblog</groupId>
             <artifactId>microblog.user.dao</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
+            <scope>runtime</scope>
+            <type>pom</type>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-openfeign -->
@@ -102,6 +114,18 @@
             <groupId>com.utils</groupId>
             <artifactId>serialization</artifactId>
             <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.microblog</groupId>
+            <artifactId>microblog.user.dao</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.microblog</groupId>
+            <artifactId>microblog-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
 
         <!-- zookeeper -->

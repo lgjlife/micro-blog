@@ -13,5 +13,4 @@ public class ExchangeType {
     public  static  String TOPIC_TYPE = "topic";
     public  static  String HEADER_TYPE = "header";
 
-
 }

@@ -7,8 +7,94 @@
 }
 #info{
     position: absolute;
-    top: 200px;
+
     left: 40%;  
     background-color: beige;
     width: 400px;
+}
+
+/***********页头****************/
+html,body,#content{
+    width: 100%;
+    height: 100%;
+    margin:0;
+    padding:0;
+
+}
+
+
+/**/
+#top-nav{
+
+    height: 50px;
+    width: 100%;
+    background-color: red;
+
+}
+
+#head-iframe{
+    width: 100%;
+    height: 50px;
+
+
+}
+
+#blog-edit{
+    border-style: none;
+    overflow-y: hidden;
+    width: 100%;
+}
+#blog-display{
+    border-style: none;
+    overflow-y: hidden;
+    width: 100%;
+}
+
+
+#top-nav div{
+    display: inline;
+}
+/***********侧边栏***********************/
+/*.info-nav{
+    background-color: red;
+    height: inherit;
+    padding-left: 0px;
+    margin-left: 0px;
+
+}*/
+#info-select-menu{
+    background-color: #F5DEB3;
+    height: 100%;
+    width: 160px;
+    float: left;
+}
+#info-select-menu ul{
+    padding-left: 0px;
+    margin-left: 0px;
+    width: inherit;
+}
+#info-select-menu li{
+    list-style-type: none;
+    padding-top: 20px;
+    margin-top: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+
+    padding-left: 0px;
+    margin-left: 0px;
+
+    background-color: #71dd8a;
+
+    width: inherit;
+
+}
+
+#info-select-menu a{
+    padding-left: 25px;
+    margin-left: 25px;
+
+}
+
+.item-select{
+    background-color: #D2B48C;
 }
