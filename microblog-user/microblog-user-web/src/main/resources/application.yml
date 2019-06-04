@@ -44,6 +44,14 @@ rabbitmq:
 rocketmq:
   address: localhost:9876
 
+fdfs:
+  so-timeout: 1501
+  connect-timeout: 100
+  thumb-image: # 缩略图
+    width: 60
+    height: 60
+  tracker-list: # tracker地址
+    - 127.0.0.1:22122
 
 microblog:
   common:

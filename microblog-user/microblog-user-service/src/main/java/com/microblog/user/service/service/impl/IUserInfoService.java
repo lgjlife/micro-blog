@@ -8,6 +8,8 @@ import com.microblog.user.dao.model.User;
 import com.microblog.user.service.config.utils.RedisStringUtil;
 import com.microblog.user.service.constants.UserRedisKeyUtil;
 import com.microblog.user.service.service.UserInfoService;
+import com.microblog.user.service.utils.fastdfs.FastdfsGroup;
+import com.microblog.user.service.utils.fastdfs.FastdfsUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,9 @@ import java.util.*;
 @Service
 public class IUserInfoService  implements UserInfoService
 {
+
+    @Autowired
+    FastdfsUtil fastdfsUtil;
 
     @Autowired
     HttpServletRequest request;
@@ -154,7 +159,14 @@ public class IUserInfoService  implements UserInfoService
                         UserRedisKeyUtil.LOGIN_USER_KEY.getTimeout());
                 File newfile = new File(savePath);
                 log.debug("newfile={}", newfile.getAbsolutePath());
+
+
+
                 file.transferTo(newfile);
+                fastdfsUtil.upload(FastdfsGroup.USER_HEADER_IMAGE_GROUP,
+                        file.getName(),file.getInputStream(),file.getSize(),
+                        null);
+
                 log.debug("文件上传成功！");
                 return subPath;
 

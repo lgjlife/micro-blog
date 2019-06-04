@@ -128,6 +128,17 @@
             <scope>compile</scope>
         </dependency>
 
+
+        <!-- fastdfs 分布式文件服务器-->
+        <dependency>
+            <groupId>com.github.tobato</groupId>
+            <artifactId>fastdfs-client</artifactId>
+            <version>1.26.5</version>
+            <scope>compile</scope>
+        </dependency>
+
+
+
         <!-- zookeeper -->
         <!--<dependency>
             <groupId>org.apache.curator</groupId>
