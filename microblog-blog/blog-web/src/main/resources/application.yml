@@ -42,3 +42,11 @@ microblog:
     # 使能打印方法执行耗时，在方法上添加注解@PrintUseTimeAnno
     printUseTimeEnable: true
 
+fdfs:
+  so-timeout: 1501
+  connect-timeout: 100
+  thumb-image: # 缩略图
+    width: 60
+    height: 60
+  tracker-list: # tracker地址
+    - 127.0.0.1:22122

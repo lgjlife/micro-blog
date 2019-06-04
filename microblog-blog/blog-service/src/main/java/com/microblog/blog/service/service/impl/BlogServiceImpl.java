@@ -8,6 +8,8 @@ import com.microblog.blog.service.service.BlogService;
 import com.microblog.blog.service.utils.ImgMarkUtil;
 import com.microblog.blog.service.utils.RedisKeyUtils;
 import com.microblog.blog.service.utils.UserUtil;
+import com.microblog.blog.service.utils.fastdfs.FastdfsGroup;
+import com.microblog.blog.service.utils.fastdfs.FastdfsUtil;
 import com.microblog.common.code.BlogReturnCode;
 import com.microblog.common.code.ReturnCode;
 import com.microblog.user.dao.model.User;
@@ -65,6 +67,9 @@ public class BlogServiceImpl implements BlogService {
 
     @Autowired
     UserFeignService userFeignService;
+
+    @Autowired
+    FastdfsUtil fastdfsUtil;
 
     /**
      *功能描述
@@ -217,6 +222,13 @@ public class BlogServiceImpl implements BlogService {
             savePaths.forEach((k,v)->{
 
                 try{
+
+                    fastdfsUtil.upload(FastdfsGroup.BLOG_IMAGE_GROUP,
+                            v.getName(),
+                            v.getInputStream(),
+                            v.getSize(),
+                            null);
+
                     //保存文件到本地
                     File newfile = new File(k);
                     v.transferTo(newfile);
