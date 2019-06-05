@@ -1,0 +1,16 @@
+server:
+  port: 8954
+
+
+swagger:
+  enable: false
+  basePackage: com
+  title: "demo ui doc"
+  contactName: "libai"
+  contactUrl: contactUrl-demo
+  contactEmail: contactEmail-demo
+  version: v1.0.0
+  description: description-demo
+  termsOfServiceUrl: termsOfServiceUrl-demo
+  license: license-demo
+  licenseUrl: licenseUrl-demo
