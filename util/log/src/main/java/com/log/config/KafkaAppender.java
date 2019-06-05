@@ -1,10 +1,10 @@
-package com.microblog.log.config;
+package com.log.config;
 
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.UnsynchronizedAppenderBase;
 import com.alibaba.fastjson.JSONObject;
-import com.microblog.log.kafka.LogKafkaProducer;
-import com.microblog.log.pojo.LogPojo;
+import com.log.kafka.LogKafkaProducer;
+import com.log.pojo.LogPojo;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
@@ -12,6 +12,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Slf4j
@@ -21,6 +23,7 @@ public class KafkaAppender extends UnsynchronizedAppenderBase<ILoggingEvent> {
 
     protected String topic = "application-log";
     protected Map<String,Object> producerCfg =  new HashMap<String, Object>();
+    private ExecutorService logSendTaskService = Executors.newCachedThreadPool();
 
 
     LogKafkaProducer producer ;
@@ -36,15 +39,14 @@ public class KafkaAppender extends UnsynchronizedAppenderBase<ILoggingEvent> {
     @Override
     public void start() {
         super.start();
-        producer = new LogKafkaProducer(producerCfg);
     }
 
     @Override
     protected void append(ILoggingEvent event) {
-
+        logSendTaskService.submit(new LogTask(event));
     }
 
-    private  LogPojo getLogPojo(ILoggingEvent event){
+    private LogPojo getLogPojo(ILoggingEvent event){
         StringBuilder builder = new StringBuilder();
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
@@ -55,6 +57,7 @@ public class KafkaAppender extends UnsynchronizedAppenderBase<ILoggingEvent> {
                 .thread(event.getThreadName())
                 .method(event.getLoggerName())
                 .message(event.getMessage())
+                .appName(applicationName)
                 .build();
         return  logPojo;
     }
@@ -73,11 +76,17 @@ public class KafkaAppender extends UnsynchronizedAppenderBase<ILoggingEvent> {
         this.producerCfg.put(key,value);
     }
 
+    public void setProducer(LogKafkaProducer producer) {
+        this.producer = producer;
+    }
 
     public void setTopic(String topic) {
         this.topic = topic;
     }
 
+    public void setApplicationName(String applicationName) {
+        this.applicationName = applicationName;
+    }
 
     class LogTask implements Runnable{
 
@@ -95,8 +104,8 @@ public class KafkaAppender extends UnsynchronizedAppenderBase<ILoggingEvent> {
 
         @Override
         public void run() {
-            String obj = JSONObject.toJSONString(getLogPojo(event));
-            producer.sendData(topic,group,obj);
+            String logData = JSONObject.toJSONString(getLogPojo(event));
+            producer.sendData(topic,group,logData);
         }
     }
 

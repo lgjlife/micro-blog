@@ -1,4 +1,4 @@
-package com.microblog.log.kafka;
+package com.log.kafka;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.*;
@@ -20,7 +20,6 @@ public class LogKafkaProducer {
     public LogKafkaProducer(Map<String,Object> config) {
 
         producer = new KafkaProducer(config);
-
     }
 
     /**
@@ -38,8 +37,10 @@ public class LogKafkaProducer {
             @Override
             public void onCompletion(RecordMetadata recordMetadata, Exception e) {
                if(recordMetadata ==null){
-                   log.error("Kafka send data fail! Please check kafka is work? Maybe fail  connect to kafka server");
-                   throw new KafkaException("Kafka send data fail! Please check kafka is work? Maybe fail  connect to kafka server ",e.getCause());
+                   System.out.println("Kafka send data fail! Please check kafka is work? Maybe fail  connect to kafka server");
+                   //throw new NullPointerException();
+                   //log.error("Kafka send data fail! Please check kafka is work? Maybe fail  connect to kafka server");
+                  // throw new KafkaException("Kafka send data fail! Please check kafka is work? Maybe fail  connect to kafka server ",e.getCause());
                }
             }
         });

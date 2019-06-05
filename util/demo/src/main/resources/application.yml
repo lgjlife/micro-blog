@@ -2,6 +2,7 @@ server:
   port: 8954
 
 
+
 swagger:
   enable: false
   basePackage: com
@@ -14,3 +15,4 @@ swagger:
   termsOfServiceUrl: termsOfServiceUrl-demo
   license: license-demo
   licenseUrl: licenseUrl-demo
+

@@ -1,4 +1,4 @@
-package com.demo.demo;
+package com.demo.swagger;
 
 
 import io.swagger.annotations.ApiOperation;

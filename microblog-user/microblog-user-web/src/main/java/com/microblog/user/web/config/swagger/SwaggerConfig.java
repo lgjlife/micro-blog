@@ -22,7 +22,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * @create: 2018-11-19 14:19
  **/
 @EnableSwagger2                // Swagger的开关，表示已经启用Swagger
-@Configuration                 // 声明当前配置类
+//@Configuration                 // 声明当前配置类
 public class SwaggerConfig {
 
     @Bean
