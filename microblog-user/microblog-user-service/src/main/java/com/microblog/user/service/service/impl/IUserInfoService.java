@@ -202,7 +202,7 @@ public class IUserInfoService  implements UserInfoService
 
         User user =  (User)redisStringUtil.get(UserRedisKeyUtil.LOGIN_USER_KEY.getPrefix()+userId);
         if(user == null){
-            user = userMapper.selectByPrimaryKey(userId);
+            user = userMapper.selectUserInfo(userId);
             redisStringUtil.set(UserRedisKeyUtil.LOGIN_USER_KEY.getPrefix()+userId,
                     user,
                     UserRedisKeyUtil.LOGIN_USER_KEY.getTimeout());

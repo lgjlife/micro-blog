@@ -1,5 +1,14 @@
 var info={
-    
+    "return":{
+        "QUERY_USER_INFO_SUCCESS":{
+            "code": "1082",
+            "message": "查询用户信息成功",
+        },
+        "QUERY_USER_INFO_FAIL":{
+            "code": "1083",
+            "message": "查询用户信息失败",
+        },
+    },
     "requestUrl":{
         "fileUploadUrl":"/user/user/info/head-img",
         "queryUserInfoUrl":"/user/user/info" ,
@@ -38,15 +47,7 @@ var info={
                 url: info.requestUrl.queryUserInfoUrl,
                 headers: {'Authorization': "i am a token"},
                 success: function(data,status){
-                    console.log("queryUserInfo 返回 status : "+status)
-                    var jsonData = JSON.stringify(data);
-                    console.log(jsonData);
-                    
-                    
-                    
-                    $("#info-nick-name-input").val(data.data.nickName);
-                    $("#info-phone-input").val(data.data.phoneNum);
-                    $("#info-email-input").val(data.data.email);
+                    info.display.infoDisplay(data);
 
                 },
                 error:function(data,status){
@@ -92,6 +93,52 @@ var info={
         
     
         
+    },
+    display:{
+        "infoDisplay":function (data) {
+            if(data.code == info.return.QUERY_USER_INFO_SUCCESS.code ){
+
+                ///////////////////////////////
+                /*页面头*/
+                $("#index-content-user").show();
+                console.log(data.message);
+                console.log(data.data);
+                $("#top-nav-unlogin").hide();
+                $("#top-nav-login").show();
+                $("#head-info-btn").text(data.data.nickName);
+
+                //////////////////////////////
+                /*用户信息*/
+                $("#user-info-header").attr("src","../static"+data.data.headerUrl);
+                $("#user-info-nickName").text(data.data.nickName);
+                $("#user-info-phone").text(data.data.phoneNum);
+                $("#user-info-email").text(data.data.email);
+                var registerDate = new Date(data.data.registerTime);
+                var displayDate = registerDate.getFullYear()+"-"+registerDate.getMonth()
+                    +"-"+registerDate.getDay()+" "
+                    + registerDate.getHours() + ":" + registerDate.getMinutes();
+                $("#user-info-register").text(displayDate);
+
+                //////////////////////////////
+                /*修改用户信息*/
+
+                $("#user-info-modify-header").attr("src","../static"+data.data.headerUrl);
+                $("#user-info-modify-nickName").val(data.data.nickName);
+                $("#user-info-modify-phone").val(data.data.phoneNum);
+                $("#user-info-modify-email").val(data.data.email);
+
+
+
+            }
+            else if(data.code == info.return.QUERY_USER_INFO_FAIL.code ){
+                console.log(data.message);
+
+                $("#top-nav-login").hide();
+                $("#top-nav-unlogin").show();
+                $("#index-content-user").hide();
+
+            }
+        }
     },
     
     /**
@@ -188,7 +235,9 @@ $(function () {
     $("#user-info-page-btn").click(function () {
         console.log("user-info-page-btn click")
         $(".info-select-menu-item").parent().removeClass("item-select");
-        $("#user-info-page-btn").parent().addClass("item-select")
+        $("#user-info-page-btn").parent().addClass("item-select");
+        $(".user-info").hide();
+        $("#user-info-page").show();
 
     })
     $("#modify-info-page-btn").click(function () {
@@ -196,11 +245,18 @@ $(function () {
         $(".info-select-menu-item").parent().removeClass("item-select");
         $("#modify-info-page-btn").parent().addClass("item-select")
 
+        $(".user-info").hide();
+        $("#user-info-modify-page").show();
+
+
     })
     $("#concern-page-btn").click(function () {
         console.log("user-info-page-btn click")
         $(".info-select-menu-item").parent().removeClass("item-select");
         $("#concern-page-btn").parent().addClass("item-select")
+
+        $(".user-info").hide();
+        $("#user-followee-page").show();
 
     })
     $("#fan-page-btn").click(function () {
@@ -208,11 +264,17 @@ $(function () {
         $(".info-select-menu-item").parent().removeClass("item-select");
         $("#fan-page-btn").parent().addClass("item-select")
 
+        $(".user-info").hide();
+        $("#user-follower-page").show();
+
     })
     $("#collect-page-btn").click(function () {
         console.log("user-info-page-btn click")
         $(".info-select-menu-item").parent().removeClass("item-select");
         $("#collect-page-btn").parent().addClass("item-select")
+
+        $(".user-info").hide();
+        $("#user-collect-page").show();
 
     })
 })

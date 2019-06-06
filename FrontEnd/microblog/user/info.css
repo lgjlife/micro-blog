@@ -83,7 +83,7 @@ html,body,#content{
     padding-left: 0px;
     margin-left: 0px;
 
-    background-color: #71dd8a;
+   /* background-color: #71dd8a;*/
 
     width: inherit;
 
@@ -96,5 +96,11 @@ html,body,#content{
 }
 
 .item-select{
-    background-color: #D2B48C;
+    background-color: #FFEC8B;
+}
+.item-unselect{
+    background-color: blue;
+}
+.user-info{
+    display: none;
 }

@@ -11,6 +11,9 @@
         <link rel="stylesheet" type="text/css" href="../static/css/bootstrap/bootstrap.css">
         <script src="../static/css/bootstrap/bootstrap.js"></script>
 
+        <script src="../common/token.js"></script>
+        <script src="../common/local.storage.utils.js"></script>
+
 
          <link rel="stylesheet" type="text/css" href="info.css">
         <script src="info.js"></script>
@@ -21,7 +24,8 @@
         <script src="../static/js/security/Barrett.js"></script>
  	    <script src="../static/js/security/BigInt.js"></script>
  	    <script src="../static/js/security/RSA.js"></script>
-        
+
+
 
         
     </head>
@@ -44,37 +48,54 @@
             </div>
         </nav>
         <div>
-            <div id="info-select-menu">
+            <div id="info-select-menu" >
                 <ul>
-                    <li>
+                    <li class="item-select">
                         <a class="info-select-menu-item" id="user-info-page-btn" href="javascript:void(0)">用户信息</a>
                     </li>
-                    <li>
+                    <li >
                         <a class="info-select-menu-item" id="modify-info-page-btn" href="javascript:void(0)">修改信息</a>
                     </li>
-                    <li>
+                    <li >
                         <a class="info-select-menu-item" id="concern-page-btn" href="javascript:void(0)">我的关注</a>
                     </li>
-                    <li>
+                    <li >
                         <a class="info-select-menu-item" id="fan-page-btn" href="javascript:void(0)">我的粉丝</a>
                     </li>
-                    <li>
+                    <li >
                         <a class="info-select-menu-item" id="collect-page-btn" href="javascript:void(0)">我的收藏</a>
                     </li>
                 </ul>
             </div>
             <div>
                 <!-- 用户信息 -->
-                <div>
-                    <img src="">
+                <div id="user-info-page" class="user-info " style="display: block" >
+                    <h1>用户信息</h1>
+                    <img style="height: 100px;width: 100px" id="user-info-header">
+                    <ul style="list-style-type:none">
+                        <li>
+                            <span style="font-weight: bold">昵称:</span><span id="user-info-nickName"></span>
+                        </li>
+                        <li>
+                            <span style="font-weight: bold">手机号:</span><span id="user-info-phone"></span>
+                        </li>
+                        <li>
+                            <span style="font-weight: bold">邮箱:</span><span id="user-info-email"></span>
+                        </li>
+                        <li>
+                            <span style="font-weight: bold">注册时间:</span><span id="user-info-register"></span>
+                        </li>
+
+                    </ul>
 
 
                 </div>
 
                 <!-- 修改信息-->
-                <div>
+                <div id="user-info-modify-page" class="user-info">
+                    <h1>修改信息</h1>
                     <div class="info-input-block">
-                        <img src="../static/img/user/head/head.jpg" id="info-header-img" height="80px" width="80px">
+                        <img src="../static/img/user/head/head.jpg" id="user-info-modify-header" height="80px" width="80px">
                     </div>
                     <div>
                         <a href="javascript:void(0)" id="modify-head">修改头像</a>
@@ -86,15 +107,15 @@
                     </div>
                     <div class="info-input-block">
                         <span class="info-lable">昵称</span>
-                        <input type="text" id = "info-nick-name-input" value="">
+                        <input type="text" id = "user-info-modify-nickName" value="">
                     </div>
                     <div class="info-input-block">
                         <span class="info-lable" >电话号码</span>
-                        <input type="text" id = "info-phone-input" value="">
+                        <input type="text" id = "user-info-modify-phone" value="">
                     </div>
                     <div class="info-input-block">
                         <span class="info-lable">邮箱</span>
-                        <input type="text" id = "info-email-input" value="">
+                        <input type="text" id = "user-info-modify-email" value="">
                     </div>
                     <div class="info-input-block">
                         <button id="info-setting-btn">保存设置</button>
@@ -102,7 +123,8 @@
                 </div>
 
                 <!--　我的关注 -->
-                <div>
+                <div id="user-followee-page" class="user-info">
+                    <h1>我的关注</h1>
                     <ul>
                         <li>
                             <img src=""><a href="javascript:void(0)">s</a>
@@ -117,7 +139,8 @@
                 </div>
 
                 <!--　我的粉丝 -->
-                <div>
+                <div id="user-follower-page" class="user-info">
+                    <h1>我的粉丝</h1>
                     <ul>
                         <li>
                             <img src=""><a href="javascript:void(0)">s</a>
@@ -131,8 +154,8 @@
                 </div>
 
                 <!--我的收藏 -->
-                <div>
-
+                <div id="user-collect-page" class="user-info">
+                    <h1>我的收藏</h1>
                 </div>
 
 
