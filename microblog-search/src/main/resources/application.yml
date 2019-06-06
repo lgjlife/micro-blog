@@ -23,7 +23,6 @@ spring:
 logging:
   level:
     com.clolud.microblog: debug
-    org: debug
     org.apache: error
 
 microblog:

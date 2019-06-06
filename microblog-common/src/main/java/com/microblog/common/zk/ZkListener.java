@@ -21,6 +21,12 @@ public class ZkListener  implements TreeCacheListener {
         try{
             ChildData data = treeCacheEvent.getData();
 
+            if((data == null)
+              ||((data != null) && (data.getData().length == 9))){
+                //为9时读到127.0.1.1
+                return;
+            }
+
             switch (treeCacheEvent.getType()){
                 case NODE_ADDED:
                     eventHandler.addHandler(data);
@@ -37,6 +43,7 @@ public class ZkListener  implements TreeCacheListener {
         }
         catch(Exception ex){
             log.error(ex.getMessage());
+            ex.printStackTrace();
         }
     }
 

@@ -9,8 +9,8 @@ eureka:
 
 logging:
   level:
-    com.microblog: trace
-    org.mybatis: trace
+    com.microblog: debug
+    org.mybatis: debug
 spring:
   application:
     name: microblog-blog

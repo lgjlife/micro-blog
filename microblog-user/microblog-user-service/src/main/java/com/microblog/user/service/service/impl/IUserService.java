@@ -16,7 +16,6 @@ import com.microblog.user.dao.model.User;
 import com.microblog.user.service.config.utils.RedisStringUtil;
 import com.microblog.user.service.constants.UserRedisKeyUtil;
 import com.microblog.user.service.rabbitmq.PublishConfig;
-import com.microblog.user.service.rabbitmq.RabbitmqProducer;
 import com.microblog.user.service.rocketmq.RocketmqProducer;
 import com.microblog.user.service.rocketmq.RocketmqPublishConfig;
 import com.microblog.user.service.service.UserService;
@@ -54,8 +53,8 @@ public class IUserService implements UserService {
     @Autowired
     RedisStringUtil redisStringUtil;
 
-    @Autowired
-    RabbitmqProducer  rabbitmqProducer;
+    /*@Autowired
+    RabbitmqProducer  rabbitmqProducer;*/
 
 
     @Autowired
@@ -138,7 +137,7 @@ public class IUserService implements UserService {
             mailDto.setTitle("Micro-Blog 验证码");
             mailDto.setConent(content);
 
-            rabbitmqProducer.publish(mailDto,mailPublishConfig);
+           // rabbitmqProducer.publish(mailDto,mailPublishConfig);
             log.debug("向邮箱({})发送验证码:({})",email,code);
             Date end = new Date();
             log.info("邮件花费时间：" + (end.getTime() - start.getTime()));

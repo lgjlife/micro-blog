@@ -47,15 +47,16 @@ public class RocketmqProducer {
      *
     */
     public   void  create(){
+
         producer = new DefaultMQProducer(group);
         producer.setNamesrvAddr(rocketProperties.getAddress());
-
 
         try{
             producer.start();
         }
         catch(Exception ex){
             log.error("create rocketmq error! group={},address ={}, message ={}",group,rocketProperties.getAddress(),ex.getMessage());
+            ex.printStackTrace();
         }
     }
 

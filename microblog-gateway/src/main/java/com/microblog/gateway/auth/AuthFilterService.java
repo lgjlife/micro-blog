@@ -98,8 +98,12 @@ public class AuthFilterService {
 
             log.debug("ListenerEventHandlerImpl　addHandler");
             byte[] body = data.getData();
+            if(body.length == 0){
+                log.debug("zk read 0 byte!");
+                return;
+            }
             String path = data.getPath();
-
+            log.info("body-len[{}],value={}",body.length,new String(body));
             Map<String , List<String>> pathMaps = ( Map<String , List<String>>)zkCli.byteToObject(body,Map.class);
 
             pathMaps.forEach((k,v)->{

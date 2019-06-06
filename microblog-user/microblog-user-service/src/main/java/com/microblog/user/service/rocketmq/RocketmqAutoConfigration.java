@@ -27,7 +27,6 @@ public class RocketmqAutoConfigration {
     @Bean
     public RocketmqProducer rocketmqProducer(){
         RocketmqProducer producer = new RocketmqProducer(rocketProperties,"USER_PHONE_VERIFICATIONCODE_GROUP");
-        producer.create();
         return  producer;
 
     }

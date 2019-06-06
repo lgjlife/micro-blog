@@ -42,7 +42,7 @@
         <producerCfg>value.serializer=org.apache.kafka.common.serialization.StringSerializer</producerCfg>
     </appender>-->
 
-    <root level="debug">
+    <root level="error">
        <!-- <appender-ref ref="KafkaAppender"/>-->
         <appender-ref ref="console"/>
     </root>
