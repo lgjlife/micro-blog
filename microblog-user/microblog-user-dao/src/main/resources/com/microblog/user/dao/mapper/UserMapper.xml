@@ -178,4 +178,23 @@
     where user_id = #{userId,jdbcType=BIGINT}
   </update>
 
+
+  <select id="selectUserInfo" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select user_id, nick_name, actual_name, gender,
+    age, status, email, email_active, phone_num, register_time, last_login_time, login_nums,
+    header_url
+    from user
+    where user_id = #{userId,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectUsersInfo" parameterType="java.util.List" resultMap="BaseResultMap">
+    select user_id, user_number, nick_name, login_password, salt, actual_name, gender,
+    age, status, email, email_active, phone_num, register_time, last_login_time, login_nums,
+    header_url
+    from user
+    where user_id in
+    <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </select>
 </mapper>

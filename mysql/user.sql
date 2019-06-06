@@ -58,29 +58,19 @@ INSERT INTO `user` VALUES (22,1,'中国速读法反攻倒算','77671e8c7374b54bd
 
 DELETE FROM user where user_id=22;
 
-
-/*用户粉丝表
-* 一对多，一个用户有多个粉丝
+/*
+通过followerId查询获得用户的关注列表
+通过followeeId查询获得用户的粉丝列表
 */
-DROP TABLE IF EXISTS `fans`;
-CREATE TABLE `fans`(
-   `fans_id` BIGINT   AUTO_INCREMENT COMMENT "粉丝ID",
-   `user_id` BIGINT   COMMENT "用户ID",
-    PRIMARY KEY (`fans_id`),
-    index(`user_id`)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT="粉丝表";
-
-
-/*用户关注表
-* 一对多，一个用户关注多个微博
-*/
-
-DROP TABLE IF EXISTS `concerns`;
-CREATE TABLE `concerns`(
-   `id` BIGINT   AUTO_INCREMENT COMMENT "关注ID",
-   `user_id` BIGINT   COMMENT "用户ID",
-   `concern_id` BIGINT   COMMENT "关注ID",
+DROP TABLE IF EXISTS `relation`;
+CREATE TABLE `relation`(
+   `id` BIGINT   AUTO_INCREMENT COMMENT "ID",
+   `followerId` BIGINT   COMMENT "关注者ID",
+   `followeeId` BIGINT   COMMENT "被关注者ID",
     PRIMARY KEY (`id`),
-    index(`user_id`),
-    index(`concern_id`)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT="用户关注表";
+    index(`followerId`),
+    index(`followeeId`),
+    index(`followerId`,`followeeId`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT="关系表";
+
+

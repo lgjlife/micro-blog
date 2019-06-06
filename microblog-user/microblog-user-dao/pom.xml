@@ -37,7 +37,6 @@
     </dependencies>
     <build>
         <plugins>
-
             <!-- mybatis generator 自动生成代码插件 -->
             <plugin>
                 <groupId>org.mybatis.generator</groupId>
@@ -46,8 +45,9 @@
                 <configuration>
                     <!--注意这里的 resources/generator/generatorConfig.xml 要与你上面的命名和放置的位置匹配-->
                     <configurationFile>${basedir}/src/main/resources/generator/generatorConfig.xml</configurationFile>
-                    <overwrite>true</overwrite>
+                    <overwrite>false</overwrite>
                     <verbose>true</verbose>
+
                 </configuration>
             </plugin>
 

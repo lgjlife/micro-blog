@@ -51,4 +51,7 @@ public interface UserMapper {
     User selectByEmail(String email);
     Integer  updateInfoByPrimaryKey(Map<String,Object> map);
 
+    User selectUserInfo(Long userId);
+    List<User> selectUsersInfo(List<Long> userIds);
+
 }

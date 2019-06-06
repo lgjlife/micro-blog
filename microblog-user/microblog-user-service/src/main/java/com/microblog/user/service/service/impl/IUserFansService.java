@@ -1,7 +1,5 @@
 package com.microblog.user.service.service.impl;
 
-import com.microblog.user.dao.mapper.ConcernsMapper;
-import com.microblog.user.dao.mapper.FansMapper;
 import com.microblog.user.dao.mapper.UserMapper;
 import com.microblog.user.dao.model.Concerns;
 import com.microblog.user.dao.model.User;

@@ -14,7 +14,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Slf4j
 @Data
@@ -24,12 +23,7 @@ public class KafkaAppender extends UnsynchronizedAppenderBase<ILoggingEvent> {
     protected String topic = "application-log";
     protected Map<String,Object> producerCfg =  new HashMap<String, Object>();
     private ExecutorService logSendTaskService = Executors.newCachedThreadPool();
-
-
-    LogKafkaProducer producer ;
-
-    AtomicInteger count = new AtomicInteger(0);
-
+    private LogKafkaProducer producer ;
     private  String applicationName;
 
     public KafkaAppender() {

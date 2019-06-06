@@ -79,17 +79,12 @@
             <generatedKey column="id" sqlStatement="MySql" type="post" identity="true"/>
         </table>-->
 
-        <table tableName="fans" >
-            <generatedKey column="fans_id" sqlStatement="MySql" type="post" identity="true"/>
+        <table tableName="relation" >
+            <generatedKey column="id" sqlStatement="MySql" type="post" identity="true"/>
         </table>
         <table tableName="concerns" >
             <generatedKey column="concerns_id" sqlStatement="MySql" type="post" identity="true"/>
         </table>
-
-
-
-
-
 
     </context>
 </generatorConfiguration>

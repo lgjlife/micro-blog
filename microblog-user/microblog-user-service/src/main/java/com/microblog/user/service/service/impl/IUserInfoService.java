@@ -177,6 +177,8 @@ public class IUserInfoService  implements UserInfoService
         throw  new NullPointerException();
     }
 
+
+
     /**
      *功能描述
      * @author lgj
