@@ -69,7 +69,26 @@ public enum UserReturnCode implements  ReturnCode{
     HEADER_FILE_NULL(1084,"上传的图片为空"),
     HEADER_FILE_SUCCESS(1085,"上传的图片成功"),
     INFO_RESET_SUCCESS (1086,"重置信息成功"),
+
+    //用户关系
+    FOLLOW_SUCCESS(3010,"关注成功"),
+    FOLLOW_FAIL(3011,"关注失败"),
+
+    UN_FOLLOW_SUCCESS(3012,"取消关注成功"),
+    UN_FOLLOW_FAIL(3013,"取消关注失败"),
+
+    REMOVE_FOLLOWER_SUCCESS(3014,"移除粉丝成功"),
+    REMOVE_FOLLOWER_FAIL(3015,"移除粉丝失败"),
+
+    LIST_FOLLOWER_SUCCESS(3016,"获取粉丝列表成功"),
+    LIST_FOLLOWER_FAIL(3017,"获取粉丝列表失败"),
+
+    LIST_FOLLOWEE_SUCCESS(3018,"获取关注者成功"),
+    LIST_FOLLOWEE_FAIL(3019,"获取关注者失败"),
+
     ;
+
+
 
     //代码
     private Integer code;

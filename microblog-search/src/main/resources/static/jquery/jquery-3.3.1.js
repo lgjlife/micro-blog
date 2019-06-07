@@ -5132,7 +5132,7 @@ jQuery.event = {
 
 		// Remove data and the expando if it's no longer used
 		if ( jQuery.isEmptyObject( events ) ) {
-			dataPriv.remove( elem, "handle events" );
+			dataPriv.remove( elem, "handler events" );
 		}
 	},
 
@@ -8179,7 +8179,7 @@ jQuery.extend( jQuery.event, {
 
 		if ( type.indexOf( "." ) > -1 ) {
 
-			// Namespaced trigger; create a regexp to match event type in handle()
+			// Namespaced trigger; create a regexp to match event type in handler()
 			namespaces = type.split( "." );
 			type = namespaces.shift();
 			namespaces.sort();
@@ -8914,7 +8914,7 @@ jQuery.extend( {
 			responseHeadersString,
 			responseHeaders,
 
-			// timeout handle
+			// timeout handler
 			timeoutTimer,
 
 			// Url cleanup var
@@ -9254,7 +9254,7 @@ jQuery.extend( {
 			// Convert no matter what (that way responseXXX fields are always set)
 			response = ajaxConvert( s, response, jqXHR, isSuccess );
 
-			// If successful, handle type chaining
+			// If successful, handler type chaining
 			if ( isSuccess ) {
 
 				// Set the If-Modified-Since and/or If-None-Match header, if in ifModified mode.
@@ -9551,7 +9551,7 @@ jQuery.ajaxTransport( function( options ) {
 
 									// Support: IE <=9 only
 									// IE9 has no XHR2 but throws on binary (trac-11426)
-									// For XHR2 non-text, let the caller handle it (gh-2498)
+									// For XHR2 non-text, let the caller handler it (gh-2498)
 									( xhr.responseType || "text" ) !== "text"  ||
 									typeof xhr.responseText !== "string" ?
 										{ binary: xhr.response } :
@@ -9569,7 +9569,7 @@ jQuery.ajaxTransport( function( options ) {
 
 				// Support: IE 9 only
 				// Use onreadystatechange to replace onabort
-				// to handle uncaught aborts
+				// to handler uncaught aborts
 				if ( xhr.onabort !== undefined ) {
 					xhr.onabort = errorCallback;
 				} else {
@@ -9579,7 +9579,7 @@ jQuery.ajaxTransport( function( options ) {
 						if ( xhr.readyState === 4 ) {
 
 							// Allow onerror to be called first,
-							// but that will not handle a native abort
+							// but that will not handler a native abort
 							// Also, save errorCallback to a variable
 							// as xhr.onerror cannot be accessed
 							window.setTimeout( function() {

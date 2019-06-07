@@ -32,8 +32,9 @@ var info={
 
                     var jsonData = JSON.stringify(data);
                     console.log(jsonData);
-                    
                     $("#info-header-img").attr("src","../static"+data.data);
+                    info.request.queryUserInfo();
+
                }
             })  
         },

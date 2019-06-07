@@ -2274,7 +2274,7 @@
                         callback();
                     }
                 }; // ----------------------------------------------------------------------
-                // the following methods are used to handle overflowing modals
+                // the following methods are used to handler overflowing modals
                 // todo (fat): these should probably be refactored out of modal.js
                 // ----------------------------------------------------------------------
 
