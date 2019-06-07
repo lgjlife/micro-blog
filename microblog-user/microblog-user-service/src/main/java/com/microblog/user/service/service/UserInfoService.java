@@ -17,9 +17,8 @@ public interface UserInfoService {
      * @return:
      *
      */
-    User userInfo();
-    User userInfoById(Long id);
-    String upLoadHeaderImg(MultipartHttpServletRequest multiRequest) throws  Exception;
-
-    ReturnCode saveSetting(Map<String, Object> map);
+    User userInfo(Long userId);
+    User userInfoById(Long userId);
+    String upLoadHeaderImg(Long userId,MultipartHttpServletRequest multiRequest) throws  Exception;
+    ReturnCode saveSetting(Long userId,Map<String, Object> map);
 }

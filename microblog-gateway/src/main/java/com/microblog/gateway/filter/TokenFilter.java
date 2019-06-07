@@ -46,7 +46,7 @@ public class TokenFilter  extends ZuulFilter {
     public Object run() throws ZuulException {
 
 
-        log.debug("TokenFilter" );
+        log.debug("Start TokenFilter ....." );
 
         RequestContext currentContext = RequestContext.getCurrentContext();
         HttpServletRequest request = currentContext.getRequest();
@@ -55,32 +55,10 @@ public class TokenFilter  extends ZuulFilter {
         try{
             //从请求中获取token
             token = TokenUtil.getTokenFromRequest(request);
-            log.debug("");
            //校验Token
            if(JwtUtil.verify(token)){
                log.debug("Token ={}",token);
                currentContext.addZuulRequestHeader("token",token);
-
-              /* String userId = JwtUtil.getClaim(token,"userId");
-               currentContext.addZuulRequestHeader("userId",userId);
-
-               currentContext.addZuulRequestHeader("authorization",token);
-               Map<String, String> headers =  currentContext.getZuulRequestHeaders();
-
-               headers.forEach((key,val)->log.debug("{}--{}",key,val));
-               request.setAttribute("Authorization",token);
-
-              String tokenAttr =  (String)request.getAttribute("authorization");
-
-              log.debug("tokenAttr = " + tokenAttr);
-
-               currentContext.setRequest(request);
-
-               currentContext.addZuulRequestHeader("token",token);
-               currentContext.addZuulRequestHeader("authorization1",token);
-               currentContext.addZuulRequestHeader("aaa",token);*/
-
-
            }
 
         }

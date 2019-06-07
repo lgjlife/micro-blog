@@ -1,9 +1,9 @@
 package com.microblog.user.web.kaptcha;
 
-import com.microblog.common.aop.syslog.anno.PrintUrlAnno;
-import com.microblog.user.service.constants.UserRedisKeyUtil;
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
+import com.microblog.common.aop.syslog.anno.PrintUrlAnno;
+import com.microblog.user.service.constants.UserRedisKeyUtil;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +59,7 @@ public class KaptchaImageCreateController {
 
         BufferedImage bi = kaptchaProducer.createImage(verificationCode);  
         ServletOutputStream out = response.getOutputStream();  
-        ImageIO.write(bi, "jpg", out);  
+        ImageIO.write(bi, "jpg", out);
         try {  
             out.flush();  
         } finally {  

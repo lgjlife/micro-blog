@@ -7,6 +7,7 @@ import com.microblog.common.result.BaseResult;
 import com.microblog.common.result.WebResult;
 import com.microblog.user.dao.model.User;
 import com.microblog.user.service.service.UserInfoService;
+import com.microblog.user.service.utils.UserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -39,11 +40,11 @@ public class UserInfoController {
 
 
     @PrintUrlAnno
-    @PostMapping("/img")
+    @PostMapping("/header-img")
     @ResponseBody
     public BaseResult upLoadHeaderImg(HttpServletRequest request, HttpServletResponse response) {
 
-
+        Long currentUserId =  UserUtil.getUserId(request);
         //创建一个通用的多部分解析器
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
         //判断 request 是否有文件上传,即多部分请求
@@ -52,7 +53,7 @@ public class UserInfoController {
             MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
 
             try{
-                String imgPath = userInfoService.upLoadHeaderImg(multiRequest);
+                String imgPath = userInfoService.upLoadHeaderImg(currentUserId,multiRequest);
                 return new WebResult(UserReturnCode.HEADER_FILE_SUCCESS,imgPath);
             }
             catch(Exception ex){
@@ -66,8 +67,9 @@ public class UserInfoController {
     @PrintUrlAnno
     @GetMapping
     public BaseResult queryCurrentLoginInfo(){
+        Long currentUserId =  UserUtil.getUserId(request);
         BaseResult result = null;
-        User user =  userInfoService.userInfo();
+        User user =  userInfoService.userInfo(currentUserId);
         if(user  == null){
 
             result = new WebResult(UserReturnCode.QUERY_USER_INFO_FAIL);
@@ -91,7 +93,8 @@ public class UserInfoController {
     @PostMapping("/setting")
     public BaseResult saveSetting(@RequestBody Map<String,Object> map){
 
-        ReturnCode returnCode = userInfoService.saveSetting(map);
+        Long currentUserId =  UserUtil.getUserId(request);
+        ReturnCode returnCode = userInfoService.saveSetting(currentUserId,map);
         BaseResult result = new WebResult(returnCode);
         return   result ;
     }

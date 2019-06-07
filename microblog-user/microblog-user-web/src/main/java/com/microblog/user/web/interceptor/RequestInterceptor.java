@@ -32,30 +32,6 @@ public class RequestInterceptor extends HandlerInterceptorAdapter {
             log.debug("token userId = " + uId);
             request.setAttribute("userId",uId);
         }
-
-       /* Enumeration<String> names = request.getHeaderNames();
-        while (names.hasMoreElements()){
-            log.debug("HeaderNames = " + names.nextElement());
-        }*/
-
-
-
-
-      /*  String Authorization =  (String)request.getHeader("authorization");
-        log.debug("Authorization = " + Authorization);
-
-        String Authorization1 =  (String)request.getHeader("authorization1");
-        log.debug("Authorization1 = " + Authorization1);
-        String aaa = request.getHeader("aaa");
-        log.debug("aaa = " + aaa);
-
-        String userId = request.getHeader("userId");
-        log.debug("userId = " + userId);
-
-
-*/
-
-
         return true;
     }
 }

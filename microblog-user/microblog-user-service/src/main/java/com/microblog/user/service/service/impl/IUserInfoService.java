@@ -8,7 +8,6 @@ import com.microblog.user.dao.model.User;
 import com.microblog.user.service.config.utils.RedisStringUtil;
 import com.microblog.user.service.constants.UserRedisKeyUtil;
 import com.microblog.user.service.service.UserInfoService;
-import com.microblog.user.service.utils.fastdfs.FastdfsGroup;
 import com.microblog.user.service.utils.fastdfs.FastdfsUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +39,8 @@ public class IUserInfoService  implements UserInfoService
     UserMapper userMapper;
 
     @Override
-    public User userInfo() {
-        return  getUser(getUserId());
+    public User userInfo(Long userId) {
+        return  getUser(userId);
     }
 
     @Override
@@ -59,7 +58,7 @@ public class IUserInfoService  implements UserInfoService
      *
     */
     @Override
-    public ReturnCode saveSetting(Map<String, Object> map) {
+    public ReturnCode saveSetting(Long userId,Map<String, Object> map) {
 
         ReturnCode returnCode = null;
 
@@ -75,7 +74,7 @@ public class IUserInfoService  implements UserInfoService
         else if(!UserRegexUtil.isEmail(email)){
             return UserReturnCode.FORMAT_EMAIL_ERR;
         }
-        User user = getUser(getUserId());
+        User user = getUser(userId);
         user.setNickName(nickName);
         user.setPhoneNum(phone);
         user.setEmail(email);
@@ -111,7 +110,7 @@ public class IUserInfoService  implements UserInfoService
 
     @Override
     @Transactional
-    public String upLoadHeaderImg(MultipartHttpServletRequest multiRequest) throws Exception {
+    public String upLoadHeaderImg(Long userId,MultipartHttpServletRequest multiRequest) throws Exception {
 
 
         List<MultipartFile> fileList = new ArrayList<>();
@@ -146,7 +145,7 @@ public class IUserInfoService  implements UserInfoService
             String savePath = staticPath + subPath;
 
             //数据保存
-            User user = getUser(getUserId());
+            User user = getUser(userId);
             if(user != null){
                 HashMap<String,Object> map = new HashMap<String,Object> ();
                 map.put("userId",user.getUserId());
@@ -159,19 +158,19 @@ public class IUserInfoService  implements UserInfoService
                         UserRedisKeyUtil.LOGIN_USER_KEY.getTimeout());
                 File newfile = new File(savePath);
                 log.debug("newfile={}", newfile.getAbsolutePath());
-
-
-
                 file.transferTo(newfile);
-                fastdfsUtil.upload(FastdfsGroup.USER_HEADER_IMAGE_GROUP,
+                /*fastdfsUtil.upload(FastdfsGroup.USER_HEADER_IMAGE_GROUP,
                         file.getName(),file.getInputStream(),file.getSize(),
-                        null);
+                        null);*/
 
                 log.debug("文件上传成功！");
+
+                redisStringUtil.delete(UserRedisKeyUtil.LOGIN_USER_KEY.getPrefix()+user.getUserId());
                 return subPath;
 
 
             }
+            log.debug("文件上传失败！");
             throw  new NullPointerException();
         }
         throw  new NullPointerException();
@@ -199,7 +198,6 @@ public class IUserInfoService  implements UserInfoService
 
     private  User  getUser(long userId){
 
-
         User user =  (User)redisStringUtil.get(UserRedisKeyUtil.LOGIN_USER_KEY.getPrefix()+userId);
         if(user == null){
             user = userMapper.selectUserInfo(userId);
@@ -212,9 +210,5 @@ public class IUserInfoService  implements UserInfoService
     }
 
 
-    private  Long  getUserId(){
-        Long userId =  (Long)request.getAttribute("userId");
-        log.debug("userId = " + userId);
-        return userId;
-    }
+
 }

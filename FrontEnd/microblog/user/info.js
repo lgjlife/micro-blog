@@ -10,7 +10,7 @@ var info={
         },
     },
     "requestUrl":{
-        "fileUploadUrl":"/user/user/info/head-img",
+        "headerImgUploadUrl":"/user/user/info/header-img",
         "queryUserInfoUrl":"/user/user/info" ,
         "requestSettingUrl":"/user/user/info/setting" ,
     },
@@ -20,7 +20,7 @@ var info={
         */
         "fileUpload":function(formData){
             $.ajax({
-                url: "/user/info/img",
+                url: info.requestUrl.headerImgUploadUrl,
                 type: 'POST',
                 cache: false,
                 data: formData,
@@ -64,12 +64,12 @@ var info={
             
               
             var sendData ={"nickName":"","phoneNum":"","email":"",};
-            sendData.nickName = $("#info-nick-name-input").val(); 
-            sendData.phoneNum = $("#info-phone-input").val();
-            sendData.email = $("#info-email-input").val(); 
+            sendData.nickName = $("#user-info-modify-nickName").val();
+            sendData.phoneNum = $("#user-info-modify-phone").val();
+            sendData.email = $("#user-info-modify-email").val();
 
             var jsonData = JSON.stringify(sendData);
-            console.log(jsonData);      
+            console.log("设置的用户信息:"+jsonData);
 
             $.ajax({
                 type: "POST",

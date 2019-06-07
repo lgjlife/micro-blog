@@ -48,8 +48,8 @@ public class AuthFilterService {
             List<String> paths = authPathMaps.get(key);
             for(String path:paths){
 
-              //  log.debug("matcher path = {}",path);
-                if(matcher.match(servletPath,path)==true){
+                log.debug("matcher pattern=[{}] ,path=[{}]",path,servletPath);
+                if(matcher.match(path,servletPath)==true){
                     log.debug("拦截{}",servletPath);
                     return true;
                 }
@@ -59,6 +59,7 @@ public class AuthFilterService {
         log.debug("不拦截{}",servletPath);
         return  false;
     }
+
 
 
 

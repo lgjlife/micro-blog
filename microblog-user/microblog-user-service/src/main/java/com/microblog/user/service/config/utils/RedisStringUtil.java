@@ -26,4 +26,11 @@ public class RedisStringUtil {
 
     }
 
+    public  Boolean  delete(String key){
+        return  redisTemplate.delete(key);
+
+    }
+
+
+
 }
