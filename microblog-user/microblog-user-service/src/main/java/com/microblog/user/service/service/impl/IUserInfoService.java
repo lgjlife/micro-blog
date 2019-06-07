@@ -1,5 +1,6 @@
 package com.microblog.user.service.service.impl;
 
+import com.github.tobato.fastdfs.domain.fdfs.MetaData;
 import com.microblog.common.code.ReturnCode;
 import com.microblog.common.code.UserReturnCode;
 import com.microblog.common.utils.UserRegexUtil;
@@ -8,6 +9,7 @@ import com.microblog.user.dao.model.User;
 import com.microblog.user.service.config.utils.RedisStringUtil;
 import com.microblog.user.service.constants.UserRedisKeyUtil;
 import com.microblog.user.service.service.UserInfoService;
+import com.microblog.user.service.utils.fastdfs.FastdfsGroup;
 import com.microblog.user.service.utils.fastdfs.FastdfsUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
 import java.util.*;
 
 @Slf4j
@@ -117,58 +118,27 @@ public class IUserInfoService  implements UserInfoService
         //取得request中的所有文件名
         fileList = multiRequest.getFiles("file");
         if (fileList == null || fileList.size() <= 0) {
-
             log.debug("file is null");
             throw  new NullPointerException();
         }
-
-
         for(MultipartFile file:fileList) {
+
             log.debug("{}--{}", file.getName(), file.getOriginalFilename());
-
-            String staticPath = "/nginx/microblog/static";
-            String imgPath = "/img/header";
-            String originalFilename = file.getOriginalFilename();
-            String suffix = originalFilename.substring(originalFilename.lastIndexOf("."));
-            log.debug("OriginalFilename = {},suffix={}",originalFilename,suffix );
-
-
-            //创建文件夹
-            File saveFile = new File(staticPath+imgPath);
-            if (!saveFile.exists()) {
-                log.debug("path:{} not exists,create dir");
-                saveFile.mkdir();
-                log.debug("saveFile.exists? {}", saveFile.exists());
-            }
-
-            String subPath = imgPath + "/" + getRandomFileName() + suffix;
-            String savePath = staticPath + subPath;
-
+            //upload to fastdfs
+            String dfsImgPath = fastdfsUtil.upload(FastdfsGroup.USER_HEADER_IMAGE_GROUP,
+                    file.getOriginalFilename(),file.getInputStream(),file.getSize(),
+                    new HashSet<MetaData>());
             //数据保存
             User user = getUser(userId);
             if(user != null){
                 HashMap<String,Object> map = new HashMap<String,Object> ();
                 map.put("userId",user.getUserId());
-                map.put("headerUrl",subPath);
+                map.put("headerUrl",dfsImgPath);
                 userMapper.updateInfoByPrimaryKey(map);
-
-                user.setHeaderUrl(subPath);
-                redisStringUtil.set(UserRedisKeyUtil.LOGIN_USER_KEY.getPrefix()+user.getUserId(),
-                        user,
-                        UserRedisKeyUtil.LOGIN_USER_KEY.getTimeout());
-                File newfile = new File(savePath);
-                log.debug("newfile={}", newfile.getAbsolutePath());
-                file.transferTo(newfile);
-                /*fastdfsUtil.upload(FastdfsGroup.USER_HEADER_IMAGE_GROUP,
-                        file.getName(),file.getInputStream(),file.getSize(),
-                        null);*/
-
+                user.setHeaderUrl(dfsImgPath);
                 log.debug("文件上传成功！");
-
                 redisStringUtil.delete(UserRedisKeyUtil.LOGIN_USER_KEY.getPrefix()+user.getUserId());
-                return subPath;
-
-
+                return dfsImgPath;
             }
             log.debug("文件上传失败！");
             throw  new NullPointerException();

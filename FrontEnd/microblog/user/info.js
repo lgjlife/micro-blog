@@ -1,5 +1,8 @@
 var info={
     "return":{
+        "fail": 0,
+        "success":1,
+
         "QUERY_USER_INFO_SUCCESS":{
             "code": "1082",
             "message": "查询用户信息成功",
@@ -81,7 +84,7 @@ var info={
                 data: jsonData,
                 success: function(data,status){
                     console.log("queryUserInfo 返回 status : "+status)
-
+                    info.request.queryUserInfo();
 
                 },
                 error:function(data,status){
@@ -90,14 +93,68 @@ var info={
                 
             });
             
-        }
+        },
+        /**
+         * 查询用户的关注
+         */
+        "queryFollowee":function(){
+            $.ajax({
+                type: "GET",
+                url: info.requestUrl.queryUserInfoUrl,
+                success: function(data,status){
+                    info.display.infoDisplay(data);
+
+                },
+                error:function(data,status){
+                    console.log("queryUserInfo 返回 status"+status);
+                }
+
+            });
+
+        },
+        /**
+         * 查询用户粉丝
+         */
+        "queryFans":function(){
+            $.ajax({
+                type: "GET",
+                url: info.requestUrl.queryUserInfoUrl,
+                success: function(data,status){
+                    info.display.infoDisplay(data);
+
+                },
+                error:function(data,status){
+                    console.log("queryUserInfo 返回 status"+status);
+                }
+
+            });
+
+        },
+        /**
+         * 查询用户收藏
+         */
+        "queryCollect":function(){
+            $.ajax({
+                type: "GET",
+                url: info.requestUrl.queryUserInfoUrl,
+                success: function(data,status){
+                    info.display.infoDisplay(data);
+
+                },
+                error:function(data,status){
+                    console.log("queryUserInfo 返回 status"+status);
+                }
+
+            });
+
+        },
         
     
         
     },
     display:{
         "infoDisplay":function (data) {
-            if(data.code == info.return.QUERY_USER_INFO_SUCCESS.code ){
+            if(data.code == info.return.success ){
 
                 ///////////////////////////////
                 /*页面头*/
@@ -110,7 +167,7 @@ var info={
 
                 //////////////////////////////
                 /*用户信息*/
-                $("#user-info-header").attr("src","../static"+data.data.headerUrl);
+                $("#user-info-header").attr("src","/"+data.data.headerUrl);
                 $("#user-info-nickName").text(data.data.nickName);
                 $("#user-info-phone").text(data.data.phoneNum);
                 $("#user-info-email").text(data.data.email);
@@ -123,7 +180,7 @@ var info={
                 //////////////////////////////
                 /*修改用户信息*/
 
-                $("#user-info-modify-header").attr("src","../static"+data.data.headerUrl);
+                $("#user-info-modify-header").attr("src","/"+data.data.headerUrl);
                 $("#user-info-modify-nickName").val(data.data.nickName);
                 $("#user-info-modify-phone").val(data.data.phoneNum);
                 $("#user-info-modify-email").val(data.data.email);
@@ -131,7 +188,7 @@ var info={
 
 
             }
-            else if(data.code == info.return.QUERY_USER_INFO_FAIL.code ){
+            else if(data.code == info.fail ){
                 console.log(data.message);
 
                 $("#top-nav-login").hide();

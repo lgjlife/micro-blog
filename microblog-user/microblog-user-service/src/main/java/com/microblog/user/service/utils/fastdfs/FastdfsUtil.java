@@ -57,10 +57,10 @@ public class FastdfsUtil {
             throws FileNotFoundException {
 
 
-        log.debug("Upload the file [{}] to fastdfs-group[]",fileName,group);
+        log.debug("Upload the file [{}] to fastdfs-group[{}]",fileName,group);
         FastFile fastFile = new FastFile.Builder()
                 .withFile(inputStream,fileSize,getFileExtName(fileName))
-                .toGroup(group)
+                //.toGroup(group)
                 .withMetaData(metaDataSet)
                 .build();
 

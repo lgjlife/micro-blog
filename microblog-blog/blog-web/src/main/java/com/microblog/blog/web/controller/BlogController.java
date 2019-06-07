@@ -69,6 +69,7 @@ public class BlogController {
         return result;
     }
 
+
     /**
      *功能描述
      * @author lgj

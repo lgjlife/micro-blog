@@ -9,7 +9,7 @@ CREATE TABLE `user`(
    `actual_name` VARCHAR(100) DEFAULT NULL COMMENT "真实姓名",
    `gender`  VARCHAR(10) DEFAULT NULL COMMENT "性别",
    `age`  TINYINT UNSIGNED DEFAULT NULL  COMMENT "年龄",
-   `header_url` VARCHAR(50) DEFAULT NULL COMMENT "头像URL",
+   `header_url` VARCHAR(100) DEFAULT NULL COMMENT "头像URL",
    /*0:未注册，1：已注册，2：登录状态，3：离线状态，4,禁止登录状态，5：注销状态）*/
    `status` TINYINT DEFAULT NULL COMMENT "状态",
    `email` VARCHAR(30) COMMENT "电子邮箱",

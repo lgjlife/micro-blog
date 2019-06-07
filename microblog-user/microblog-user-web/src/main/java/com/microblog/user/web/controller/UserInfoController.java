@@ -2,7 +2,6 @@ package com.microblog.user.web.controller;
 
 import com.microblog.common.aop.syslog.anno.PrintUrlAnno;
 import com.microblog.common.code.ReturnCode;
-import com.microblog.common.code.UserReturnCode;
 import com.microblog.common.result.BaseResult;
 import com.microblog.common.result.WebResult;
 import com.microblog.user.dao.model.User;
@@ -54,14 +53,14 @@ public class UserInfoController {
 
             try{
                 String imgPath = userInfoService.upLoadHeaderImg(currentUserId,multiRequest);
-                return new WebResult(UserReturnCode.HEADER_FILE_SUCCESS,imgPath);
+                return new WebResult(BaseResult.RESULT_SUCCESS,"获取用户头像图片成功",imgPath);
             }
             catch(Exception ex){
                 ex.printStackTrace();
-                return new WebResult(UserReturnCode.HEADER_FILE_NULL);
+                return new WebResult(BaseResult.RESULT_FAIL,"获取用户头像图片失败:"+ex.getMessage());
             }
         }
-        return new WebResult(UserReturnCode.HEADER_FILE_NULL);
+        return new WebResult(BaseResult.RESULT_FAIL,"获取用户头像图片失败,图片不存在");
     }
 
     @PrintUrlAnno
@@ -72,11 +71,11 @@ public class UserInfoController {
         User user =  userInfoService.userInfo(currentUserId);
         if(user  == null){
 
-            result = new WebResult(UserReturnCode.QUERY_USER_INFO_FAIL);
+            result = new WebResult(BaseResult.RESULT_FAIL,"查询用户信息失败，用户未登录");
             return   result ;
 
         }
-        result = new WebResult(UserReturnCode.QUERY_USER_INFO_SUCCESS,user);
+        result = new WebResult(BaseResult.RESULT_SUCCESS,"查询用户信息成功",user);
         return   result ;
     }
 

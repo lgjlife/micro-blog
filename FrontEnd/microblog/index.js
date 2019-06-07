@@ -1,13 +1,7 @@
 var index={
     "return":{
-        "QUERY_USER_INFO_SUCCESS":{
-            "code": "1082",
-            "message": "查询用户信息成功",
-        },
-        "QUERY_USER_INFO_FAIL":{
-            "code": "1083",
-            "message": "查询用户信息失败",
-        },
+        "fail": 0,
+        "success":1,
     },
     "requestUrl":{
        "queryUserInfoUrl":"/user/user/info",
@@ -20,8 +14,9 @@ var index={
                 type: "GET",
                 url: index.requestUrl.queryUserInfoUrl,
                 success: function(data,status){
-                    console.log("queryUserInfo 返回 status : "+status)
-                    if(data.code == index.return.QUERY_USER_INFO_SUCCESS.code ){
+                    console.log("queryUserInfo 返回 : "+JSON.stringify(data));
+
+                    if(data.code == index.return.success){
                         $("#index-content-user").show();
                         console.log(data.message);
 
@@ -29,11 +24,11 @@ var index={
                         $("#top-nav-login").show();
 
                         $("#head-info-btn").text(data.data.nickName);
-                        $("#index-header-img").attr("src","static"+data.data.headerUrl);
+                        $("#index-header-img").attr("src","/"+data.data.headerUrl);
                         $("#index-content-user-name").text(data.data.nickName);
                         
                     }
-                    else if(data.code == index.return.QUERY_USER_INFO_FAIL.code ){
+                    else if(data.code == index.return.fail ){
                         console.log(data.message);
 
                         $("#top-nav-login").hide();
