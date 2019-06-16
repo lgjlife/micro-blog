@@ -16,6 +16,4 @@ spring:
 ribbon:
   eureka:
     enabled: true
-logging:
-  level:
-    org.springframework: debug
+

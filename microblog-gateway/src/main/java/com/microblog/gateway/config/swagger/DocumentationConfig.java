@@ -29,6 +29,9 @@ public class DocumentationConfig implements SwaggerResourcesProvider {
         resources.add(swaggerResource("私信模块", "/chat/v2/api-docs", "2.0"));
         resources.add(swaggerResource("用户模块", "/user/v2/api-docs", "2.0"));
         resources.add(swaggerResource("网关模块", "/v2/api-docs", "2.0"));
+        resources.add(swaggerResource("微博模块", "/blog/v2/api-docs", "2.0"));
+        resources.add(swaggerResource("任务调度模块", "/scheduler/v2/api-docs", "2.0"));
+        resources.add(swaggerResource("搜索模块", "/search/v2/api-docs", "2.0"));
         return resources;
     }
 

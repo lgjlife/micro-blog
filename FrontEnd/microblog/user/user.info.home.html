@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户首页</title>
+
+    <script src="../static/js/jquery/jquery-3.3.1.js"></script>
+    <link rel="../stylesheet" type="text/css" href="static/css/bootstrap/bootstrap.css">
+    <script src="../static/css/bootstrap/bootstrap.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="user.info.home.css">
+    <script src="user.info.home.js"></script>
+    <script src="../common/return.js"></script>
+
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">microblog</a>
+            </div>
+            <div class="navbar-header" id="top-nav-unlogin">
+                <a class="navbar-brand" href="../index.html" id="main-page">首页</a>
+                <a class="navbar-brand" href="javascript:void(0)" id="head-login-btn">登录</a>
+                <a class="navbar-brand" href="javascript:void(0)" id="head-register-btn">注册</a>
+            </div>
+            <div class="navbar-header" id="top-nav-login" style=" display: none">
+                <a class="navbar-brand" href="javascript:void(0)" id="head-info-btn"></a>
+                <a class="navbar-brand" href="javascript:void(0)" id="head-logout-btn">退出登录</a>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- 内容显示 -->
+    <div id="content-display">
+        <!-- 用户信息内容显示 -->
+        <div id="user-info-display">
+            <div>
+                <div>
+                    <img id="user-header-img" src="../static/img/header/1.jpg"/>
+                </div>
+                <div>
+                    <span>人民的名义</span>
+                </div>
+                <div>
+                    <span>简介:</span><span></span>
+                </div>
+            </div>
+            <div>
+                <ul>
+                    <li><span>关注:</span><a href="">100</a></li>
+                    <li><span>粉丝:</span><a href="">200</a></li>
+                    <li><span>微博:</span><a href="">300</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- 博客内容显示-->
+        <div id="blog-content-display">
+            <ul id="blog-content-ul">
+                <!-- ------------------------- -->
+                <li class="blog-content-list">
+                    <div class="blog-content">
+                       <!-- 用户信息显示-->
+                        <div class="blog-content-user-info">
+                            <div  class="blog-content-header-img">
+                                <img src="../static/img/user/head/head.jpg" height="120px" width="120px">
+                            </div>
+                            <span  style="float: right"><a href="javascript:void(0);" onclick="$('.content-blog-menu').show();">操作</a></span>
+
+                            <div>
+                                <a href="#">谁知我心</a>
+                                <span>2月15日 23:23</span>
+                            </div>
+
+                            <div id="content-blog-menu-show">
+
+                            </div>
+                            <div style="display: none;" class="content-blog-menu">
+                                <a href="javascript:void(0);">帮上头条</a>
+                                <a href="javascript:void(0);">屏蔽这条微博</a>
+                                <a href="javascript:void(0);">屏蔽<span>xxxx</span></a>
+                                <a href="javascript:void(0);">取消关注<span>xxxx</span></a>
+                                <a href="javascript:void(0);">投诉</a>
+                                <button onclick="$('.content-blog-menu').hide();">关闭</button>
+                            </div>
+                        </div>
+                        <!-- 微博内容显示-->
+
+                        <div blog-content-word-div>
+                            <span  class="blog-content-word">
+                                小米9的好看，值得细细品味。
+
+                                最难描述的是小米9颜色。远看天蓝色，安安静静的。换个角度，不同的光线下，就会呈现各种炫丽的彩虹色，还依稀闪现金属光泽。
+                                这是纳米级激光全息工艺，加双层镀膜，才造就了这么独特的色彩，越看越好看！
+                                附上小米9全息幻彩蓝版本的实拍图。
+                            </span>
+                        </div>
+                         <!--  微博图片显示-->
+                        <div class="blog-content-img-block"  >
+                            <img src="../static/img/user/shouji.jpg" class="blog-content-img" >
+                            <img src="../static/img/user/shouji.jpg" class="blog-content-img" >
+                            <img src="../static/img/user/shouji.jpg" class="blog-content-img" >
+                            <img src="../static/img/user/shouji.jpg" class="blog-content-img" >
+                            <img src="../static/img/user/shouji.jpg" class="blog-content-img" >
+                            <img src="../static/img/user/shouji.jpg" class="blog-content-img" >
+                            <img src="../static/img/user/shouji.jpg" class="blog-content-img" >
+
+                        </div>
+                        <!-- // 微博底部信息显示-->
+                        <div class="blog-">
+                            <a href="javascript:void(0)">收藏(<span>100</span>)</a>
+                            <a href="javascript:void(0)">转发(<span>100</span>)</a>
+                            <a href="javascript:void(0)">评论(<span>100</span>)</a>
+                            <a href="javascript:void(0)">点赞(<span>100</span>)</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>

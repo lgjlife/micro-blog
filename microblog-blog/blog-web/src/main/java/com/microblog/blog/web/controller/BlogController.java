@@ -1,14 +1,17 @@
 package com.microblog.blog.web.controller;
 
 
+import com.microblog.blog.service.dto.BlogInfoDto;
+import com.microblog.blog.service.service.BlogService;
 import com.microblog.common.aop.syslog.anno.PrintUrlAnno;
 import com.microblog.common.code.BlogReturnCode;
 import com.microblog.common.code.ReturnCode;
 import com.microblog.common.code.UserReturnCode;
 import com.microblog.common.result.BaseResult;
 import com.microblog.common.result.WebResult;
-import com.microblog.blog.service.service.BlogService;
-import com.microblog.blog.service.dto.BlogInfoDto;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,6 +35,7 @@ import java.util.Map;
 @Slf4j
 @RestController
 @RequestMapping("/blog")
+@Api(value="/blog",description="博客操作相关控制器")
 public class BlogController {
 
 
@@ -53,6 +57,8 @@ public class BlogController {
    */
     @PrintUrlAnno
     @PostMapping("/list")
+    @ApiOperation(value = "/list",httpMethod = "POST",notes="查询博客")
+    @ApiParam(name="map")
     public BaseResult queryBlog(@RequestBody Map<String,Object>  map){
 
         String type = (String) map.get("type");
@@ -81,6 +87,7 @@ public class BlogController {
     */
     @PrintUrlAnno
     @PostMapping("/submit")
+    @ApiOperation(value = "/submit",httpMethod = "POST",notes="上传头像")
     public BaseResult upLoadHeaderImg(HttpServletRequest request, HttpServletResponse response) {
 
 
@@ -104,6 +111,8 @@ public class BlogController {
     */
     @PrintUrlAnno
     @PostMapping("/collect")
+    @ApiOperation(value = "/collect",httpMethod = "POST",notes="收藏博客")
+    @ApiParam(name="blogId")
     public BaseResult collect(long blogId){
         ReturnCode returnCode = blogService.collect(blogId);
         BaseResult result = new WebResult(returnCode);
@@ -120,6 +129,7 @@ public class BlogController {
     */
     @PrintUrlAnno
     @PostMapping("/repost")
+    @ApiOperation(value = "/repost",httpMethod = "POST",notes="转发博客")
     public BaseResult repost(long blogId,String content){
 
         ReturnCode returnCode = blogService.repost(blogId, content);
@@ -139,6 +149,7 @@ public class BlogController {
     */
     @PrintUrlAnno
     @PostMapping("/comment")
+    @ApiOperation(value = "/comment",httpMethod = "POST",notes="评论")
     public BaseResult comment(long blogId,String content){
 
         ReturnCode returnCode = blogService.collect(blogId);
@@ -158,6 +169,7 @@ public class BlogController {
     */
     @PrintUrlAnno
     @PostMapping("/like")
+    @ApiOperation(value = "/like",httpMethod = "POST",notes="点赞")
     public BaseResult like(long blogId){
         ReturnCode returnCode = blogService.collect(blogId);
         BaseResult result = new WebResult(returnCode);

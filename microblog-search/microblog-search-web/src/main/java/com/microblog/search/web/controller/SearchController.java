@@ -10,6 +10,8 @@ import com.microblog.search.service.dto.SearchBlogDto;
 import com.microblog.search.service.dto.SearchUserDto;
 import com.microblog.search.service.result.SearchReturnCode;
 import com.microblog.search.web.contants.SearchType;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
@@ -20,6 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Map;
 
+
+@Api(value = "/search",description = "搜索 controller")
 @Slf4j
 @RestController
 @RequestMapping("/search")
@@ -34,6 +38,7 @@ public class SearchController {
 
 
 
+    @ApiOperation(value = "/query",httpMethod = "POST",notes="搜索")
     @PrintUrlAnno
     @RequestMapping("/query")
     public BaseResult query(@RequestBody Map<String,String> requestMap){

@@ -27,3 +27,14 @@ microblog:
     # 使能打印方法执行耗时，在方法上添加注解@PrintUseTimeAnno
     printUseTimeEnable: true
 
+swagger:
+  basePackage: com.microblog.scheduler.web.controller
+  title: "Blog API 文档"
+  contactName: "lgj"
+  contactUrl: contactUrl-demo
+  contactEmail: contactEmail-demo
+  version: v1.0.0
+  description: blog
+  termsOfServiceUrl: termsOfServiceUrl-demo
+  license: license-demo
+  licenseUrl: licenseUrl-demo

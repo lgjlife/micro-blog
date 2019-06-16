@@ -2,10 +2,10 @@ package com.microblog.search.web.controller;
 
 
 import com.microblog.common.aop.syslog.anno.PrintUrlAnno;
-import com.microblog.search.service.BlogSearchService;
 import com.microblog.search.service.impl.ElaSearchService;
 import com.microblog.search.service.pojo.SearchDemo;
 import com.microblog.search.service.pojo.SearchDemoFactory;
+import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;

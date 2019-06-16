@@ -50,3 +50,15 @@ fdfs:
     height: 60
   tracker-list: # tracker地址
     - 127.0.0.1:22122
+
+swagger:
+  basePackage: com.microblog.blog.web.controller
+  title: "Blog API 文档"
+  contactName: "lgj"
+  contactUrl: contactUrl-demo
+  contactEmail: contactEmail-demo
+  version: v1.0.0
+  description: blog
+  termsOfServiceUrl: termsOfServiceUrl-demo
+  license: license-demo
+  licenseUrl: licenseUrl-demo

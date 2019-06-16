@@ -1,0 +1,115 @@
+html,body,#content-display{
+    width: 100%;
+    height: 100%;
+    margin:0;
+    padding:0;
+
+}
+
+/*************用户信息显示************************/
+#user-info-display{
+
+    height: inherit;
+    width: 150px;
+    float: left;
+    background-color: #dee2e6;
+
+}
+/*头像*/
+#user-header-img{
+    height: 150px;
+    width: 150px;
+}
+
+#user-info-display ul{
+    list-style-type: none;
+    padding-top: 0px;
+    margin-top: 0px;
+    padding-left: 0px;
+    margin-left: 0px;
+
+}
+
+#user-info-display li{
+    list-style-type: none;
+    padding-top: 0px;
+    margin-top: 0px;
+    padding-left: 0px;
+    margin-left: 0px;
+
+}
+/****************微博信息显示*************************/
+#blog-content-display{
+    height: inherit;
+    width: 80%;
+    float: left;
+    background-color: #71dd8a;
+
+
+}
+
+/*博客  ul li*/
+#blog-content-display ul{
+    list-style: none;
+    padding-left:0px;
+}
+.blog-content-user-info{
+    height: auto;
+    background-color: blanchedalmond;
+}
+/*头像*/
+.blog-content-header-img{
+
+}
+
+.content-blog-menu{
+    position:relative;
+    left:0px;
+    top:-180px;
+    float: right;
+    z-index: 100;
+    background-color:red;
+}
+.content-blog-menu a {
+    display: block;
+
+}
+/*博客内容**/
+
+.blog-content-list{
+    margin-bottom: 12px;
+    border-width:1px;
+    border-color:darkgray;
+    border-style:inset;
+}
+.blog-content-word-div{
+    background-color: antiquewhite;
+}
+/*博客图片**/
+.blog-content-img{
+    height:auto;
+    width: 32%;
+    background-color: aqua;
+    margin-left: 1px;
+    margin-top: 1px;
+}
+.blog-content-img-block {
+    display: block;
+    height: auto;
+    background-color:antiquewhite;
+}
+/*图片*/
+/*.blog-content-img{
+   width: 33%;
+    height: auto;
+    margin: 1px;
+    float: left;
+}*/
+.blog-content-img-block>div {
+    width: 33%;
+    height: auto;
+    margin: 1px;
+    float: left;
+    background-color: orange;
+}
+

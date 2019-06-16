@@ -3,6 +3,7 @@ package com.microblog.scheduler.web.controller;
 import com.microblog.common.module.points.PointsTypes;
 import com.microblog.points.service.PointsService;
 import com.microblog.scheduler.web.utils.UserUtil;
+import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 
 
+@Api(value = "/message",description = "积分 controller")
 @Slf4j
 @RestController
 @RequestMapping("/points")

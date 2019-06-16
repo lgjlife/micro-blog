@@ -51,12 +51,7 @@
             <version>1.18.6</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>com.microblog</groupId>
-            <artifactId>cloud-consumer-feign</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
+
         <dependency>
             <groupId>com.microblog</groupId>
             <artifactId>microblog-common</artifactId>
@@ -110,9 +105,6 @@
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
             <version>2.1.0.RELEASE</version>
         </dependency>
-
-
-
 
     </dependencies>
 

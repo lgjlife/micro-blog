@@ -61,6 +61,8 @@ public class IUserInfoService  implements UserInfoService
     @Override
     public ReturnCode saveSetting(Long userId,Map<String, Object> map) {
 
+
+
         ReturnCode returnCode = null;
 
         String nickName = (String) map.get("nickName");
