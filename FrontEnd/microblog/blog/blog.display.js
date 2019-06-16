@@ -105,7 +105,7 @@ var blog={
                             //<!-- 用户信息显示 -->
                             + "<div class='blog-content-user-info'>"
                                + "<div  class='blog-content-header-img'>" 
-                                    + "<img src=' "+ blog.staticPath + data[i].headerUrl + "' height='120px' width='120px'>"
+                                    + "<img src=' "+ "/"+ data[i].headerUrl + "' height='120px' width='120px'>"
                                 + "</div>"
                                 + "<span  style='float: right'><a href='javascript:void(0);' onclick='$('.content-blog-menu').show();'>操作</a></span>"
 

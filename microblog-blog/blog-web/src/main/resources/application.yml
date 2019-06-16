@@ -5,7 +5,7 @@ server:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8001/eureka/
+      defaultZone: http://172.17.0.1:8001/eureka/
 
 logging:
   level:
@@ -19,7 +19,7 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource    # 配置当前要使用的数据源的操作类型
     driver-class-name: com.mysql.cj.jdbc.Driver      # 配置MySQL的驱动程序类
-    url: jdbc:mysql://localhost:3306/microblog?characterEncoding=utf-8           # 数据库连接地址
+    url: jdbc:mysql://172.17.0.1:3306/microblog?characterEncoding=utf-8           # 数据库连接地址
     username: root                                  # 数据库用户名
     password: 563739007                            # 数据库连接密码
     filters: config,stat
@@ -30,7 +30,7 @@ spring:
       max-wait-millis: 200                          # 等待连接获取的最大超时时间
   redis:
     #host地址
-    host: 127.0.0.1
+    host: 172.17.0.1
     #端口
     port: 6379
 
@@ -49,7 +49,7 @@ fdfs:
     width: 60
     height: 60
   tracker-list: # tracker地址
-    - 127.0.0.1:22122
+    - 172.17.0.1:22122
 
 swagger:
   basePackage: com.microblog.blog.web.controller

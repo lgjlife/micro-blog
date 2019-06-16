@@ -12,8 +12,6 @@
         <module>microblog-search</module>
         <module>microblog-chat</module>
         <module>microblog-support</module>
-        <module>microblog-auth</module>
-        <module>microblog-user</module>
         <module>microblog-blog</module>
         <module>microblog-gateway</module>
         <module>microblog-msg</module>

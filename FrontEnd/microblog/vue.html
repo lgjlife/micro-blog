@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+</head>
+
+<body>
+<div id="app">
+    <ul>
+        <!--根据数组数据自动渲染页面-->
+        <li v-for="item in message">{{item}}</li>
+    </ul>
+    <button @click="add">添加数据</button>
+</div>
+</body>
+
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            message: ["第1条数据","第2条数据"],
+            i:2
+        },
+        methods:{
+            //向数组添加一条数据即可
+            add:function(){
+                this.i++
+                this.message.push("第"+this.i+"条数据")
+            }
+        }
+    })
+</script>

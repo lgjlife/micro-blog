@@ -5,11 +5,12 @@
     <parent>
         <artifactId>microblog-blog</artifactId>
         <groupId>com.microblog</groupId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>blog-service</artifactId>
+    <packaging>jar</packaging>
 
 
     <dependencies>
@@ -49,7 +50,7 @@
         <dependency>
             <groupId>com.microblog</groupId>
             <artifactId>blog-dao</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>1.0.0</version>
             <scope>compile</scope>
         </dependency>
 

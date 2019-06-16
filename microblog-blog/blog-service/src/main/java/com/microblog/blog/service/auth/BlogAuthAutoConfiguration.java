@@ -11,7 +11,7 @@ public class BlogAuthAutoConfiguration {
     @Bean
     public ZkCli zkCli(){
         ZkCli zkCli = new ZkCli();
-        zkCli.connect("localhost:2181");
+        zkCli.connect("172.17.0.1:2181");
         return zkCli;
     }
 
