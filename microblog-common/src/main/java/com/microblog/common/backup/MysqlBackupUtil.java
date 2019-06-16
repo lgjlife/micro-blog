@@ -27,7 +27,7 @@ public class MysqlBackupUtil {
     //进入数据库所需要的密码
     private String password = "mysqlBackup";
     //数据库导出文件保存路径,本工程目录下的mysql/all
-    private String savePath = "./mysql/all";
+    private static   String savePath = "./mysql/all";
     //数据库导出文件文件名
     private String fileName;
     //要导出的数据库名
@@ -107,6 +107,27 @@ public class MysqlBackupUtil {
             e.printStackTrace();
         }
     }
+
+    private static void  deleteFile(String savePath){
+        File file = new File(savePath);
+        File[] files = file.listFiles();
+
+        for(File f:files){
+
+            if(f.exists()){
+                log.info("file[{}] exist",f.getName());
+                boolean flag =  f.delete();
+                log.info("file[{}] delete status:",flag);
+            }
+            else {
+                log.info("file[{}] not exist",f.getName());
+            }
+        }
+
+
+
+
+    }
     /**
      * 根据当前时间获取备份文件
      * @return
@@ -122,6 +143,9 @@ public class MysqlBackupUtil {
 
 
     public static void main(String args[]){
+
+
+        deleteFile(savePath);
         MysqlBackupUtil mysqlBackupUtil = new MysqlBackupUtil();
         mysqlBackupUtil.backup();
     }
