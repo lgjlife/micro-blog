@@ -1,10 +1,10 @@
 package com.microblog.user.service.feign;
 
 
-import com.microblog.user.dao.model.User;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient(name="microblog-points",configuration = FeignConfig.class)
 public interface PointsFeignService {
 
-    @GetMapping(value = "/points/query")
-    User queryPoints(@RequestParam("userId") Long userId);
+    @RequestMapping(value = "/points/query",method = RequestMethod.GET)
+    Long queryPoints(@RequestParam Long userId);
 
+    /*@GetMapping("/query")
+    public Long queryPoints(@RequestParam("userId")Long userId){
 
-
-
+        return pointsService.queryPoints(userId);
+    }*/
 }

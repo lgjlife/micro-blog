@@ -61,9 +61,9 @@ public class PointsController {
 
     }
 
-
+    @PrintUrlAnno
     @GetMapping("/query")
-    public Long queryPoints(@RequestParam("userId")Long userId){
+    public Long queryPoints(@RequestParam("userId") Long userId){
 
         return pointsService.queryPoints(userId);
     }

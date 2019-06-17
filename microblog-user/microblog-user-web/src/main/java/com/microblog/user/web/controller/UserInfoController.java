@@ -2,6 +2,7 @@ package com.microblog.user.web.controller;
 
 import com.microblog.common.aop.syslog.anno.PrintUrlAnno;
 import com.microblog.common.code.ReturnCode;
+import com.microblog.common.dto.UserInfoDto;
 import com.microblog.common.result.BaseResult;
 import com.microblog.common.result.WebResult;
 import com.microblog.user.dao.model.User;
@@ -69,14 +70,14 @@ public class UserInfoController {
     public BaseResult queryCurrentLoginInfo(){
         Long currentUserId =  UserUtil.getUserId(request);
         BaseResult result = null;
-        User user =  userInfoService.userInfo(currentUserId);
-        if(user  == null){
+        UserInfoDto userInfoDto =  userInfoService.userInfo(currentUserId);
+        if(userInfoDto  == null){
 
             result = new WebResult(UserRet.RESULT_FAIL,"查询用户信息失败，用户未登录");
             return   result ;
 
         }
-        result = new WebResult(UserRet.RESULT_SUCCESS,"查询用户信息成功",user);
+        result = new WebResult(UserRet.RESULT_SUCCESS,"查询用户信息成功",userInfoDto);
         return   result ;
     }
 

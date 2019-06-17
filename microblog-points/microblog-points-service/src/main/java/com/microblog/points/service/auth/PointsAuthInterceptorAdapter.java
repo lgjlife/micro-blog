@@ -13,7 +13,7 @@ import java.util.List;
  * @date 5/29/19
 */
 @Component
-public class BlogAuthInterceptorAdapter extends AuthInterceptorAdapter {
+public class PointsAuthInterceptorAdapter extends AuthInterceptorAdapter {
 
     private final  String prePath = "/points";
 

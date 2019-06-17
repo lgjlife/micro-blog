@@ -8,7 +8,7 @@ eureka:
 spring:
   #   allow-bean-definition-overriding: true
   application:
-    name: microblog-points
+    name: microblog-scheduler
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource    # 配置当前要使用的数据源的操作类型
     driver-class-name: com.mysql.cj.jdbc.Driver      # 配置MySQL的驱动程序类
@@ -47,7 +47,7 @@ microblog:
 
 swagger:
   basePackage: com.microblog.points.web.controller
-  title: "Blog API 文档"
+  title: "积分 API 文档"
   contactName: "lgj"
   contactUrl: contactUrl-demo
   contactEmail: contactEmail-demo

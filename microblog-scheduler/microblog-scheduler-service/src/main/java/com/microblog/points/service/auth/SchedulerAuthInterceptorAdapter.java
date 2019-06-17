@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class UserAuthInterceptorAdapter extends AuthInterceptorAdapter {
+public class SchedulerAuthInterceptorAdapter extends AuthInterceptorAdapter {
 
     @Override
     protected List<String> authPath() {
@@ -18,6 +18,6 @@ public class UserAuthInterceptorAdapter extends AuthInterceptorAdapter {
     @Override
     protected String applicationName() {
 
-        return "microblog-points";
+        return "microblog-scheduler";
     }
 }

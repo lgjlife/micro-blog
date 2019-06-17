@@ -3,6 +3,7 @@ package com.microblog.user.service.service.impl;
 import com.github.tobato.fastdfs.domain.fdfs.MetaData;
 import com.microblog.common.code.ReturnCode;
 import com.microblog.common.code.UserReturnCode;
+import com.microblog.common.dto.UserInfoDto;
 import com.microblog.common.utils.UserRegexUtil;
 import com.microblog.user.dao.mapper.UserMapper;
 import com.microblog.user.dao.model.User;
@@ -13,6 +14,7 @@ import com.microblog.user.service.service.UserInfoService;
 import com.microblog.user.service.utils.fastdfs.FastdfsGroup;
 import com.microblog.user.service.utils.fastdfs.FastdfsUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,11 +47,22 @@ public class IUserInfoService  implements UserInfoService
 
 
     @Override
-    public User userInfo(Long userId) {
+    public UserInfoDto userInfo(Long userId) {
+        log.debug("userId = " + userId);
 
-        pointsFeignService.queryPoints(userId);./
+        UserInfoDto userInfoDto  =  (UserInfoDto)redisStringUtil.get(UserRedisKeyUtil.LOGIN_USER_INFO_KEY.getPrefix()+userId);
+        if(userInfoDto == null){
+            User user = userMapper.selectUserInfo(userId);
+            Long points = pointsFeignService.queryPoints(userId);
+            userInfoDto = new UserInfoDto();
+            BeanUtils.copyProperties(user,userInfoDto);
+            userInfoDto.setPoints(points);
+            redisStringUtil.set(UserRedisKeyUtil.LOGIN_USER_INFO_KEY.getPrefix()+userId,
+                    userInfoDto,
+                    UserRedisKeyUtil.LOGIN_USER_INFO_KEY.getTimeout());
+        }
 
-        return  getUser(userId);
+        return  userInfoDto;
     }
 
     @Override

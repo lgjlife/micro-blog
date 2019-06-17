@@ -27,6 +27,7 @@ var index={
                         $("#head-info-btn").text(data.data.nickName);
                         $("#index-header-img").attr("src","/"+data.data.headerUrl);
                         $("#index-content-user-name").text(data.data.nickName);
+                        $("#points").text(data.data.points);
                         
                     }
                     else if(data.code == index.return.fail ){

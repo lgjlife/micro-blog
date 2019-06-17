@@ -1,6 +1,7 @@
 package com.microblog.user.service.service;
 
 import com.microblog.common.code.ReturnCode;
+import com.microblog.common.dto.UserInfoDto;
 import com.microblog.user.dao.model.User;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -17,7 +18,7 @@ public interface UserInfoService {
      * @return:
      *
      */
-    User userInfo(Long userId);
+    UserInfoDto userInfo(Long userId);
     User userInfoById(Long userId);
     String upLoadHeaderImg(Long userId,MultipartHttpServletRequest multiRequest) throws  Exception;
     ReturnCode saveSetting(Long userId,Map<String, Object> map);

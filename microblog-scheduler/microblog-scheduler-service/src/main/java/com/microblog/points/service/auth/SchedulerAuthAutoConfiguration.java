@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 
 
 @Configuration
-public class BlogAuthAutoConfiguration {
+public class SchedulerAuthAutoConfiguration {
 
     @Bean
     public ZkCli zkCli(){
