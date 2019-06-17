@@ -9,7 +9,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @EnableSwagger2
 @EnableDiscoveryClient
-@MapperScan(basePackages = "common.microblog.scheduler.dao.mapper")
+@MapperScan(basePackages = "com.microblog.scheduler.dao.mapper")
 @SpringBootApplication
 @ComponentScan(basePackages = "com.microblog.*")
 public class MicroblogSchedulerWebApplication {

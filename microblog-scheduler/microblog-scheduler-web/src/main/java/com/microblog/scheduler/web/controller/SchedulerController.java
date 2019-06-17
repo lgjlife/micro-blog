@@ -48,7 +48,7 @@ public class SchedulerController {
         if((StringUtils.isEmpty(type))
         ||(StringUtils.isEmpty(jobGroup))
         ||(StringUtils.isEmpty(jobClass))){
-            return new WebResult(SchedulerReturnCode.NULL_PARAM);
+            return new WebResult(SchedulerReturnCode.NULL_PARAM.getCode(),SchedulerReturnCode.NULL_PARAM.getMessage());
         }
 
         if(type.equals("startup")){
@@ -69,7 +69,7 @@ public class SchedulerController {
             return schedulerService.registerJob(jobGroup,jobClass);
         }
 
-        return new WebResult(SchedulerReturnCode.NULL_PARAM);
+        return new WebResult(SchedulerReturnCode.NULL_PARAM.getCode(),SchedulerReturnCode.NULL_PARAM.getMessage());
 
     }
 

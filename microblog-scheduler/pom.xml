@@ -2,14 +2,35 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>microblog</artifactId>
-        <groupId>com.microblog</groupId>
-        <version>0.0.1-SNAPSHOT</version>
-    </parent>
-    <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.0.RELEASE</version>
+        <relativePath/>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.microblog</groupId>
+    <version>1.0.0</version>
     <artifactId>microblog-scheduler</artifactId>
     <packaging>pom</packaging>
+
+    <properties>
+        <skipTests>true</skipTests>
+    </properties>
+
+    <modules>
+        <module>microblog-scheduler-dao</module>
+        <module>microblog-scheduler-service</module>
+        <module>microblog-scheduler-web</module>
+    </modules>
+
+    <build>
+        <plugins>
+
+        </plugins>
+    </build>
+
 
 </project>

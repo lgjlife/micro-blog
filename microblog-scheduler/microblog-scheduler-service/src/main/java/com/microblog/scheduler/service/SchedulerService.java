@@ -59,12 +59,14 @@ public class SchedulerService {
         try{
             schedulerHandle.addJod(job);
             Trigger.TriggerState state = schedulerHandle.getTriggerState(job.getJobGroup(),job.getJobClass());
-            return new WebResult(SchedulerReturnCode.JOB_CREATE_SUCCESS,state.toString());
+            return new WebResult(SchedulerReturnCode.JOB_CREATE_SUCCESS.getCode(),
+                    SchedulerReturnCode.JOB_CREATE_SUCCESS.getMessage(),
+                    state.toString());
 
         }
         catch(Exception ex){
             log.error(ex.getMessage());
-            return new WebResult(SchedulerReturnCode.JOB_CREATE_FAIL);
+            return new WebResult(SchedulerReturnCode.JOB_CREATE_FAIL.getCode(),SchedulerReturnCode.JOB_CREATE_FAIL.getMessage());
         }
     }
 
@@ -161,11 +163,14 @@ public class SchedulerService {
         try{
             schedulerHandle.deleteJob(jobGroup,jobClass);
             Trigger.TriggerState state = schedulerHandle.getTriggerState(jobGroup,jobClass);
-            return new WebResult(SchedulerReturnCode.JOB_DELETE_SUCCESS,state.toString());
+            return new WebResult(SchedulerReturnCode.JOB_DELETE_SUCCESS.getCode(),
+                    SchedulerReturnCode.JOB_DELETE_SUCCESS.getMessage(),
+                    state.toString());
         }
         catch(Exception ex){
             log.error(ex.getMessage());
-            return new WebResult(SchedulerReturnCode.JOB_DELETE_FAIL);
+            return new WebResult(SchedulerReturnCode.JOB_DELETE_FAIL.getCode(),
+                    SchedulerReturnCode.JOB_DELETE_FAIL.getMessage());
         }
 
     }
@@ -180,11 +185,12 @@ public class SchedulerService {
         try{
             schedulerHandle.deleteJob(jobGroup,jobClass);
             Trigger.TriggerState state = schedulerHandle.getTriggerState(jobGroup,jobClass);
-            return new WebResult(SchedulerReturnCode.JOB_REMOVE_SUCCESS,state.toString());
+            return new WebResult(SchedulerReturnCode.JOB_REMOVE_SUCCESS.getCode(),
+                    SchedulerReturnCode.JOB_REMOVE_SUCCESS.getMessage(),state.toString());
         }
         catch(Exception ex){
             log.error(ex.getMessage());
-            return new WebResult(SchedulerReturnCode.JOB_REMOVE_FAIL);
+            return new WebResult(SchedulerReturnCode.JOB_REMOVE_FAIL.getCode(),SchedulerReturnCode.JOB_REMOVE_FAIL.getMessage());
         }
 
     }
@@ -202,12 +208,14 @@ public class SchedulerService {
         try{
             schedulerHandle.addJod(job);
             Trigger.TriggerState state = schedulerHandle.getTriggerState(job.getJobGroup(),job.getJobClass());
-            return new WebResult(SchedulerReturnCode.JOB_CREATE_SUCCESS,state.toString());
+            return new WebResult(SchedulerReturnCode.JOB_CREATE_SUCCESS.getCode(),
+                    SchedulerReturnCode.JOB_CREATE_SUCCESS.getMessage(),state.toString());
 
         }
         catch(Exception ex){
             log.error(ex.getMessage());
-            return new WebResult(SchedulerReturnCode.JOB_CREATE_FAIL);
+            return new WebResult(SchedulerReturnCode.JOB_CREATE_FAIL.getCode(),
+                    SchedulerReturnCode.JOB_CREATE_FAIL.getMessage());
         }
 
     }
@@ -226,11 +234,14 @@ public class SchedulerService {
         try{
             schedulerHandle.pauseJob(jobGroup,jobClass);
             Trigger.TriggerState state = schedulerHandle.getTriggerState(jobGroup,jobClass);
-            return new WebResult(SchedulerReturnCode.JOB_PAUSE_SUCCESS,state.toString());
+            return new WebResult(SchedulerReturnCode.JOB_PAUSE_SUCCESS.getCode(),
+                    SchedulerReturnCode.JOB_PAUSE_SUCCESS.getMessage(),
+                    state.toString());
         }
         catch(Exception ex){
             log.error(ex.getMessage());
-            return new WebResult(SchedulerReturnCode.JOB_PAUSE_FAIL);
+            return new WebResult(SchedulerReturnCode.JOB_PAUSE_FAIL.getCode(),
+                    SchedulerReturnCode.JOB_PAUSE_FAIL.getMessage());
         }
 
     }
@@ -269,11 +280,14 @@ public class SchedulerService {
         try{
             schedulerHandle.resumeJob(jobGroup,jobClass);
             Trigger.TriggerState state = schedulerHandle.getTriggerState(jobGroup,jobClass);
-            return new WebResult(SchedulerReturnCode.JOB_STARTUP_SUCCESS,state.toString());
+            return new WebResult(SchedulerReturnCode.JOB_STARTUP_SUCCESS.getCode(),
+                    SchedulerReturnCode.JOB_STARTUP_SUCCESS.getMessage(),
+                    state.toString());
         }
         catch(Exception ex){
             log.error(ex.getMessage());
-            return new WebResult(SchedulerReturnCode.JOB_STARTUP_FAIL);
+            return new WebResult(SchedulerReturnCode.JOB_STARTUP_FAIL.getCode(),
+                    SchedulerReturnCode.JOB_STARTUP_FAIL.getMessage());
         }
     }
 
