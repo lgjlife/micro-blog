@@ -5,7 +5,8 @@ var index={
     },
     "requestUrl":{
        "queryUserInfoUrl":"/user/user/info",
-       "requestLogoutUrl":"/user/logout", 
+       "requestLogoutUrl":"/user/logout",
+       "signatureUrl":"/points/points/signature"
     },
     "request":{
         
@@ -49,7 +50,6 @@ var index={
             $.ajax({
                 type: "post",
                 url: index.requestUrl.requestLogoutUrl,
-                headers: {'Authorization': "i am a token"},
                 success: function(data,status){
                     console.log("logout: "+data.message);               
 
@@ -60,6 +60,25 @@ var index={
                 
             });
             
+        },
+        "requestSignature":function (type) {
+            var dataSend = {"type":""};
+            dataSend.type = type;
+
+            $.ajax({
+                type: "post",
+                url: index.requestUrl.signatureUrl,
+                data: dataSend,
+                success: function(data,status){
+                    console.log("requestSignature: "+data.message);
+
+                },
+                error:function(data,status){
+
+                }
+
+            });
+
         },
     }, 
         
@@ -124,3 +143,9 @@ $(function(){
     })
 })
 
+$(function () {
+
+    $("#signature-btn").click(function () {
+        index.request.requestSignature(10);
+    })
+})

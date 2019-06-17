@@ -6,7 +6,7 @@ import com.microblog.common.module.points.PointsTypes;
 public class PointsStrategyImpl implements PointsStrategy {
 
     @Override
-    public int getPoints(String type) {
+    public int getPoints(Integer type) {
 
         if(PointsTypes.POINTS_ADD_TYPE_DAILY_SIGNATURE.equals(type)){
             return  1;

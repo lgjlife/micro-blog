@@ -15,7 +15,7 @@ spring:
   application:
     name: microblog-points
   mybatis:
-    mapper-locations: common.microblog.points.dao.mapper
+    mapper-locations: com.microblog.points.dao.mapper
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource    # 配置当前要使用的数据源的操作类型
     driver-class-name: com.mysql.cj.jdbc.Driver      # 配置MySQL的驱动程序类
@@ -42,7 +42,7 @@ microblog:
     printUseTimeEnable: true
 
 swagger:
-  basePackage: com.microblog.scheduler.web.controller
+  basePackage: com.microblog.points.web.controller
   title: "Blog API 文档"
   contactName: "lgj"
   contactUrl: contactUrl-demo

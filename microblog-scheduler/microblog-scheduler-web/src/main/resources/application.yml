@@ -8,7 +8,7 @@ eureka:
 spring:
   #   allow-bean-definition-overriding: true
   application:
-    name: microblog-scheduler
+    name: microblog-points
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource    # 配置当前要使用的数据源的操作类型
     driver-class-name: com.mysql.cj.jdbc.Driver      # 配置MySQL的驱动程序类
@@ -28,7 +28,7 @@ spring:
     # type: common.alibaba.druid.pool.DruidDataSource
   #  driver-class-name: common.mysql.jdbc.Driver
   mybatis:
-    mapper-locations: com.microblog.scheduler.dao.mapper.*
+    mapper-locations: com.microblog.points.dao.mapper.*
     configuration:
       log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
@@ -46,7 +46,7 @@ microblog:
     printUseTimeEnable: true
 
 swagger:
-  basePackage: com.microblog.scheduler.web.controller
+  basePackage: com.microblog.points.web.controller
   title: "Blog API 文档"
   contactName: "lgj"
   contactUrl: contactUrl-demo

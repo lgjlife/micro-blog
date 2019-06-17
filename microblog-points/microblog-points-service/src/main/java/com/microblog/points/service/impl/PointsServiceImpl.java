@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
  * @Description  积分操作实现类
  * @date 5/15/19
 */
+
 @Service
 public class PointsServiceImpl implements PointsService {
 
@@ -32,7 +33,7 @@ public class PointsServiceImpl implements PointsService {
      *
     */
     @Override
-    public boolean handlePoints(long userId,String addType) {
+    public boolean handlePoints(Long userId,Integer addType) {
         long pointCount = pointsStrategy.getPoints(addType);
         Points points =  pointsMapper.selectByUserId(userId);
         if(points == null){
@@ -64,7 +65,7 @@ public class PointsServiceImpl implements PointsService {
      *
     */
     @Override
-    public long queryPoints(long userId) {
+    public long queryPoints(Long userId) {
 
         Points points = pointsMapper.selectByUserId(userId);
         if(points == null){

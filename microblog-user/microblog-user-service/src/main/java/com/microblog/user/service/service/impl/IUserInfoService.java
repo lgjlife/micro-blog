@@ -8,6 +8,7 @@ import com.microblog.user.dao.mapper.UserMapper;
 import com.microblog.user.dao.model.User;
 import com.microblog.user.service.config.utils.RedisStringUtil;
 import com.microblog.user.service.constants.UserRedisKeyUtil;
+import com.microblog.user.service.feign.PointsFeignService;
 import com.microblog.user.service.service.UserInfoService;
 import com.microblog.user.service.utils.fastdfs.FastdfsGroup;
 import com.microblog.user.service.utils.fastdfs.FastdfsUtil;
@@ -39,8 +40,15 @@ public class IUserInfoService  implements UserInfoService
     @Autowired
     UserMapper userMapper;
 
+    @Autowired
+    PointsFeignService pointsFeignService;
+
+
     @Override
     public User userInfo(Long userId) {
+
+        pointsFeignService.queryPoints(userId);./
+
         return  getUser(userId);
     }
 

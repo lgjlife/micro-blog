@@ -36,18 +36,12 @@ zuul:
     scheduler:
       path: /scheduler/**
       url: http://localhost:8108
-    #私信系统
-  #  chat:
-   #   path: /chat/**
-    #  url: http://localhost:8001
-    # 服务注册中心
-    # 访问注册中心，使用的是url,否则会报错
-    # common.netflix.client.ClientException: Load balancer does not have available server for client
+    points:
+      path: /points/**
+      url: http://localhost:8102
     center:
       path: /center/**
       url: http://localhost:8001
-    #  serviceId: center
-
     # 用户模块
     user:
       url: http://localhost:8002

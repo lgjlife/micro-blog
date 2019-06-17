@@ -4530,7 +4530,7 @@
             // Trust units reported by jQuery.css
             unit = unit || initialInUnit[3];
 
-            // Iteratively approximate from a nonzero starting point
+            // Iteratively approximate from a nonzero starting points
             initialInUnit = +initial || 1;
 
             while (maxIterations--) {
@@ -6268,7 +6268,7 @@
     function setPositiveNumber(elem, value, subtract) {
 
         // Any relative (+/-) values have already been
-        // normalized at this point
+        // normalized at this points
         var matches = rcssNum.exec(value);
         return matches ?
 
@@ -6788,7 +6788,7 @@
 
     jQuery.fx = Tween.prototype.init;
 
-// Back compat <1.8 extension point
+// Back compat <1.8 extension points
     jQuery.fx.step = {};
 
 
@@ -10057,7 +10057,7 @@
         // but those exceptions were never presented as a real life use-cases
         // and might be considered as more preferable results.
         //
-        // This logic, however, is not guaranteed and can change at any point in the future
+        // This logic, however, is not guaranteed and can change at any points in the future
         offsetParent: function () {
             return this.map(function () {
                 var offsetParent = this.offsetParent;

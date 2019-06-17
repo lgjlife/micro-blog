@@ -58,6 +58,7 @@ var login={
                         var tokenVal = data.data;
                         console.log("token = " + tokenVal);
                         tokenUtil.setToken(tokenVal);
+
                         console.log("token = " + tokenUtil.getToken());
 
                     }

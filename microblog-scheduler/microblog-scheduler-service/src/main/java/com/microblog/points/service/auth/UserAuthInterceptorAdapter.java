@@ -1,0 +1,23 @@
+package com.microblog.points.service.auth;
+
+import com.microblog.common.auth.AuthInterceptorAdapter;
+import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Component
+public class UserAuthInterceptorAdapter extends AuthInterceptorAdapter {
+
+    @Override
+    protected List<String> authPath() {
+        List<String> paths = new ArrayList<>();
+        return paths;
+    }
+
+    @Override
+    protected String applicationName() {
+
+        return "microblog-points";
+    }
+}

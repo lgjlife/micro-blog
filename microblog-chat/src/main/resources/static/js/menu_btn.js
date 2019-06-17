@@ -86,7 +86,7 @@ var menu_manager = {
      * */
     "handleMenuBodySysScheduler": function () {
         console.log("任务监控....")
-        $("#admin-right-body-sys-scheduler").show();
+        $("#admin-right-body-sys-points").show();
     },
 
 

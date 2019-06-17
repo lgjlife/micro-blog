@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 @Data
 public class PointsDto implements Serializable {
-    long messageId;
-    long userId;
-    String type;
+    Long messageId;
+    Long userId;
+    Integer type;
 }
