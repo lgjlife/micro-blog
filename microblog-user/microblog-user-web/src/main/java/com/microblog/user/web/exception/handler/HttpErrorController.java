@@ -2,6 +2,7 @@ package com.microblog.user.web.exception.handler;
 
 import com.microblog.common.result.BaseResult;
 import com.microblog.common.result.WebResult;
+import com.microblog.user.service.ret.UserRet;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +22,7 @@ public class HttpErrorController implements ErrorController {
     @RequestMapping(path  = ERROR_PATH )
     public BaseResult error(HttpServletRequest request, HttpServletResponse response){
         log.info("访问/error" + "  错误代码："  + response.getStatus());
-        BaseResult result = new WebResult(WebResult.RESULT_FAIL,"error:"+response.getStatus());
+        BaseResult result = new WebResult(UserRet.RESULT_FAIL,"error:"+response.getStatus(),null);
         return result;
     }
     @Override

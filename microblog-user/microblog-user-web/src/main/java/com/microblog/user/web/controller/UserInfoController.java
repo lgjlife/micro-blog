@@ -5,6 +5,7 @@ import com.microblog.common.code.ReturnCode;
 import com.microblog.common.result.BaseResult;
 import com.microblog.common.result.WebResult;
 import com.microblog.user.dao.model.User;
+import com.microblog.user.service.ret.UserRet;
 import com.microblog.user.service.service.UserInfoService;
 import com.microblog.user.service.utils.UserUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -53,14 +54,14 @@ public class UserInfoController {
 
             try{
                 String imgPath = userInfoService.upLoadHeaderImg(currentUserId,multiRequest);
-                return new WebResult(BaseResult.RESULT_SUCCESS,"获取用户头像图片成功",imgPath);
+                return new WebResult(WebResult.RESULT_SUCCESS,"获取用户头像图片成功",imgPath);
             }
             catch(Exception ex){
                 ex.printStackTrace();
-                return new WebResult(BaseResult.RESULT_FAIL,"获取用户头像图片失败:"+ex.getMessage());
+                return new WebResult(WebResult.RESULT_FAIL,"获取用户头像图片失败:"+ex.getMessage());
             }
         }
-        return new WebResult(BaseResult.RESULT_FAIL,"获取用户头像图片失败,图片不存在");
+        return new WebResult(WebResult.RESULT_FAIL,"获取用户头像图片失败,图片不存在");
     }
 
     @PrintUrlAnno
@@ -71,11 +72,11 @@ public class UserInfoController {
         User user =  userInfoService.userInfo(currentUserId);
         if(user  == null){
 
-            result = new WebResult(BaseResult.RESULT_FAIL,"查询用户信息失败，用户未登录");
+            result = new WebResult(UserRet.RESULT_FAIL,"查询用户信息失败，用户未登录");
             return   result ;
 
         }
-        result = new WebResult(BaseResult.RESULT_SUCCESS,"查询用户信息成功",user);
+        result = new WebResult(UserRet.RESULT_SUCCESS,"查询用户信息成功",user);
         return   result ;
     }
 
@@ -94,7 +95,7 @@ public class UserInfoController {
 
         Long currentUserId =  UserUtil.getUserId(request);
         ReturnCode returnCode = userInfoService.saveSetting(currentUserId,map);
-        BaseResult result = new WebResult(returnCode);
+        BaseResult result = new WebResult(returnCode.getCode(),returnCode.getMessage());
         return   result ;
     }
 

@@ -1,7 +1,6 @@
 package com.microblog.common.result;
 
 
-import com.microblog.common.code.ReturnCode;
 import lombok.Data;
 
 /**
@@ -15,17 +14,20 @@ public class WebResult extends BaseResult{
 
     private static final long serialVersionUID = 1L;
 
-    public WebResult(ReturnCode code) {
-        super(code.getCode(), code.getMessage());
-    }
+    public static  Integer RESULT_FAIL = 0;
+    public static  Integer RESULT_SUCCESS = 1;
 
-    public WebResult(ReturnCode code, Object object) {
-        super(code.getCode(), code.getMessage(),object);
-    }
+
 
     public WebResult(Integer code, String message) {
         super(code, message);
     }
+
+   /* public WebResult(ReturnCode code, Object object) {
+        super(code.getCode(), code.getMessage(),object);
+    }
+*/
+
 
     public WebResult(Integer code, String message, Object object) {
         super(code, message, object);

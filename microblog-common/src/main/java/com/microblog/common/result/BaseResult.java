@@ -19,6 +19,10 @@ public class BaseResult implements Serializable {
     //返回对象
     private  Object data;
 
+    public BaseResult(Integer code) {
+        this.code = code;
+    }
+
     public BaseResult(Integer code, String message) {
         this.code = code;
         this.message = message;

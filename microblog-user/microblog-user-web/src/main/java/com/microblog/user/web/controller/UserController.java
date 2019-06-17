@@ -59,7 +59,7 @@ public class UserController {
            || StringUtils.isEmpty(loginNameType)
            || StringUtils.isEmpty(loginPassword)
            || StringUtils.isEmpty(imgVerificationCode)){
-            result = new WebResult(UserReturnCode.ERROR_PARAM);
+            result = new WebResult(UserReturnCode.ERROR_PARAM.getCode(),UserReturnCode.ERROR_PARAM.getMessage());
             return  result;
         }
 
@@ -114,7 +114,7 @@ public class UserController {
         }*/
         //注册请求
         UserReturnCode returnCode = userService.register(registerName,registerPassword);
-        result = new WebResult(returnCode);
+        result = new WebResult(returnCode.getCode(),returnCode.getMessage());
         return   result ;
     }
 
@@ -137,7 +137,7 @@ public class UserController {
 
         if(StringUtils.isEmpty(registerName)
         || StringUtils.isEmpty(registerNameType) ){
-            result = new WebResult(UserReturnCode.ERROR_PARAM);
+            result = new WebResult(UserReturnCode.ERROR_PARAM.getCode(),UserReturnCode.ERROR_PARAM.getMessage());
             return  result;
         }
         log.debug("registerName = " + registerName
@@ -147,19 +147,19 @@ public class UserController {
         //是电话号码
         if(UserRegexUtil.isMobile(registerName)){
             if(userService.sendPhoneVerificationCode(registerName)){
-                result = new WebResult(UserReturnCode.VALIDATE_CODE_SEND_SUCCESS);
+                result = new WebResult(UserReturnCode.VALIDATE_CODE_SEND_SUCCESS.getCode(),UserReturnCode.VALIDATE_CODE_SEND_SUCCESS.getMessage());
                 return result;
             }
         }
         //是邮件地址类型
         else if(UserRegexUtil.isEmail(registerName)){
             if(userService.sendEmailVerificationCode(registerName)){
-                result = new WebResult(UserReturnCode.VALIDATE_CODE_SEND_SUCCESS);
+                result = new WebResult(UserReturnCode.VALIDATE_CODE_SEND_SUCCESS.getCode(),UserReturnCode.VALIDATE_CODE_SEND_SUCCESS.getMessage());
                 return result;
             }
         }
 
-        result = new WebResult(UserReturnCode.VALIDATE_CODE_SEND_FAIL);
+        result = new WebResult(UserReturnCode.VALIDATE_CODE_SEND_FAIL.getCode(),UserReturnCode.VALIDATE_CODE_SEND_FAIL.getMessage());
         return result;
     }
 
@@ -179,7 +179,7 @@ public class UserController {
        // String name  = (String) requestMap.get("name");
         log.debug("name = {}",name);
         Map map = userService.getRsaKey(name);
-        result = new WebResult(UserReturnCode.REQUEST_RSA_KEY_SUCCESS,map);
+        result = new WebResult(WebResult.RESULT_SUCCESS,"获取RSA 的 modulus/exponent 成功",map);
         return   result ;
     }
 
@@ -197,7 +197,7 @@ public class UserController {
     public BaseResult logout(){
         BaseResult result = null;
         UserReturnCode code = userService.logout();
-        result = new WebResult(code);
+        result = new WebResult(code.getCode(),code.getMessage());
         return   result ;
     }
 

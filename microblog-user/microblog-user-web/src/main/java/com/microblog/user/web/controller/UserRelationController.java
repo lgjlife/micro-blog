@@ -58,11 +58,11 @@ public class UserRelationController {
     @PostMapping("/follow")
     public BaseResult follow(Long folleeId){
         if(folleeId == null){
-            return new WebResult(RelationReturnCode.ERROR_PARAM);
+            return new WebResult(RelationReturnCode.ERROR_PARAM.getCode(),RelationReturnCode.ERROR_PARAM.getMessage());
         }
         Long currentUserId =  UserUtil.getUserId(request);
         ReturnCode returnCode = userRelationService.follow(currentUserId,folleeId);
-        return new WebResult(returnCode);
+        return new WebResult(returnCode.getCode(),returnCode.getMessage());
     }
 
     /**
@@ -80,12 +80,12 @@ public class UserRelationController {
     @PostMapping("/unfollow")
     public BaseResult unfollow(Long folleeId){
         if(folleeId == null){
-            return new WebResult(RelationReturnCode.ERROR_PARAM);
+            return new WebResult(RelationReturnCode.ERROR_PARAM.getCode(),RelationReturnCode.ERROR_PARAM.getMessage());
         }
 
         Long currentUserId =  UserUtil.getUserId(request);
         ReturnCode returnCode = userRelationService.unfollow(currentUserId,folleeId);
-        return new WebResult(returnCode);
+        return new WebResult(returnCode.getCode(),returnCode.getMessage());
 
 
     }
@@ -107,11 +107,11 @@ public class UserRelationController {
     public BaseResult removeFollower(Long follerId){
 
         if(follerId == null){
-            return new WebResult(RelationReturnCode.ERROR_PARAM);
+            return new WebResult(RelationReturnCode.ERROR_PARAM.getCode(),RelationReturnCode.ERROR_PARAM.getMessage());
         }
         Long currentUserId =  UserUtil.getUserId(request);
         ReturnCode returnCode = userRelationService.removeFollower(follerId,currentUserId);
-        return new WebResult(returnCode);
+        return new WebResult(returnCode.getCode(),returnCode.getMessage());
     }
 
     /**
@@ -130,7 +130,7 @@ public class UserRelationController {
         Long currentUserId =  UserUtil.getUserId(request);
         List<User> users =  userRelationService.listFollower(currentUserId);
 
-        return new WebResult(RelationReturnCode.REMOVE_FOLLOWER_SUCCESS,users);
+        return new WebResult(WebResult.RESULT_SUCCESS,"获取粉丝列表成功",users);
     }
 
     /**
@@ -149,6 +149,6 @@ public class UserRelationController {
         Long currentUserId =  UserUtil.getUserId(request);
         List<User> users = userRelationService.listFollowee(currentUserId);
 
-        return new WebResult(RelationReturnCode.REMOVE_FOLLOWER_SUCCESS,users);
+        return new WebResult(WebResult.RESULT_SUCCESS,"获取关注列表成功",users);
     }
 }
