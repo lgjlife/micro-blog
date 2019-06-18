@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.microblog.filesystem.config.FilesystemAutoConfiguration,\
+com.microblog.filesystem.config.FastClientImporter

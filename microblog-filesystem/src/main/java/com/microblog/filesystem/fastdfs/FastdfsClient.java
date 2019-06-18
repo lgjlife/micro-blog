@@ -44,7 +44,7 @@ public class FastdfsClient extends AbstractFileProvider {
         }
 
         FastFile fastFile = new FastFile.Builder()
-                .withFile(upLoadObject.getInputStream(),upLoadObject.getSize(),upLoadObject.getName())
+                .withFile(upLoadObject.getInputStream(),upLoadObject.getSize(),upLoadObject.getFileExtName())
                 //.toGroup(group)
                 .withMetaData(metaDataSet)
                 .build();

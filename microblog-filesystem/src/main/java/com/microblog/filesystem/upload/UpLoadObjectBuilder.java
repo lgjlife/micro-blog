@@ -24,6 +24,11 @@ public class UpLoadObjectBuilder {
         upLoadObject.setName(name);
         return this;
     }
+    public UpLoadObjectBuilder fileExtName(String fileExtName){
+        upLoadObject.setFileExtName(fileExtName);
+        return this;
+    }
+
     public UpLoadObjectBuilder group(String group){
         upLoadObject.setGroup(group);
         return this;

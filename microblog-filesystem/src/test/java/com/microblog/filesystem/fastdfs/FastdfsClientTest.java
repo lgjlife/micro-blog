@@ -35,13 +35,32 @@ public class FastdfsClientTest {
         log.info("path = " + file.getAbsolutePath());
         InputStream ins = new FileInputStream(file);
 
-        UpLoadObject upLoadObject = new UpLoadObjectBuilder().name(file.getName())
-               .path(file.getAbsolutePath()).size(ins.available()).inputStream(ins)
+        UpLoadObject upLoadObject = new UpLoadObjectBuilder().fileExtName("jpg")
+                .path(file.getAbsolutePath()).size(ins.available()).inputStream(ins)
                 .metaDate(new HashMap<>()).build();
 
         String path = fastdfsClient.upLoad(upLoadObject);
 
         log.info("保存的地址:"+ path);
 
+    }
+
+    @Test
+    public void delete() throws Exception {
+
+
+        File file = new File("pic/timg.jpg");
+        log.info("path = " + file.getAbsolutePath());
+        InputStream ins = new FileInputStream(file);
+
+        UpLoadObject upLoadObject = new UpLoadObjectBuilder().fileExtName("jpg")
+                .path(file.getAbsolutePath()).size(ins.available()).inputStream(ins)
+                .metaDate(new HashMap<>()).build();
+
+        log.info("upLoadObject = " + upLoadObject);
+
+        String path = fastdfsClient.upLoad(upLoadObject);
+        log.info("保存的地址:"+ path);
+        fastdfsClient.delete(path);
     }
 }

@@ -18,6 +18,7 @@ public class UpLoadObject {
     private String group;
     private String path;
     private String name;
+    private String fileExtName;
     private InputStream inputStream;
     private long size;
     private Map<String,Object> metaDate =  new HashMap<String, Object>();

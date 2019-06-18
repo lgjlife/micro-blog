@@ -45,7 +45,7 @@ public class FastdfsClientTest {
         log.info("path = " + file.getAbsolutePath());
         InputStream ins = new FileInputStream(file);
 
-        UpLoadObject upLoadObject = new UpLoadObjectBuilder().name(file.getName())
+        UpLoadObject upLoadObject = new UpLoadObjectBuilder().fileExtName("jpg")
                .path(file.getAbsolutePath()).size(ins.available()).inputStream(ins)
                 .metaDate(new HashMap<>()).build();
 
