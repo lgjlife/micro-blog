@@ -69,6 +69,12 @@ public class FastdfsUtil {
         log.debug("The file path is :{}",storePath.getFullPath());
         return storePath.getFullPath();
 
+
+
+    }
+
+    public void delete(String path){
+        storageClient.deleteFile(path);
     }
 
     /**

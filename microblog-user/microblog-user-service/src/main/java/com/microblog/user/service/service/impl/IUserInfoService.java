@@ -144,29 +144,33 @@ public class IUserInfoService  implements UserInfoService
             log.debug("file is null");
             throw  new NullPointerException();
         }
-        for(MultipartFile file:fileList) {
+        MultipartFile file = fileList.get(0);
 
-            log.debug("{}--{}", file.getName(), file.getOriginalFilename());
-            //upload to fastdfs
-            String dfsImgPath = fastdfsUtil.upload(FastdfsGroup.USER_HEADER_IMAGE_GROUP,
-                    file.getOriginalFilename(),file.getInputStream(),file.getSize(),
-                    new HashSet<MetaData>());
-            //数据保存
-            User user = getUser(userId);
-            if(user != null){
-                HashMap<String,Object> map = new HashMap<String,Object> ();
-                map.put("userId",user.getUserId());
-                map.put("headerUrl",dfsImgPath);
-                userMapper.updateInfoByPrimaryKey(map);
-                user.setHeaderUrl(dfsImgPath);
-                log.debug("文件上传成功！");
-                redisStringUtil.delete(UserRedisKeyUtil.LOGIN_USER_KEY.getPrefix()+user.getUserId());
-                return dfsImgPath;
-            }
-            log.debug("文件上传失败！");
-            throw  new NullPointerException();
+
+        log.debug("{}--{}", file.getName(), file.getOriginalFilename());
+        //upload to fastdfs
+        String dfsImgPath = fastdfsUtil.upload(FastdfsGroup.USER_HEADER_IMAGE_GROUP,
+                file.getOriginalFilename(),file.getInputStream(),file.getSize(),
+                new HashSet<MetaData>());
+
+        //数据保存
+        User user = getUser(userId);
+        String oldHeaderUrl = user.getHeaderUrl();
+
+        if(user != null){
+            HashMap<String,Object> map = new HashMap<String,Object> ();
+            map.put("userId",user.getUserId());
+            map.put("headerUrl",dfsImgPath);
+            userMapper.updateInfoByPrimaryKey(map);
+            user.setHeaderUrl(dfsImgPath);
+            log.debug("文件上传成功！");
+            redisStringUtil.delete(UserRedisKeyUtil.LOGIN_USER_INFO_KEY.getPrefix()+user.getUserId());
+
+            return dfsImgPath;
         }
+        log.debug("文件上传失败！");
         throw  new NullPointerException();
+
     }
 
 
