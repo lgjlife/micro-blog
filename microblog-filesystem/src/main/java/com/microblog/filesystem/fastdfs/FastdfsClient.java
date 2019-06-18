@@ -44,7 +44,7 @@ public class FastdfsClient extends AbstractFileProvider {
         }
 
         FastFile fastFile = new FastFile.Builder()
-                .withFile(upLoadObject.getInputStream(),upLoadObject.getSize(),upLoadObject.getFileExtName())
+                .withFile(upLoadObject.getInputStream(),upLoadObject.getSize(),getFileExtName(upLoadObject.getName()))
                 //.toGroup(group)
                 .withMetaData(metaDataSet)
                 .build();
@@ -58,4 +58,12 @@ public class FastdfsClient extends AbstractFileProvider {
         storageClient.deleteFile(path);
         return true;
     }
+
+
+    private String getFileExtName(String fileName){
+        String fileExtName = fileName.substring(fileName.lastIndexOf(".")+1);
+        return fileExtName;
+
+    }
+
 }

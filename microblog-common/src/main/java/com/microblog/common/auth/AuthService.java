@@ -2,8 +2,10 @@ package com.microblog.common.auth;
 
 import com.microblog.common.zk.ZkCli;
 import com.microblog.common.zk.ZkCreateConfig;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.zookeeper.CreateMode;
 
+@Slf4j
 public class AuthService {
 
     private final String rootPath = "/microblog";
@@ -30,8 +32,12 @@ public class AuthService {
                 .build();
         String result  = zkCli.createPath(createConfig);
         if(result != null){
+
+
             zkCli.setData(getPath(authInterceptorAdapter.getAppName()),
                     authInterceptorAdapter.getAuthPaths());
+
+            log.debug(""+authInterceptorAdapter);
         }
 
     }

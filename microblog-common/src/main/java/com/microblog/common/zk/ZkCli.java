@@ -56,24 +56,23 @@ public class ZkCli {
     public  String createPath(ZkCreateConfig config){
        try{
 
-           if (false == checkExists(config.getPath())) {
-               log.debug("path [{}] not exist ，create path ....", config.getPath());
-               String result  =  client.create()
-                       .creatingParentsIfNeeded()
-                       .withMode((config == null?CreateMode.PERSISTENT:config.getCreateMode()))
-                       .forPath(config.getPath());
-               if(result == null){
-                   log.debug("create [{}] fail,maybe the path is exist! ",config.getPath());
-               }
-               else {
-                   log.debug("create [{}] success! ",config.getPath());
-               }
-
-               return result;
-
-           } else {
+           if(checkExists(config.getPath())){
+               log.debug("create [{}] fail,maybe the path is exist! Delete ... ",config.getPath());
+               client.delete().forPath(config.getPath());
+           }
+           log.debug("path [{}] not exist ，create path ....", config.getPath());
+           String result  =  client.create()
+                   .creatingParentsIfNeeded()
+                   .withMode((config == null?CreateMode.PERSISTENT:config.getCreateMode()))
+                   .forPath(config.getPath());
+           if(result == null){
                log.debug("create [{}] fail,maybe the path is exist! ",config.getPath());
            }
+           else {
+               log.debug("create [{}] success! ",config.getPath());
+           }
+
+           return result;
 
 
        }

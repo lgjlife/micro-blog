@@ -1,17 +1,18 @@
 package com.microblog.user.service.service.impl;
 
-import com.github.tobato.fastdfs.domain.fdfs.MetaData;
 import com.microblog.common.code.ReturnCode;
 import com.microblog.common.code.UserReturnCode;
 import com.microblog.common.dto.UserInfoDto;
 import com.microblog.common.utils.UserRegexUtil;
+import com.microblog.filesystem.provider.FSProvider;
+import com.microblog.filesystem.upload.UpLoadObject;
+import com.microblog.filesystem.upload.UpLoadObjectBuilder;
 import com.microblog.user.dao.mapper.UserMapper;
 import com.microblog.user.dao.model.User;
 import com.microblog.user.service.config.utils.RedisStringUtil;
 import com.microblog.user.service.constants.UserRedisKeyUtil;
 import com.microblog.user.service.feign.PointsFeignService;
 import com.microblog.user.service.service.UserInfoService;
-import com.microblog.user.service.utils.fastdfs.FastdfsGroup;
 import com.microblog.user.service.utils.fastdfs.FastdfsUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -30,7 +31,11 @@ public class IUserInfoService  implements UserInfoService
 {
 
     @Autowired
-    FastdfsUtil fastdfsUtil;
+FastdfsUtil fastdfsUtil;
+
+    @Autowired
+    FSProvider fastdfsClient;
+
 
     @Autowired
     HttpServletRequest request;
@@ -149,9 +154,14 @@ public class IUserInfoService  implements UserInfoService
 
         log.debug("{}--{}", file.getName(), file.getOriginalFilename());
         //upload to fastdfs
-        String dfsImgPath = fastdfsUtil.upload(FastdfsGroup.USER_HEADER_IMAGE_GROUP,
+        UpLoadObject upLoadObject = new UpLoadObjectBuilder().name( file.getOriginalFilename())
+                .size(file.getSize()).inputStream(file.getInputStream())
+                .metaDate(new HashMap<>()).build();
+        String dfsImgPath =  fastdfsClient.upLoad(upLoadObject);
+
+    /*    String dfsImgPath = fastdfsClient.upLoad(FastdfsGroup.USER_HEADER_IMAGE_GROUP,
                 file.getOriginalFilename(),file.getInputStream(),file.getSize(),
-                new HashSet<MetaData>());
+                new HashSet<MetaData>())*/
 
         //数据保存
         User user = getUser(userId);

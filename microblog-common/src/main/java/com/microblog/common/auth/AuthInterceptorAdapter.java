@@ -31,4 +31,13 @@ public abstract class AuthInterceptorAdapter {
     public String getAppName() {
         return applicationName();
     }
+
+    @Override
+    public String toString() {
+        return "AuthInterceptorAdapter{" +
+                "authPaths=" + authPaths +
+                ", appName='" + appName + '\'' +
+                ", paths=" + paths +
+                '}';
+    }
 }
