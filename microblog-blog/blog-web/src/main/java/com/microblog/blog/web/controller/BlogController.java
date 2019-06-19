@@ -69,7 +69,8 @@ public class BlogController {
        // log.debug("userId = " + request.getHeader("userId"));
         List<BlogInfoDto> blogInfoDtos = blogService.queryBlog(type,3,page,count);
 
-        BaseResult result = new WebResult(BlogReturnCode.BLOG_QUERY_SUCCESS,blogInfoDtos);
+        BaseResult result = new WebResult(BlogReturnCode.BLOG_QUERY_SUCCESS.getCode(),
+                BlogReturnCode.BLOG_QUERY_SUCCESS.getMessage(),blogInfoDtos);
 
 
         return result;
@@ -96,8 +97,8 @@ public class BlogController {
 
         MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
         ReturnCode returnCode = blogService.submit(multiRequest);
-        BaseResult result = new WebResult(returnCode);
-        return new WebResult(UserReturnCode.HEADER_FILE_NULL);
+        BaseResult result = new WebResult(returnCode.getCode(),returnCode.getMessage());
+        return new WebResult(UserReturnCode.HEADER_FILE_NULL.getCode(),UserReturnCode.HEADER_FILE_NULL.getMessage());
     }
 
     /**
@@ -115,7 +116,7 @@ public class BlogController {
     @ApiParam(name="blogId")
     public BaseResult collect(long blogId){
         ReturnCode returnCode = blogService.collect(blogId);
-        BaseResult result = new WebResult(returnCode);
+        BaseResult result = new WebResult(returnCode.getCode(),returnCode.getMessage());
         return result;
     }
     /**
@@ -133,7 +134,7 @@ public class BlogController {
     public BaseResult repost(long blogId,String content){
 
         ReturnCode returnCode = blogService.repost(blogId, content);
-        BaseResult result = new WebResult(returnCode);
+        BaseResult result = new WebResult(returnCode.getCode(),returnCode.getMessage());
         return result;
 
     }
@@ -153,7 +154,7 @@ public class BlogController {
     public BaseResult comment(long blogId,String content){
 
         ReturnCode returnCode = blogService.collect(blogId);
-        BaseResult result = new WebResult(returnCode);
+        BaseResult result = new WebResult(returnCode.getCode(),returnCode.getMessage());
         return result;
 
     }
@@ -172,7 +173,7 @@ public class BlogController {
     @ApiOperation(value = "/like",httpMethod = "POST",notes="点赞")
     public BaseResult like(long blogId){
         ReturnCode returnCode = blogService.collect(blogId);
-        BaseResult result = new WebResult(returnCode);
+        BaseResult result = new WebResult(returnCode.getCode(),returnCode.getMessage());
         return result;
 
     }

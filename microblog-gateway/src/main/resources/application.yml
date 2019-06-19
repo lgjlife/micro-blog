@@ -23,30 +23,25 @@ zuul:
     socket-timeout-millis: 10000
   routes:
     #搜索系统
-    search:
-      path: /search/**
-      url: http://localhost:8700
-    #认证系统
-    auth:
-      path: /auth/**
-      url: http://localhost:8773
-    blog:
-      path: /blog/**
-      url: http://localhost:8703
-    scheduler:
-      path: /scheduler/**
-      url: http://localhost:8108
-    points:
-      path: /points/**
-      url: http://localhost:8102
-    center:
-      path: /center/**
-      url: http://localhost:8001
+    microblog-search: /search/**
+    # 微博系统
+    microblog-blog: /blog/**
     # 用户模块
-    user:
-      url: http://localhost:8002
+    microblog-user: /user/**
+    # 积分系统
+    microblog-points: /points/**
+    # 任务系统
+    microblog-scheduler: /scheduler/**
+
+
+   # users:
+    #  path: /user/**
+     # serviceId: microblog-user
+  #  user:
+   #   url: http://localhost:8002
       # serviceId: MICROBLOG-USER
-      path: /user/**
+    #  path: /user/**
+
 ribbon:
   ReadTimeout: 60000
   ConnectTimeout: 60000
@@ -57,27 +52,4 @@ logging:
     com.microblog: debug
     org.apache.shiro.session.mgt: error
 
-# 需要验证Token的路径
-auth:
-  #私信chat应用
-  chat:
-    name: chat
-    paths:
-      - /chat/needFilter
-      - /chat/**
-      - /chat/user
-  # 用户模块应用
-  user:
-    name: user
-    paths:
-      - /user/user/info/**
-      - /user/user/info
-    # 用户模块应用
-  blog:
-    name: blog
-    paths:
-      - /blog/blog/submit/**
-      - /blog/blog/submit
-      - /blog/blog/list
-    exclude:
-      - /blog/blog/list
+
