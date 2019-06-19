@@ -84,6 +84,13 @@
             <artifactId>spring-cloud-starter-openfeign</artifactId>
             <version>2.1.0.RELEASE</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-netflix-hystrix -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+            <version>2.1.0.RELEASE</version>
+        </dependency>
+
 
 
         <!-- https://mvnrepository.com/artifact/com.rabbitmq/amqp-client -->

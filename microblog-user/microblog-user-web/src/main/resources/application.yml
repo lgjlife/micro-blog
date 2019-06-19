@@ -34,6 +34,10 @@ spring:
     #端口
     port: 6379
 
+feign:
+  hystrix:
+    enabled: true
+
 rabbitmq:
   producer:
     host: 172.17.0.1

@@ -90,7 +90,7 @@ var blog={
                 
             var imgDisplay = "";
             for(var j = 0; j < data[i].blogImg.length ;j++ ){
-                 imgDisplay += "<img src='" + blog.staticPath + data[i].blogImg[j] + "' class='blog-content-img' >";
+                 imgDisplay += "<img src='" + "/" + data[i].blogImg[j] + "' class='blog-content-img' >";
              }
             
    

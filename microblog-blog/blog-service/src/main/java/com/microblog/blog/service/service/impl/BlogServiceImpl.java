@@ -8,22 +8,25 @@ import com.microblog.blog.service.service.BlogService;
 import com.microblog.blog.service.utils.ImgMarkUtil;
 import com.microblog.blog.service.utils.RedisKeyUtils;
 import com.microblog.blog.service.utils.UserUtil;
-import com.microblog.blog.service.utils.fastdfs.FastdfsGroup;
 import com.microblog.blog.service.utils.fastdfs.FastdfsUtil;
 import com.microblog.common.code.BlogReturnCode;
 import com.microblog.common.code.ReturnCode;
+import com.microblog.filesystem.provider.FSProvider;
+import com.microblog.filesystem.upload.UpLoadObject;
+import com.microblog.filesystem.upload.UpLoadObjectBuilder;
 import com.microblog.user.dao.model.User;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.OutputStream;
 import java.util.*;
 
 
@@ -70,6 +73,10 @@ public class BlogServiceImpl implements BlogService {
 
     @Autowired
     FastdfsUtil fastdfsUtil;
+
+    @Autowired
+    FSProvider fastdfsClient;
+
 
     /**
      *功能描述
@@ -182,78 +189,33 @@ public class BlogServiceImpl implements BlogService {
         for(MultipartFile file:fileList) {
 
             //最多9张
-            if(fileCount++ > 9){
+            try{
+                //添加水印
+                OutputStream os = new ByteArrayOutputStream();
+                ((ByteArrayOutputStream) os).size();
+                ImgMarkUtil.markImageByString(file.getInputStream(),os,"@"+UserUtil.getNickName(request),"jpg");
+
+                //upload to fastdfs
+                UpLoadObject upLoadObject = new UpLoadObjectBuilder().name( file.getOriginalFilename())
+                        .size(((ByteArrayOutputStream) os).size())
+                        .inputStream(new ByteArrayInputStream(((ByteArrayOutputStream) os).toByteArray()))
+                        .metaDate(new HashMap<>()).build();
+                String dfsImgPath =  fastdfsClient.upLoad(upLoadObject);
+
+                //数据保存
+                BlogImg blogImg = new BlogImg();
+                blogImg.setBlogId(blog.getBlogId());
+                blogImg.setImgUrl(dfsImgPath);
+                blogImgs.add(blogImg);
+            }
+            catch(Exception ex){
+                log.error(ex.getMessage());
+            }
+            if((fileCount++) > 9){
                 break;
             }
-
-            log.debug("{}--{}", file.getName(), file.getOriginalFilename());
-
-            String staticPath = "/nginx/microblog/static";
-            String imgPath = "/img/blog/" + UserUtil.getUserId(request);
-            String originalFilename = file.getOriginalFilename();
-            String suffix = originalFilename.substring(originalFilename.lastIndexOf("."));
-            log.debug("OriginalFilename = {},suffix={}",originalFilename,suffix );
-
-
-            //创建文件夹
-            File saveFile = new File(staticPath+imgPath);
-            if (!saveFile.exists()) {
-                log.debug("path:{} not exists,create dir",saveFile);
-              //  saveFile.mk
-                boolean result = saveFile.mkdirs();
-                log.debug("saveFile  result = {}" , result);
-                log.debug("saveFile.exists? {}", saveFile.exists());
-            }
-
-            String subPath = imgPath + "/" + getRandomFileName() + suffix;
-            String savePath = staticPath + subPath;
-            savePaths.put(savePath,file);
-            //数据保存
-
-            BlogImg blogImg = new BlogImg();
-            blogImg.setBlogId(blog.getBlogId());
-            blogImg.setImgUrl(subPath);
-            blogImgs.add(blogImg);
         }
-
-        try{
-
-            blogImgMapper.insertList(blogImgs);
-            savePaths.forEach((k,v)->{
-
-                try{
-
-                    fastdfsUtil.upload(FastdfsGroup.BLOG_IMAGE_GROUP,
-                            v.getName(),
-                            v.getInputStream(),
-                            v.getSize(),
-                            null);
-
-                    //保存文件到本地
-                    File newfile = new File(k);
-                    v.transferTo(newfile);
-
-                    //添加水印
-                    int dot =  k.lastIndexOf("."); //k = abc.jps
-                    String prefix = k.substring(0,dot); // abc
-                    String suffix = k.substring(dot,k.length()); // .jpg
-                    String descPath = prefix+"-copy" + suffix;
-                    File source = new File(k);
-                    File desc = new File(descPath);
-                    int result = FileCopyUtils.copy(source,desc);
-                    ImgMarkUtil.markImageByString(descPath,k,"@"+UserUtil.getNickName(request));
-
-
-                }
-                catch(Exception ex){
-                    log.error("保存图片失败:{}",ex.getMessage());
-                }
-            });
-        }
-        catch(Exception ex){
-            log.error("上传图片失败:{}",ex.getMessage());
-            return  BlogReturnCode.BLOG_SUBMIT_FAIL;
-        }
+        blogImgMapper.insertList(blogImgs);
         return  BlogReturnCode.BLOG_SUBMIT_SUCCESS;
     }
 

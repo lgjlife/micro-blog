@@ -67,6 +67,9 @@ public class PointsServiceImpl implements PointsService {
     @Override
     public long queryPoints(Long userId) {
 
+        if(true){
+            throw new NullPointerException("积分出现异常");
+        }
         Points points = pointsMapper.selectByUserId(userId);
         if(points == null){
             return  0;

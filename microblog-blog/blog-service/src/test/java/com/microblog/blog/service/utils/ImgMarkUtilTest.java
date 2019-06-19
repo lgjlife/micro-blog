@@ -1,7 +1,7 @@
 package com.microblog.blog.service.utils;
 
 import lombok.extern.slf4j.Slf4j;
-import org.openjdk.jmh.annotations.Benchmark;
+import org.junit.Test;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
@@ -9,6 +9,9 @@ import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
@@ -24,8 +27,8 @@ public class ImgMarkUtilTest {
     }
 
 
-   // @Test
-    @Benchmark
+    @Test
+    //@Benchmark
     public void markImageByString() {
         String srcImgPath = "img/timg.jpeg";
         String iconPath = "img/login.png";
@@ -37,4 +40,21 @@ public class ImgMarkUtilTest {
         //long end = System.currentTimeMillis();
         //log.debug("time = " + (end-start));
     }
+
+    @Test
+    public void markImageByString1() throws Exception{
+        String srcImgPath = "img/timg.jpeg";
+        String targerPath = "img/target-new.jpeg" ;
+
+        OutputStream os = new FileOutputStream(new File(targerPath));
+
+        ImgMarkUtil.markImageByString(new File(srcImgPath), os,"@苦了阿达","jpeg");
+
+        log.info(" ssss ");
+        os.flush();
+
+
+
+    }
+
 }

@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.io.OutputStream;
 
 
@@ -154,6 +155,86 @@ public class ImgMarkUtil {
         }
 
     }
+
+    /**
+     *功能描述
+     * @author lgj
+     * @Description
+     * @date 6/19/19
+     * @param:   srcfile 源文件
+     *           OutputStream 输出流
+     *           text 需要水印的字符
+     *           format 文件格式
+     * @return:
+     *
+    */
+    public static void markImageByString(File srcfile ,OutputStream output,String text,String format){
+
+        try{
+
+            // log.debug("img name = {}",srcfile.getName());
+            Image srcImg = ImageIO.read(srcfile);
+
+            int width = srcImg.getWidth(null);
+            int height = srcImg.getHeight(null);
+
+            //   log.debug("width = {} ,height = {}",width,height);
+            BufferedImage bufferedImage = new BufferedImage(width,height, BufferedImage.TYPE_INT_RGB);
+            Graphics2D graphics2D = (Graphics2D) bufferedImage.createGraphics();
+
+            //写入原图
+            graphics2D.drawImage(srcImg.getScaledInstance(srcImg.getWidth(null), srcImg
+                    .getHeight(null), Image.SCALE_SMOOTH), 0, 0, null);
+
+            //字体设置
+            graphics2D.setColor(Color.BLACK);
+            graphics2D.setFont(new Font("宋体",Font.BOLD,14));
+            //位置自适应，图片右下角
+            graphics2D.drawString(text,width - 9*getStrLength(text),height-20);
+
+            ImageIO.write(bufferedImage, format, output);
+        }
+        catch(Exception ex){
+            log.error(ex.getMessage());
+        }
+
+    }
+
+    public static void markImageByString(InputStream inputStream , OutputStream outputStream, String text, String format){
+
+        try{
+
+            // log.debug("img name = {}",srcfile.getName());
+            Image srcImg = ImageIO.read(inputStream);
+
+            int width = srcImg.getWidth(null);
+            int height = srcImg.getHeight(null);
+
+            //   log.debug("width = {} ,height = {}",width,height);
+            BufferedImage bufferedImage = new BufferedImage(width,height, BufferedImage.TYPE_INT_RGB);
+            Graphics2D graphics2D = (Graphics2D) bufferedImage.createGraphics();
+
+            //写入原图
+            graphics2D.drawImage(srcImg.getScaledInstance(srcImg.getWidth(null), srcImg
+                    .getHeight(null), Image.SCALE_SMOOTH), 0, 0, null);
+
+            //字体设置
+            graphics2D.setColor(Color.BLACK);
+            graphics2D.setFont(new Font("宋体",Font.BOLD,14));
+            //位置自适应，图片右下角
+            graphics2D.drawString(text,width - 9*getStrLength(text),height-20);
+
+            ImageIO.write(bufferedImage, format, outputStream);
+        }
+        catch(Exception ex){
+            log.error(ex.getMessage());
+        }
+
+    }
+
+
+
+
 
     /**
      *功能描述

@@ -9,15 +9,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Component
-@FeignClient(name="microblog-points",configuration = FeignConfig.class)
+@FeignClient(name="microblog-points",configuration = FeignConfig.class,
+        fallback = PointsFeignServiceFallback.class
+        //fallbackFactory = PointsFeignServiceFallbackFactory.class
+         )
 public interface PointsFeignService {
 
     @RequestMapping(value = "/points/query",method = RequestMethod.GET)
     Long queryPoints(@RequestParam Long userId);
-
-    /*@GetMapping("/query")
-    public Long queryPoints(@RequestParam("userId")Long userId){
-
-        return pointsService.queryPoints(userId);
-    }*/
 }
