@@ -10,15 +10,12 @@ public class PointsFeignServiceFallbackFactory implements FallbackFactory<Points
 
     @Override
     public PointsFeignService create(Throwable throwable) {
-
-        log.error("QueryPoints[{}] request Service[Points] fail!",throwable.getMessage());
-
         return new PointsFeignService(){
 
             @Override
             public Long queryPoints(Long userId) {
 
-                log.error("QueryPoints[{}] request Service[Points] fail!",userId);
+                log.error("Fallback:QueryPoints[userId:{}] request Service[Points] fail! Throwable is :{} ",userId,throwable.getMessage());
                 return 0L;
             }
         };

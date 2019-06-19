@@ -47,8 +47,8 @@ html,body{
 }
 /*博客图片**/
 .blog-content-img{
-    height:auto;
-    width: 32%;
+    height:292px;
+    width: 292px;
     background-color: aqua;
     margin-left: 1px;
     margin-top: 1px;    

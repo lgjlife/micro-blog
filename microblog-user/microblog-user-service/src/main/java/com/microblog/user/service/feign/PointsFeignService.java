@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Component
 @FeignClient(name="microblog-points",configuration = FeignConfig.class,
-        fallback = PointsFeignServiceFallback.class
-        //fallbackFactory = PointsFeignServiceFallbackFactory.class
+        //fallback = PointsFeignServiceFallback.class
+       fallbackFactory = PointsFeignServiceFallbackFactory.class
          )
 public interface PointsFeignService {
 
