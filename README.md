@@ -114,6 +114,75 @@
 * 日志聚合： Kafka + Logstash + elasticsearch + Kibana
 * 前端:Html,Javascript,css,jquery
 
+:apple:
+
+## 功能列表
+### 架构
+* Nginx 作为反向代理服务器，前端代码部署在Nginx中
+* 微服务框架使用Spring Cloud实现
+* 客户端--->Nginx--->Zuul--->微服务--->数据库
+
+### Scheduler任务调度模块
+* 使用Quartz实现
+* 支持分布式定时任务
+* 实现任务增删改查
+* 支持任务类注入Spring Bean
+
+### Log日志集中输出模块
+* 拦截日志
+* 输送到Kafka服务器
+* 整个系统为Logback+Kafka+LogStash+ElasticSearch+Kibana实现日志集中监控，避免单个微服务日志查看困难的问题
+
+### Swagger Rest API模块
+* 使用Swagger2.0实现
+* 给整个系统的所有微服务提供统一的访问页面
+
+### GateWay 网关模块
+* 使用Spring Cloud Zuul实现
+* 访问路径拦截，校验是否需要进行JWK校验
+* 使用Zookeeper获取各个微服务的拦截配置
+
+### Common 公共基础模块
+* 为整个微服务提供通用的基础类
+* AOP实现访问Url打印，注解配置
+* AOP实现方法调用时间打印，注解配置
+* 微服务向Zookeeper写入访问路径拦截配置的实现
+* MySQL数据备份
+* 通用Dto类
+* Token校验具体逻辑业务实现
+* RSA加解密业务实现
+* 邮件，短信业务实现
+* Zookeeper客户端封装
+
+### Docker
+* 使用DockerFile构建镜像
+* 项目文件夹中的build.sh为镜像构建脚本
+* 项目文件夹中的run.sh为创建容器并启动脚本
+
+### Spring Cloud 集成组件
+
+### 前端
+* 相关语言和框架使用Html,CSS,JavaScript,Jquery,BootStrap.
+* 前端代码部署在Nginx中
+* Nginx同时也作为后端网关的代理服务器
+
+### User 用户模块
+* 用户注册登录，支持邮件、电话注册
+* 密码传输加密
+* 密码MD5之后再保存
+* 图片验证码
+* 登录之后使用JWK进行访问用户验证
+* 用户信息修改
+
+### fileSystem分布式文件系统
+* 使用FastDFS实现
+* 用于存放头像图片，微博图片
+
+### search 搜索模块
+* 使用ElasticSearch实现
+* 用于搜索用于，微博
+* 使用LogStash实现和MySQL数据同步更新。使用定时任务监控MySQL数据删除情况，实现数据删除同步更新
+
 ## 设计思路
 
 ### 登录拦截

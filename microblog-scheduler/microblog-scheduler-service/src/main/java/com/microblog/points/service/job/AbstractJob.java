@@ -10,7 +10,12 @@ package com.microblog.points.service.job;
  **/
 public  abstract class AbstractJob {
 
-    String description;
+    private String description;
+
+   /* public abstract void setDescription();
+    public String getDescription(){
+        return description;
+    }*/
 
    /* AbstractJob(String description){
         this.description = description;

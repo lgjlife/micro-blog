@@ -36,7 +36,5 @@ public class BlogDeleteFromElaJob extends AbstractJob implements Job {
         catch(Exception ex){
             log.error(ex.getMessage());
         }
-
-
     }
 }

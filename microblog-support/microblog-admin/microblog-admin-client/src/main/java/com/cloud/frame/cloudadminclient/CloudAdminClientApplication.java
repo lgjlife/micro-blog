@@ -10,7 +10,7 @@ public class CloudAdminClientApplication {
 
     public static void main(String[] args) {
 
-        DispatcherServlet
+
         SpringApplication.run(CloudAdminClientApplication.class, args);
     }
 }
