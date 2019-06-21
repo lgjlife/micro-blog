@@ -3,7 +3,8 @@ server:
   port: 8006
 
 management:
-  security: false
+  security:
+    enabled: false
   endpoint:
     health:
       show-details: always
@@ -17,7 +18,11 @@ eureka:
     service-url:
       defaultZone: http://localhost:8001/eureka/
 
+
 spring:
   application:
     name: microblog-admin-server
-
+  security:
+    user:
+      name: user
+      password: 123456

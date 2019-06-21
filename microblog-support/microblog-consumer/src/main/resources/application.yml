@@ -1,0 +1,20 @@
+
+server:
+  port: 8302
+eureka:
+  client:
+    service-url:
+      defaultZone: http://172.17.0.1:8001/eureka/
+
+spring:
+  application:
+    name: microblog-consumer
+
+feign:
+  hystrix:
+    enabled: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
