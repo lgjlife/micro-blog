@@ -6,7 +6,8 @@ eureka:
   client:
     service-url:
       defaultZone: http://172.17.0.1:8001/eureka/
-
+  instance:
+    lease-expiration-duration-in-seconds:
 logging:
   level:
     com.microblog: debug
@@ -33,6 +34,7 @@ spring:
     host: 172.17.0.1
     #端口
     port: 6379
+
 
 feign:
   hystrix:

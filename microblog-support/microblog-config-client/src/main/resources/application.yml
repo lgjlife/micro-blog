@@ -1,0 +1,16 @@
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8001/eureka/
+server:
+  port: 9002
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      #cors:
+       # allowed-origins: "*"
+        #allowed-methods: "*"

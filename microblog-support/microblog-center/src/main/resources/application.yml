@@ -11,7 +11,7 @@ eureka:
           http://localhost:8001/eureka/
 spring:
   application:
-    name: center
+    name: microblog-center
 
 ribbon:
   eureka:

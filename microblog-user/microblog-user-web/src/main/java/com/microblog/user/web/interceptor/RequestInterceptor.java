@@ -3,6 +3,9 @@ package com.microblog.user.web.interceptor;
 
 import com.microblog.common.token.jwt.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.context.annotation.Conditional;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 */
 @Slf4j
 //@Component
+@ConditionalOnBean
 public class RequestInterceptor extends HandlerInterceptorAdapter {
 
 

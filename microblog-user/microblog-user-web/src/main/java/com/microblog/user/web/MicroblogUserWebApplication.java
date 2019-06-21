@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Import;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 
@@ -16,6 +17,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableDiscoveryClient
 @SpringBootApplication
 @ComponentScan(basePackages={"com.microblog.user","com.microblog.common"})
+
 public class MicroblogUserWebApplication {
     public static void main(String args[]) {
         SpringApplication.run(MicroblogUserWebApplication.class, args);
