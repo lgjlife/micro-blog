@@ -13,7 +13,8 @@ import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboar
  * @See:
  * @create: 2018-12-13 02:49
  **/
-//http://localhost:8012/hystrix -- > http://localhost:8302/actuator/hystrix.stream
+// 单应用 http://localhost:8012/hystrix -- > http://localhost:8302/actuator/hystrix.stream
+//  聚合监控 http://localhost:8012/hystrix -- >  http://localhost:8013/turbine.stream
 @EnableEurekaClient
 @SpringBootApplication
 @EnableHystrixDashboard

@@ -16,7 +16,7 @@ import org.springframework.cloud.netflix.turbine.EnableTurbine;
 
 @EnableEurekaClient
 @SpringBootApplication
-@EnableTurbine
+@EnableTurbine  //http://localhost:8013/turbine.stream
 public class MicroblogTurbineApplication {
     public static void main(String[] args) {
 
