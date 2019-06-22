@@ -11,7 +11,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.microblog</groupId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <artifactId>microblog-hystrix-dashboard</artifactId>
 
 

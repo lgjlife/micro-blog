@@ -25,27 +25,14 @@ $(function () {
         $("#display-swagger").show();
     })
 
-    $("#menu-admin-select").click(function () {
-        $(".display-module").hide();
-        $("#display-admin").show();
-    })
-
-    $("#menu-zipkin-select").click(function () {
-        $(".display-module").hide();
-        $("#display-zipkin").show();
-    })
-
-    $("#menu-druid-select").click(function () {
-        $(".display-module").hide();
-        $("#display-druid").show();
-    })
-
-
     $("#menu-scheduler-select").click(function () {
         $(".display-module").hide();
         $("#display-scheduler").show();
     })
 
-
+    $("#menu-system-select").click(function () {
+        $(".display-module").hide();
+        $("#system-minitor").show();
+    })
 
 })
