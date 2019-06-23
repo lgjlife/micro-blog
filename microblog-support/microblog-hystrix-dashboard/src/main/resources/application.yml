@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: Cloud-Hystrixdashboard
+    name: Cloud-Hystrix-dashboard
 
 eureka:
   client:

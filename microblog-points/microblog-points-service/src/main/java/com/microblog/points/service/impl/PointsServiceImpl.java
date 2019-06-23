@@ -1,10 +1,13 @@
 package com.microblog.points.service.impl;
 
+import com.microblog.common.result.BaseResult;
+import com.microblog.common.result.WebResult;
 import com.microblog.points.dao.mapper.PointsMapper;
 import com.microblog.points.dao.model.Points;
 import com.microblog.points.service.PointsService;
 import com.microblog.points.service.strategy.PointsStrategy;
 import com.microblog.points.service.strategy.PointsStrategyImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +18,7 @@ import org.springframework.stereotype.Service;
  * @date 5/15/19
 */
 
+@Slf4j
 @Service
 public class PointsServiceImpl implements PointsService {
 
@@ -33,8 +37,15 @@ public class PointsServiceImpl implements PointsService {
      *
     */
     @Override
-    public boolean handlePoints(Long userId,Integer addType) {
-        long pointCount = pointsStrategy.getPoints(addType);
+    public BaseResult handlePoints(Long userId, Integer addType) {
+        long pointCount = 0;
+        try{
+            pointCount = pointsStrategy.getPoints(addType);
+        }
+        catch(Exception ex){
+            return new WebResult(0,ex.getMessage());
+        }
+
         Points points =  pointsMapper.selectByUserId(userId);
         if(points == null){
             points = new Points();
@@ -50,9 +61,7 @@ public class PointsServiceImpl implements PointsService {
             points.setPoints(currentPointCount);
             pointsMapper.updateByPrimaryKey(points);
         }
-
-
-        return true;
+        return  new WebResult(1,"积分添加成功");
     }
 
     /**

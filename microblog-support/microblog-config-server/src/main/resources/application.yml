@@ -13,7 +13,7 @@ spring:
        #   force-pull: true
         #  search-paths: config-repo
         native:
-          search-locations: file:config-repo
+          search-locations: file:config-repo  #classpath:config-repo
   profiles:
     active: native
 management:

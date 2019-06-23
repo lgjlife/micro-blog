@@ -2,7 +2,7 @@ package com.microblog.hystrixdashboard;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
 
 /**
@@ -15,7 +15,7 @@ import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboar
  **/
 // 单应用 http://localhost:8012/hystrix -- > http://localhost:8302/actuator/hystrix.stream
 //  聚合监控 http://localhost:8012/hystrix -- >  http://localhost:8013/turbine.stream
-@EnableEurekaClient
+@EnableDiscoveryClient
 @SpringBootApplication
 @EnableHystrixDashboard
 public class MicroblogHystrixdashboardApplication {

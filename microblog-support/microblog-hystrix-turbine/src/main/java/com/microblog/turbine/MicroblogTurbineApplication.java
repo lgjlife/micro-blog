@@ -2,7 +2,7 @@ package com.microblog.turbine;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.turbine.EnableTurbine;
 
 /**
@@ -14,7 +14,7 @@ import org.springframework.cloud.netflix.turbine.EnableTurbine;
  * @create: 2018-12-13 02:49
  **/
 
-@EnableEurekaClient
+@EnableDiscoveryClient
 @SpringBootApplication
 @EnableTurbine  //http://localhost:8013/turbine.stream
 public class MicroblogTurbineApplication {

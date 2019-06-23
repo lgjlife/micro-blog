@@ -6,7 +6,7 @@ import com.microblog.common.module.points.PointsTypes;
 public class PointsStrategyImpl implements PointsStrategy {
 
     @Override
-    public int getPoints(Integer type) {
+    public int getPoints(Integer type) throws IllegalArgumentException{
 
         if(PointsTypes.POINTS_ADD_TYPE_DAILY_SIGNATURE.equals(type)){
             return  1;
@@ -22,6 +22,6 @@ public class PointsStrategyImpl implements PointsStrategy {
             return -2;
         }
 
-        return 0;
+        throw  new IllegalArgumentException("Type["+type+"] 不存在");
     }
 }

@@ -2,6 +2,7 @@ package com.microblog.points.web.controller;
 
 import com.microblog.common.aop.syslog.anno.PrintUrlAnno;
 import com.microblog.common.module.points.PointsTypes;
+import com.microblog.common.result.BaseResult;
 import com.microblog.points.service.PointsService;
 import com.microblog.points.web.utils.UserUtil;
 import io.swagger.annotations.Api;
@@ -54,10 +55,10 @@ public class PointsController {
     */
     @PrintUrlAnno
     @PostMapping("/signature")
-    public void signature(@RequestParam("type") Integer type){
+    public BaseResult signature(@RequestParam("type") Integer type){
         Long currentUserId =  UserUtil.getUserId(request);
         log.debug("userId = {},type = {} " , currentUserId ,type);
-        pointsService.handlePoints(currentUserId,type);
+        return pointsService.handlePoints(currentUserId,type);
 
     }
 

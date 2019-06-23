@@ -1,4 +1,5 @@
 # 基于SpringCloud的仿微博系统
+[![博客园](https://img.shields.io/badge/%E5%8D%9A%E5%AE%A2%E5%9B%AD-%E5%86%AC%E7%9C%A0%E7%9A%84%E5%B1%B1%E8%B0%B7-brightgreen.svg)](https://www.cnblogs.com/lgjlife/)
 [我的博客](https://www.cnblogs.com/lgjlife/)
 ## 设计思路
 ![](https://github.com/lgjlife/micro-blog/blob/master/micro-blog%20%E8%AE%BE%E8%AE%A1%E5%9B%BE.jpg)
