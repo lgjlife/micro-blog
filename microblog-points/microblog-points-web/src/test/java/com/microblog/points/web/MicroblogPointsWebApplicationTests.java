@@ -1,4 +1,4 @@
-package com.microblog.microblogpointsweb;
+package com.microblog.points.web;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
