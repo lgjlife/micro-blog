@@ -1,0 +1,17 @@
+server:
+  port: 6005
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8001/eureka/
+spring:
+  cloud:
+    gateway:
+      routes:
+        # Normwal Websocket route
+        - id: websocket_route
+          uri: ws://localhost:8991
+          predicates:
+            - Path=/websocket/**
+  application:
+    name: gateway

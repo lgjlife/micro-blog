@@ -5,8 +5,17 @@ eureka:
     service-url:
       defaultZone: http://localhost:8001/eureka/
 spring:
+  cloud:
+    gateway:
+      routes:
+      # Normwal Websocket route
+      - id: websocket_route
+        uri: ws://localhost:8991
+        predicates:
+        - Path=/websocket/**
   application:
-    name: microblog-gateway
+    name: gateway
+
 management:
   endpoint:
     health:
@@ -35,7 +44,6 @@ zuul:
     microblog-center:
       path: /center/**
       serviceId: http://localhost:8001
-
    # users:
     #  path: /user/**
      # serviceId: microblog-user
@@ -56,5 +64,5 @@ logging:
     org.springframework.security: debug
     com.microblog: debug
     org.apache.shiro.session.mgt: error
-
+    org: debug
 

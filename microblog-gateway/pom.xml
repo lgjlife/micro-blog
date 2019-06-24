@@ -49,6 +49,12 @@
         </dependency>
 
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
+
         <!--支持热部署 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
