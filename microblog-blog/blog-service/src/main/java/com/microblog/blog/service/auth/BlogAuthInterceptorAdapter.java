@@ -20,9 +20,9 @@ public class BlogAuthInterceptorAdapter extends AuthInterceptorAdapter {
     @Override
     protected List<String> authPath() {
         List<String> paths = new ArrayList<>();
-        paths.add(prePath + "/blog/submit/**");
-        paths.add(prePath + "/blog/submit");
-        paths.add(prePath + "/blog/list");
+        paths.add("/blog/submit/**");
+        paths.add("/blog/submit");
+        paths.add("/blog/list");
         return paths;
     }
 

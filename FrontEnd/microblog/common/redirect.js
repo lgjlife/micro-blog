@@ -18,7 +18,11 @@ function  redirectHandle(xhr) {
 $(function () {
 
     $(document).ajaxComplete(function (event, xhr, settings) {
-        console.log("ajaxComplete  adffdafadsaf")
-        redirectHandle(xhr);
+        console.log("status = " + xhr.status);
+
+        if(xhr.status == 401){
+            redirectHandle(xhr);
+        }
+
     })
 })

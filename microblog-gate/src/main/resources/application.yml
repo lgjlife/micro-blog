@@ -29,6 +29,27 @@ spring:
           predicates:
             - Path=/blog/**
 
+        - id: microblog-search
+          uri: lb://microblog-search
+          predicates:
+            - Path=/search/**
+
+        - id: microblog-points
+          uri: lb://microblog-points
+          predicates:
+            - Path=/points/**
+
+        - id: microblog-scheduler
+          uri: lb://microblog-scheduler
+          predicates:
+            - Path=/scheduler/**
+
+        - id: microblog-center
+          uri: lb://microblog-center
+          predicates:
+            - Path=/center/**
+
+
   application:
     name: gateway
 logging:

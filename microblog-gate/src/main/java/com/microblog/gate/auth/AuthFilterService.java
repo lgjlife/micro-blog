@@ -1,4 +1,4 @@
-package com.microblog.gate.filter.auth;
+package com.microblog.gate.auth;
 
 
 import com.microblog.common.zk.ListenerEventHandler;
