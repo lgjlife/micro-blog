@@ -1,2 +1,14 @@
 server:
   port: 8991
+logging:
+  level:
+    org: info
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8001/eureka/
+
+spring:
+  application:
+    name: microblog-websocket

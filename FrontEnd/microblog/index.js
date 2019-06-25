@@ -4,7 +4,7 @@ var index={
         "success":1,
     },
     "requestUrl":{
-       "queryUserInfoUrl":"/user/user/info",
+       "queryUserInfoUrl":"/user/info",
        "requestLogoutUrl":"/user/logout",
        "signatureUrl":"/points/points/signature"
     },

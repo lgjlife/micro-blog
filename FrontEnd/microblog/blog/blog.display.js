@@ -10,7 +10,7 @@ var blog={
         "PUBLIC": "PUBLIC",
     },
     "requestUrl": {
-       "requestBlogUrl": "/blog/blog/list",
+       "requestBlogUrl": "/blog/list",
     },
     
     "request":{

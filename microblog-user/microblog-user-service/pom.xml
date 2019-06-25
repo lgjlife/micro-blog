@@ -149,30 +149,17 @@
 
 
 
-
-
-
-        <!-- fastdfs 分布式文件服务器-->
-       <!-- <dependency>
-            <groupId>com.github.tobato</groupId>
-            <artifactId>fastdfs-client</artifactId>
-            <version>1.26.5</version>
-            <scope>compile</scope>
-        </dependency>-->
-
-        <dependency>
-            <groupId>com.microblog</groupId>
-            <artifactId>filesystem</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-
-
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>20.0</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.microblog</groupId>
+            <artifactId>filesystem</artifactId>
+            <version>1.0.0</version>
+            <scope>compile</scope>
+        </dependency>
 
 
         <!-- zookeeper -->

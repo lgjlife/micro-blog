@@ -2,9 +2,9 @@ var login={
     //登录名称类型 phone / email
     "loginNameType":"phone",
     "requestUrl":{
-       "loginSubmitUrl":"/user/user/login",
+       "loginSubmitUrl":"/user/login",
         //获取 rsa modulus  exponent
-        "requestmModulusAndExponentUrl":"/user/user/key",
+        "requestmModulusAndExponentUrl":"/user/key",
     },
     "rsa":{
         "modulus":"",

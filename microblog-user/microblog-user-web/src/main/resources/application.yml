@@ -6,8 +6,6 @@ eureka:
   client:
     service-url:
       defaultZone: http://172.17.0.1:8001/eureka/
-  instance:
-    lease-expiration-duration-in-seconds:
 logging:
   level:
     com.microblog: debug

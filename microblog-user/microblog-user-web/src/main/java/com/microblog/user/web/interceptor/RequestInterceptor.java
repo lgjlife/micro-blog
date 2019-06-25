@@ -4,12 +4,11 @@ package com.microblog.user.web.interceptor;
 import com.microblog.common.token.jwt.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
-import org.springframework.context.annotation.Conditional;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Enumeration;
 
 /**
  *功能描述 
@@ -28,7 +27,13 @@ public class RequestInterceptor extends HandlerInterceptorAdapter {
 
         log.debug("RequestInterceptor....");
 
-        String token =  (String)request.getHeader("token");
+        Enumeration<String> headerNames =  request.getHeaderNames();
+        while(headerNames.hasMoreElements()){
+            String name = headerNames.nextElement();
+            System.out.println(name + "---" + request.getHeader(name));
+        }
+
+        String token =  (String)request.getHeader("authorization");
 
         if (token != null){
             log.debug("token = " + token);

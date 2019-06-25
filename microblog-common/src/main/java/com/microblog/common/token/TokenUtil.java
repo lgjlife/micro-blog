@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.server.reactive.ServerHttpRequest;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -42,4 +43,23 @@ public class TokenUtil {
         }
 
     }
+
+    public  static  String getTokenFromRequest(ServerHttpRequest request)  throws TokenNotFoundException{
+
+        String token;
+
+       /* if(!StringUtils.isEmpty(token = request.getHeaders().get(AuthConstants.HEADER_TOKEN_KEY))){
+            return token;
+        }
+        else  if(!StringUtils.isEmpty(token = request.getParameter(AuthConstants.PARAM_TOKEN_KEY))){
+            log.debug("paramToken = {}" , token);
+            return token;
+        }else {
+            throw  new TokenNotFoundException("Token 未存在");
+        }*/
+
+       return null;
+
+    }
+
 }

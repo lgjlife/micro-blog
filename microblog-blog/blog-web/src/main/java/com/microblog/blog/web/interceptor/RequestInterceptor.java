@@ -23,7 +23,7 @@ public class RequestInterceptor extends HandlerInterceptorAdapter {
 
         log.debug("RequestInterceptor....");
 
-        String token =  (String)request.getHeader("token");
+        String token =  (String)request.getHeader("authorization");
 
         if (token != null){
             log.debug("token = " + token);

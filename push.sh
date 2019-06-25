@@ -7,7 +7,7 @@ mkdir FrontEnd
 echo +++++++++复制目录...............
 cp -r  /nginx/microblog  /home/lgj/aProject/aRealPrj/microblog/FrontEnd  
 echo +++++++++复制nginx.conf
-cp /etc/nginx/nginx.conf  /home/lgj/aProject/aRealPrj/microblog/FrontEnd/nginx.conf
+cp /usr/local/nginx/conf/nginx.conf  /home/lgj/aProject/aRealPrj/microblog/FrontEnd/nginx.conf
 
 echo  ++++++++git add  .
 git add .

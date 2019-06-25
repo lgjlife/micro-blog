@@ -1,5 +1,5 @@
 server:
-  port: 6005
+  port: 6003
 eureka:
   client:
     service-url:
@@ -13,5 +13,25 @@ spring:
           uri: ws://localhost:8991
           predicates:
             - Path=/websocket/**
+
+        - id: websocket_route1
+          uri: lb://microblog-websocket #localhost:8991
+          predicates:
+            - Path=/socket/**
+
+        - id: microblog-user
+          uri: lb://microblog-user
+          predicates:
+            - Path=/user/**
+
+        - id: microblog-blog
+          uri: lb://microblog-blog
+          predicates:
+            - Path=/blog/**
+
   application:
     name: gateway
+logging:
+  level:
+    org: info
+    com.microblog: debug

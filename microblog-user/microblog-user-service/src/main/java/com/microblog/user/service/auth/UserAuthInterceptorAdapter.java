@@ -12,8 +12,8 @@ public class UserAuthInterceptorAdapter extends AuthInterceptorAdapter {
     @Override
     protected List<String> authPath() {
         List<String> paths = new ArrayList<>();
-        paths.add("/user/user/info");
-        paths.add("/user/user/info/**");
+        paths.add("/user/info");
+        paths.add("/user/info/**");
         return paths;
     }
 
