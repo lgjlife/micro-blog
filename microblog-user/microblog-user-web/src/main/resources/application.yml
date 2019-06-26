@@ -34,6 +34,7 @@ spring:
     port: 6379
 
 
+
 feign:
   hystrix:
     enabled: true

@@ -36,9 +36,13 @@ public class RequestInterceptor extends HandlerInterceptorAdapter {
 
         if (token != null){
             log.debug("token = " + token);
-            Long uId = Long.valueOf(JwtUtil.getClaim(token,"userId"));
-            log.debug("token userId = " + uId);
-            request.setAttribute("userId",uId);
+            String userId = JwtUtil.getClaim(token,"userId");
+            if(userId != null){
+                Long uId = Long.valueOf(userId);
+                log.debug("token userId = " + uId);
+                request.setAttribute("userId",uId);
+            }
+
         }
         return true;
     }

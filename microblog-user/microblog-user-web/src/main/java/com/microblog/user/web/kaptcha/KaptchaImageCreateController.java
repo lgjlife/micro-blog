@@ -37,7 +37,7 @@ public class KaptchaImageCreateController {
 
     @ApiOperation(value="/kaptcha",httpMethod="GET",notes = "获取验证码图片")
     @PrintUrlAnno(description = "获取验证码图片")
-    @GetMapping("/kaptcha")
+    @GetMapping("/user/kaptcha")
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception{
         response.setDateHeader("Expires",0);
         response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");  

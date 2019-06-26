@@ -1,14 +1,16 @@
 package com.swagger.config;
 
 
+import com.sun.istack.internal.NotNull;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @Data
 @ConfigurationProperties(prefix = "swagger")
-public class SwaggerProperties {
+public final  class SwaggerProperties {
 
-    private String enable;
+    @NotNull
+    public final  String pathPrefix;
     private String basePackage = "com";
     private String title = "swagger";
 

@@ -34,7 +34,7 @@ public class SwaggerConfig {
     @ConditionalOnProperty(prefix="swagger",name = "enable",havingValue = "true")
     @Bean
     public Docket docket() {
-        return new Docket(DocumentationType.SWAGGER_2)
+        return new Docket(DocumentationType.SWAGGER_2).pathMapping("/user")
                 .apiInfo(apiInfo())
                 .select()
                 //为当前包路径

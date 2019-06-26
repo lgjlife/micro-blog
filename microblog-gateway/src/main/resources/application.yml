@@ -7,62 +7,64 @@ eureka:
 spring:
   cloud:
     gateway:
+      # 网关路由策略
       routes:
-      # Normwal Websocket route
-      - id: websocket_route
-        uri: ws://localhost:8991
-        predicates:
-        - Path=/websocket/**
+        # Normwal Websocket route
+        - id: websocket_route
+          uri: ws://localhost:8991
+          predicates:
+            - Path=/websocket/**
+
+        - id: websocket_route1
+          uri: lb://microblog-websocket #localhost:8991
+          predicates:
+            - Path=/socket/**
+
+        # 用户模块
+        - id: microblog-user
+          uri: lb://microblog-user
+          predicates:
+            - Path=/user/**
+        #  filters:
+         #   - SwaggerHeaderFilter
+          #  - StripPrefix=1
+         #  微博模块
+        - id: microblog-blog
+          uri: lb://microblog-blog
+          predicates:
+            - Path=/blog/**
+
+
+        # 搜索模块
+        - id: microblog-search
+          uri: lb://microblog-search
+          predicates:
+            - Path=/search/**
+
+        # 积分模块
+        - id: microblog-points
+          uri: lb://microblog-points
+          predicates:
+            - Path=/points/**
+       #   filters:
+        #    - SwaggerHeaderFilter
+         #   - StripPrefix=1
+        # 任务调度
+        - id: microblog-scheduler
+          uri: lb://microblog-scheduler
+          predicates:
+            - Path=/scheduler/**
+
+        # 配置中心
+        - id: microblog-center
+          uri: lb://microblog-center
+          predicates:
+            - Path=/center/**
+
+
   application:
     name: gateway
-
-management:
-  endpoint:
-    health:
-      show-details: always
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-
-#zuul 路由配置
-zuul:
-  host:
-    connect-timeout-millis: 7000
-    socket-timeout-millis: 10000
-  routes:
-    #搜索系统
-    microblog-search: /search/**
-    # 微博系统
-    microblog-blog: /blog/**
-    # 用户模块
-    microblog-user: /user/**
-    # 积分系统
-    microblog-points: /points/**
-    # 任务系统
-    microblog-scheduler: /scheduler/**
-    microblog-center:
-      path: /center/**
-      serviceId: http://localhost:8001
-   # users:
-    #  path: /user/**
-     # serviceId: microblog-user
-  #  user:
-   #   url: http://localhost:8002
-      # serviceId: MICROBLOG-USER
-    #  path: /user/**
-    #需要忽略的头部信息，不在传播到其他服务
- #   sensitive-headers: Access-Control-Allow-Origin
-  #  ignored-headers: Access-Control-Allow-Origin,H-APP-Id,Token,APPToken
-
-ribbon:
-  ReadTimeout: 60000
-  ConnectTimeout: 60000
-
 logging:
   level:
-    org.springframework.security: debug
+    org: info
     com.microblog: debug
-    org.apache.shiro.session.mgt: error
-    org: debug
-
