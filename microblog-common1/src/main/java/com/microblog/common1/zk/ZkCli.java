@@ -1,6 +1,6 @@
-package com.microblog.common.zk;
+package com.microblog.common1.zk;
 
-import com.microblog.common.serialization.FastjsonSerializeUtil;
+import com.microblog.common1.FastjsonSerializeUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.curator.RetryPolicy;
 import org.apache.curator.framework.CuratorFramework;

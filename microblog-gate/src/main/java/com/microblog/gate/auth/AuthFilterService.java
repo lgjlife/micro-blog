@@ -1,8 +1,8 @@
 package com.microblog.gate.auth;
 
 
-import com.microblog.common.zk.ListenerEventHandler;
-import com.microblog.common.zk.ZkCli;
+import com.microblog.common1.zk.ListenerEventHandler;
+import com.microblog.common1.zk.ZkCli;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.curator.framework.recipes.cache.ChildData;
 import org.springframework.util.AntPathMatcher;

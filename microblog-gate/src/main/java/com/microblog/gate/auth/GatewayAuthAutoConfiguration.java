@@ -1,6 +1,7 @@
 package com.microblog.gate.auth;
 
-import com.microblog.common.zk.ZkCli;
+
+import com.microblog.common1.zk.ZkCli;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
