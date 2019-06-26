@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Component
-@FeignClient(name="microblog-points",configuration = FeignConfig.class,
+@FeignClient(name="microblog-scheduler",configuration = FeignConfig.class,
         //fallback = PointsFeignServiceFallback.class
        fallbackFactory = PointsFeignServiceFallbackFactory.class
          )

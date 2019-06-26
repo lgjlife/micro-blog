@@ -43,12 +43,10 @@ public class AuthFilterService {
         AntPathMatcher matcher =  new AntPathMatcher();
 
         Set<String> keys =  authPathMaps.keySet();
-
+        log.debug("校验路径=[{}]",keys);
         for(String key:keys){
             List<String> paths = authPathMaps.get(key);
             for(String path:paths){
-
-                log.debug("matcher pattern=[{}] ,path=[{}]",path,servletPath);
                 if(matcher.match(path,servletPath)==true){
                     log.debug("拦截{}",servletPath);
                     return true;
@@ -65,18 +63,15 @@ public class AuthFilterService {
         AntPathMatcher matcher =  new AntPathMatcher();
 
         Set<String> keys =  authPathMaps.keySet();
-
         for(String key:keys){
             List<String> paths = authPathMaps.get(key);
+            log.debug("访问路径：[{}],系统路径=[{}]",requestPath,paths);
             for(String path:paths){
-
-                log.debug("matcher pattern=[{}] ,path=[{}]",path,requestPath);
                 if(matcher.match(path,requestPath)==true){
                     log.debug("拦截{}",requestPath);
                     return true;
                 }
             }
-
         }
         log.debug("不拦截{}",requestPath);
         return  false;

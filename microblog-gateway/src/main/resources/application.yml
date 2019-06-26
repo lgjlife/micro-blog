@@ -25,9 +25,7 @@ spring:
           uri: lb://microblog-user
           predicates:
             - Path=/user/**
-        #  filters:
-         #   - SwaggerHeaderFilter
-          #  - StripPrefix=1
+
          #  微博模块
         - id: microblog-blog
           uri: lb://microblog-blog
@@ -42,13 +40,10 @@ spring:
             - Path=/search/**
 
         # 积分模块
-        - id: microblog-points
-          uri: lb://microblog-points
+        - id: microblog-scheduler
+          uri: lb://microblog-scheduler
           predicates:
-            - Path=/points/**
-       #   filters:
-        #    - SwaggerHeaderFilter
-         #   - StripPrefix=1
+            - Path=/scheduler/**
         # 任务调度
         - id: microblog-scheduler
           uri: lb://microblog-scheduler

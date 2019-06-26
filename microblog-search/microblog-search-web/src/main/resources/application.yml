@@ -28,7 +28,7 @@ microblog:
     printUseTimeEnable: true
 
 swagger:
-  basePackage: com.microblog.points.web.controller
+  basePackage: com.microblog.scheduler.web.controller
   title: "Blog API 文档"
   contactName: "lgj"
   contactUrl: contactUrl-demo

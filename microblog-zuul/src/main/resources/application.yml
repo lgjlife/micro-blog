@@ -38,7 +38,7 @@ zuul:
     # 用户模块
     microblog-user: /user/**
     # 积分系统
-    microblog-points: /points/**
+    microblog-points: /scheduler/**
     # 任务系统
     microblog-scheduler: /scheduler/**
     microblog-center:

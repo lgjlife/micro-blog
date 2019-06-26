@@ -561,7 +561,7 @@ INSERT INTO `location` VALUES (1,532701,'广东省深圳市宝安区','guangdong
 UNLOCK TABLES;
 
 --
--- Table structure for table `points`
+-- Table structure for table `scheduler`
 --
 
 DROP TABLE IF EXISTS `points`;
@@ -577,12 +577,12 @@ CREATE TABLE `points` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `points`
+-- Dumping data for table `scheduler`
 --
 
 LOCK TABLES `points` WRITE;
-/*!40000 ALTER TABLE `points` DISABLE KEYS */;
-/*!40000 ALTER TABLE `points` ENABLE KEYS */;
+/*!40000 ALTER TABLE `scheduler` DISABLE KEYS */;
+/*!40000 ALTER TABLE `scheduler` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --

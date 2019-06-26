@@ -1,7 +1,6 @@
 package com.swagger.config;
 
 
-import com.sun.istack.internal.NotNull;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -9,8 +8,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "swagger")
 public final  class SwaggerProperties {
 
-    @NotNull
-    public final  String pathPrefix;
     private String basePackage = "com";
     private String title = "swagger";
 

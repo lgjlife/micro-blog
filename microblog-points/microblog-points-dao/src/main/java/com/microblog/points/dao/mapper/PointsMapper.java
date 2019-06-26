@@ -1,6 +1,7 @@
 package com.microblog.points.dao.mapper;
 
 import com.microblog.points.dao.model.Points;
+
 import java.util.List;
 
 public interface PointsMapper {
@@ -43,7 +44,6 @@ public interface PointsMapper {
      * @mbg.generated
      */
     int updateByPrimaryKey(Points record);
-
 
     Points selectByUserId(Long userId);
 

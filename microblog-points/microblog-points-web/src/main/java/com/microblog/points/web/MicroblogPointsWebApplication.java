@@ -9,7 +9,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 @MapperScan("com.microblog.points.dao.mapper")
 @EnableDiscoveryClient
-@SpringBootApplication(scanBasePackages="com.microblog.points")
+@SpringBootApplication(scanBasePackages= "com.microblog.points")
 public class MicroblogPointsWebApplication {
 
     public static void main(String[] args) {

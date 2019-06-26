@@ -57,7 +57,7 @@ public class MsgConfiguration {
     */
     @Bean
     public MqProducer mqProducer(){
-        MqProducer producer = new MqProducer("microblog-points-group","localhost:9876");
+        MqProducer producer = new MqProducer("microblog-scheduler-group","localhost:9876");
         try{
             producer.createProducer();
             return producer;

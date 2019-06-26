@@ -41,14 +41,14 @@
         `````.xml 放置在src/main/resources/下
         -->
         <!-- targetPackage  生成文件存放的目录-->
-        <javaModelGenerator targetPackage="com.microblog.points.dao.model"
+        <javaModelGenerator targetPackage="com.microblog.scheduler.dao.model"
                             targetProject="src/main/java/">
             <!-- 判断是否对数据库查询结果进行trim操作 -->
             <!-- = true则 this.pointsName = pointsName == null ? null : pointsName.trim(); -->
             <property name="trimStrings" value="false" />
         </javaModelGenerator>
         <!-- 设置生成Mapper.xml文件的属性 位置 可选-->
-        <sqlMapGenerator targetPackage="com.microblog.points.dao.mapper"
+        <sqlMapGenerator targetPackage="com.microblog.scheduler.dao.mapper"
                          targetProject="src/main/resources"/>
         <!-- 用于设置 接口类的属性-->
         <!--
@@ -60,18 +60,18 @@
                 1.ANNOTATEDMAPPER 基于注解的MAPPER接口，不会有对应的XML文件
                 2.XMLMAPPER 所有的方法都在XML中，接口调用依赖XML文件
         -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.microblog.points.dao.mapper"
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.microblog.scheduler.dao.mapper"
                              targetProject="src/main/java"/>
         <!-- os_favorites  os_receipt_address  os_receipt_address os_points_login   -->
         <!-- 可以配置多个table,每个表单独配置-->
         <!-- type="post" identity="true" :  ORDER = AFTER -->
         <!-- type="pre" identity="false"(only  the value) : ORDER = BEFORE -->
         <!-- 配置需要生成的表 ，如果需要执行时返回主键，就设置generatedKey-->
-       <!-- <table tableName="points" >
+       <!-- <table tableName="scheduler" >
             <generatedKey column="points_id" sqlStatement="MySql" type="post" identity="true"/>
         </table>-->
 
-        <!--<table tableName="points" >
+        <!--<table tableName="scheduler" >
             <generatedKey column="points_id" sqlStatement="MySql" type="post" identity="true"/>
         </table>-->
 

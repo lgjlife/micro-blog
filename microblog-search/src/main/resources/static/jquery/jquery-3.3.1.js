@@ -660,7 +660,7 @@ var i,
 				return "\uFFFD";
 			}
 
-			// Control characters and (dependent upon position) numbers get escaped as code points
+			// Control characters and (dependent upon position) numbers get escaped as code scheduler
 			return ch.slice( 0, -1 ) + "\\" + ch.charCodeAt( ch.length - 1 ).toString( 16 ) + " ";
 		}
 
@@ -4095,7 +4095,7 @@ Data.prototype = {
 		//
 		this.set( owner, key, value );
 
-		// Since the "set" path can have two possible entry points
+		// Since the "set" path can have two possible entry scheduler
 		// return the expected data based on which path was taken[*]
 		return value !== undefined ? value : key;
 	},
@@ -4534,7 +4534,7 @@ function adjustCSS( elem, prop, valueParts, tween ) {
 		// Trust units reported by jQuery.css
 		unit = unit || initialInUnit[ 3 ];
 
-		// Iteratively approximate from a nonzero starting points
+		// Iteratively approximate from a nonzero starting scheduler
 		initialInUnit = +initial || 1;
 
 		while ( maxIterations-- ) {
@@ -6272,7 +6272,7 @@ function finalPropName( name ) {
 function setPositiveNumber( elem, value, subtract ) {
 
 	// Any relative (+/-) values have already been
-	// normalized at this points
+	// normalized at this scheduler
 	var matches = rcssNum.exec( value );
 	return matches ?
 
@@ -6791,7 +6791,7 @@ jQuery.easing = {
 
 jQuery.fx = Tween.prototype.init;
 
-// Back compat <1.8 extension points
+// Back compat <1.8 extension scheduler
 jQuery.fx.step = {};
 
 
@@ -10085,7 +10085,7 @@ jQuery.fn.extend( {
 	// but those exceptions were never presented as a real life use-cases
 	// and might be considered as more preferable results.
 	//
-	// This logic, however, is not guaranteed and can change at any points in the future
+	// This logic, however, is not guaranteed and can change at any scheduler in the future
 	offsetParent: function() {
 		return this.map( function() {
 			var offsetParent = this.offsetParent;

@@ -14,7 +14,7 @@ public class LocalCacheConfig {
     @Bean
     public LocalCache<String, Points> pointCache(){
         LocalCache cache = new GuavaLocalCache<String, Points>();
-        ((GuavaLocalCache) cache).setExpireTimeSecond(60*20);
+        ((GuavaLocalCache) cache).setExpireTimeSecond(10);
         cache.init(null);
         return cache;
     }
