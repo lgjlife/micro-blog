@@ -7,6 +7,7 @@ eureka:
 spring:
   cloud:
     gateway:
+      # 网关路由策略
       routes:
         # Normwal Websocket route
         - id: websocket_route
@@ -19,34 +20,48 @@ spring:
           predicates:
             - Path=/socket/**
 
+        # 用户模块
         - id: microblog-user
           uri: lb://microblog-user
           predicates:
             - Path=/user/**
-          filters:
-            - SwaggerHeaderFilter
-            - StripPrefix=1
-
+       #   filters:
+        #    - SwaggerHeaderFilter
+         #   - StripPrefix=1
+         #  微博模块
         - id: microblog-blog
           uri: lb://microblog-blog
           predicates:
             - Path=/blog/**
+          filters:
+            - SwaggerHeaderFilter
+            - StripPrefix=1
 
+        # 搜索模块
         - id: microblog-search
           uri: lb://microblog-search
           predicates:
             - Path=/search/**
-
+          filters:
+            - SwaggerHeaderFilter
+            - StripPrefix=1
+        # 积分模块
         - id: microblog-points
           uri: lb://microblog-points
           predicates:
             - Path=/points/**
-
+          filters:
+            - SwaggerHeaderFilter
+            - StripPrefix=1
+        # 任务调度
         - id: microblog-scheduler
           uri: lb://microblog-scheduler
           predicates:
             - Path=/scheduler/**
-
+          filters:
+            - SwaggerHeaderFilter
+            - StripPrefix=1
+        # 配置中心
         - id: microblog-center
           uri: lb://microblog-center
           predicates:
@@ -57,5 +72,5 @@ spring:
     name: gateway
 logging:
   level:
-    org: debug
+    org: info
     com.microblog: debug

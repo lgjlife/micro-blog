@@ -25,8 +25,7 @@ public class RequestInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        log.debug("RequestInterceptor....");
-
+        log.debug("RequestInterceptor,The ServletPath is :",request.getRequestURI());
         Enumeration<String> headerNames =  request.getHeaderNames();
         while(headerNames.hasMoreElements()){
             String name = headerNames.nextElement();

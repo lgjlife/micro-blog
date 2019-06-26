@@ -1,5 +1,6 @@
 package com.microblog.points.service.impl;
 
+import com.microblog.cache.localcache.LocalCache;
 import com.microblog.common.result.BaseResult;
 import com.microblog.common.result.WebResult;
 import com.microblog.points.dao.mapper.PointsMapper;
@@ -22,10 +23,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class PointsServiceImpl implements PointsService {
 
+    private static String POINT_CACHE_KEY_PREFX = "POINT:";
+
     private PointsStrategy pointsStrategy = new PointsStrategyImpl();
 
     @Autowired
     private PointsMapper pointsMapper;
+
+    @Autowired
+    private LocalCache<String, Points> pointCache;
 
     /**
      *功能描述
@@ -47,6 +53,8 @@ public class PointsServiceImpl implements PointsService {
         }
 
         Points points =  pointsMapper.selectByUserId(userId);
+
+
         if(points == null){
             points = new Points();
             points.setUserId(userId);
@@ -61,6 +69,7 @@ public class PointsServiceImpl implements PointsService {
             points.setPoints(currentPointCount);
             pointsMapper.updateByPrimaryKey(points);
         }
+        pointCache.set(POINT_CACHE_KEY_PREFX+userId,points);
         return  new WebResult(1,"积分添加成功");
     }
 
@@ -76,10 +85,16 @@ public class PointsServiceImpl implements PointsService {
     @Override
     public long queryPoints(Long userId) {
 
-        Points points = pointsMapper.selectByUserId(userId);
+        Points points =  pointCache.get(POINT_CACHE_KEY_PREFX+userId);
+
         if(points == null){
-            return  0;
+            points = pointsMapper.selectByUserId(userId);
+            if(points == null){
+                return  0;
+            }
+            pointCache.set(POINT_CACHE_KEY_PREFX+userId,points);
         }
+
         return points.getPoints();
     }
 }

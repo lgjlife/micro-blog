@@ -26,7 +26,7 @@ public class GuavaLocalCache<Sring,T> implements LocalCache<Sring,T> {
                 .build(new CacheLoader<String,T>(){
 
                     public T load(String s) throws Exception {
-                        return null;
+                        return defaultObject;
                     }
                 });
     }
@@ -69,5 +69,6 @@ public class GuavaLocalCache<Sring,T> implements LocalCache<Sring,T> {
 
     public void setExpireTimeSecond(long expireTimeSecond) {
         this.expireTimeSecond = expireTimeSecond;
+
     }
 }
