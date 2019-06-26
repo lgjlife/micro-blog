@@ -100,8 +100,16 @@ html,body,#content{
     /*position:absolute;
 	right:0px;*/
     float: right;
-	
     color: red;
+}
+
+/*签到*/
+#sign-iframe{
+    width: 250px;
+    height: 425px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+
 }
 
 #content-hot ul{

@@ -11,7 +11,7 @@ logging:
   level:
     com.microblog: debug
     org.apache.ibatis: debug
-    org: debug
+    org: info
 spring:
   application:
     name: microblog-points

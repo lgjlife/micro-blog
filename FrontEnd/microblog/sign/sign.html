@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="shortcut icon" href="#" />
+        <title>个人中心</title>
+        <script src="../static/js/jquery/jquery-3.3.1.js"></script>
+       <!-- <script src="js/jquery/jquery-3.3.1.js"></script>-->
+        <link rel="stylesheet" type="text/css" href="../static/css/bootstrap/bootstrap.css">
+        <script src="../static/css/bootstrap/bootstrap.js"></script>
+
+        <script src="/common/token.js"></script>
+        <script src="/common/local.storage.utils.js"></script>
+
+        <link rel="stylesheet" href="calendar_Dodui.css" />
+
+    </head>
+    <body>
+
+         <div id="calendar_Dodui">
+             <div id="calendarYm_Dodui">
+            <span id="year"></span>年<span id="month"></span>月</div>
+
+            <div id="week_Dodui">
+                <span>日</span>
+                <span>一</span>
+                <span>二</span>
+                <span>三</span>
+                <span>四</span>
+                <span>五</span>
+                <span>六</span>
+            </div>
+            <div id="dayBG_Dodui">
+                <ul id="daydataBG_Dodui"></ul>
+                <ul id="dataNums_Dodui"></ul>
+            </div>
+        </div>
+        <script type="text/javascript" src="calendar_Dodui.js"></script>
+         <script type="text/javascript" src="sign.js"></script>
+    </body>
+</html>

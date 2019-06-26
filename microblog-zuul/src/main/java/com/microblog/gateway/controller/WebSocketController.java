@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/socket")
 public class WebSocketController {
 
-
-
     @RequestMapping("/home")
     public String home(){
 

@@ -2,6 +2,7 @@ package com.microblog.points.web.interceptor;
 
 import com.microblog.common.token.jwt.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +24,7 @@ public class RequestInterceptor extends HandlerInterceptorAdapter {
 
         log.debug("RequestInterceptor....");
 
-        String token =  (String)request.getHeader("token");
+        String token =  (String)request.getHeader(HttpHeaders.AUTHORIZATION);
 
         if (token != null){
             log.debug("token = " + token);
