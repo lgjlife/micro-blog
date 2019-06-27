@@ -47,6 +47,6 @@ public interface SignMapper {
     int updateByPrimaryKey(Sign record);
 
 
-    int updateByYear(@Param("record") Sign record,@Param("year") int year);
+    int updateByYear(@Param("sign") Sign sign,@Param("year") int year);
     Sign selectByYear(@Param("userId") Long userId,@Param("year")int year);
 }

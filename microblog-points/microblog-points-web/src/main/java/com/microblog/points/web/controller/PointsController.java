@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 
 @Api(value = "/message",description = "积分 controller")
@@ -57,5 +58,14 @@ public class PointsController {
         return pointsService.queryPoints(userId);
     }
 
+    @PrintUrlAnno
+    @GetMapping("/signhistory")
+    public List<Integer> signHistory(@RequestParam("year") Integer year, @RequestParam("month") Integer month){
+        log.info("year={},month={}",year,month);
+        Long currentUserId =  UserUtil.getUserId(request);
+        List<Integer>  result = pointsService.getCurMonthSignDate(currentUserId,year,month);
+        log.info("result = " + result);
+        return result;
+    }
 
 }

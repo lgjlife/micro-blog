@@ -106,7 +106,7 @@ html,body,#content{
 /*签到*/
 #sign-iframe{
     width: 250px;
-    height: 425px;
+    height: 290px;
     overflow-x: hidden;
     overflow-y: hidden;
 

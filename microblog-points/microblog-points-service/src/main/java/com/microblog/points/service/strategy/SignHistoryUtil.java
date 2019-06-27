@@ -146,6 +146,21 @@ public class SignHistoryUtil {
 
     }
 
+    public static boolean isSign(String signHistory,int dayOfYear) throws Exception{
+
+        checkOutofDay(dayOfYear);
+
+        byte[] data = signHistoryToByte(signHistory);
+        int index = dayOfYear / 8;
+        int offset = dayOfYear % 8;
+        //System.out.print(index+"-");
+        int flag = data[index] & (1 << (7-offset));
+
+        return flag == 0?false:true;
+
+    }
+
+
 
     /**
      *功能描述

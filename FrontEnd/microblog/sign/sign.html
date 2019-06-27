@@ -13,31 +13,39 @@
 
         <script src="/common/token.js"></script>
         <script src="/common/local.storage.utils.js"></script>
-
-        <link rel="stylesheet" href="calendar_Dodui.css" />
-
+        <link rel="stylesheet" href="sign.css" />
     </head>
     <body>
 
-         <div id="calendar_Dodui">
-             <div id="calendarYm_Dodui">
-            <span id="year"></span>年<span id="month"></span>月</div>
 
-            <div id="week_Dodui">
-                <span>日</span>
-                <span>一</span>
-                <span>二</span>
-                <span>三</span>
-                <span>四</span>
-                <span>五</span>
-                <span>六</span>
+        <div id="calendar">
+            <div class="month">
+                <ul>
+                    <li class="prev" id="prev-btn">❮</li>
+                    <li class="next" id="next-btn">❯</li>
+                    <li style="text-align:center">
+                        <span style="font-size:18px" id="display-year">2016</span>
+                        </br>
+                        <span style="font-size:18px" id="display-month">八月</span>
+
+                    </li>
+                </ul>
             </div>
-            <div id="dayBG_Dodui">
-                <ul id="daydataBG_Dodui"></ul>
-                <ul id="dataNums_Dodui"></ul>
-            </div>
+
+            <ul class="weekdays">
+                <li>日</li>
+                <li>一</li>
+                <li>二</li>
+                <li>三</li>
+                <li>四</li>
+                <li>五</li>
+                <li>六</li>
+            </ul>
+
+            <ul class="days" id="days-display">
+
+            </ul>
         </div>
-        <script type="text/javascript" src="calendar_Dodui.js"></script>
          <script type="text/javascript" src="sign.js"></script>
     </body>
 </html>

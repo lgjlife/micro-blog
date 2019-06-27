@@ -72,7 +72,7 @@
     sign_history = #{sign.signHistory,jdbcType=VARCHAR},
     sign_count = #{sign.signCount,jdbcType=INTEGER},
     last_sign_time = #{sign.lastSignTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=BIGINT} and year = #{year}
+    where user_id = #{sign.userId,jdbcType=BIGINT} and year = #{year}
   </update>
 
   <select id="selectByYear" resultMap="BaseResultMap">

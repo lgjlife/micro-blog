@@ -76,4 +76,21 @@ public class PointsControllerTest {
                result.getResponse().getContentAsString());
 
     }
+
+    @Test
+    public void signHistory() throws Exception {
+
+        MvcResult result  =  mockMvc.perform(MockMvcRequestBuilders
+                .get("/points/signhistory")
+                .requestAttr("userId",3L)
+                .param("year","2019")
+                .param("month","6"))
+
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andReturn();
+
+        log.info("执行结果:queryPoints status=[{}] ;result = [{}] ",
+                result.getResponse().getStatus(),
+                result.getResponse().getContentAsString());
+    }
 }

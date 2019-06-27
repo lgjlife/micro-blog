@@ -4,13 +4,19 @@ import com.microblog.cache.localcache.LocalCache;
 import com.microblog.common.result.BaseResult;
 import com.microblog.common.result.WebResult;
 import com.microblog.points.dao.mapper.PointsMapper;
+import com.microblog.points.dao.mapper.SignMapper;
 import com.microblog.points.dao.model.Points;
+import com.microblog.points.dao.model.Sign;
 import com.microblog.points.service.PointsService;
 import com.microblog.points.service.strategy.PointsStrategy;
 import com.microblog.points.service.strategy.PointsStrategyFactory;
+import com.microblog.points.service.strategy.SignHistoryUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *功能描述
@@ -30,6 +36,10 @@ public class PointsServiceImpl implements PointsService {
 
     @Autowired
     private PointsMapper pointsMapper;
+
+    @Autowired
+    private SignMapper signMapper;
+
 
     @Autowired
     private LocalCache<String, Points> pointCache;
@@ -61,7 +71,30 @@ public class PointsServiceImpl implements PointsService {
 
     }
 
+    /**
+     *功能描述
+     * @author lgj
+     * @Description  获取当月的签到记录
+     * @date 6/27/19
+     * @param:
+     * @return:
+     *
+    */
+    public  List<Integer> getCurMonthSignDate(Long userId,int year , int month){
 
+        Sign sign = signMapper.selectByYear(userId,year);
+        if(sign ==  null){
+            return  new ArrayList<>();
+        }
+        try{
+            return  SignHistoryUtil.getSignHistoryByMonth(sign.getSignHistory(),year,month);
+        }
+        catch(Exception ex){
+            log.error(ex.getMessage());
+            return  new ArrayList<>();
+        }
+
+    }
 
     /**
      *功能描述

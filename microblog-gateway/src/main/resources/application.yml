@@ -40,10 +40,10 @@ spring:
             - Path=/search/**
 
         # 积分模块
-        - id: microblog-scheduler
-          uri: lb://microblog-scheduler
+        - id: microblog-points
+          uri: lb://microblog-points
           predicates:
-            - Path=/scheduler/**
+            - Path=/points/**
         # 任务调度
         - id: microblog-scheduler
           uri: lb://microblog-scheduler
@@ -61,5 +61,5 @@ spring:
     name: gateway
 logging:
   level:
-    org: info
+    org: debug
     com.microblog: debug

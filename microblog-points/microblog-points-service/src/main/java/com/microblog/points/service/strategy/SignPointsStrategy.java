@@ -31,6 +31,28 @@ public class SignPointsStrategy extends AbstractPointsStrategy {
     public void handler(Long userId, Integer type)throws Exception {
         Integer point =   super.getPoints(type);
 
+        LocalDate localDate = LocalDate.now();
+        Sign sign = signMapper.selectByYear(userId,localDate.getYear());
+
+        if(SignHistoryUtil.isSign(sign.getSignHistory(),localDate.getDayOfYear())){
+
+            throw new SignException("今日已经签到！");
+        }
+        if(sign == null){
+            sign = new Sign();
+            sign.setUserId(userId);
+            sign.setLastSignTime(new Date());
+            sign.setSignHistory(SignHistoryUtil.sign(SignHistoryUtil.defaultsignHistory(),localDate.getDayOfYear()));
+            sign.setYear(localDate.getYear());
+            signMapper.insert(sign);
+        }
+        else{
+            sign.setLastSignTime(new Date());
+            sign.setSignHistory(SignHistoryUtil.sign(sign.getSignHistory(),localDate.getDayOfYear()));
+            signMapper.updateByYear(sign,localDate.getYear());
+        }
+
+
 
         Points points =  pointsMapper.selectByUserId(userId);
 
@@ -49,24 +71,5 @@ public class SignPointsStrategy extends AbstractPointsStrategy {
             points.setPoints(currentPointCount);
             pointsMapper.updateByPrimaryKey(points);
         }
-
-
-        LocalDate localDate = LocalDate.now();
-
-        Sign sign = signMapper.selectByYear(userId,localDate.getYear());
-        if(sign == null){
-            sign = new Sign();
-            sign.setUserId(userId);
-            sign.setLastSignTime(new Date());
-            sign.setSignHistory(SignHistoryUtil.sign(SignHistoryUtil.defaultsignHistory(),localDate.getDayOfYear()));
-            sign.setYear(localDate.getYear());
-            signMapper.insert(sign);
-        }
-        else{
-            sign.setLastSignTime(new Date());
-            sign.setSignHistory(SignHistoryUtil.sign(sign.getSignHistory(),localDate.getDayOfYear()));
-            signMapper.updateByYear(sign,localDate.getYear());
-        }
-
     }
 }
