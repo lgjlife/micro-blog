@@ -15,15 +15,15 @@ public class SignHistoryUtilTest {
         String signHistory = SignHistoryUtil.defaultsignHistory();
 
 
-        int signMonth = 8;
-        int signDay = 13;
+        int signMonth = 1;
+        int signDay = 1;
         int dayOfYear0 = LocalDate.of(2019,signMonth,signDay).getDayOfYear();
         log.info("对2019-"+ signMonth + "-"+signDay+",第[" + dayOfYear0 + "]天签到！");
         signHistory = SignHistoryUtil.sign(signHistory,dayOfYear0);
 
 
-        signMonth = 8;
-        signDay = 24;
+        signMonth = 1;
+        signDay = 6;
         int dayOfYear1 = LocalDate.of(2019,signMonth,signDay).getDayOfYear();
         log.info("对2019-"+ signMonth + "-"+signDay+",第[" + dayOfYear1 + "]天签到！");
         signHistory = SignHistoryUtil.sign(signHistory,dayOfYear1);
@@ -35,6 +35,11 @@ public class SignHistoryUtilTest {
 
         System.out.println();
 
+        for(int i = 0; i< 10; i++){
+            log.info("第[{}]天是否签到:{}",i,SignHistoryUtil.isSign(data,i));
+        }
+
+        System.out.println();
         log.info("第[{}]天是否签到:{}",dayOfYear0,SignHistoryUtil.isSign(data,dayOfYear0));
         log.info("第[{}]天是否签到:{}",dayOfYear1,SignHistoryUtil.isSign(data,dayOfYear1));
 

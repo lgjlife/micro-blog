@@ -203,31 +203,5 @@ public class SignHistoryUtil {
     }
 
 
-
-   public static void main(String args[]){
-
-       byte[] data = new byte[1];
-       for(int i = 0; i< 127; i++){
-           data[0] = (byte)i;
-           String str =  new String(data);
-           System.out.println(data[0] + "---" + str);
-       }
-
-       data[0] = -13;
-       String str =  new String(data);
-       System.out.println(data[0] + "---" + str + "----");
-
-       //获取2018/6/11 位于该年第几天
-       LocalDate localDate  = LocalDate.of(2018,6,11);
-       localDate.getDayOfYear();
-
-       //获取今天 位于当年第几天
-       LocalDate localDate1  = LocalDate.now();
-       localDate.getDayOfYear();
-
-   }
-
-
-
 }
 
