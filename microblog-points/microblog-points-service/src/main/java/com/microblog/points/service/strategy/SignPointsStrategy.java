@@ -7,6 +7,7 @@ import com.microblog.points.dao.model.Points;
 import com.microblog.points.dao.model.Sign;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -28,6 +29,7 @@ public class SignPointsStrategy extends AbstractPointsStrategy {
     private SignMapper signMapper;
 
     @Override
+    @Transactional
     public void handler(Long userId, Integer type)throws Exception {
         Integer point =   super.getPoints(type);
 

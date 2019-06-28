@@ -14,10 +14,9 @@ var tokenUtil={
 $(function () {
 
     $(document).ajaxSend(function (event, xhr, settings) {
-        console.log("ajaxSend")
         var tokenVal = tokenUtil.getToken();
         if(tokenVal != ""){
-            console.log("ajaxSend - token = "+ tokenVal);
+            console.log("tokenUtil - token = "+ tokenVal);
             xhr.setRequestHeader("Authorization",tokenVal);
         }
     })

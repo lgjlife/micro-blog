@@ -13,9 +13,9 @@ html,body,#content{
     width: 100%;
 }
 
-#head-iframe{
+#header-iframe{
     width: 100%;
-    height: 50px;
+    height: 90px;
 }
 
 #blog-edit{

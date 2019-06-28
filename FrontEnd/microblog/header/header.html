@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="shortcut icon" href="#" />
+        <title>个人中心</title>
+        <script src="/static/js/jquery/jquery-3.3.1.js"></script>
+       <!-- <script src="js/jquery/jquery-3.3.1.js"></script>-->
+        <link rel="stylesheet" type="text/css" href="/static/css/bootstrap/bootstrap.css">
+        <script src="/static/css/bootstrap/bootstrap.js"></script>
+
+        <script src="/common/token.js"></script>
+        <script src="/common/local.storage.utils.js"></script>
+
+
+        <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+        <script src="/cache/cache.js"></script>
+        <script src="/user/info.js"></script>
+        <script src="/common/return.js"></script>
+        <script src="header.js"></script>
+    </head>
+    <body>
+        <div id="header">
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="/index.html" target='_parent'>microblog</a>
+                    </div>
+                    <form class="navbar-form navbar-left" role="search">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search" id="head-search-input">
+                        </div>
+                        <button type="button" class="btn btn-default" id="head-search-btn">搜索</button>
+                    </form>
+
+                    <div class="navbar-header" id="top-nav-unlogin">
+                        <a class="navbar-brand" href="/index.html" id="main-page" target='_parent'>首页</a>
+                        <a class="navbar-brand" href="/user/login.html" target='_parent'>登录</a>
+                        <a class="navbar-brand" href="/user/register.html" target='_parent'>注册</a>
+                    </div>
+                    <div class="navbar-header" id="top-nav-login" style=" display: none">
+                        <a class="navbar-brand" href="/user/info.html" target='_parent' id="head-info-btn"></a>
+                        <a class="navbar-brand" href="javascript:void(0)" id="head-logout-btn">退出登录</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+    </body>
+</html>

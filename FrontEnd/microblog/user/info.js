@@ -13,9 +13,9 @@ var info={
         },
     },
     "requestUrl":{
-        "headerImgUploadUrl":"/user/user/info/header-img",
-        "queryUserInfoUrl":"/user/user/info" ,
-        "requestSettingUrl":"/user/user/info/setting" ,
+        "headerImgUploadUrl":"/user/info/header-img",
+        "queryUserInfoUrl":"/user/info" ,
+        "requestSettingUrl":"/user/info/setting" ,
     },
     "request":{
         /**
@@ -45,17 +45,25 @@ var info={
         /**
         * 查询用户信息
         */
-        "queryUserInfo":function(){
+        "queryUserInfo":function(handler){
             $.ajax({
                 type: "GET",
                 url: info.requestUrl.queryUserInfoUrl,
-                headers: {'Authorization': "i am a token"},
                 success: function(data,status){
-                    info.display.infoDisplay(data);
+
+                    console.log("info-queryUserInfo:"+JSON.stringify(data));
+                    //缓存
+                    cache.set(cache.key.loginUserInfo,data.data,1000*60*60);
+
+                    if(handler != null){
+                        handler.excutor.success(data);
+                    }
+                    //info.display.infoDisplay(data);
 
                 },
                 error:function(data,status){
-                     console.log("queryUserInfo 返回 status"+status);  
+                     console.log("queryUserInfo 返回 status"+status);
+                    handler.excutor.fail(data);
                 }
                 
             });
@@ -153,6 +161,11 @@ var info={
         
     },
     display:{
+        "infoDisplayExcutor":{
+            "excutor":function (data) {
+                this.display.infoDisplay(data)
+            }
+        },
         "infoDisplay":function (data) {
             if(data.code == info.return.success ){
 
