@@ -3,6 +3,7 @@ package com.microblog.blog.web.controller;
 
 import com.microblog.blog.service.dto.BlogInfoDto;
 import com.microblog.blog.service.service.BlogService;
+import com.microblog.blog.service.utils.UserUtil;
 import com.microblog.common.aop.syslog.anno.PrintUrlAnno;
 import com.microblog.common.code.BlogReturnCode;
 import com.microblog.common.code.ReturnCode;
@@ -13,10 +14,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
@@ -163,10 +161,16 @@ public class BlogController {
     @PrintUrlAnno
     @PostMapping("/like")
     @ApiOperation(value = "/like",httpMethod = "POST",notes="点赞")
-    public BaseResult like(long blogId){
-        ReturnCode returnCode = blogService.collect(blogId);
-        BaseResult result = new WebResult(returnCode.getCode(),returnCode.getMessage());
-        return result;
+    public BaseResult like(@RequestParam("blogId") Long blogId,@RequestParam("type") String type){
+
+        Long userId = UserUtil.getUserId(request);
+
+        log.info("userId:[{}],blogId:[{}] type:[{}] ",userId,blogId,type );
+        if((userId == null) || (blogId == null) ||  (type == null)){
+            return new WebResult(WebResult.RESULT_FAIL,"操作失败:请求参数错误!");
+        }
+        long curLikeNum = blogService.like(blogId,userId,type);
+        return new WebResult(WebResult.RESULT_SUCCESS,"操作成功!",curLikeNum);
 
     }
 

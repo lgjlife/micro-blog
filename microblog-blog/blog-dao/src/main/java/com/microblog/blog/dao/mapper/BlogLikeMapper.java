@@ -52,5 +52,7 @@ public interface BlogLikeMapper {
 
     Long insertMap(@Param("likeMaps") Map<String, BlogLike> likeMaps);
     Long deleteMap(@Param("unLikeMaps") Map<String, BlogLike> unLikeMaps);
+    Long deleteByUserId(@Param("userId") Long  userId);
+
 
 }

@@ -23,7 +23,7 @@ public interface BlogService {
     ReturnCode collect(long blogId);
     ReturnCode repost(long blogId, String content);
     ReturnCode comment(long blogId, String content);
-    ReturnCode like(long blogId);
-    ReturnCode unLike(long blogId);
+    long like(long blogId,long userId,String type);
+
 
 }

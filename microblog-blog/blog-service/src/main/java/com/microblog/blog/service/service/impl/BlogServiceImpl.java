@@ -7,7 +7,6 @@ import com.microblog.blog.service.exception.BlogException;
 import com.microblog.blog.service.feign.UserFeignService;
 import com.microblog.blog.service.service.BlogService;
 import com.microblog.blog.service.utils.ImgMarkUtil;
-import com.microblog.blog.service.utils.RedisKeyUtils;
 import com.microblog.blog.service.utils.UserUtil;
 import com.microblog.blog.service.utils.fastdfs.FastdfsUtil;
 import com.microblog.common.code.BlogReturnCode;
@@ -120,21 +119,23 @@ public class BlogServiceImpl implements BlogService {
             long likeCount =   blogLikeMapper.selectCountByBlogId(blogId);
             long repostCount =   blogRepostMapper.selectCountByBlogId(blogId);
             long commentCount =   blogCommentMapper.selectCountByBlogId(blogId);
-
+            boolean isLike = false;
             User user = userFeignService.queryUserInfo(blog.getUserId());
             BlogInfoDto dto = null;
             if(user != null){
                  dto = BlogInfoDto.builder()
-                        .blogId(blogId)
-                        .blogImg(imgs)
-                        .headerUrl(user.getHeaderUrl())
-                        .nickName(user.getNickName())
-                        .content(blog.getContent())
-                        .collectNum(collectCount)
-                        .likeNum(likeCount)
-                        .repostNum(repostCount)
-                        .commentNum(commentCount)
-                        .build();
+                         .blogId(blogId)
+                         .blogImg(imgs)
+                         .headerUrl(user.getHeaderUrl())
+                         .nickName(user.getNickName())
+                         .publishTime(blog.getPublishTime())
+                         .content(blog.getContent())
+                         .collectNum(collectCount)
+                         .likeNum(likeCount)
+                         .isLike(isLike)
+                         .repostNum(repostCount)
+                         .commentNum(commentCount)
+                         .build();
                 blogInfoDtos.add(dto);
                 log.debug("blogInfoDtos = " + blogInfoDtos);
             }
@@ -170,7 +171,7 @@ public class BlogServiceImpl implements BlogService {
         Blog blog = new Blog();
         blog.setContent(blogText);
       //  blog.setCreateTime(new Date());
-       // blog.setPublishTime(new Date());
+      //  blog.setPublishTime(blog.getPublishTime());
         blog.setType(blogType);
         blog.setIsOriginal("true");
         blog.setUserId(UserUtil.getUserId(request));
@@ -266,6 +267,8 @@ public class BlogServiceImpl implements BlogService {
         return BlogReturnCode.BLOG_COLLECT_SUCCESS;
     }
 
+
+
     /**
      *功能描述
      * @author lgj
@@ -275,45 +278,27 @@ public class BlogServiceImpl implements BlogService {
      * @return:
      *
     */
+
+
     @Override
-    public ReturnCode like(long blogId) {
+    public long like(long blogId, long userId, String type) {
 
-        BlogLike blogLike = new BlogLike();
-        blogLike.setBlogId(blogId);
-        blogLike.setUserId(UserUtil.getUserId(request));
-        blogLike.setCreateTime(new Date());
-        redisTemplate.opsForValue().increment(RedisKeyUtils.getBlogLikeCount(blogId,new Date().getDate()));
+        if("like".equals(type)){
+            BlogLike blogLike = new BlogLike();
+            blogLike.setBlogId(blogId);
+            blogLike.setUserId(userId);
+            blogLike.setCreateTime(new Date());
+            blogLikeMapper.insert(blogLike);
+        }
+        else {
+            blogLikeMapper.deleteByUserId(userId);
+        }
 
-
-        //blogLikeMapper.insert(blogLike);
-
-
-        return BlogReturnCode.BLOG_COLLECT_SUCCESS;
+        Long result = null;
+        if((result = blogLikeMapper.selectCountByBlogId(blogId)) == null){
+            return 0;
+        }
+        return result;
     }
-
-    /**
-     *功能描述
-     * @author lgj
-     * @Description 取消点赞操作
-     * @date 5/14/19
-     * @param:
-     * @return:
-     *
-    */
-    @Override
-    public ReturnCode unLike(long blogId) {
-        return null;
-    }
-
-    private String  getRandomFileName(){
-        String random = String.valueOf(new Random().nextInt(10000));
-        String timestamp = String.valueOf(new Date().getTime());
-
-        return  random+"-"+timestamp;
-
-    }
-
-
-
 
 }

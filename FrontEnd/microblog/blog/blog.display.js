@@ -1,3 +1,5 @@
+document.write("<script language=javascript src='/common/return.js'></script>");
+
 var blog={
     "staticPath":"../static",
     "paging":{
@@ -10,7 +12,8 @@ var blog={
         "PUBLIC": "PUBLIC",
     },
     "requestUrl": {
-       "requestBlogUrl": "/blog/list",
+        "requestBlogUrl": "/blog/list",
+        "requestBlogLikeUrl": "/blog/like",
     },
     
     "request":{
@@ -47,6 +50,47 @@ var blog={
                 
             
             });  
+        },
+        "likeRequest":function(likeDom,blogId,type){
+
+            console.log("点赞请求参数:"+"type = " + type + "  blogId = "+blogId);
+            $.ajax({
+                type: "post",
+                url : blog.requestUrl.requestBlogLikeUrl,
+                data : {
+                    "blogId":blogId,
+                    "type": type,
+                },
+                success:function(data,status){
+
+                    console.log(JSON.stringify(data));
+                    if(data.code == returnCode.success){
+                        alert(data.message);
+                        likeDom.find(".sp1").html("取消点赞");
+
+                        if(type=="like"){
+                            likeDom.find(".sp1").html("取消点赞");
+
+                            likeDom.find(".sp2").html(data.data);
+
+                        }
+                        else if(type=="unlike"){
+                            likeDom.find(".sp1").html("点赞")
+                            likeDom.find(".sp2").html(data.data);
+                        }
+
+
+                    }
+                    else if(data.code == returnCode.fail){
+                        alert(data.message);
+                    }
+                },
+                error:function(data,status){
+                    alert(data.message);
+                },
+
+
+            });
         },
         
     },
@@ -96,6 +140,7 @@ var blog={
 
             console.log("publishTime"+blogInfo.publishTime);
 
+            blogContentListTemplate = blogContentListTemplate.replace('{blogId}',blogInfo.blogId);
             blogContentListTemplate = blogContentListTemplate.replace('{headerUrl}',"/"+blogInfo.headerUrl);
             blogContentListTemplate = blogContentListTemplate.replace('{nickName}',blogInfo.nickName);
             blogContentListTemplate = blogContentListTemplate.replace('{publishTime}',blogInfo.publishTime);
@@ -152,6 +197,40 @@ $(function(){
     $(document).on('dblclick',".maxImg",function () {
         $(".maxImg").hide();
     })
+
+    //收藏
+    $(document).on('click',".collect-select",function () {
+
+    })
+    //转发
+    $(document).on('click',".repost-select",function () {
+
+    })
+    //评论
+    $(document).on('click',".comment-select",function () {
+
+    })
+    //点赞
+    $(document).on('click',".like-select",function () {
+        var type = "";
+
+        console.log($(this).find(".sp1").html());
+        if($(this).find(".sp1").html()  == "点赞"){
+            console.log("点赞");
+            type = "like";
+        }
+        else if($(this).find(".sp1").html()  == "取消点赞"){
+            console.log("取消点赞");
+            type = "unlike";
+        }
+
+        console.log($(this).parent());
+        var blogId = $(this).parent().parent().find(".blog-id").html();
+
+
+        blog.request.likeRequest($(this),Number(blogId),type);
+    })
+
 
 
 

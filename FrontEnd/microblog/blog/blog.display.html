@@ -63,6 +63,7 @@
                          <span>{publishTime}</span>
                          </div>
 
+
                      <div id='content-blog-menu-show'>
 
                      </div>
@@ -77,6 +78,7 @@
                      </div>
 
                   <!-- 微博内容显示 -->
+                  <div class="blog-id">{blogId}</div>
                   <div class=" blog-content-word-div">
                       <span  class='blog-content-word'>{content}</span>
                   </div>
@@ -86,20 +88,22 @@
                  </div>
                   <!-- 微博底部信息显示 -->
                  <div class='blog-butom'>
-                       <a href='javascript:void(0)'>收藏(<span>{collectNum}</span>)</a>
-                      <a href='javascript:void(0)'>转发(<span>{repostNum}</span>)</a>
-                       <a href='javascript:void(0)'>评论(<span>{commentNum}</span>)</a>
-                       <a href='javascript:void(0)'>点赞(<span>{likeNum}</span>)</a>
+                     <a href='javascript:void(0)' class="collect-select"><span class="sp1">收藏</span>(<span class="sp2">{collectNum}</span>)</a>
+                     <a href='javascript:void(0)' class="repost-select"><span class="sp1">转发</span>(<span class="sp2">{repostNum}</span>)</a>
+                     <a href='javascript:void(0)' class="comment-select"><span class="sp1">评论</span>(<span class="sp2">{commentNum}</span>)</a>
+                     <a href='javascript:void(0)' class="like-select"><span class="sp1">点赞</span>(<span class="sp2">{likeNum}</span>)</a>
                  </div>
              </div>
-            <img class="center maxImg" src="/group1/M00/00/01/fwAAAV0WSCCAdptAAAHxX6poE9E55.jpeg">
+
         </li>
     </script>
 
+    <!--博客显示模板-->
     <script id="blog-img-list-template" type="text/html">
         <img src='{blogImg}' class='blog-content-img' >
     </script>
 
+    <!-- 图片放大显示模板-->
     <script id="maxImg-template" type="text/html">
         <img class="center maxImg" src="{src}" />
     </script>

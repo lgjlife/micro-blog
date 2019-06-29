@@ -65,12 +65,12 @@
   <select id="selectCountByBlogId" resultType="java.lang.Long" parameterType="java.lang.Long" >
     select count(#{blogId})
     from blog_like
+    where blog_id = #{blogId}
   </select>
   <insert id="insertMap" >
 
 
-    insert into blog_like (blog_id, user_id, create_time
-    )
+    insert into blog_like (blog_id, user_id, create_time)
     values
     <foreach collection="likeMaps" item="blogLike" index="key" separator=",">
       (#{blogLike.blogId,jdbcType=BIGINT},
@@ -95,6 +95,11 @@
     </foreach>
   </delete>
 
+
+  <delete id="deleteByUserId" parameterType="java.lang.Long" >
+    delete from blog_like
+    where user_id = #{userId,jdbcType=BIGINT}
+  </delete>
 
 
 </mapper>
