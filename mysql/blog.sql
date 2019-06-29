@@ -36,12 +36,14 @@ CREATE TABLE `blog_img`(
  */
 DROP TABLE IF EXISTS `blog_comment`;
 CREATE TABLE `blog_comment`(
-   `comment_id` BIGINT   AUTO_INCREMENT COMMENT "评论ID",
+   `id` BIGINT   AUTO_INCREMENT COMMENT "评论ID",
    `blog_id` BIGINT   COMMENT "博客ID",
    `user_id` BIGINT   COMMENT "评论用户ID",
+   `pid` BIGINT default 0   COMMENT "父级ID",
+   `reply_id` BIGINT  default 0 COMMENT "回复的ID",
    `content`  TEXT   COMMENT "内容",
    `publish_time` DATETIME DEFAULT NULL COMMENT "发布时间",
-    PRIMARY KEY (`comment_id`),
+    PRIMARY KEY (`id`),
     index(`blog_id`),
     index(`user_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT="博客评论表";

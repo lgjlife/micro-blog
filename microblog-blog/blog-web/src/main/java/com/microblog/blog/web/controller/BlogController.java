@@ -136,29 +136,7 @@ public class BlogController {
 
     }
 
-    /**
-     *功能描述
-     * @author lgj
-     * @Description   评论
-     * @date 2/22/19
-     * @param:
-     * @return:
-     *
-    */
-    @PrintUrlAnno
-    @PostMapping("/comment")
-    @ApiOperation(value = "/comment",httpMethod = "POST",notes="评论")
-    public BaseResult comment(Long blogId,String content){
 
-        Long userId = UserUtil.getUserId(request);
-        if((userId == null) || (blogId == null)){
-            return new WebResult(WebResult.RESULT_FAIL,"操作失败:请求参数错误!");
-        }
-
-        long result  = blogService.comment(blogId, userId,content);
-        return new WebResult(WebResult.RESULT_SUCCESS,"操作成功!",result);
-
-    }
 
     /**
      *功能描述
