@@ -2,7 +2,6 @@ package com.microblog.blog.service.service;
 
 
 import com.microblog.blog.service.dto.BlogInfoDto;
-import com.microblog.common.code.ReturnCode;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.util.List;
@@ -16,13 +15,10 @@ import java.util.List;
 public interface BlogService {
 
     List<BlogInfoDto>  queryBlog(String type, long userId,int page, int count);
-
     void submit(MultipartHttpServletRequest multiRequest);
-
-
-    ReturnCode collect(long blogId);
-    ReturnCode repost(long blogId, String content);
-    ReturnCode comment(long blogId, String content);
+    long collect(long blogId,long userId);
+    long repost(long blogId,long userId, String content);
+    long comment(long blogId,long userId, String content);
     long like(long blogId,long userId,String type);
 
 

@@ -16,6 +16,8 @@ var blog={
         "requestBlogUrl": "/blog/list",
         "requestBlogLikeUrl": "/blog/like",
         "requestBlogCollectUrl": "/blog/collect",
+        "requestBlogRepostUrl": "/blog/repost",
+        "requestBlogCommentUrl": "/blog/comment",
     },
     
     "request":{
@@ -88,28 +90,25 @@ var blog={
 
             });
         },
-        "collectRequest":function(likeDom,blogId,type){
+        /**
+         * 收藏请求
+         * @param collectDom
+         * @param blogId
+         * @param type
+         */
+        "collectRequest":function(collectDom,blogId){
 
-            console.log("点赞请求参数:"+"type = " + type + "  blogId = "+blogId);
             $.ajax({
                 type: "post",
                 url : blog.requestUrl.requestBlogCollectUrl,
                 data : {
                     "blogId":blogId,
-                    "type": type,
                 },
                 success:function(data,status){
 
                     console.log(JSON.stringify(data));
                     if(data.code == returnCode.success){
-                        if(type=="like"){
-                            likeDom.find(".sp1").html("取消点赞");
-                            likeDom.find(".sp2").html(data.data);
-                        }
-                        else if(type=="unlike"){
-                            likeDom.find(".sp1").html("点赞")
-                            likeDom.find(".sp2").html(data.data);
-                        }
+                        collectDom.find(".sp2").html(data.data);
                     }
                     else if(data.code == returnCode.fail){
                         alert(data.message);
@@ -122,6 +121,66 @@ var blog={
 
             });
         },
+        /**
+         * 转发请求
+         * @param repostDom
+         * @param blogId
+         * @param type
+         */
+        "repostRequest":function(repostDom,blogId,content){
+
+            $.ajax({
+                type: "post",
+                url : blog.requestUrl.requestBlogRepostUrl,
+                data : {
+                    "blogId":blogId,
+                    "content":content,
+                },
+                success:function(data,status){
+
+                    console.log(JSON.stringify(data));
+                    if(data.code == returnCode.success){
+                        repostRequest.find(".sp2").html(data.data);
+                    }
+                    else if(data.code == returnCode.fail){
+                        alert(data.message);
+                    }
+                },
+                error:function(data,status){
+                    alert(data.message);
+                },
+
+
+            });
+        },
+
+        "commentRequest":function(commentDom,blogId,content){
+
+            $.ajax({
+                type: "post",
+                url : blog.requestUrl.requestBlogCommentUrl,
+                data : {
+                    "blogId":blogId,
+                    "content":content,
+                },
+                success:function(data,status){
+
+                    console.log(JSON.stringify(data));
+                    if(data.code == returnCode.success){
+                        commentDom.find(".sp2").html(data.data);
+                    }
+                    else if(data.code == returnCode.fail){
+                        alert(data.message);
+                    }
+                },
+                error:function(data,status){
+                    alert(data.message);
+                },
+
+
+            });
+        },
+
         
     },
     "IFrameResize":function(){
@@ -239,14 +298,19 @@ $(function(){
     //收藏
     $(document).on('click',".collect-select",function () {
 
+        var blogId = $(this).parent().parent().find(".blog-id").html();
+        blog.request.collectRequest($(this),Number(blogId));
     })
     //转发
     $(document).on('click',".repost-select",function () {
-
+        var blogId = $(this).parent().parent().find(".blog-id").html();
+        blog.request.repostRequest($(this),Number(blogId),content);
     })
     //评论
     $(document).on('click',".comment-select",function () {
-        g_alert("success","");
+
+        var blogId = $(this).parent().parent().find(".blog-id").html();
+        blog.request.commentRequest($(this),Number(blogId),content);
     })
     //点赞
     $(document).on('click',".like-select",function () {

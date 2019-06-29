@@ -47,4 +47,5 @@ public interface BlogCollectMapper {
     int updateByPrimaryKey(BlogCollect record);
 
     Long selectCountByBlogId(@Param("blogId") Long blogId);
+    Long selectCount(@Param("blogId") Long blogId,@Param("userId") Long userId);
 }

@@ -6,7 +6,6 @@ import com.microblog.blog.service.service.BlogService;
 import com.microblog.blog.service.utils.UserUtil;
 import com.microblog.common.aop.syslog.anno.PrintUrlAnno;
 import com.microblog.common.code.BlogReturnCode;
-import com.microblog.common.code.ReturnCode;
 import com.microblog.common.result.BaseResult;
 import com.microblog.common.result.WebResult;
 import io.swagger.annotations.Api;
@@ -104,10 +103,14 @@ public class BlogController {
     @PostMapping("/collect")
     @ApiOperation(value = "/collect",httpMethod = "POST",notes="收藏博客")
     @ApiParam(name="blogId")
-    public BaseResult collect(long blogId){
-        ReturnCode returnCode = blogService.collect(blogId);
-        BaseResult result = new WebResult(returnCode.getCode(),returnCode.getMessage());
-        return result;
+    public BaseResult collect(@RequestParam("blogId")Long blogId){
+
+        Long userId = UserUtil.getUserId(request);
+        if((userId == null) || (blogId == null)){
+            return new WebResult(WebResult.RESULT_FAIL,"操作失败:请求参数错误!");
+        }
+        long result  = blogService.collect(blogId,userId);
+        return new WebResult(WebResult.RESULT_SUCCESS,"操作成功!",result);
     }
     /**
      *功能描述
@@ -121,11 +124,15 @@ public class BlogController {
     @PrintUrlAnno
     @PostMapping("/repost")
     @ApiOperation(value = "/repost",httpMethod = "POST",notes="转发博客")
-    public BaseResult repost(long blogId,String content){
+    public BaseResult repost(Long blogId,String content){
 
-        ReturnCode returnCode = blogService.repost(blogId, content);
-        BaseResult result = new WebResult(returnCode.getCode(),returnCode.getMessage());
-        return result;
+        Long userId = UserUtil.getUserId(request);
+        if((userId == null) || (blogId == null)){
+            return new WebResult(WebResult.RESULT_FAIL,"操作失败:请求参数错误!");
+        }
+
+        long result = blogService.repost(blogId,userId, content);
+        return new WebResult(WebResult.RESULT_SUCCESS,"操作成功!",result);
 
     }
 
@@ -141,11 +148,15 @@ public class BlogController {
     @PrintUrlAnno
     @PostMapping("/comment")
     @ApiOperation(value = "/comment",httpMethod = "POST",notes="评论")
-    public BaseResult comment(long blogId,String content){
+    public BaseResult comment(Long blogId,String content){
 
-        ReturnCode returnCode = blogService.collect(blogId);
-        BaseResult result = new WebResult(returnCode.getCode(),returnCode.getMessage());
-        return result;
+        Long userId = UserUtil.getUserId(request);
+        if((userId == null) || (blogId == null)){
+            return new WebResult(WebResult.RESULT_FAIL,"操作失败:请求参数错误!");
+        }
+
+        long result  = blogService.comment(blogId, userId,content);
+        return new WebResult(WebResult.RESULT_SUCCESS,"操作成功!",result);
 
     }
 

@@ -9,8 +9,6 @@ import com.microblog.blog.service.service.BlogService;
 import com.microblog.blog.service.utils.ImgMarkUtil;
 import com.microblog.blog.service.utils.UserUtil;
 import com.microblog.blog.service.utils.fastdfs.FastdfsUtil;
-import com.microblog.common.code.BlogReturnCode;
-import com.microblog.common.code.ReturnCode;
 import com.microblog.filesystem.provider.FSProvider;
 import com.microblog.filesystem.upload.UpLoadObject;
 import com.microblog.filesystem.upload.UpLoadObjectBuilder;
@@ -229,34 +227,46 @@ public class BlogServiceImpl implements BlogService {
 
     }
 
+    /**
+     *功能描述
+     * @author lgj
+     * @Description  收藏
+     * @date 6/29/19
+    */
     @Override
-    public ReturnCode collect(long blogId) {
- 
+    public long collect(long blogId,long userId) {
+
+        Long count = blogCollectMapper.selectCount(blogId,userId);
+        if(count == 1){
+            throw  new BlogException("操作失败,您已经收藏过该微博");
+        }
+
         BlogCollect blogCollect = new BlogCollect();
         blogCollect.setBlogId(blogId);
-        blogCollect.setUserId(UserUtil.getUserId(request));
+        blogCollect.setUserId(userId);
         blogCollect.setCreateTime(new Date());
         blogCollectMapper.insert(blogCollect);
 
-        return BlogReturnCode.BLOG_COLLECT_SUCCESS;
+        return  blogCollectMapper.selectCountByBlogId(blogId);
+
     }
 
     @Override
-    public ReturnCode repost(long blogId,String content) {
+    public long repost(long blogId,long userId,String content) {
 
         BlogRepost blogRepost = new BlogRepost();
         blogRepost.setBlogId(blogId);
-        blogRepost.setUserId(UserUtil.getUserId(request));
+        blogRepost.setUserId(userId);
         blogRepost.setCreateTime(new Date());
         blogRepost.setContent(content);
         blogRepostMapper.insert(blogRepost);
 
+        return blogRepostMapper.selectCountByBlogId(blogId);
 
-        return BlogReturnCode.BLOG_COLLECT_SUCCESS;
     }
 
     @Override
-    public ReturnCode comment(long blogId,String content) {
+    public long comment(long blogId,long userId,String content) {
 
         BlogComment blogComment = new BlogComment();
         blogComment.setBlogId(blogId);
@@ -266,7 +276,7 @@ public class BlogServiceImpl implements BlogService {
         blogCommentMapper.insert(blogComment);
 
 
-        return BlogReturnCode.BLOG_COLLECT_SUCCESS;
+        return 0;
     }
 
 

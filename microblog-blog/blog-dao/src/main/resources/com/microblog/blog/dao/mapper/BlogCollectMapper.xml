@@ -65,7 +65,15 @@
   <select id="selectCountByBlogId" resultType="java.lang.Long" parameterType="java.lang.Long" >
     select count(#{blogId})
     from blog_collect
+    where blog_id = #{blogId,jdbcType=BIGINT}
   </select>
+
+  <select id="selectCount" resultType="java.lang.Long">
+    select count(#{blogId})
+    from blog_collect
+    where blog_id = #{blogId,jdbcType=BIGINT} and  user_id = #{userId,jdbcType=BIGINT}
+  </select>
+
 
 
 </mapper>
