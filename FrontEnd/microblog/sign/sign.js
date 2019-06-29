@@ -128,7 +128,7 @@ var sign={
             //空白天数li
             var emptyHtml = "";
             for(var i = 0 ; i < emptyDays;i++){
-                emptyHtml += "<li>x</li>";
+                emptyHtml += "<li></li>";
 
             }
             //

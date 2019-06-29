@@ -1,12 +1,16 @@
+
+document.write("<script language=javascript src='/common/return.js'></script>");
+
+
 var edit = {
     "requestUrl":{
-        "submitBlogUrl": "/blog/blog/submit"
+        "submitBlogUrl": "/blog/submit"
     },
 
     "request":{
 
         /**
-         * 上传文件请求
+         * 发布微博
          */
         "submitBlog":function(formData){
             $.ajax({
@@ -17,17 +21,19 @@ var edit = {
                 processData: false,
                 contentType: false,
                 success:function(data,status){
-                    console.log(data.message);
-                    console.log(data.data);
-
-                    var jsonData = JSON.stringify(data);
-                    console.log(jsonData);
+                    $("#display").html("");
+                    if(data.code == returnCode.success){
+                        $("#display").append(data.message);
+                    }
+                    else if(data.code == returnCode.fail){
+                        $("#display").append(data.message);
+                    }
 
                 },
-                success:function(data,status){
+                error:function(xhr,status,error){
                     console.log("request error  + " + status);
-
-
+                    $("#display").html("");
+                    $("#display").append("错误提示： " + xhr.status + " " + xhr.statusText);
                 }
 
             })
@@ -108,7 +114,7 @@ $(function(){
         // 处理字符串，给##添加样式
         var text = $("#blog-edit-input").val();
         text = edit.addTextHref(text);
-        $("#display").append(text);
+
         console.log("text = " + text);
         formData.append('blog-text',text);
 

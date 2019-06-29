@@ -17,7 +17,7 @@ public interface BlogService {
 
     List<BlogInfoDto>  queryBlog(String type, long userId,int page, int count);
 
-    ReturnCode submit(MultipartHttpServletRequest multiRequest);
+    void submit(MultipartHttpServletRequest multiRequest);
 
 
     ReturnCode collect(long blogId);

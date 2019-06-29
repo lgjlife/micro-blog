@@ -12,7 +12,12 @@ var cache={
         "searchString": "SEARCH:STRING",
 
     },
-    
+    /**
+     * 设置缓存
+     * @param key
+     * @param value
+     * @param expiredTimeMS  过期时间，单位ms
+     */
     "set":function (key,value,expiredTimeMS) {
 
         if((expiredTimeMS == 0 )  || (expiredTimeMS == null)){
@@ -25,8 +30,12 @@ var cache={
             localStorage.setItem(key+cache.key.expiredStartTime,new Date().getTime());
         }
 
-
     },
+    /**
+     *  获取键
+     * @param key
+     * @returns {*} key存在，返回对象；不存在，返回null
+     */
     "get":function (key) {
 
         var expiredTimeMS = localStorage.getItem(key+cache.key.expiredTime);
@@ -41,23 +50,39 @@ var cache={
         }
         else {
             console.log("cache-缓存["+key+"]不存在！");
+            cache.remove(key);
             return null;
         }
 
 
 
     },
+    /**
+     *  移除键
+     * @param key
+     */
     "remove":function (key) {
         localStorage.removeItem(key);
         localStorage.removeItem(key+cache.key.expiredTime);
         localStorage.removeItem(key+cache.key.expiredStartTime);
     },
+    /**
+     * 对键重新更新过期时间
+     * @param key
+     * @param expiredTimeMS  过期时间ms
+     */
     "expired":function (key,expiredTimeMS) {
 
         if(cache.get(key)!=null){
             localStorage.setItem(key+cache.key.expiredTime,expiredTimeMS);
         }
 
+    },
+    /**
+     * 清除所有缓存
+     */
+    "clear":function () {
+        localStorage.clear();
     }
 
 }

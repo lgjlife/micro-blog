@@ -83,72 +83,36 @@ var blog={
     /**
     * 追加显示博客 "+ blog.staticPath + data.headerUrl + "
     **/
-    "displayBlog":function(data){
-      //  for(var i = 0; i < data.length ;i++ ){
-            for(var i in data){
-                
-                
-            var imgDisplay = "";
-            for(var j = 0; j < data[i].blogImg.length ;j++ ){
-                 imgDisplay += "<img src='" + "/" + data[i].blogImg[j] + "' class='blog-content-img' >";
-             }
-            
-   
-            console.log("imgDisplay = " + imgDisplay + " i = i");
-            
-            if(imgDisplay == ""){
-                imgDisplay = "<span></span>";
-            }
-            
-            var blogText =  "<li class='blog-content-list'>"
-                        + " <div class='blog-content'>"
-                            //<!-- 用户信息显示 -->
-                            + "<div class='blog-content-user-info'>"
-                               + "<div  class='blog-content-header-img'>" 
-                                    + "<img src=' "+ "/"+ data[i].headerUrl + "' height='120px' width='120px'>"
-                                + "</div>"
-                                + "<span  style='float: right'><a href='javascript:void(0);' onclick='$('.content-blog-menu').show();'>操作</a></span>"
+    "displayBlog":function(blogInfos){
 
-                               + " <div>"
-                                    + "<a href='#'>" +data[i].nickName + "</a>"
-                                   + " <span>2月15日 23:23</span>"
-                                + "</div>"
-                                
-                               + " <div id='content-blog-menu-show'>"
-                                    
-                                + "</div>"
-                               + " <div style='display: none;' class='content-blog-menu'>"
-                                   + " <a href='javascript:void(0);'>帮上头条</a>"
-                                   + " <a href='javascript:void(0);'>屏蔽这条微博</a>"
-                                   + "<a href='javascript:void(0);'>屏蔽<span>xxxx</span></a>"
-                                   + "<a href='javascript:void(0);'>取消关注<span>xxxx</span></a>"
-                                   + " <a href='javascript:void(0);'>投诉</a>"
-                                   + " <button onclick='$('.content-blog-menu').hide();'>关闭</button>"
-                               + " </div>"
-                           + " </div>"
-                            
-                         ///  <!-- 微博内容显示 -->
-                          + "  <div blog-content-word-div>"
-                              + "  <span  class='blog-content-word'>"
-                                + data[i].content
-                               + ' </span>'
-                           + " </div>"
-                           //  <!-- 微博图片显示 -->                                  
-                           + " <div class='blog-content-img-block'  >"
-                                     + imgDisplay     
-                           + " </div>"
-                          //  <!-- 微博底部信息显示 --> 
-                           + " <div class='blog-'>"
-                             + "   <a href='javascript:void(0)'>收藏(<span>" + data[i].collectNum + "</span>)</a> " 
-                              + "  <a href='javascript:void(0)'>转发(<span>" + data[i].repostNum + "</span>)</a>"  
-                             + "   <a href='javascript:void(0)'>评论(<span>" + data[i].commentNum + "</span>)</a> " 
-                             + "   <a href='javascript:void(0)'>点赞(<span>" + data[i].likeNum + "</span>)</a>  "
-                          + "  </div>"
-                       + " </div> "
-                  + "  </li> "; 
-            
-            $("#blog-content-ul").append(blogText);
-            
+        if(blogInfos == null){
+            console.log("blog.display.js-displayBlog:" + "blogInfos is null");
+            return;
+        }
+
+
+        for(let blogInfo of blogInfos){
+            var  blogContentListTemplate = $("#blog-content-list-template").html();
+
+            console.log("publishTime"+blogInfo.publishTime);
+
+            blogContentListTemplate = blogContentListTemplate.replace('{headerUrl}',"/"+blogInfo.headerUrl);
+            blogContentListTemplate = blogContentListTemplate.replace('{nickName}',blogInfo.nickName);
+            blogContentListTemplate = blogContentListTemplate.replace('{publishTime}',blogInfo.publishTime);
+            blogContentListTemplate = blogContentListTemplate.replace('{content}',blogInfo.content);
+            blogContentListTemplate = blogContentListTemplate.replace('{collectNum}',blogInfo.collectNum);
+            blogContentListTemplate = blogContentListTemplate.replace('{repostNum}',blogInfo.repostNum);
+            blogContentListTemplate = blogContentListTemplate.replace('{commentNum}',blogInfo.commentNum);
+            blogContentListTemplate = blogContentListTemplate.replace('{likeNum}',blogInfo.likeNum);
+
+            var blogImgListTemplate =$("#blog-img-list-template").html();
+            var imgs = "";
+            for(let img of blogInfo.blogImg){
+                imgs +=  blogImgListTemplate.replace('{blogImg}',"/"+img);
+            }
+            blogContentListTemplate = blogContentListTemplate.replace('{imgDisplay}',imgs)
+
+            $('#blog-content-ul').append(blogContentListTemplate);
         }
         blog.IFrameResize();
     }
@@ -166,5 +130,31 @@ $(function(){
         
         blog.request.requestBlog(blog.type.ALL);
     })
+
+    //图片绑定，单机放大
+    $(document).on('click',".blog-content-img",function () {
+        console.log("图片按下:"+$(this).attr("src"));
+        var originSrc = $(this).attr("src");
+        var maxImgTemplate =$("#maxImg-template").html();
+        maxImgTemplate = maxImgTemplate.replace('{src}',originSrc);
+        $("body").append(maxImgTemplate);
+
+        var  top = $(this).offset().top;
+        var  bottom = $(this).offset().bottom;
+        console.log("top = " + top + " bottom =  "+ bottom);
+
+        $(".maxImg").css("top",top-150);
+
+
+    })
+
+    //双击图片消失
+    $(document).on('dblclick',".maxImg",function () {
+        $(".maxImg").hide();
+    })
+
+
+
+
     
 })

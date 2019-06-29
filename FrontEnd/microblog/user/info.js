@@ -162,53 +162,45 @@ var info={
     },
     display:{
         "infoDisplayExcutor":{
-            "excutor":function (data) {
-                this.display.infoDisplay(data)
-            }
+            "excutor":{
+                "success":function (data) {
+                    if(data.code == info.return.success ){
+                        info.display.infoDisplay(data.data);
+                    }
+                    else if(data.code == info.fail ){
+                        console.log(data.message);
+
+                        $("#top-nav-login").hide();
+                        $("#top-nav-unlogin").show();
+                        $("#index-content-user").hide();
+
+                    }
+
+                },
+
+            },
         },
-        "infoDisplay":function (data) {
-            if(data.code == info.return.success ){
+        "infoDisplay":function (userInfo) {
+            //////////////////////////////
+            /*用户信息*/
+            $("#user-info-header").attr("src","/"+userInfo.headerUrl);
+            $("#user-info-nickName").text(userInfo.nickName);
+            $("#user-info-phone").text(userInfo.phoneNum);
+            $("#user-info-email").text(userInfo.email);
+            var registerDate = new Date(userInfo.registerTime);
+            var displayDate = registerDate.getFullYear()+"-"+registerDate.getMonth()
+                +"-"+registerDate.getDay()+" "
+                + registerDate.getHours() + ":" + registerDate.getMinutes();
+            $("#user-info-register").text(displayDate);
 
-                ///////////////////////////////
-                /*页面头*/
-                $("#index-content-user").show();
-                console.log(data.message);
-                console.log(data.data);
-                $("#top-nav-unlogin").hide();
-                $("#top-nav-login").show();
-                $("#head-info-btn").text(data.data.nickName);
+            //////////////////////////////
+            /*修改用户信息*/
 
-                //////////////////////////////
-                /*用户信息*/
-                $("#user-info-header").attr("src","/"+data.data.headerUrl);
-                $("#user-info-nickName").text(data.data.nickName);
-                $("#user-info-phone").text(data.data.phoneNum);
-                $("#user-info-email").text(data.data.email);
-                var registerDate = new Date(data.data.registerTime);
-                var displayDate = registerDate.getFullYear()+"-"+registerDate.getMonth()
-                    +"-"+registerDate.getDay()+" "
-                    + registerDate.getHours() + ":" + registerDate.getMinutes();
-                $("#user-info-register").text(displayDate);
+            $("#user-info-modify-header").attr("src","/"+userInfo.headerUrl);
+            $("#user-info-modify-nickName").val(userInfo.nickName);
+            $("#user-info-modify-phone").val(userInfo.phoneNum);
+            $("#user-info-modify-email").val(userInfo.email);
 
-                //////////////////////////////
-                /*修改用户信息*/
-
-                $("#user-info-modify-header").attr("src","/"+data.data.headerUrl);
-                $("#user-info-modify-nickName").val(data.data.nickName);
-                $("#user-info-modify-phone").val(data.data.phoneNum);
-                $("#user-info-modify-email").val(data.data.email);
-
-
-
-            }
-            else if(data.code == info.fail ){
-                console.log(data.message);
-
-                $("#top-nav-login").hide();
-                $("#top-nav-unlogin").show();
-                $("#index-content-user").hide();
-
-            }
         }
     },
     
@@ -280,7 +272,7 @@ var info={
         for(var i = 0 ; i < files.length ; i ++){
             formData.append('file',files[i]);
         }
-        
+
         info.request.fileUpload(formData);
         
     }) 
@@ -291,10 +283,18 @@ var info={
     $("#info-setting-btn").click(function () {
         console.log("保存设置");
         info.request.requestSetting();        
-    })   
-     
-     
-    info.request.queryUserInfo();
+    })
+
+     var loginUserInfo = cache.get(cache.key.loginUserInfo);
+     if( loginUserInfo != null){
+         //缓存中有用户信息
+         console.log("header-缓存中有用户信息");
+         info.display.infoDisplay(loginUserInfo);
+     }else {
+         //缓存中没有用户信息，向后端请求
+         console.log("header-缓存中没有用户信息，向后端请求");
+         info.request.queryUserInfo(header.handler.userInfoHandler);
+     }
      
 })
 

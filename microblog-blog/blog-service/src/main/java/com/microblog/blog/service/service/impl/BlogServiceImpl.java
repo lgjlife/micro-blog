@@ -3,6 +3,7 @@ package com.microblog.blog.service.service.impl;
 import com.microblog.blog.dao.mapper.*;
 import com.microblog.blog.dao.model.*;
 import com.microblog.blog.service.dto.BlogInfoDto;
+import com.microblog.blog.service.exception.BlogException;
 import com.microblog.blog.service.feign.UserFeignService;
 import com.microblog.blog.service.service.BlogService;
 import com.microblog.blog.service.utils.ImgMarkUtil;
@@ -20,6 +21,7 @@ import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -153,7 +155,8 @@ public class BlogServiceImpl implements BlogService {
      *
     */
     @Override
-    public ReturnCode submit(MultipartHttpServletRequest multiRequest) {
+    @Transactional
+    public void submit(MultipartHttpServletRequest multiRequest) {
         List<MultipartFile> fileList = new ArrayList<>();
 
         //博客内容
@@ -176,10 +179,13 @@ public class BlogServiceImpl implements BlogService {
         log.debug("blogId = {}",blogId);
 
 
+        if(true){
+            throw new BlogException("微博发布失败，图片保存出现错误");
+        }
         //取得request中的所有文件名
         fileList = multiRequest.getFiles("blog-img");
         if (fileList == null || fileList.size() <= 0) {
-           return BlogReturnCode.BLOG_SUBMIT_SUCCESS;
+           return ;
         }
         List<BlogImg> blogImgs = new LinkedList<BlogImg>();
         Map<String,MultipartFile> savePaths =  new HashMap<String,MultipartFile>();
@@ -210,13 +216,14 @@ public class BlogServiceImpl implements BlogService {
             }
             catch(Exception ex){
                 log.error(ex.getMessage());
+                throw new BlogException("微博发布失败，图片保存出现错误");
             }
             if((fileCount++) > 9){
                 break;
             }
         }
         blogImgMapper.insertList(blogImgs);
-        return  BlogReturnCode.BLOG_SUBMIT_SUCCESS;
+
     }
 
     @Override

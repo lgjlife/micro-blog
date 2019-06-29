@@ -6,7 +6,6 @@ import com.microblog.blog.service.service.BlogService;
 import com.microblog.common.aop.syslog.anno.PrintUrlAnno;
 import com.microblog.common.code.BlogReturnCode;
 import com.microblog.common.code.ReturnCode;
-import com.microblog.common.code.UserReturnCode;
 import com.microblog.common.result.BaseResult;
 import com.microblog.common.result.WebResult;
 import io.swagger.annotations.Api;
@@ -19,10 +18,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 
@@ -89,16 +86,11 @@ public class BlogController {
     @PrintUrlAnno
     @PostMapping("/submit")
     @ApiOperation(value = "/submit",httpMethod = "POST",notes="上传头像")
-    public BaseResult upLoadHeaderImg(HttpServletRequest request, HttpServletResponse response) {
-
-
-        //创建一个通用的多部分解析器
-        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
+    public BaseResult upLoadHeaderImg(HttpServletRequest request) {
 
         MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
-        ReturnCode returnCode = blogService.submit(multiRequest);
-        BaseResult result = new WebResult(returnCode.getCode(),returnCode.getMessage());
-        return new WebResult(UserReturnCode.HEADER_FILE_NULL.getCode(),UserReturnCode.HEADER_FILE_NULL.getMessage());
+         blogService.submit(multiRequest);
+        return new WebResult(WebResult.RESULT_SUCCESS,"l微博发布成功");
     }
 
     /**

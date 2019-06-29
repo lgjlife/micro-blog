@@ -85,3 +85,20 @@ html,body{
 #content-blog-menu  a{
 
 }
+
+.maxImg{
+    width: 600px;
+    height: 600px;
+    position: absolute;/*这里一定要设置*/
+    z-index: 999999;/*这里是该元素与显示屏的距离，据说越大越好，但是我也没有看到效果，因为没有它也是可以的*/
+   /* margin-top: 20%;
+    margin-left: -209px;*/
+    -webkit-transition: .5s ease-in-out;/* css的transition允许css的属性值在一定的时间内从一个状态平滑的过渡到另一个状态 */
+    -moz-transition: .5s ease-in-out;/*这里为了兼容其他浏览器*/
+    -o-transition: .5s ease-in-out;
+}
+.center{
+    left: 15%;
+    top: 50%;
+
+}
