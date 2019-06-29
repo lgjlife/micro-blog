@@ -119,7 +119,9 @@ public class BlogServiceImpl implements BlogService {
             long likeCount =   blogLikeMapper.selectCountByBlogId(blogId);
             long repostCount =   blogRepostMapper.selectCountByBlogId(blogId);
             long commentCount =   blogCommentMapper.selectCountByBlogId(blogId);
-            boolean isLike = false;
+            Long userLike = blogLikeMapper.selectCount(blogId,userId);
+            boolean isLike = (userLike == 1?true:false);
+
             User user = userFeignService.queryUserInfo(blog.getUserId());
             BlogInfoDto dto = null;
             if(user != null){
@@ -132,7 +134,7 @@ public class BlogServiceImpl implements BlogService {
                          .content(blog.getContent())
                          .collectNum(collectCount)
                          .likeNum(likeCount)
-                         .isLike(isLike)
+                         .likeFlag(isLike)
                          .repostNum(repostCount)
                          .commentNum(commentCount)
                          .build();
@@ -283,7 +285,13 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public long like(long blogId, long userId, String type) {
 
+
+
         if("like".equals(type)){
+            if(blogLikeMapper.selectCount(blogId,userId) == 1){
+                throw new BlogException("您已经点赞!");
+            }
+
             BlogLike blogLike = new BlogLike();
             blogLike.setBlogId(blogId);
             blogLike.setUserId(userId);
@@ -291,7 +299,7 @@ public class BlogServiceImpl implements BlogService {
             blogLikeMapper.insert(blogLike);
         }
         else {
-            blogLikeMapper.deleteByUserId(userId);
+            blogLikeMapper.delete(blogId,userId);
         }
 
         Long result = null;

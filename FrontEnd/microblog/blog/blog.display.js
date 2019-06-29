@@ -1,4 +1,5 @@
 document.write("<script language=javascript src='/common/return.js'></script>");
+document.write("<script language=javascript src='/alter/alter.js'></script>");
 
 var blog={
     "staticPath":"../static",
@@ -14,6 +15,7 @@ var blog={
     "requestUrl": {
         "requestBlogUrl": "/blog/list",
         "requestBlogLikeUrl": "/blog/like",
+        "requestBlogCollectUrl": "/blog/collect",
     },
     
     "request":{
@@ -36,12 +38,7 @@ var blog={
                    console.log(data.message);
                    
                    var jsonData = JSON.stringify(data);
-                    console.log(jsonData);
-                   
-                /*for(var dat in data.data){
-                     console.log(data.data[dat]);
-                }*/
-                   
+                   console.log(jsonData);
                    blog.displayBlog(data.data);
                },
                 error:function(data,status){
@@ -51,6 +48,12 @@ var blog={
             
             });  
         },
+        /**
+         * 点赞请求
+         * @param likeDom
+         * @param blogId
+         * @param type
+         */
         "likeRequest":function(likeDom,blogId,type){
 
             console.log("点赞请求参数:"+"type = " + type + "  blogId = "+blogId);
@@ -65,21 +68,48 @@ var blog={
 
                     console.log(JSON.stringify(data));
                     if(data.code == returnCode.success){
-                        alert(data.message);
-                        likeDom.find(".sp1").html("取消点赞");
-
                         if(type=="like"){
                             likeDom.find(".sp1").html("取消点赞");
-
                             likeDom.find(".sp2").html(data.data);
-
                         }
                         else if(type=="unlike"){
                             likeDom.find(".sp1").html("点赞")
                             likeDom.find(".sp2").html(data.data);
                         }
+                    }
+                    else if(data.code == returnCode.fail){
+                        alert(data.message);
+                    }
+                },
+                error:function(data,status){
+                    alert(data.message);
+                },
 
 
+            });
+        },
+        "collectRequest":function(likeDom,blogId,type){
+
+            console.log("点赞请求参数:"+"type = " + type + "  blogId = "+blogId);
+            $.ajax({
+                type: "post",
+                url : blog.requestUrl.requestBlogCollectUrl,
+                data : {
+                    "blogId":blogId,
+                    "type": type,
+                },
+                success:function(data,status){
+
+                    console.log(JSON.stringify(data));
+                    if(data.code == returnCode.success){
+                        if(type=="like"){
+                            likeDom.find(".sp1").html("取消点赞");
+                            likeDom.find(".sp2").html(data.data);
+                        }
+                        else if(type=="unlike"){
+                            likeDom.find(".sp1").html("点赞")
+                            likeDom.find(".sp2").html(data.data);
+                        }
                     }
                     else if(data.code == returnCode.fail){
                         alert(data.message);
@@ -150,6 +180,14 @@ var blog={
             blogContentListTemplate = blogContentListTemplate.replace('{commentNum}',blogInfo.commentNum);
             blogContentListTemplate = blogContentListTemplate.replace('{likeNum}',blogInfo.likeNum);
 
+            //检测自己是否已经点赞
+            if(blogInfo.likeFlag == true){
+                blogContentListTemplate = blogContentListTemplate.replace('{likeWord}',"取消点赞");
+            }
+            else {
+                blogContentListTemplate = blogContentListTemplate.replace('{likeWord}',"点赞");
+            }
+
             var blogImgListTemplate =$("#blog-img-list-template").html();
             var imgs = "";
             for(let img of blogInfo.blogImg){
@@ -208,10 +246,12 @@ $(function(){
     })
     //评论
     $(document).on('click',".comment-select",function () {
-
+        g_alert("success","");
     })
     //点赞
     $(document).on('click',".like-select",function () {
+
+
         var type = "";
 
         console.log($(this).find(".sp1").html());

@@ -67,6 +67,13 @@
     from blog_like
     where blog_id = #{blogId}
   </select>
+
+  <select id="selectCount" resultType="java.lang.Long">
+    select count(*)
+    from blog_like
+    where blog_id = #{blogId} and user_id = #{userId,jdbcType=BIGINT}
+  </select>
+
   <insert id="insertMap" >
 
 
@@ -96,9 +103,9 @@
   </delete>
 
 
-  <delete id="deleteByUserId" parameterType="java.lang.Long" >
+  <delete id="delete"  >
     delete from blog_like
-    where user_id = #{userId,jdbcType=BIGINT}
+    where  blog_id = #{blogId} and user_id = #{userId,jdbcType=BIGINT}
   </delete>
 
 

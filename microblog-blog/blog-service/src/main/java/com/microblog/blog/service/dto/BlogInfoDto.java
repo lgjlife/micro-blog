@@ -23,6 +23,6 @@ public class BlogInfoDto {
     private long repostNum;
     private long commentNum;
     private long likeNum;
-    private boolean isLike;
+    private boolean likeFlag;
 
 }
