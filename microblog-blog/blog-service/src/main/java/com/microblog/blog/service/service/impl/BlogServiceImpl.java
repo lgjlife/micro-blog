@@ -125,6 +125,7 @@ public class BlogServiceImpl implements BlogService {
             if(user != null){
                  dto = BlogInfoDto.builder()
                          .blogId(blogId)
+                         .userId(userId)
                          .blogImg(imgs)
                          .headerUrl(user.getHeaderUrl())
                          .nickName(user.getNickName())

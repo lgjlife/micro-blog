@@ -127,7 +127,7 @@ var blog={
          * @param blogId
          * @param type
          */
-        "repostRequest":function(repostDom,blogId,content){
+        "repostRequest":function(btnDom,blogId,content){
 
             $.ajax({
                 type: "post",
@@ -140,7 +140,11 @@ var blog={
 
                     console.log(JSON.stringify(data));
                     if(data.code == returnCode.success){
-                        repostRequest.find(".sp2").html(data.data);
+
+                        console.log("data.nessage");
+                        console.log("btnDom = " + btnDom);
+                        console.log(btnDom.parent().find(".repost-result"));
+                        btnDom.parent().find(".repost-result").html(data.message);
                     }
                     else if(data.code == returnCode.fail){
                         alert(data.message);
@@ -167,7 +171,7 @@ var blog={
 
                     console.log(JSON.stringify(data));
                     if(data.code == returnCode.success){
-                        commentDom.find(".sp2").html(data.data);
+                        commentDom.find("span").html(data.message);
                     }
                     else if(data.code == returnCode.fail){
                         alert(data.message);
@@ -230,6 +234,7 @@ var blog={
             console.log("publishTime"+blogInfo.publishTime);
 
             blogContentListTemplate = blogContentListTemplate.replace('{blogId}',blogInfo.blogId);
+            blogContentListTemplate = blogContentListTemplate.replace('{userId}',blogInfo.userId);
             blogContentListTemplate = blogContentListTemplate.replace('{headerUrl}',"/"+blogInfo.headerUrl);
             blogContentListTemplate = blogContentListTemplate.replace('{nickName}',blogInfo.nickName);
             blogContentListTemplate = blogContentListTemplate.replace('{publishTime}',blogInfo.publishTime);
@@ -303,14 +308,65 @@ $(function(){
     })
     //转发
     $(document).on('click',".repost-select",function () {
+        console.log("转发操作");
+
+        $(".repost-window").remove();
+
+        var blogContentListDom = $(this).parent().parent().parent();
+        //移除转发时显示的窗口
+
+        //用户ID
+        var userId = blogContentListDom.find(".blog-content-user-id").html();
+        //用户昵称
+        var nickName = blogContentListDom.find(".blog-content-user-nickName").html();
+        //原始微博内容
+        var originContent = blogContentListDom.find(".blog-content-word").html();
+
+        console.log("userId = " + userId + " nickName = " + nickName + "  originContent = " + originContent);
+        var repostTemplate = $("#repost-template").html();
         var blogId = $(this).parent().parent().find(".blog-id").html();
-        blog.request.repostRequest($(this),Number(blogId),content);
+
+        repostTemplate = repostTemplate.replace('{blogId}',blogId);
+        repostTemplate = repostTemplate.replace('{userId}',userId);
+        repostTemplate = repostTemplate.replace('{nickName}',nickName);
+        repostTemplate = repostTemplate.replace('{content}',originContent);
+
+        $("body").append(repostTemplate);
+        var  top = $(this).offset().top;
+        console.log("top = " + top);
+        var height = $(".repost-window").height();
+        console.log("height = " + height);
+        top = ( top -height)<0?0:( top -height);
+
+        $(".repost-window").css("top",top);
+
+        console.log("top = " + top);
+
+
+
+        $(document).on("click",".repost-close-btn",function () {
+            $(".repost-window").remove();
+        })
+        $(document).on("click",".repost-submit-btn",function () {
+
+            var blogId = $(this).parent().parent().find(".repost-blog-id").html();
+            content=$(this).parent().parent().find(".blog-edit-input").val();
+            console.log("blogId = "+ blogId + " content = "+content);
+            blog.request.repostRequest($(this),Number(blogId),content);
+        })
     })
     //评论
     $(document).on('click',".comment-select",function () {
 
+        var x=window.screenLeft?window.screenLeft: window.screenX ;
+        var y=window.screenTop?window.screenTop: window.screenY;
+        console.log(x+" "+y);
+
+        console.log(document.body.scrollTop + "  " +
+        document.documentElement.scrollTop);
+
         var blogId = $(this).parent().parent().find(".blog-id").html();
-        blog.request.commentRequest($(this),Number(blogId),content);
+       // blog.request.commentRequest($(this),Number(blogId),content);
     })
     //点赞
     $(document).on('click',".like-select",function () {
@@ -334,10 +390,4 @@ $(function(){
 
         blog.request.likeRequest($(this),Number(blogId),type);
     })
-
-
-
-
-
-    
 })

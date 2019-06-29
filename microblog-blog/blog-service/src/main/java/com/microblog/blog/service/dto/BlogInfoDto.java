@@ -12,6 +12,7 @@ import java.util.List;
 public class BlogInfoDto {
 
     private Long  blogId;
+    private Long userId;
     private String headerUrl;
     private String nickName;
 

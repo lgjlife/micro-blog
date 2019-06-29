@@ -51,15 +51,15 @@
     <script id="blog-content-list-template" type="text/html"> <!- 注意标签内的type属性 -!>
         <li class='blog-content-list'>
              <div class='blog-content'>
-                <!-- 用户信息显示 -->
-                 <div class='blog-content-user-info'>
+                  <!-- 用户信息显示 -->
+                   <div class='blog-content-user-info'>
                      <div  class='blog-content-header-img'>
                          <img src='{headerUrl}' height='120px' width='120px'>
                      </div>
                      <span  style='float: right'><a href='javascript:void(0);' onclick="$('.content-blog-menu').show();">操作</a></span>
-
+                     <span class="blog-content-user-id">{userId}</span>
                      <div>
-                         <a href='#'> {nickName}  </a>
+                         <a href='#' class="blog-content-user-nickName"> {nickName}  </a>
                          <span>{publishTime}</span>
                          </div>
 
@@ -74,8 +74,8 @@
                          <a href='javascript:void(0);'>取消关注<span>xxxx</span></a>
                          <a href='javascript:void(0);'>投诉</a>
                          <button onclick="$('.content-blog-menu').hide();">关闭</button>
-                         </div>
                      </div>
+                   </div>
 
                   <!-- 微博内容显示 -->
                   <div class="blog-id" style="display: none">{blogId}</div>
@@ -107,6 +107,34 @@
     <script id="maxImg-template" type="text/html">
         <img class="center maxImg" src="{src}" />
     </script>
+
+  <!--转发模板-->
+    <script id="repost-template" type="text/html">
+        <div class="repost-window">
+            <div class="repost-title-block">
+                <span class="repost-title">转发微博</span>
+                <button class="repost-close-btn" style="float: right">X</button>
+            </div>
+            <div>
+                <span style="display: none" class="repost-blog-id">{blogId}</span>
+                <span>//<a href="/user/info.home.html?u={userId}">@{nickName}:</a>{content}</span>
+            </div>
+            <div class="repost-edit-block">
+                <textarea class="blog-edit-input" rows="10" cols="30" placeholder="转发理由" maxlength="120"></textarea>
+            </div>
+            <div class="repost-submit-block">
+                <button class="repost-submit-btn">转发</button>
+                <span class="repost-result" style="color: red"></span>
+            </div>
+        </div>
+    </script>
+
+    <!--评论模板-->
+    <script id="comment-template" type="text/html">
+        <img class="center maxImg" src="{src}" />
+    </script>
+
+
 
 
 </html>
