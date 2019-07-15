@@ -19,6 +19,15 @@
             <artifactId>mybatis</artifactId>
             <version>3.4.6</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-elasticsearch -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-elasticsearch</artifactId>
+            <version>3.1.2.RELEASE</version>
+        </dependency>
+
+
     </dependencies>
     <build>
         <plugins>

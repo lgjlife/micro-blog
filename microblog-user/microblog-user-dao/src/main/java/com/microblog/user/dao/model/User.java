@@ -1,7 +1,10 @@
 package com.microblog.user.dao.model;
 
 import lombok.ToString;
+import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.util.Date;
 
@@ -23,6 +26,7 @@ public class User {
      *
      * @mbg.generated
      */
+    @Field(type = FieldType.Long)
     private Long userId;
 
     /**
@@ -188,6 +192,7 @@ public class User {
      *
      * @mbg.generated
      */
+    @Field(type = FieldType.Date, format = DateFormat.custom,pattern = "yyyy-MM-dd")
     private Date updateTime;
 
     /**

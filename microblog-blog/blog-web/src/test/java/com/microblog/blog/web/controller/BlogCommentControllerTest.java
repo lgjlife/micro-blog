@@ -44,6 +44,7 @@ public class BlogCommentControllerTest {
     @Test
     public void queryOneLevelComment() throws Exception{
 
+
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
                 .get(basePath+"/query/1")
                 .requestAttr("userId",3L)
@@ -52,7 +53,7 @@ public class BlogCommentControllerTest {
                 .param("pageCount","50"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
-        log.info("执行结果:signature status=[{}]，result = [{}] ",
+        log.info("\n执行结果:signature status=[{}]，\nresult = [{}] ",
                 result.getResponse().getStatus(),
                 result.getResponse().getContentAsString());
 
@@ -69,7 +70,7 @@ public class BlogCommentControllerTest {
                 .param("pId","1"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
-        log.info("执行结果:signature status=[{}]，result = [{}] ",
+        log.info("\n执行结果:signature status=[{}]，\nresult = [{}] ",
                 result.getResponse().getStatus(),
                 result.getResponse().getContentAsString());
     }
@@ -96,7 +97,7 @@ public class BlogCommentControllerTest {
                 .andReturn();
 
 
-        log.info("执行结果:signature status=[{}]，result = [{}] ",
+        log.info("\n执行结果:signature status=[{}]，\nresult = [{}] ",
                 result.getResponse().getStatus(),
                 result.getResponse().getContentAsString());
     }
@@ -110,7 +111,7 @@ public class BlogCommentControllerTest {
                 .param("commentId","1"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
-        log.info("执行结果:signature status=[{}]，result = [{}] ",
+        log.info("\r\n执行结果:signature status=[{}]，\r\n result = [{}] ",
                 result.getResponse().getStatus(),
                 result.getResponse().getContentAsString());
 

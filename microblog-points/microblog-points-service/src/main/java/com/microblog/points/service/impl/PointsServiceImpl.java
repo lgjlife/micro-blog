@@ -2,6 +2,7 @@ package com.microblog.points.service.impl;
 
 import com.microblog.cache.localcache.LocalCache;
 import com.microblog.common.result.BaseResult;
+import com.microblog.common.result.Result;
 import com.microblog.common.result.WebResult;
 import com.microblog.points.dao.mapper.PointsMapper;
 import com.microblog.points.dao.mapper.SignMapper;
@@ -61,12 +62,12 @@ public class PointsServiceImpl implements PointsService {
             if(pointsStrategy != null){
                 pointsStrategy.handler(userId,type);
             }
-            return  new WebResult(WebResult.RESULT_SUCCESS,"积分添加成功");
+            return  new WebResult(Result.RESULT_SUCCESS,"积分添加成功");
 
         }
         catch(Exception ex){
             log.error(ex.getMessage());
-            return  new WebResult(WebResult.RESULT_FAIL,ex.getMessage());
+            return  new WebResult(Result.RESULT_FAIL,ex.getMessage());
         }
 
     }

@@ -85,7 +85,7 @@ public class UserRelationController {
 
         Long currentUserId =  UserUtil.getUserId(request);
         ReturnCode returnCode = userRelationService.unfollow(currentUserId,folleeId);
-        return new WebResult(returnCode.getCode(),returnCode.getMessage());
+        return new WebResult(WebResult.RESULT_SUCCESS,returnCode.getMessage());
 
 
     }
@@ -111,7 +111,7 @@ public class UserRelationController {
         }
         Long currentUserId =  UserUtil.getUserId(request);
         ReturnCode returnCode = userRelationService.removeFollower(follerId,currentUserId);
-        return new WebResult(returnCode.getCode(),returnCode.getMessage());
+        return new WebResult(WebResult.RESULT_SUCCESS,returnCode.getMessage());
     }
 
     /**

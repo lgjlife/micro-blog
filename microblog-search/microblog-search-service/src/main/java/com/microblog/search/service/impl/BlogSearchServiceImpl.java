@@ -1,5 +1,6 @@
 package com.microblog.search.service.impl;
 
+
 import com.microblog.blog.dao.model.Blog;
 import com.microblog.search.service.BlogSearchService;
 import com.microblog.search.service.dto.SearchBlogDto;

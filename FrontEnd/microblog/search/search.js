@@ -10,7 +10,7 @@ var search={
      * 请求路径
      */
     "url":{
-        "searchUrl":"/search/search/query"
+        "searchUrl":"/search/query"
     },
     /**
      * 执行ajax请求
@@ -32,14 +32,19 @@ var search={
                 return JSON.stringify(search.request.searchData.data);
             }
         },
-        "search":function (jsonData) {
-            console.log("搜索:" + jsonData);
+        "search":function (type,queryString) {
+        
             $.ajax({
                 url: search.url.searchUrl,
                 type: 'POST',
-                contentType : "application/json;charset=utf-8",
-                dataType: "json",
-                data: jsonData,
+                // contentType : "application/json;charset=utf-8",
+                // dataType: "json",
+                data: {
+                    //查询类型　blog , user
+                    "type":type,
+                    //查询字符串
+                    "queryString":queryString,
+                },
                 success:function(data,status){
                     console.log("message = " + data.message);
                     console.log("message = " + data.message);
@@ -273,8 +278,8 @@ $(function () {
         //执行搜索
         var currentQueryString = $("#search-search-input-block-input").val();
         storage.setItem(storage.constants.currentQueryString,currentQueryString);
-        var searchData = search.request.searchData.getData(search.searchType,currentQueryString);
-        search.request.search(searchData);
+
+        search.request.search(search.searchType,currentQueryString);
 
     })
     /**
@@ -289,8 +294,7 @@ $(function () {
         //执行搜索
         var currentQueryString = $("#search-search-input-block-input").val();
         storage.setItem(storage.constants.currentQueryString,currentQueryString);
-        var searchData = search.request.searchData.getData(search.searchType,currentQueryString);
-        search.request.search(searchData);
+        search.request.search(search.searchType,currentQueryString);
     })
 
     $("#search-search-input-block-btn").click(function () {
@@ -299,8 +303,8 @@ $(function () {
         var currentQueryString = $("#search-search-input-block-input").val();
         storage.setItem(storage.constants.currentQueryString,currentQueryString);
         displayBlockSetect(search.searchType);
-        var searchData = search.request.searchData.getData(search.searchType,currentQueryString);
-        search.request.search(searchData);
+
+        search.request.search(search.searchType,currentQueryString);
 
     })
 

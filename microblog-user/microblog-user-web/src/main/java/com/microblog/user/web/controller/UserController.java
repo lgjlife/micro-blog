@@ -4,6 +4,7 @@ package com.microblog.user.web.controller;
 import com.microblog.common.aop.syslog.anno.PrintUrlAnno;
 import com.microblog.common.code.UserReturnCode;
 import com.microblog.common.result.BaseResult;
+import com.microblog.common.result.Result;
 import com.microblog.common.result.WebResult;
 import com.microblog.common.utils.UserRegexUtil;
 import com.microblog.user.service.service.UserService;
@@ -179,7 +180,7 @@ public class UserController {
        // String name  = (String) requestMap.get("name");
         log.debug("name = {}",name);
         Map map = userService.getRsaKey(name);
-        result = new WebResult(WebResult.RESULT_SUCCESS,"获取RSA 的 modulus/exponent 成功",map);
+        result = new WebResult(Result.RESULT_SUCCESS,"获取RSA 的 modulus/exponent 成功",map);
         return   result ;
     }
 

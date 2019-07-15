@@ -8,19 +8,17 @@ import com.microblog.search.service.BlogSearchService;
 import com.microblog.search.service.UserSearchService;
 import com.microblog.search.service.dto.SearchBlogDto;
 import com.microblog.search.service.dto.SearchUserDto;
-import com.microblog.search.service.result.SearchReturnCode;
 import com.microblog.search.web.contants.SearchType;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Map;
 
 
 @Api(value = "/search",description = "搜索 controller")
@@ -41,29 +39,28 @@ public class SearchController {
     @ApiOperation(value = "/query",httpMethod = "POST",notes="搜索")
     @PrintUrlAnno
     @RequestMapping("/query")
-    public BaseResult query(@RequestBody Map<String,String> requestMap){
+    public BaseResult query(@RequestParam("type") String type,@RequestParam("queryString") String queryString){
 
-        String type = requestMap.get("type");
-        String queryString = requestMap.get("queryString");
 
-        log.info("requestMap = " + requestMap);
+
+        log.info("type = {},queryString={}",type,queryString);
         if(StringUtils.isEmpty(type) || StringUtils.isEmpty(queryString)){
 
-            return new WebResult(SearchReturnCode.SEARCH_NULL_PARAM);
+            return new WebResult(WebResult.RESULT_FAIL,"搜索失败，搜索字段不能为空！");
 
         }
 
         if(SearchType.USER.equals(type)){
             List<SearchUserDto> result = userSearchService.queryUser(queryString);
-            return new WebResult(SearchReturnCode.SEARCH_SUCCESS,result);
+            return new WebResult(WebResult.RESULT_SUCCESS,"搜索用户信息成功",result);
         }
         else if(SearchType.BLOG.equals(type)){
 
             List<SearchBlogDto> result = blogSearchService.queryUser(queryString);
-            return new WebResult(SearchReturnCode.SEARCH_SUCCESS);
+            return new WebResult(WebResult.RESULT_SUCCESS,"搜索博客信息成功",result);
         }
 
-        return new WebResult(SearchReturnCode.SEARCH_FAIL);
+        return new WebResult(WebResult.RESULT_FAIL,"搜索失败！");
 
     }
 }

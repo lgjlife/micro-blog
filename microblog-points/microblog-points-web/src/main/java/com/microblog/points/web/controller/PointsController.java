@@ -2,6 +2,7 @@ package com.microblog.points.web.controller;
 
 import com.microblog.common.aop.syslog.anno.PrintUrlAnno;
 import com.microblog.common.result.BaseResult;
+import com.microblog.common.result.Result;
 import com.microblog.common.result.WebResult;
 import com.microblog.points.service.PointsService;
 import com.microblog.points.web.utils.UserUtil;
@@ -47,7 +48,7 @@ public class PointsController {
             return pointsService.handlePoints(currentUserId,type);
         }
 
-        return new WebResult(WebResult.RESULT_FAIL,"签到错误，请求参数不正确!");
+        return new WebResult(Result.RESULT_FAIL,"签到错误，请求参数不正确!");
 
     }
 

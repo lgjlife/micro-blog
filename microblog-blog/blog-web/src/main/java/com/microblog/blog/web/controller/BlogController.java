@@ -7,6 +7,7 @@ import com.microblog.blog.service.utils.UserUtil;
 import com.microblog.common.aop.syslog.anno.PrintUrlAnno;
 import com.microblog.common.code.BlogReturnCode;
 import com.microblog.common.result.BaseResult;
+import com.microblog.common.result.Result;
 import com.microblog.common.result.WebResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -87,7 +88,7 @@ public class BlogController {
 
         MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
          blogService.submit(multiRequest);
-        return new WebResult(WebResult.RESULT_SUCCESS,"l微博发布成功");
+        return new WebResult(Result.RESULT_SUCCESS,"l微博发布成功");
     }
 
     /**
@@ -107,10 +108,10 @@ public class BlogController {
 
         Long userId = UserUtil.getUserId(request);
         if((userId == null) || (blogId == null)){
-            return new WebResult(WebResult.RESULT_FAIL,"操作失败:请求参数错误!");
+            return new WebResult(Result.RESULT_FAIL,"操作失败:请求参数错误!");
         }
         long result  = blogService.collect(blogId,userId);
-        return new WebResult(WebResult.RESULT_SUCCESS,"操作成功!",result);
+        return new WebResult(Result.RESULT_SUCCESS,"操作成功!",result);
     }
     /**
      *功能描述
@@ -128,11 +129,11 @@ public class BlogController {
 
         Long userId = UserUtil.getUserId(request);
         if((userId == null) || (blogId == null)){
-            return new WebResult(WebResult.RESULT_FAIL,"操作失败:请求参数错误!");
+            return new WebResult(Result.RESULT_FAIL,"操作失败:请求参数错误!");
         }
 
         long result = blogService.repost(blogId,userId, content);
-        return new WebResult(WebResult.RESULT_SUCCESS,"操作成功!",result);
+        return new WebResult(Result.RESULT_SUCCESS,"操作成功!",result);
 
     }
 
@@ -156,10 +157,10 @@ public class BlogController {
 
         log.info("userId:[{}],blogId:[{}] type:[{}] ",userId,blogId,type );
         if((userId == null) || (blogId == null) ||  (type == null)){
-            return new WebResult(WebResult.RESULT_FAIL,"操作失败:请求参数错误!");
+            return new WebResult(Result.RESULT_FAIL,"操作失败:请求参数错误!");
         }
         long curLikeNum = blogService.like(blogId,userId,type);
-        return new WebResult(WebResult.RESULT_SUCCESS,"操作成功!",curLikeNum);
+        return new WebResult(Result.RESULT_SUCCESS,"操作成功!",curLikeNum);
 
     }
 

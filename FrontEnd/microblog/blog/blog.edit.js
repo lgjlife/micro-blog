@@ -6,7 +6,7 @@ var edit = {
     "requestUrl":{
         "submitBlogUrl": "/blog/submit"
     },
-
+    
     "request":{
 
         /**
@@ -26,6 +26,7 @@ var edit = {
                         $("#display").append(data.message);
                     }
                     else if(data.code == returnCode.fail){
+                        
                         $("#display").append(data.message);
                     }
 
@@ -175,7 +176,7 @@ $(function(){
 
         console.log("delete文件个数 = " + files.length);
 
-
+        
         //打开预览窗口
         $("#head-file-preview").show();
 

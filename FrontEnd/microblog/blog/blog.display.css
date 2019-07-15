@@ -12,7 +12,9 @@ html,body{
 #blog-content-display ul{
     list-style: none;  
     padding-left:0px;
+    
 }
+
 .blog-content-user-info{
     height: auto;
     background-color: blanchedalmond;

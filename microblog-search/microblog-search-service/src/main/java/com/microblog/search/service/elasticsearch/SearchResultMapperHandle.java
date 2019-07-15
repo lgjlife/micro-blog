@@ -1,5 +1,7 @@
 package com.microblog.search.service.elasticsearch;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.search.SearchHit;
@@ -11,16 +13,11 @@ import org.springframework.data.elasticsearch.core.aggregation.AggregatedPage;
 import org.springframework.data.elasticsearch.core.aggregation.impl.AggregatedPageImpl;
 import org.springframework.stereotype.Component;
 
-import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 /**
@@ -32,6 +29,13 @@ import java.util.Map;
 @Component
 @Slf4j
 public class SearchResultMapperHandle implements SearchResultMapper {
+
+    private ObjectMapper objectMapper = new ObjectMapper();
+
+    {
+        this.objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        this.objectMapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
+    }
 
     @Override
     public <T> AggregatedPage<T> mapResults(SearchResponse searchResponse, Class<T> aClass, Pageable pageable) {
@@ -45,31 +49,32 @@ public class SearchResultMapperHandle implements SearchResultMapper {
         for (SearchHit searchHit:searchHits){
 
             try{
+                log.info("searchHit = " + searchHit.getSourceAsString());
 
                 Map<String, Object> resultMap = searchHit.getSourceAsMap();
+
+                print(resultMap);
+
+
+                T obj = objectMapper.readValue(searchHit.getSourceAsString(),aClass);
+                System.out.println(obj);
 
                 T instance =  aClass.newInstance();
                 Field[] fields =   aClass.getDeclaredFields();
                 Map<String, HighlightField> highlightFieldMap =  searchHit.getHighlightFields();
 
                 for(Field field:fields){
-                    field.setAccessible(true);
-                    PropertyDescriptor propertyDescriptor = new PropertyDescriptor(field.getName(),aClass);
-                    Method setMethod = propertyDescriptor.getWriteMethod();
-                    HighlightField highlightField = null ;
-                    if(( highlightField=highlightFieldMap.get(field.getName())) != null){
-                        //field　高亮字段
-                        setMethod.invoke(instance,highlightField.getFragments()[0].toString());
-                    }
-                    else {
-                        //field　不是高亮字段
-                        Object value =(Object)resultMap.get(field.getName());
-                        value =  valueTypeExchang(field,value);
-                        setMethod.invoke(instance,value);
+                    if(highlightFieldMap.containsKey(field.getName())){
+                        if(field.getType() != String.class){
+                            break;
+                        }
+                        field.setAccessible(true);
+                        String highlightFieldValue =  Arrays.toString(highlightFieldMap.get(field.getName()).getFragments());
+                        field.set(obj,highlightFieldValue);
                     }
 
                 }
-                results.add(instance);
+                results.add(obj);
             }
             catch(Exception ex){
                 log.error(ex.getMessage());
@@ -79,6 +84,15 @@ public class SearchResultMapperHandle implements SearchResultMapper {
         //log.info("size = " + results.size() + "results:"+results);
         AggregatedPage page = new AggregatedPageImpl<T>(results);
         return page;
+    }
+
+    private void print(Map<String, Object> resultMap){
+        resultMap.forEach((key,value)->{
+
+           log.info("key[{}],type[{}],value[{}]",key,value.getClass(),value);
+
+        });
+
     }
 
     /**

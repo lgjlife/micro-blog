@@ -4,6 +4,7 @@ import com.microblog.common.aop.syslog.anno.PrintUrlAnno;
 import com.microblog.common.code.ReturnCode;
 import com.microblog.common.dto.UserInfoDto;
 import com.microblog.common.result.BaseResult;
+import com.microblog.common.result.Result;
 import com.microblog.common.result.WebResult;
 import com.microblog.user.dao.model.User;
 import com.microblog.user.service.ret.UserRet;
@@ -55,14 +56,14 @@ public class UserInfoController {
 
             try{
                 String imgPath = userInfoService.upLoadHeaderImg(currentUserId,multiRequest);
-                return new WebResult(WebResult.RESULT_SUCCESS,"获取用户头像图片成功",imgPath);
+                return new WebResult(Result.RESULT_SUCCESS,"获取用户头像图片成功",imgPath);
             }
             catch(Exception ex){
                 ex.printStackTrace();
-                return new WebResult(WebResult.RESULT_FAIL,"获取用户头像图片失败:"+ex.getMessage());
+                return new WebResult(Result.RESULT_FAIL,"获取用户头像图片失败:"+ex.getMessage());
             }
         }
-        return new WebResult(WebResult.RESULT_FAIL,"获取用户头像图片失败,图片不存在");
+        return new WebResult(Result.RESULT_FAIL,"获取用户头像图片失败,图片不存在");
     }
 
     @PrintUrlAnno
