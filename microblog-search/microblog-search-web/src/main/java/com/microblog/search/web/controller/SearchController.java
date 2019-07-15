@@ -7,8 +7,8 @@ import com.microblog.common.result.WebResult;
 import com.microblog.search.service.BlogSearchService;
 import com.microblog.search.service.UserSearchService;
 import com.microblog.search.service.dto.SearchBlogDto;
-import com.microblog.search.service.dto.SearchUserDto;
 import com.microblog.search.web.contants.SearchType;
+import com.microblog.user.dao.model.User;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -51,7 +51,7 @@ public class SearchController {
         }
 
         if(SearchType.USER.equals(type)){
-            List<SearchUserDto> result = userSearchService.queryUser(queryString);
+            List<User> result = userSearchService.queryUser(queryString);
             return new WebResult(WebResult.RESULT_SUCCESS,"搜索用户信息成功",result);
         }
         else if(SearchType.BLOG.equals(type)){

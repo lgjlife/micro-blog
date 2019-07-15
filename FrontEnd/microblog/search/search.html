@@ -132,35 +132,6 @@
                 <!-- 搜索结果,用户-->
                 <div id="search-content-display-user">
                     <ul class="user-list-ul">
-                        <!--<li class="user-list">
-                            <div>
-                                <div class="user-list-header-block">
-                                    <img src="../static/img/header/0.jpg" class="user-header-img">
-                                </div>
-                                <div>
-                                    <a href="javascript:void(0)" class="user-list-info-nickName">萨达</a>
-                                    <button type="button" class="user-list-concern-btn">关注</button>
-                                    <div>
-                                        <span >关注:</span><span class="user-concern-count">660</span>
-                                    </div>
-                                    <div>
-                                        <span>粉丝:</span><span class="user-fans-count">60</span>
-                                    </div>
-                                    <div>
-                                        <span>微博:</span><span class="user-blog-count">66</span>
-                                    </div>
-
-                                </div>
-                                <div>
-                                    <span>简介:</span><span class="user-desc">直播北京突发事件，急事儿私信。只此一号，一个已婚的北京爷们儿用不正经的方式干着</span>
-                                </div>
-                            </div>
-
-                        </li>-->
-
-                        <hr style="background-color: #D2B48C;height: 1px">
-
-
                     </ul>
                 </div>
             </div>
@@ -169,14 +140,39 @@
         <div id="search-right">
 
         </div>
-
-
-
-
-
-
-
-
     </body>
+    <script id="user-template" type="text/html">
+        <li class=‘user-list’>
+            <div>
+                <div class='user-list-header-block'>
+                   <img src="{headerImgUrl}" class='user-header-img'>
+                </div>
+                <div>
+                  <span style="display:none">{userId}</span>
+                  <div>
+                     <a href='/user/info.home.html?u={userId}' class='user-list-info-nickName'>{nickName}</a>
+                     <button type='button' class='user-list-concern-btn'>关注</button>
+                  </div>
+                  <div>
+                     <span >关注:</span><span class='user-concern-count'> {concern}</span>
+                  </div>
+                  <div>
+                     <span>粉丝:</span><span class='user-fans-count'>{fans}</span>
+                  </div>
+                  <div>
+                     <span>微博:</span><span class='user-blog-count'>{blog}</span>
+                  </div>
+                </div>
+                <div>
+                    <span>简介:</span><span class='user-desc'>{desc}</span>
+                </div>
+            </div>
+        </li>
+        <hr style="background-color: #D2B48C;height: 1px">
+    </script>
+
+    <script id="blog-template" type="text/html">
+    
+    </script>
 
 </html>

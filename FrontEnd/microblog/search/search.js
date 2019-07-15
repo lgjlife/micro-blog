@@ -47,11 +47,12 @@ var search={
                 },
                 success:function(data,status){
                     console.log("message = " + data.message);
-                    console.log("message = " + data.message);
                     search.display.displayUserList(data.data);
                 },
                 error(xhr,status,error){
-                    alert("出现异常，请重试！");
+                   // alert("出现异常，请重试！");
+                   $(".user-list-ul").html("");
+                   $(".search-content-display").html("");
                 }
 
             })
@@ -66,43 +67,21 @@ var search={
      */
     "display":{
 
-        "displayUserList":function (user) {
-            console.log("displayUserList...");
-            $("#search-content-display-user ul").text("");
+        "displayUserList":function (users) {
 
-
-            for(var i = 0; i < user.length ;i++){
-
-                var text = "<li class=‘user-list’>"
-                    + "<div>"
-                    + "    <div class='user-list-header-block'>"
-                    + "        <img src='" + search.staticPath + user[i].headerImgUrl + "' class='user-header-img'>"
-                    + "    </div>"
-                    + "    <div>"
-                    + "      <div>"
-                    + "         <a href='javascript:void(0)' class='user-list-info-nickName'>" + user[i].nickName + "</a>"
-                    + "         <button type='button' class='user-list-concern-btn'>关注</button>"
-                    + "      </div>"
-                    + "      <div>"
-                    + "         <span >关注:</span><span class='user-concern-count'>" + user[i].concern + "</span>"
-                    + "      </div>"
-                    +  "     <div>"
-                    + "         <span>粉丝:</span><span class='user-fans-count'>" + user[i].fans + "</span>"
-                    + "      </div>"
-                    + "      <div>"
-                    + "         <span>微博:</span><span class='user-blog-count'>" + user[i].blog + "</span>"
-                    + "      </div>"
-                    + "    </div>"
-
-                    + "    <div>"
-                    + "        <span>简介:</span><span class='user-desc'>" + user[i].desc + "</span>"
-                    + "    </div>"
-                    + " </div>"
-                    + " </li>"
-                    + " <hr>";
-
-                $("#search-content-display-user ul").append(text);
-            }
+            $(".user-list-ul").html("");
+            for(var i = 0; i < users.length ;i++){
+                var userTemplate = $("#user-template").html();
+                userTemplate = userTemplate.replace('{userId}',users[i].userId);
+                userTemplate = userTemplate.replace('{headerImgUrl}',"/"+users[i].headerUrl);
+                userTemplate = userTemplate.replace('{userId}',users[i].userId);
+                userTemplate = userTemplate.replace('{nickName}',users[i].nickName);
+                userTemplate = userTemplate.replace('{concern}',11);
+                userTemplate = userTemplate.replace('{fans}',23);
+                userTemplate = userTemplate.replace('{blog}',44);
+                userTemplate = userTemplate.replace('{desc}',"非凡的世界");
+                $(".user-list-ul").append(userTemplate);
+            }            
         },
         "displayBlogList":function (data) {
             console.log("displayBlogList....");
@@ -290,6 +269,7 @@ $(function () {
         $("#search-select-blog-btn").css("color","black");
         $("#search-select-user-btn").css("color","blue");
         search.searchType="user";
+
         displayBlockSetect(search.searchType);
         //执行搜索
         var currentQueryString = $("#search-search-input-block-input").val();
@@ -327,8 +307,3 @@ $(function () {
 
 
 })
-
-/*
-$("body").load(function () {
-    console.log("load.... ");
-})*/

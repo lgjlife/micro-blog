@@ -261,4 +261,18 @@ public class Blog {
     public void setIsOriginal(String isOriginal) {
         this.isOriginal = isOriginal;
     }
+
+    @Override
+    public String toString() {
+        return "Blog{" +
+                "blogId=" + blogId +
+                ", userId=" + userId +
+                ", content='" + content + '\'' +
+                ", videoUrl='" + videoUrl + '\'' +
+                ", type='" + type + '\'' +
+                ", createTime=" + createTime +
+                ", publishTime=" + publishTime +
+                ", isOriginal='" + isOriginal + '\'' +
+                '}';
+    }
 }

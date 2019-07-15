@@ -4,6 +4,7 @@ var storage={
     "constants":{
         //当前查询的字符串
         "currentQueryString":"currentQueryString",
+        
     },
     "setItem":function (key,value) {
         localStorage.setItem(key,value);

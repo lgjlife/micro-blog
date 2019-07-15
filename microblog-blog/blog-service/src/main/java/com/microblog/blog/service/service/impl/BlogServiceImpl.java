@@ -190,12 +190,11 @@ public class BlogServiceImpl implements BlogService {
            return ;
         }
         List<BlogImg> blogImgs = new LinkedList<BlogImg>();
-        Map<String,MultipartFile> savePaths =  new HashMap<String,MultipartFile>();
+
         //处理图片
 
         byte  fileCount = 0;
         for(MultipartFile file:fileList) {
-
             //最多9张
             try{
                 //添加水印
