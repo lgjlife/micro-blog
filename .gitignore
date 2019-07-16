@@ -3,7 +3,7 @@ target
 
 .mvn/
 out/
-
+.out
 ### STS ###
 .apt_generated
 .classpath
