@@ -17,7 +17,7 @@
     <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-    <script src="search.js"></script>
+    <script src="/cache/cache.js"></script>
     <link rel="stylesheet" type="text/css" href="search.css">
 </head>
     <body>
@@ -26,20 +26,8 @@
         <!-- 顶部导航栏 -->
        <!-- 顶部导航栏 -->
        <iframe id="header-iframe" src="/header/header.html"
-               style="background-color: #FFEFD5;height: 80px;width: 100%;overflow-y:hidden" >
+               style="background-color: #FFEFD5;height: 100px;width: 100%;overflow-y:hidden" >
        </iframe>
-        <!--<div id="search-head-nav">
-            <div class="search-div" id="top-nav-unlogin">
-                <a class="search-nav-link" href="../index.html" id="main-page">首页</a>
-                <a class="search-nav-link" href="javascript:void(0)" id="head-login-btn">登录</a>
-                <a class="search-nav-link" href="javascript:void(0)" id="head-register-btn">注册</a>
-            </div>
-            <div class="search-div" id="top-nav-login" style=" display: none">
-                <a class="search-nav-link" href="javascript:void(0)" id="head-info-btn"></a>
-                <a class="search-nav-link" href="javascript:void(0)" id="head-logout-btn">退出登录</a>
-            </div>
-        </div>-->
-
         <!-- 布局－左侧 -->
         <div id="search-left">
 
@@ -51,12 +39,11 @@
                 <div id="search-search-input-block">
                     <a id="search-search-input-block-a" href="../index.html">microblog</a>
                     <input id="search-search-input-block-input">
-                    <button type="button" id="search-search-input-block-btn">搜索</button>
+                    <button type="button" id="search-search-input-block-btn" class="searchStart">搜索</button>
                 </div>
                 <div id="search-search-select-block">
-                    <a  href="javascript:void(0)" id="search-select-blog-btn">微博</a>
-
-                    <a  href="javascript:void(0)" id="search-select-user-btn">用户</a>
+                    <a  href="javascript:void(0)" id="search-select-blog-btn" class="searchStart" searchType="blog">微博</a>
+                    <a  href="javascript:void(0)" id="search-select-user-btn" class="searchStart" searchType="user">用户</a>
 
                 </div>
 
@@ -65,68 +52,7 @@
             <div id="search-content-display">
                 <!-- 搜索结果　微博-->
                 <div id="search-content-display-blog">
-                    <!-- 微波内容 -->
-                    <div id="blog-content-display">
-                        <ul id="blog-content-ul">
-                            <!-- ------------------------- -->
-                            <li class="blog-content-list">
-                                <div class="blog-content">
-                                    <div class="blog-content-user-info">
-                                        <div  class="blog-content-header-img">
-                                            <img src="../static/img/user/head/head.jpg" height="120px" width="120px">
-                                        </div>
-                                        <span  style="float: right"><a href="javascript:void(0);" onclick="$('.content-blog-menu').show();">操作</a></span>
-
-                                        <div>
-                                            <a href="#">谁知我心</a>
-                                            <span>2月15日 23:23</span>
-                                        </div>
-
-                                        <div id="content-blog-menu-show">
-
-                                        </div>
-                                        <div style="display: none;" class="content-blog-menu">
-                                            <a href="javascript:void(0);">帮上头条</a>
-                                            <a href="javascript:void(0);">屏蔽这条微博</a>
-                                            <a href="javascript:void(0);">屏蔽<span>xxxx</span></a>
-                                            <a href="javascript:void(0);">取消关注<span>xxxx</span></a>
-                                            <a href="javascript:void(0);">投诉</a>
-                                            <button onclick="$('.content-blog-menu').hide();">关闭</button>
-                                        </div>
-                                    </div>
-
-                                    微博内容显示
-                                    <div blog-content-word-div>
-                                        <span  class="blog-content-word">
-                                            小米9的好看，值得细细品味。
-
-                                            最难描述的是小米9颜色。远看天蓝色，安安静静的。换个角度，不同的光线下，就会呈现各种炫丽的彩虹色，还依稀闪现金属光泽。
-                                            这是纳米级激光全息工艺，加双层镀膜，才造就了这么独特的色彩，越看越好看！
-                                            附上小米9全息幻彩蓝版本的实拍图。
-                                        </span>
-                                    </div>
-                                      微博图片显示
-                                    <div class="blog-content-img-block"  >
-                                        <img src="../static/img/user/shouji.jpg" class="blog-content-img" >
-                                        <img src="../static/img/user/shouji.jpg" class="blog-content-img" >
-                                        <img src="../static/img/user/shouji.jpg" class="blog-content-img" >
-                                        <img src="../static/img/user/shouji.jpg" class="blog-content-img" >
-                                        <img src="../static/img/user/shouji.jpg" class="blog-content-img" >
-                                        <img src="../static/img/user/shouji.jpg" class="blog-content-img" >
-                                        <img src="../static/img/user/shouji.jpg" class="blog-content-img" >
-
-                                    </div>
-                                    // 微博底部信息显示
-                                    <div class="blog-">
-                                        <a href="javascript:void(0)">收藏(<span>100</span>)</a>
-                                        <a href="javascript:void(0)">转发(<span>100</span>)</a>
-                                        <a href="javascript:void(0)">评论(<span>100</span>)</a>
-                                        <a href="javascript:void(0)">点赞(<span>100</span>)</a>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+                
                 </div>
 
                 <!-- 搜索结果,用户-->
@@ -140,7 +66,19 @@
         <div id="search-right">
 
         </div>
+
     </body>
+
+    <!--将动态加载的 blog-template 放在此处-->
+    <div id="blog-template">
+
+    </div>
+
+
+    <script>
+        $("#blog-template").load('../blog/blog.display.template.html');
+    </script>
+
     <script id="user-template" type="text/html">
         <li class=‘user-list’>
             <div>
@@ -171,8 +109,7 @@
         <hr style="background-color: #D2B48C;height: 1px">
     </script>
 
-    <script id="blog-template" type="text/html">
-    
-    </script>
+    <script src="search.js"></script>
+
 
 </html>

@@ -10,6 +10,7 @@ var cache={
         "loginUserInfo": "USER:INFO",
         //搜索字段
         "searchString": "SEARCH:STRING",
+        "searchType": "SEARCH:TYPR",
 
     },
     /**
@@ -19,7 +20,7 @@ var cache={
      * @param expiredTimeMS  过期时间，单位ms
      */
     "set":function (key,value,expiredTimeMS) {
-
+        console.log("cache set: key="+key +  " value = " + value + " expiredTimeMS = " + expiredTimeMS)
         if((expiredTimeMS == 0 )  || (expiredTimeMS == null)){
             localStorage.setItem(key,value);
         }

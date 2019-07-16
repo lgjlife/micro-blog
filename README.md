@@ -3,6 +3,52 @@
 ## 设计思路
 ![](https://github.com/lgjlife/micro-blog/blob/master/micro-blog%20%E8%AE%BE%E8%AE%A1%E5%9B%BE.jpg)
 
+# 实现功能介绍
+
+* 整体架构
+    * nginx作为反向代理服务器
+    * Spring Cloud 作为微服务实现方案 
+    * 前后端分离
+    * 前端文件部署在nginx中
+    * 网关统一实现拦截认证
+
+* 集成Spring Cloud 相关模块
+    * Eureka服务注册与发现
+    * Feign声明式调用
+    * admin微服务监控
+    * config分布式统一配置，支持本地和git，仅用于测试，各个微服务未使用
+    * hystrix-dashboard & hystrix-turbine 用于微服务熔断器监控
+    * sleuth服务请求链监控
+    * gateway实现网关，不使用zuul.
+* 前端
+    * 前后端分离，单独部署
+    * html,css,javascript,jquery实现
+    * 前端部署在nginx中
+ 
+* 网关
+    * spring dloud gateway实现
+    * 统一拦截请求并鉴权，确认当前请求是否需要登录
+    * 路由前端的请求
+    
+* zookeeper统一配置中心
+    * 路径分为需登录才可访问以及无需登录普两种类型，需登录才可访问的路径需要各个微服务自行向zk设置
+    * 微服务向zk写入本应用的拦截路径配置
+    * 网关监听zk的拦截路径配置节点，有更新则更新网关本地的拦截路径配置
+    * 节点类型为无序临时节点，微服务下线时将会删除本节点的配置
+    
+* 登录认证方式
+    * JWT实现
+    * 登录成功之后后端会向前端返回生成的token
+    * 前端缓存token  
+    * 前端每个请求都会带上Authorization的Header字段，也就是token 
+    * 网关统一拦截校验是否为需要登录路径，需要登录则校验token是否有效，无效则跳转到登录页面
+ 
+* 用户模块
+    * 用户注册
+        * 
+    * 用户登录
+    
+
 # 模块说明
 ├─microblog 父工程
 

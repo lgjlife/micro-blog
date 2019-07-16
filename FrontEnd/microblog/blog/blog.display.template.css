@@ -1,0 +1,134 @@
+html,body{
+    height: 1000px;
+    margin:0;
+    padding:0;
+}
+/*博客显示区块*/
+#blog-content-display{
+    background-color: azure;   
+    margin-top: 5px;
+}
+/*博客  ul li*/
+#blog-content-display ul{
+    list-style: none;  
+    padding-left:0px;
+    
+}
+
+.blog-content-user-info{
+    height: auto;
+    background-color: blanchedalmond;
+}
+/*头像*/
+.blog-content-header-img{
+ 
+}
+
+.content-blog-menu{
+    position:relative;
+    left:0px;
+    top:-180px;
+    float: right;
+    z-index: 100;
+    background-color:red;
+}
+.content-blog-menu a {
+    display: block;
+   
+}
+/*博客内容**/
+
+.blog-content-list{
+    margin-bottom: 12px; 
+    border-width:1px;
+    border-color:darkgray;
+    border-style:inset;
+}
+.blog-content-word-div{
+    background-color: antiquewhite;
+}
+/*博客图片**/
+.blog-content-img{
+    height:292px;
+    width: 292px;
+    background-color: aqua;
+    margin-left: 1px;
+    margin-top: 1px;    
+}
+.blog-content-img-block {
+    display: block;
+    height: auto;
+    background-color:antiquewhite;
+}
+/*图片*/
+/*.blog-content-img{
+   width: 33%;
+    height: auto;
+    margin: 1px;
+    float: left; 
+}*/
+.blog-content-img-block>div {
+    width: 33%;
+    height: auto;
+    margin: 1px;
+    float: left;
+    background-color: orange;
+}
+
+#content-blog-menu-show{
+    float: right;
+}
+#content-blog-menu{
+    float: right;
+
+    z-index:100;
+    
+}
+#content-blog-menu  a{
+
+}
+/*图片放大显示*/
+.maxImg{
+    width: 600px;
+    height: 600px;
+    position: absolute;/*这里一定要设置*/
+    z-index: 999999;/*这里是该元素与显示屏的距离，据说越大越好，但是我也没有看到效果，因为没有它也是可以的*/
+   /* margin-top: 20%;
+    margin-left: -209px;*/
+    -webkit-transition: .5s ease-in-out;/* css的transition允许css的属性值在一定的时间内从一个状态平滑的过渡到另一个状态 */
+    -moz-transition: .5s ease-in-out;/*这里为了兼容其他浏览器*/
+    -o-transition: .5s ease-in-out;
+}
+.center{
+    left: 15%;
+    top: 50%;
+
+}
+
+/* 转发框*/
+.repost-window{
+    background-color: #eeeeee;
+    width: 70%;
+    height: 300px;
+    position: absolute;/*这里一定要设置*/
+    z-index: 999999;/*这里是该元素与显示屏的距离，据说越大越好，但是我也没有看到效果，因为没有它也是可以的*/
+    /* margin-top: 20%;
+     margin-left: -209px;*/
+    -webkit-transition: .5s ease-in-out;/* css的transition允许css的属性值在一定的时间内从一个状态平滑的过渡到另一个状态 */
+    -moz-transition: .5s ease-in-out;/*这里为了兼容其他浏览器*/
+    -o-transition: .5s ease-in-out;
+    left: 15%;
+    right: 15%;
+    top: 50%;
+
+    border-style: solid;
+    border-width:1px;
+
+}
+/*转发理由输入框*/
+.blog-edit-input{
+    width: 100%;
+    height: 200px;
+
+}
+

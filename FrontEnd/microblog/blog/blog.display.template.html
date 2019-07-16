@@ -1,0 +1,71 @@
+ 
+
+<script src="/static/js/jquery/jquery-3.3.1.js"></script>
+<!-- <script src="js/jquery/jquery-3.3.1.js"></script>-->
+<!--
+<link rel="stylesheet" type="text/css" href="/static/css/bootstrap/bootstrap.css">
+<script src="/static/css/bootstrap/bootstrap.js"></script>
+-->
+
+<script src="/blog/blog.display.template.js"></script>
+<!--
+<link rel="stylesheet" type="text/css" href="/blog/blog.display.template.css">
+-->
+
+<!-- 博客列表模板 -->
+<script id="blog-content-list-template" type="text/html"> <!- 注意标签内的type属性 -!>
+    <li class='blog-content-list'>
+        <div class='blog-content'>
+            <!-- 用户信息显示 -->
+            <div class='blog-content-user-info'>
+                <div  class='blog-content-header-img'>
+                    <img src='{headerUrl}' height='120px' width='120px'>
+                </div>
+                <span  style='float: right'><a href='javascript:void(0);' onclick="$('.content-blog-menu').show();">操作</a></span>
+                <span class="blog-content-user-id" style="display: none">{userId}</span>
+                <div>
+                    <a href='/user/info.home.html?u={userId}' class="blog-content-user-nickName"> {nickName}  </a>
+                    <span>{publishTime}</span>
+                    </div>
+
+                <!--  -->
+                <div id='content-blog-menu-show'>
+
+                </div>
+                <div style='display: none;' class='content-blog-menu'>
+                    <a href='javascript:void(0);'>帮上头条</a>
+                    <a href='javascript:void(0);'>屏蔽这条微博</a>
+                    <a href='javascript:void(0);'>屏蔽<span>xxxx</span></a>
+                    <a href='javascript:void(0);'>取消关注<span>xxxx</span></a>
+                    <a href='javascript:void(0);'>投诉</a>
+                    <button onclick="$('.content-blog-menu').hide();">关闭</button>
+                </div>
+            </div>
+
+            <!-- 微博内容显示 -->
+            <div class="blog-id" style="display: none">{blogId}</div>
+            <div class=" blog-content-word-div">
+                <span  class='blog-content-word'>{content}</span>
+            </div>
+            <!-- 微博图片显示 -->
+            <div class="blog-content-img-block"  >
+                {imgDisplay}
+            </div>
+            <!-- 微博底部信息显示 -->
+            <div class='blog-butom'>
+                <a href='javascript:void(0)' class="collect-select"><span class="sp1">收藏</span>(<span class="sp2">{collectNum}</span>)</a>
+                <a href='javascript:void(0)' class="repost-select"><span class="sp1">转发</span>(<span class="sp2">{repostNum}</span>)</a>
+                <a href='javascript:void(0)' class="comment-select"><span class="sp1">评论</span>(<span class="sp2">{commentNum}</span>)</a>
+                <a href='javascript:void(0)' class="like-select"><span class="sp1">{likeWord}</span>(<span class="sp2">{likeNum}</span>)</a>
+            </div>
+        </div>
+
+    </li>
+</script>
+
+<!--博客显示模板-->
+<script id="blog-img-list-template" type="text/html">
+    <img src='{blogImg}' class='blog-content-img' >
+</script>
+
+ 
