@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Component
-@FeignClient(name="microblog-user",configuration = FeignConfig.class)
+@FeignClient(name="microblog-user",configuration = UserFeignConfig.class)
 public interface UserFeignService {
 
     @RequestMapping(value = "/user/info/query",method = RequestMethod.GET)

@@ -1,11 +1,11 @@
 package com.microblog.search.service;
 
-import com.microblog.search.service.dto.SearchBlogDto;
+import com.microblog.blog.dao.dto.BlogInfoDto;
 
 import java.util.List;
 
 public interface BlogSearchService {
 
-    List<SearchBlogDto> queryUser(String queryString);
+    List<BlogInfoDto> queryBlog(String queryString);
 
 }

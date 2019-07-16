@@ -1,4 +1,4 @@
-package com.microblog.search.service.feign.user;
+package com.microblog.search.service.feign.blog;
 
 import feign.Retryer;
 import org.springframework.context.annotation.Bean;
@@ -15,10 +15,10 @@ import static java.util.concurrent.TimeUnit.SECONDS;
  * @create: 2018-12-13 11:42
  **/
 @Configuration
-public class FeignConfig {
+public class BlogFeignConfig {
 
     @Bean
-    public Retryer retryer(){
+    public Retryer blogRetryer(){
        return new Retryer.Default(100,SECONDS.toMillis(1),5);
     }
 }

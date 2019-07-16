@@ -1,8 +1,8 @@
 package com.microblog.blog.service.service.impl;
 
+import com.microblog.blog.dao.dto.BlogInfoDto;
 import com.microblog.blog.dao.mapper.*;
 import com.microblog.blog.dao.model.*;
-import com.microblog.blog.service.dto.BlogInfoDto;
 import com.microblog.blog.service.exception.BlogException;
 import com.microblog.blog.service.feign.UserFeignService;
 import com.microblog.blog.service.service.BlogService;
@@ -100,7 +100,7 @@ public class BlogServiceImpl implements BlogService {
      *
     */
     @Override
-    public List<BlogInfoDto> queryBlog(String type,long userId, int page , int count) {
+    public List<BlogInfoDto> queryBlog(String type, long userId, int page , int count) {
         List<BlogInfoDto>  blogInfoDtos = new LinkedList<>();
 
         log.debug("type ={},userId = {},page={},count={}",type,userId,page,count);
@@ -147,6 +147,45 @@ public class BlogServiceImpl implements BlogService {
         return blogInfoDtos;
     }
 
+    @Override
+    public BlogInfoDto queryBlog(Long blogId, Long userId) {
+
+        Blog blog = blogMapper.selectByPrimaryKey(blogId);
+        log.debug("blog = " + blog);
+
+        List<BlogImg> blogImgs = blogImgMapper.selectBlogId(blogId);
+        List<String> imgs =  new ArrayList<>();
+        blogImgs.forEach((img)->{
+            imgs.add(img.getImgUrl());
+        });
+        long collectCount =  blogCollectMapper.selectCountByBlogId(blogId);
+        long likeCount =   blogLikeMapper.selectCountByBlogId(blogId);
+        long repostCount =   blogRepostMapper.selectCountByBlogId(blogId);
+        long commentCount =   blogCommentMapper.selectCountByBlogId(blogId);
+        Long userLike = blogLikeMapper.selectCount(blogId,userId);
+        boolean isLike = (userLike == 1?true:false);
+
+        User user = userFeignService.queryUserInfo(blog.getUserId());
+        BlogInfoDto dto = null;
+        if(user != null){
+            dto = BlogInfoDto.builder()
+                    .blogId(blogId)
+                    .userId(userId)
+                    .blogImg(imgs)
+                    .headerUrl(user.getHeaderUrl())
+                    .nickName(user.getNickName())
+                    .publishTime(blog.getPublishTime())
+                    .content(blog.getContent())
+                    .collectNum(collectCount)
+                    .likeNum(likeCount)
+                    .likeFlag(isLike)
+                    .repostNum(repostCount)
+                    .commentNum(commentCount)
+                    .build();
+        }
+       return dto;
+    }
+
     /**
      *功能描述
      * @author lgj
@@ -181,9 +220,7 @@ public class BlogServiceImpl implements BlogService {
         log.debug("blogId = {}",blogId);
 
 
-        if(true){
-            throw new BlogException("微博发布失败，图片保存出现错误");
-        }
+
         //取得request中的所有文件名
         fileList = multiRequest.getFiles("blog-img");
         if (fileList == null || fileList.size() <= 0) {

@@ -1,7 +1,7 @@
 package com.microblog.blog.web.controller;
 
 
-import com.microblog.blog.service.dto.BlogInfoDto;
+import com.microblog.blog.dao.dto.BlogInfoDto;
 import com.microblog.blog.service.service.BlogService;
 import com.microblog.blog.service.utils.UserUtil;
 import com.microblog.common.aop.syslog.anno.PrintUrlAnno;
@@ -66,9 +66,13 @@ public class BlogController {
 
         BaseResult result = new WebResult(BlogReturnCode.BLOG_QUERY_SUCCESS.getCode(),
                 BlogReturnCode.BLOG_QUERY_SUCCESS.getMessage(),blogInfoDtos);
-
-
         return result;
+    }
+    @PrintUrlAnno
+    @GetMapping("/query/1")
+    public  BlogInfoDto queryBlog(@RequestParam("blogId") Long blogId, @RequestParam("userId") Long userId){
+        BlogInfoDto blogInfoDto =  blogService.queryBlog(blogId,userId);
+        return  blogInfoDto;
     }
 
 

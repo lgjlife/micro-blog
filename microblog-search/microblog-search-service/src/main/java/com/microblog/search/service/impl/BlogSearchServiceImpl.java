@@ -1,11 +1,12 @@
 package com.microblog.search.service.impl;
 
 
+import com.microblog.blog.dao.dto.BlogInfoDto;
 import com.microblog.blog.dao.model.Blog;
 import com.microblog.search.service.BlogSearchService;
-import com.microblog.search.service.dto.SearchBlogDto;
 import com.microblog.search.service.elasticsearch.ElasticsearchHandler;
 import com.microblog.search.service.elasticsearch.SearchConfig;
+import com.microblog.search.service.feign.blog.BlogFeignService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,8 +21,12 @@ public class BlogSearchServiceImpl implements BlogSearchService {
     @Autowired
     private ElasticsearchHandler elasticsearchHandler;
 
+    @Autowired
+    private BlogFeignService blogFeignService;
+
+
     @Override
-    public List<SearchBlogDto> queryUser(String queryString) {
+    public List<BlogInfoDto> queryBlog(String queryString) {
 
 
         String[]  types = {"blog"};
@@ -33,22 +38,24 @@ public class BlogSearchServiceImpl implements BlogSearchService {
                 .clazz(Blog.class).build();
 
         log.info("SearchConfig = " + searchConfig);
-        List<Blog> blogs = elasticsearchHandler.query().search(searchConfig);
-        List<SearchBlogDto> searchBlogDtos = new ArrayList<>(blogs.size());
+        List<Blog> searchBlogs = elasticsearchHandler.query().search(searchConfig);
 
-        for(int i = 0; i< blogs.size(); i++){
-            Blog blog = blogs.get(i);
-            SearchBlogDto searchBlogDto = SearchBlogDto.builder()
-                    .blogId(blog.getBlogId())
-                    .userId(blog.getUserId())
-                    .content(blog.getContent())
-                    .publishTime(blog.getPublishTime().getTime())
-                    .build();
-
-            searchBlogDtos.add(searchBlogDto);
+        if((searchBlogs == null ) || (searchBlogs.isEmpty())){
+            return new ArrayList<>();
         }
-        log.info("搜索结果:[{}],users = {}",searchBlogDtos.size(),  searchBlogDtos);
+        
+        log.info("搜索结果:"+searchBlogs);
+        List<BlogInfoDto> blogInfoDtos = new ArrayList<>();
+        for(Blog blog:searchBlogs){
+            log.info("查询参数:blog-id:{},user-id:{}",blog.getBlogId(),blog.getUserId());
+            BlogInfoDto blogInfoDto =  blogFeignService.queryBlogfo(blog.getBlogId(),blog.getUserId());
+            log.info("blogInfoDto = " + blogInfoDto);
+            if(blogInfoDtos!=null){
 
-        return searchBlogDtos;
+                blogInfoDtos.add(blogInfoDto);
+            }
+        }
+
+        return blogInfoDtos;
     }
 }

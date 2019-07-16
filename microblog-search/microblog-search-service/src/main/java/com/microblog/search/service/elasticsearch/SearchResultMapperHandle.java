@@ -41,11 +41,11 @@ public class SearchResultMapperHandle implements SearchResultMapper {
     public <T> AggregatedPage<T> mapResults(SearchResponse searchResponse, Class<T> aClass, Pageable pageable) {
         SearchHits searchHits = searchResponse.getHits();
 
-        List<T> results=null;
+        log.info("searchHits = " +  searchHits);
+        List<T> results=new ArrayList<>();
         if(searchHits.getHits().length <= 0){
-            return  null;
+            return   new AggregatedPageImpl<T>(results);
         }
-        results = new ArrayList<>();
         for (SearchHit searchHit:searchHits){
 
             try{
