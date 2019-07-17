@@ -20,7 +20,7 @@ public class WebSocketServer {
 
     public void run(int port) throws Exception {
 
-        log.info("service bind port = " + port);
+        log.info("comment bind port = " + port);
         //bossGroup接受传入的连接
         EventLoopGroup bossGroup = new NioEventLoopGroup();
         //一旦bossGroup接受连接并注册到workerGroup，workerGroup则处理连接相关的流量

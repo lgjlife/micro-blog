@@ -49,7 +49,7 @@ public class SchedulerHandle {
                 .withIdentity(job.getJobClass(), job.getJobGroup()).build();
 
         //hello-group.common.microblog.scheduler.dao.model.QuartzJob
-        //hello-group.common.microblog.scheduler.service.job.HelloJob
+        //hello-group.common.microblog.scheduler.comment.job.HelloJob
         log.info("job key = [{}]",jobDetail.getKey());
         if(scheduler.checkExists(jobDetail.getKey()) == true){
             log.info("job[{}] is exist!!",jobDetail.getKey());

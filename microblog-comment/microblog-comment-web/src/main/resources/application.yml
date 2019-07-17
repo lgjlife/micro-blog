@@ -1,0 +1,29 @@
+
+
+
+spring:
+  application:
+    name: microblog-blog
+  mybatis:
+    mapper-locations: common.microblog.comment.dao.mapper
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource    # 配置当前要使用的数据源的操作类型
+    driver-class-name: com.mysql.cj.jdbc.Driver      # 配置MySQL的驱动程序类
+    url: jdbc:mysql://localhost:8066/microblog?characterEncoding=utf-8           # 数据库连接地址
+    username: user                                  # 数据库用户名
+    password: user                            # 数据库连接密码
+    filters: config,stat
+    dbcp2:                                          # 进行数据库连接池的配置
+      min-idle: 5                                   # 数据库连接池的最小维持连接数
+      initial-size: 5                               # 初始化提供的连接数
+      max-total: 5                                  # 最大的连接数
+      max-wait-millis: 200                          # 等待连接获取的最大超时时间
+server:
+  port: 8611
+
+microblog:
+  common:
+    # 使能打印访问Url，在Controller方法上添加注解@PrintUrlAnno
+    printUrlEnable: true
+    # 使能打印方法执行耗时，在方法上添加注解@PrintUseTimeAnno
+    printUseTimeEnable: true
