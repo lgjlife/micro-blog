@@ -166,21 +166,50 @@ var blogDisplayTemplate={
      */
     "commentDisplay":function (commentDisplayDom,comments) {
 
-        for(var i = 0 ; i < comments.length;i++){
+        for(var parentIndex = 0 ; parentIndex < comments.length;parentIndex++){
+
+            console.log("comments.length = " + comments.length);
 
             var  commentListHtml = $("#blog-comment-list-template").html();
-            console.log("commentListHtml = " + commentListHtml);
+           // console.log("commentListHtml = " + commentListHtml);
 
-            commentListHtml = commentListHtml.replace("{userHeaderUrl}","/"+comments[i].headerUrl);
-            commentListHtml = commentListHtml.replace(/{userId}/g,comments[i].userId);
-            commentListHtml = commentListHtml.replace("{nickName}",comments[i].nickName);
-            commentListHtml = commentListHtml.replace("{blogId}",comments[i].blogId);
-            commentListHtml = commentListHtml.replace("{cid}",comments[i].cid);
-            commentListHtml = commentListHtml.replace("{content}",comments[i].content);
-            commentListHtml = commentListHtml.replace("{ctime}",comments[i].ctime);
+            //一级回复
+            commentListHtml = commentListHtml.replace("{userHeaderUrl}","/"+comments[parentIndex].headerUrl);
+            commentListHtml = commentListHtml.replace(/{userId}/g,comments[parentIndex].userId);
+            commentListHtml = commentListHtml.replace(/{nickName}/g,comments[parentIndex].nickName);
+            commentListHtml = commentListHtml.replace("{blogId}",comments[parentIndex].blogId);
+            commentListHtml = commentListHtml.replace("{cid}",comments[parentIndex].cid);
+            commentListHtml = commentListHtml.replace("{content}",comments[parentIndex].content);
+            commentListHtml = commentListHtml.replace("{ctime}",comments[parentIndex].ctime);
+
+            //二级回复
+            var allChildCommentHtml = "";
+            if(comments[parentIndex].child.length != 0){
+
+
+                var child = comments[parentIndex].child;
+                for(var childIndex = 0 ; childIndex < child.length;childIndex++){
+                    console.log("child.length = " + child.length);
+                    var childCommentHtml = $("#blog-comment-list-child-template").html();
+                    childCommentHtml = childCommentHtml.replace("{userHeaderUrl}","/"+child[childIndex].headerUrl);
+                    childCommentHtml = childCommentHtml.replace(/{userId}/g,child[childIndex].userId);
+                    childCommentHtml = childCommentHtml.replace(/{nickName}/g,child[childIndex].nickName);
+                    childCommentHtml = childCommentHtml.replace("{blogId}",child[childIndex].blogId);
+                    childCommentHtml = childCommentHtml.replace("{cid}",child[childIndex].cid);
+                    childCommentHtml = childCommentHtml.replace("{content}",child[childIndex].content);
+                    childCommentHtml = childCommentHtml.replace("{ctime}",child[childIndex].ctime);
+
+                    allChildCommentHtml += childCommentHtml;
+                }
+
+                commentListHtml = commentListHtml.replace("{childComment}",allChildCommentHtml);
+            }else {
+                commentListHtml = commentListHtml.replace("{childComment}","");
+            }
 
             commentDisplayDom.find(".comment-display-ul").append(commentListHtml);
         }
+        blogDisplayTemplate.addEvent.addFirstLevelReplyAndLike();
     },
 
     /**
@@ -268,7 +297,6 @@ var blogDisplayTemplate={
                 var blogId = $(this).parent().parent().parent().attr("blogId");
                 console.log("提交评论blogId =  " + blogId);
 
-
                 var comment ={"id":"","blogId":"","userId":"","pid":"","replyId":"","publishTime":"","content":""};
                 comment.blogId = blogId;
                 comment.userId = cache.get(cache.key.loginUserInfo).userId;
@@ -280,6 +308,58 @@ var blogDisplayTemplate={
 
             })
         },
+        //一级回复事件
+        "addFirstLevelReplyAndLike":function () {
+
+            $(".first-reply").on("click",function () {
+                console.log("一级评论");
+
+                var firstLevelCommentListDom = $(this).parent();
+                var firstLevelCommentInputDivDom = firstLevelCommentListDom.find(".first-comment-input-div");
+                var firstLevelCommentInputTextareaDom = firstLevelCommentInputDivDom.find("textarea");
+
+                //展开关闭一级评论的输入框
+                if(firstLevelCommentInputDivDom.css("display") == "none"){
+                    console.log("展示对话框");
+                    firstLevelCommentInputDivDom.show();
+                }
+                else {
+                    console.log("关闭对话框");
+                    firstLevelCommentInputDivDom.hide();
+                }
+
+                $(".firstLevelCommentSubmit").off("click");
+                $(".firstLevelCommentSubmit").on("click",function () {
+
+                    var firstLevelCommentListDom = $(this).parent().parent();
+                    var firstLevelCommentInputDivDom = firstLevelCommentListDom.find(".first-comment-input-div");
+                    var firstLevelCommentInputTextareaDom = firstLevelCommentInputDivDom.find("textarea");
+
+                    var comment ={"id":"","blogId":"","userId":"","pid":"","replyId":"","publishTime":"","content":""};
+
+                    comment.blogId = firstLevelCommentListDom.attr("blogId");
+                    comment.userId = cache.get(cache.key.loginUserInfo).userId;
+                    comment.replyId = firstLevelCommentListDom.attr("cid");
+                    comment.content = firstLevelCommentInputTextareaDom.val();
+
+                    console.log("提交评论内容 =  " + JSON.stringify(comment));
+                    blogDisplayTemplate.request.commentSubmit(JSON.stringify(comment));
+
+
+
+                })
+
+
+            })
+
+            $(".first-like").on("click",function () {
+                console.log("一级点赞");
+            })
+
+
+
+
+        }
 
 
     },

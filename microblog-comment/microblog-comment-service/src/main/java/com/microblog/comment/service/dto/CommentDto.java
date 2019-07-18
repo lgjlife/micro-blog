@@ -23,10 +23,11 @@ public class CommentDto {
     private long cid;
     //微博id
     private long blogId;
-    //评论用户id
-    private long uid;
     //回复的评论ID
     private Long replyId;
+
+    //评论用户id
+    private long uid;
     //评论用户头像
     private String headerUrl;
     //评论用户昵称

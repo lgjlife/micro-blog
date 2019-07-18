@@ -9,6 +9,7 @@
 <script src="/cache/cache.js"></script>
 <script src="/blog/blog.display.template.js"></script>
 <script src="/common/return.js"></script>
+<link rel="stylesheet" type="text/css" href="/blog/blog.display.template.css">
 <!--
 <link rel="stylesheet" type="text/css" href="/blog/blog.display.template.css">
 -->
@@ -102,19 +103,42 @@
     </div>
 </script>
 
+<!-- 一级评论-->
 <script id="blog-comment-list-template" type="text/html">
-    <li commentUserId="{userId}" blogId="{blogId}" cid="{cid}">
-        <img src="{userHeaderUrl}" style="height: 50px;width: 50px"/>
+    <li commentUserId="{userId}" blogId="{blogId}" cid="{cid}" nickName="{nickName}">
+        <img src="{userHeaderUrl}" style="height: 25px;width: 25px"/>
         <a href="/user/info.home.html?u={userId}">{nickName}</a>
+        <br/>
         <span>{content}</span>
+        <br/>
         <span>{ctime}</span>
-        <a href="javascript:void(0)">回复</a>
-        <a href="javascript:void(0)">点赞</a>
-        <div>
+        <a href="javascript:void(0)" class="first-reply">回复</a>
+        <a href="javascript:void(0)" class="first-like">点赞</a>
+        <div class="first-comment-input-div" style="display: none;height: 100px" >
+            <textarea class="comment-input" style="width: 80%"></textarea>
+            <br/>
+            <button class="firstLevelCommentSubmit">评论</button>
+        </div>
+        <div class="child-comment-block">
             <ul>
-
+                {childComment}
             </ul>
         </div>
     </li>
 </script>
+
+<!-- 二级评论-->
+<script id="blog-comment-list-child-template" type="text/html">
+    <li commentUserId="{userId}" blogId="{blogId}" cid="{cid}"  nickName="{nickName}"
+        style="display: block ; "
+    >
+        <a href="/user/info.home.html?u={userId}">{nickName}</a>
+        <span>{content}</span>
+        <br/>
+        <span>{ctime}</span>
+        <a href="javascript:void(0)" class="second-reply">回复</a>
+        <a href="javascript:void(0)" class="second-like">点赞</a>
+    </li>
+</script>
+
  
