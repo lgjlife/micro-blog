@@ -1,14 +1,14 @@
 package com.microblog.comment.web.controller;
 
 
+import com.microblog.comment.service.dto.CommentDto;
 import com.microblog.comment.service.service.CommentService;
-import com.microblog.commmet.dao.model.BlogComment;
+import com.microblog.commment.dao.model.BlogComment;
 import com.microblog.common.aop.syslog.anno.PrintUrlAnno;
+import com.microblog.common.result.BaseResult;
+import com.microblog.common.result.WebResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ public class CommentController {
 
 
 
-    @PrintUrlAnno
+   /* @PrintUrlAnno
     @PostMapping
     public void create(){
 
@@ -36,5 +36,30 @@ public class CommentController {
     @GetMapping("/list")
     public List<BlogComment> get(){
         return commentService.get();
+    }*/
+
+    @PrintUrlAnno
+    @GetMapping("/list")
+    public BaseResult getComments(@RequestParam("blogId") long blogId,
+                                  @RequestParam("page")  int page,
+                                  @RequestParam("pageCount") int pageCount){
+
+        List<CommentDto> commentDtos = commentService.getComments(blogId,page,pageCount);
+        return new WebResult(WebResult.RESULT_SUCCESS,"评论获取成功",commentDtos);
+
     }
+
+    @PrintUrlAnno
+    @PostMapping("/create")
+    public  BaseResult createComment(@RequestBody  BlogComment comment){
+
+       Integer result =  commentService.createComment(comment);
+       if(result == null){
+           return new WebResult(WebResult.RESULT_FAIL,"评论失败");
+       }
+        return new WebResult(WebResult.RESULT_SUCCESS,"评论成功");
+
+    }
+
+
 }

@@ -1,6 +1,8 @@
-package com.microblog.commmet.dao.mapper;
+package com.microblog.commment.dao.mapper;
 
-import com.microblog.commmet.dao.model.BlogComment;
+import com.microblog.commment.dao.model.BlogComment;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 public interface BlogCommentMapper {
@@ -43,4 +45,8 @@ public interface BlogCommentMapper {
      * @mbggenerated
      */
     int updateByPrimaryKey(BlogComment record);
+
+    List<BlogComment> selectParent(@Param("blogId") long blogId,@Param("page")  int page,@Param("pageCount")  int pageCount);
+
+    List<BlogComment> selectChild(List<Long> list);
 }

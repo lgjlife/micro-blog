@@ -1,4 +1,4 @@
-package com.microblog.commmet.dao.model;
+package com.microblog.commment.dao.model;
 
 import java.util.Date;
 
@@ -225,5 +225,19 @@ public class BlogComment {
      */
     public void setContent(String content) {
         this.content = content;
+    }
+
+
+    @Override
+    public String toString() {
+        return "BlogComment{" +
+                "id=" + id +
+                ", blogId=" + blogId +
+                ", userId=" + userId +
+                ", pid=" + pid +
+                ", replyId=" + replyId +
+                ", publishTime=" + publishTime +
+                ", content='" + content + '\'' +
+                '}';
     }
 }

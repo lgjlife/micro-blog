@@ -1,15 +1,18 @@
 
 
-
+eureka:
+  client:
+    service-url:
+      defaultZone: http://172.17.0.1:8001/eureka/
 spring:
   application:
-    name: microblog-blog
+    name: microblog-comment
   mybatis:
-    mapper-locations: common.microblog.comment.dao.mapper
+    mapper-locations: com.microblog.comment.dao.mapper
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource    # 配置当前要使用的数据源的操作类型
     driver-class-name: com.mysql.cj.jdbc.Driver      # 配置MySQL的驱动程序类
-    url: jdbc:mysql://localhost:8066/microblog?characterEncoding=utf-8           # 数据库连接地址
+    url: jdbc:mysql://localhost:3306/microblog?characterEncoding=utf-8           # 数据库连接地址
     username: user                                  # 数据库用户名
     password: user                            # 数据库连接密码
     filters: config,stat
@@ -27,3 +30,7 @@ microblog:
     printUrlEnable: true
     # 使能打印方法执行耗时，在方法上添加注解@PrintUseTimeAnno
     printUseTimeEnable: true
+logging:
+  level:
+    com.microblog.comment.dao.mapper: debug
+    org.apache.ibatis: debug

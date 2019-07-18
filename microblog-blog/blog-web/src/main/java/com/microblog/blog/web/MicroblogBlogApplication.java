@@ -11,9 +11,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @EnableSwagger2
 @EnableFeignClients(basePackages="com.microblog.blog.service.feign")
+@EnableDiscoveryClient
 //扫描 mapper 文件
 @MapperScan("com.microblog.blog.dao.mapper")
-@EnableDiscoveryClient
 @SpringBootApplication
 @ComponentScan(value={"com.microblog.blog","com.microblog.common"})
 public class MicroblogBlogApplication {
