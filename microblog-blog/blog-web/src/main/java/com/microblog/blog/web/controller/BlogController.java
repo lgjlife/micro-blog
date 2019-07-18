@@ -62,7 +62,7 @@ public class BlogController {
 
         log.debug("queryBlog....");
        // log.debug("userId = " + request.getHeader("userId"));
-        List<BlogInfoDto> blogInfoDtos = blogService.queryBlog(type,3,page,count);
+        List<BlogInfoDto> blogInfoDtos = blogService.queryBlog(type,1,page,count);
 
         BaseResult result = new WebResult(BlogReturnCode.BLOG_QUERY_SUCCESS.getCode(),
                 BlogReturnCode.BLOG_QUERY_SUCCESS.getMessage(),blogInfoDtos);

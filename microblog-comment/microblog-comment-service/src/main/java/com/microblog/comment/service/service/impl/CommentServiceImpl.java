@@ -73,6 +73,7 @@ public class CommentServiceImpl implements CommentService {
                     .uid(comment.getUserId())
                     .nickName(user.getNickName())
                     .headerUrl(user.getHeaderUrl())
+                    .replyId(comment.getReplyId())
                     .content(comment.getContent())
                     .ctime(comment.getPublishTime())
                     .build();
@@ -100,6 +101,7 @@ public class CommentServiceImpl implements CommentService {
                                 .uid(childComment.getUserId())
                                 .nickName(user.getNickName())
                                 .headerUrl(user.getHeaderUrl())
+                                .replyId(childComment.getReplyId())
                                 .content(childComment.getContent())
                                 .ctime(childComment.getPublishTime())
                                 .build();

@@ -6,8 +6,9 @@
 <link rel="stylesheet" type="text/css" href="/static/css/bootstrap/bootstrap.css">
 <script src="/static/css/bootstrap/bootstrap.js"></script>
 -->
-
+<script src="/cache/cache.js"></script>
 <script src="/blog/blog.display.template.js"></script>
+<script src="/common/return.js"></script>
 <!--
 <link rel="stylesheet" type="text/css" href="/blog/blog.display.template.css">
 -->
@@ -15,7 +16,7 @@
 <!-- 博客列表模板 -->
 <script id="blog-content-list-template" type="text/html"> <!- 注意标签内的type属性 -!>
     <li class='blog-content-list'>
-        <div class='blog-content'>
+        <div class='blog-content' blogId="{blogId}" >
             <!-- 用户信息显示 -->
             <div class='blog-content-user-info'>
                 <div  class='blog-content-header-img'>
@@ -53,19 +54,66 @@
             </div>
             <!-- 微博底部信息显示 -->
             <div class='blog-butom'>
-                <a href='javascript:void(0)' class="collect-select"><span class="sp1">收藏</span>(<span class="sp2">{collectNum}</span>)</a>
-                <a href='javascript:void(0)' class="repost-select"><span class="sp1">转发</span>(<span class="sp2">{repostNum}</span>)</a>
-                <a href='javascript:void(0)' class="comment-select"><span class="sp1">评论</span>(<span class="sp2">{commentNum}</span>)</a>
-                <a href='javascript:void(0)' class="like-select"><span class="sp1">{likeWord}</span>(<span class="sp2">{likeNum}</span>)</a>
+                <a href='javascript:void(0)' class="collect-select"><span class="sp1 collect-item">收藏</span>(<span class="sp2">{collectNum}</span>)</a>
+                <a href='javascript:void(0)' class="repost-select"><span class="sp1 repost-item">转发</span>(<span class="sp2">{repostNum}</span>)</a>
+                <a href='javascript:void(0)' class="comment-select"><span class="sp1 comment-item">评论</span>(<span class="sp2">{commentNum}</span>)</a>
+                <a href='javascript:void(0)' class="like-select"><span class="sp1 like-item">{likeWord}</span>(<span class="sp2">{likeNum}</span>)</a>
             </div>
-        </div>
+            <!-评论显示区域-->
+            <div class="comment-display" style="display: none" blogId="">
 
+            </div>
+
+        </div>
     </li>
 </script>
 
-<!--博客显示模板-->
+<!--博客图片显示模板-->
 <script id="blog-img-list-template" type="text/html">
     <img src='{blogImg}' class='blog-content-img' >
 </script>
 
+<script id="blog-comment-template" type="text/html">
+    <!--  评论输入-->
+    <span>用户评论</span>
+    <div>
+        <!-- 头像-->
+        <div style="float: left">
+            <image style="height: 50px;width: 50px" src="{curUserHeaderUrl}"/>
+        </div>
+        <!-- 评论输入框-->
+        <div >
+            <textarea class="comment-input" style="width: 80%"></textarea>
+        </div>
+        <!-- 提交按钮 -->
+        <div>
+            <button class="first-level-comment-submit-btn">评论</button>
+        </div>
+
+        <!--
+       -->
+    </div>
+
+    <!-- 评论 列表-->
+    <div>
+        <ul>
+
+        </ul>
+    </div>
+</script>
+<script id="blog-comment-list-template" type="text/html">
+    <li commentUserId="commentUserId">
+        <img src="{commentUserHeaderUrl}"/>
+        <a href="/user/info.home.html?u={commentUserId}"></a>
+        <span></span>
+        <span></span>
+        <a>回复</a>
+        <a>点赞</a>
+        <div>
+            <ul>
+
+            </ul>
+        </div>
+    </li>
+</script>
  

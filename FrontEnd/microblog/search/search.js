@@ -74,7 +74,6 @@ var search={
 
             })
         }
-
     },
     "return":{
 
@@ -112,6 +111,50 @@ var search={
 
 }
 
+var test={"code":1,"message":"评论获取成功",
+    "data":[
+        {
+            "cid":1,
+            "blogId":1,
+            "uid":1,
+            "replyId":null,
+            "headerUrl":"/img/header/5597-1550725481498.jpg",
+            "nickName":"第三方但是",
+            "content":"真好笑！",
+            "ctime":"2019-07-18T05:05:34.000+0000",
+            "child":[
+                {
+                    "cid":2,
+                    "blogId":1,
+                    "uid":1,
+                    "replyId":null,
+                    "headerUrl":"/img/header/5597-1550725481498.jpg",
+                    "nickName":"第三方但是","content":"真好笑+1！",
+                    "ctime":"2019-07-18T05:05:35.000+0000","child":null
+                },
+                {
+                    "cid":3,
+                    "blogId":1,
+                    "uid":1,
+                    "replyId":null,
+                    "headerUrl":"/img/header/5597-1550725481498.jpg",
+                    "nickName":"第三方但是",
+                    "content":"真好笑+2！",
+                    "ctime":"2019-07-18T05:05:35.000+0000",
+                    "child":null
+                }
+                ]
+        },
+        {
+            "cid":4,
+            "blogId":1,
+            "uid":1,
+            "replyId":null,
+            "headerUrl":"/img/header/5597-1550725481498.jpg",
+            "nickName":"第三方但是",
+            "content":"很有趣！",
+            "ctime":"2019-07-18T05:05:35.000+0000",
+            "child":[{"cid":5,"blogId":1,"uid":1,"replyId":null,"headerUrl":"/img/header/5597-1550725481498.jpg","nickName":"第三方但是","content":"很有趣+1！","ctime":"2019-07-18T05:05:35.000+0000","child":null},{"cid":6,"blogId":1,"uid":1,"replyId":null,"headerUrl":"/img/header/5597-1550725481498.jpg","nickName":"第三方但是","content":"很有趣+2！","ctime":"2019-07-18T05:05:35.000+0000","child":null}]}]}
 /**
  * 进入页面触发
  */

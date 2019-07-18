@@ -99,9 +99,10 @@ var register={
                type: "post",
                url : register.requestUrl.registerSubmitUrl,
                contentType : "application/json;charset=utf-8",
+                dataType: "json",
                //数据格式是json串,传进一个person
                data : jsonData,
-               dataType: "json",
+
                success:function(data,status){
                     console.log(data.message);
                    if(data.code == register.return.REGISTER_SUCCESS.code){

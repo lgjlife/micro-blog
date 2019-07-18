@@ -82,7 +82,7 @@
     </if>
 
     <if test="type != null and type != ''">
-      and  type = #{type,jdbcType=BIGINT}
+      and  type = #{type}
     </if>
      order by publish_time desc
      limit #{start},#{count}

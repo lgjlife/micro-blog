@@ -44,6 +44,13 @@ spring:
           uri: lb://microblog-points
           predicates:
             - Path=/points/**
+
+        # 积分模块
+        - id: microblog-comment
+          uri: lb://microblog-comment
+          predicates:
+            - Path=/comment/**
+
         # 任务调度
         - id: microblog-scheduler
           uri: lb://microblog-scheduler
