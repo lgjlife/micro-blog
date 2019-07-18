@@ -96,19 +96,20 @@
 
     <!-- 评论 列表-->
     <div>
-        <ul>
+        <ul class="comment-display-ul">
 
         </ul>
     </div>
 </script>
+
 <script id="blog-comment-list-template" type="text/html">
-    <li commentUserId="commentUserId">
-        <img src="{commentUserHeaderUrl}"/>
-        <a href="/user/info.home.html?u={commentUserId}"></a>
-        <span></span>
-        <span></span>
-        <a>回复</a>
-        <a>点赞</a>
+    <li commentUserId="{userId}" blogId="{blogId}" cid="{cid}">
+        <img src="{userHeaderUrl}" style="height: 50px;width: 50px"/>
+        <a href="/user/info.home.html?u={userId}">{nickName}</a>
+        <span>{content}</span>
+        <span>{ctime}</span>
+        <a href="javascript:void(0)">回复</a>
+        <a href="javascript:void(0)">点赞</a>
         <div>
             <ul>
 

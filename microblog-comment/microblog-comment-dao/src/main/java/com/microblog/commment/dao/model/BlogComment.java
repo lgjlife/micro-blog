@@ -1,5 +1,7 @@
 package com.microblog.commment.dao.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class BlogComment {
@@ -187,6 +189,7 @@ public class BlogComment {
      *
      * @mbggenerated
      */
+
     public Date getPublishTime() {
         return publishTime;
     }

@@ -1,7 +1,9 @@
 package com.microblog.comment.service.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -32,6 +34,8 @@ public class CommentDto {
     //评论内容
     private String content;
     //评论时间
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date ctime;
     //子评论
     List<CommentDto> child = new ArrayList<>();
