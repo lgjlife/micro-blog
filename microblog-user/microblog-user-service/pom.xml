@@ -17,11 +17,11 @@
     <dependencies>
 
         <!-- https://mvnrepository.com/artifact/org.apache.shiro/shiro-core -->
-        <dependency>
+        <!--<dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-core</artifactId>
             <version>1.4.0</version>
-        </dependency>
+        </dependency>-->
 
 
 

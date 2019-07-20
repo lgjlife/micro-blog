@@ -18,10 +18,9 @@ import com.microblog.user.service.constants.UserRedisKeyUtil;
 import com.microblog.user.service.rabbitmq.PublishConfig;
 import com.microblog.user.service.rocketmq.RocketmqProducer;
 import com.microblog.user.service.rocketmq.RocketmqPublishConfig;
+import com.microblog.user.service.security.SecurityUtil;
 import com.microblog.user.service.service.UserService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.shiro.crypto.SecureRandomNumberGenerator;
-import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -237,7 +236,7 @@ public class IUserService implements UserService {
 
         String random= user.getSalt();
         //将原始密码加盐（上面生成的盐），并且用md5算法加密三次，将最后结果存入数据库中
-        String resultPassword = new Md5Hash(password,random,3).toString();
+        String resultPassword = SecurityUtil.md5Hash(password,random,3).toString();
 
 
         if(user.getLoginPassword().equals(resultPassword)){
@@ -339,9 +338,9 @@ public class IUserService implements UserService {
 
         //对原始密码加密
         //生成盐（部分，需要存入数据库中）
-        String random=new SecureRandomNumberGenerator().nextBytes().toHex();
+        String random= new Random().nextInt(999999)+"";
         //将原始密码加盐（上面生成的盐），并且用md5算法加密三次，将最后结果存入数据库中
-        String resultPassword = new Md5Hash(password,random,3).toString();
+        String resultPassword = SecurityUtil.md5Hash(password, random, 3);
         log.debug("进行MD5加密的密码 = " + resultPassword);
 
 

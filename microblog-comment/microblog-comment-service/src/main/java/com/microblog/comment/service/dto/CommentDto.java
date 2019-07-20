@@ -26,6 +26,9 @@ public class CommentDto {
     //回复的评论ID
     private Long replyId;
 
+    private Long replyUserId;
+    private Long replyUserNickName;
+
     //评论用户id
     private long uid;
     //评论用户头像

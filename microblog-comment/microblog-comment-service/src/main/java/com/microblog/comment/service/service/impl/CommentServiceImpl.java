@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Slf4j
@@ -84,7 +85,7 @@ public class CommentServiceImpl implements CommentService {
         log.info("parentIds = " + parentIds);
 
         if(parentIds.size() != 0){
-            //所有的评论都没有子评论
+            //有一级评论有子评论
             List<BlogComment> childComments = commentMapper.selectChild(parentIds);
 
             for(CommentDto parentCommentDto:parentCommentDtos){
@@ -105,6 +106,18 @@ public class CommentServiceImpl implements CommentService {
                                 .content(childComment.getContent())
                                 .ctime(childComment.getPublishTime())
                                 .build();
+
+                        //设置被回复评论的用户ID和用户昵称
+                        if(childComment.getReplyId() != 0){
+                            List<BlogComment> filterComment = childComments.stream().filter( (comment)->{
+                                return childComment.getReplyId() == comment.getId();
+                            }).collect(Collectors.toList());
+                            if((filterComment!=null) && (!filterComment.isEmpty())){
+                                childCommentDto.setReplyUserId(filterComment.get(0).getUserId());
+                                childCommentDto.setReplyUserNickName(filterComment.get(0).getUserId());
+                            }
+
+                        }
 
                         child.add(childCommentDto);
                     }
