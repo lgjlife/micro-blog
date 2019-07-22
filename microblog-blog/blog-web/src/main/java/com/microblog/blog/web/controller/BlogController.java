@@ -3,6 +3,8 @@ package com.microblog.blog.web.controller;
 
 import com.microblog.blog.dao.dto.BlogInfoDto;
 import com.microblog.blog.service.service.BlogService;
+import com.microblog.blog.service.service.CommentLikeService;
+import com.microblog.blog.service.utils.LikeType;
 import com.microblog.blog.service.utils.UserUtil;
 import com.microblog.common.aop.syslog.anno.PrintUrlAnno;
 import com.microblog.common.code.BlogReturnCode;
@@ -35,10 +37,13 @@ public class BlogController {
 
 
     @Autowired
-    BlogService blogService;
+    private BlogService blogService;
 
     @Autowired
-    HttpServletRequest request;
+    private HttpServletRequest request;
+
+    @Autowired
+    private CommentLikeService commentLikeService;
    /**
     *功能描述
     * @author lgj
@@ -155,20 +160,25 @@ public class BlogController {
     @PrintUrlAnno
     @PostMapping("/like")
     @ApiOperation(value = "/like",httpMethod = "POST",notes="点赞")
-    public BaseResult like(@RequestParam("blogId") Long blogId,@RequestParam("type") String type){
-
+    public BaseResult like(@RequestParam("id") Long id,@RequestParam("type") String type){
         Long userId = UserUtil.getUserId(request);
 
-        log.info("userId:[{}],blogId:[{}] type:[{}] ",userId,blogId,type );
-        if((userId == null) || (blogId == null) ||  (type == null)){
+        if((userId == null) || (id == null) ||  (type == null)){
             return new WebResult(Result.RESULT_FAIL,"操作失败:请求参数错误!");
         }
-        long curLikeNum = blogService.like(blogId,userId,type);
-        return new WebResult(Result.RESULT_SUCCESS,"操作成功!",curLikeNum);
+        log.debug("userId:[{}],id:[{}] type:[{}] ",userId,id,type );
 
+        if((LikeType.blogLike.equals(type))||(LikeType.blogUnlike.equals(type))){
+            long curLikeNum = blogService.like(id,userId,type);
+            return new WebResult(Result.RESULT_SUCCESS,"操作成功!",curLikeNum);
+        }
+        else  if((LikeType.commentLike.equals(type))||(LikeType.commentUnlike.equals(type))){
+            long curLikeNum = commentLikeService.likeHandler(id,userId,type);
+            return new WebResult(Result.RESULT_SUCCESS,"操作成功!",curLikeNum);
+        }
+
+        else {
+            return new WebResult(Result.RESULT_FAIL,"操作失败:请求参数错误!");
+        }
     }
-
-
-
-
 }

@@ -23,6 +23,7 @@ public class BlogAuthInterceptorAdapter extends AuthInterceptorAdapter {
         paths.add("/blog/submit/**");
         paths.add("/blog/submit");
         paths.add("/blog/list");
+        paths.add("/blog/comment");
         return paths;
     }
 

@@ -7,11 +7,18 @@ document.write("<script language=javascript src='/alter/alter.js'></script>");
 
 var blogDisplayTemplate={
 
+    "likeType":{
+        "blogLike":"blogLike",
+        "blogUnlike":"blogUnlike",
+        "commentLike":"commentLike",
+        "commentUnlike":"commentUnlike",
+    },
     "url":{
         //提交评论
-        "commentSubmitUrl": "/comment/create",
-        "queryCommentUrl":  "/comment/list",
-        "deleteComment":  "/comment/delete",
+        "commentSubmitUrl": "/blog/comment/create",
+        "queryCommentUrl":  "/blog/comment/list",
+        "deleteComment":  "/blog/comment/delete",
+        "requestBlogLikeUrl": "/blog/like",
     },
     "request":{
         /**
@@ -112,7 +119,51 @@ var blogDisplayTemplate={
                 }
 
             })
-        }
+        },
+        /**
+         * 点赞请求
+         * @param likeDom
+         * @param blogId
+         * @param type
+         */
+        "likeRequest":function(likeDom,id,type){
+
+            console.log("点赞请求参数:"+"type = " + type + "  id = "+id);
+            $.ajax({
+                type: "post",
+                url : blogDisplayTemplate.url.requestBlogLikeUrl,
+                data : {
+                    "id":id,
+                    "type": type,
+                },
+                success:function(data,status){
+
+                    console.log(JSON.stringify(data));
+                    if(data.code == returnCode.success){
+                        if((type==blogDisplayTemplate.likeType.blogLike)
+                        ||(type==blogDisplayTemplate.likeType.commentLike)){
+                            
+                            likeDom.children("span").eq(0).html("取消点赞");
+                            likeDom.children("span").eq(1).html(data.data);
+                        }
+                        else if((type==blogDisplayTemplate.likeType.blogUnlike)
+                        ||((type==blogDisplayTemplate.likeType.commentUnlike))){
+
+                            likeDom.children("span").eq(0).html("点赞");
+                            likeDom.children("span").eq(1).html(data.data);
+                        }
+                    }
+                    else if(data.code == returnCode.fail){
+                        alert(data.message);
+                    }
+                },
+                error:function(data,status){
+                    alert(data.message);
+                },
+
+
+            });
+        },
 
     },
 
@@ -167,7 +218,7 @@ var blogDisplayTemplate={
             blogContentListTemplate = blogContentListTemplate.replace('{collectNum}',blogInfo.collectNum);
             blogContentListTemplate = blogContentListTemplate.replace('{repostNum}',blogInfo.repostNum);
             blogContentListTemplate = blogContentListTemplate.replace('{commentNum}',blogInfo.commentNum);
-            blogContentListTemplate = blogContentListTemplate.replace('{likeNum}',blogInfo.likeNum);
+            blogContentListTemplate = blogContentListTemplate.replace('{likeNumber}',blogInfo.likeNum);
 
             //检测自己是否已经点赞
             if(blogInfo.likeFlag == true){
@@ -223,6 +274,16 @@ var blogDisplayTemplate={
             commentListHtml = commentListHtml.replace("{content}",comments[parentIndex].content);
             commentListHtml = commentListHtml.replace("{ctime}",comments[parentIndex].ctime);
 
+            commentListHtml = commentListHtml.replace('{likeNumber}',comments[parentIndex].likeNum);
+            //检测自己是否已经点赞
+            if(comments[parentIndex].likeFlag == true){
+                commentListHtml = commentListHtml.replace('{likeWord}',"取消点赞");
+            }
+            else {
+                commentListHtml = commentListHtml.replace('{likeWord}',"点赞");
+            }
+
+
             var userId = cache.get(cache.key.loginUserInfo).userId;
             console.log("userId = " + userId + "  commentUserId= " + comments[parentIndex].userId);
             if(userId == comments[parentIndex].userId){
@@ -255,6 +316,16 @@ var blogDisplayTemplate={
                     childCommentHtml = childCommentHtml.replace("{pid}",child[childIndex].pid);
                     childCommentHtml = childCommentHtml.replace("{content}",child[childIndex].content);
                     childCommentHtml = childCommentHtml.replace("{ctime}",child[childIndex].ctime);
+
+                    childCommentHtml = childCommentHtml.replace('{likeNumber}',child[childIndex].likeNum);
+                    //检测自己是否已经点赞
+                    if(child[childIndex].likeFlag == true){
+                        childCommentHtml = childCommentHtml.replace('{likeWord}',"取消点赞");
+                    }
+                    else {
+                        childCommentHtml = childCommentHtml.replace('{likeWord}',"点赞");
+                    }
+
 
                     var userId = cache.get(cache.key.loginUserInfo).userId;
                     console.log("userId = " + userId + "  commentUserId= " + comments[parentIndex].userId);
@@ -367,11 +438,27 @@ var blogDisplayTemplate={
 
 
         /**
-         * 添加点赞事件
+         * 微博添加点赞事件
          */
         "addLikeEvent":function () {
             $(".like-select").on("click",function () {
-                console.log("点赞");
+                console.log("微博点赞");
+
+                var likeDom = $(this);
+                var blogId = $(this).parent().parent().attr("blogId");
+                var type="";
+
+                if(likeDom.children("span").eq(0).html() == "点赞"){
+                    console.log("当前为点赞");
+                    type = blogDisplayTemplate.likeType.blogLike;
+                }
+                else {
+                    console.log("当前为取消点赞");
+                    type = blogDisplayTemplate.likeType.blogUnlike;
+                }
+
+                console.log("blogId = " + blogId + ";  type =  " + type);
+                blogDisplayTemplate.request.likeRequest(likeDom,blogId,type);
             })
         },
 
@@ -441,11 +528,26 @@ var blogDisplayTemplate={
 
 
             })
-
+            //一级评论点赞
             $(".first-like").on("click",function () {
                 console.log("一级点赞");
+                var likeDom = $(this);
+                var cid = $(this).parent().attr("cid");
+                var type;
+
+                if(likeDom.children("span").eq(0).html() == "点赞"){
+                    type = blogDisplayTemplate.likeType.commentLike;
+                }
+                else {
+                    type = blogDisplayTemplate.likeType.commentUnlike;
+                }
+
+                console.log("cid = " + cid + ";  type =  " + type);
+                blogDisplayTemplate.request.likeRequest(likeDom,cid,type);
+
             })
         },
+        //添加二级评论的回复和喜欢事件
         "addSecondLevelReplyAndLike":function () {
 
             $(".second-reply").on("click",function () {
@@ -489,10 +591,25 @@ var blogDisplayTemplate={
 
             })
 
+            //二级评论点赞
             $(".second-like").on("click",function () {
                 console.log("二级点赞");
+                var likeDom = $(this);
+                var blogId = $(this).parent().attr("cid");
+                var type;
+
+                if(likeDom.children("span").eq(0).html() == "点赞"){
+                    type = blogDisplayTemplate.likeType.commentLike;
+                }
+                else {
+                    type = blogDisplayTemplate.likeType.commentUnlike;
+                }
+
+                console.log("cid = " + blogId + ";  type =  " + type);
+                blogDisplayTemplate.request.likeRequest(likeDom,blogId,type);
             })
         },
+        //一级评论删除
         "addFirstLevelDelete":function () {
 
             $(".first-delete").on("click",function () {
@@ -503,6 +620,7 @@ var blogDisplayTemplate={
                 blogDisplayTemplate.request.deleteComment(commentId);
             })
         },
+        //二级评论删除
         "addSecondLevelDelete":function () {
 
             $(".second-delete").on("click",function () {

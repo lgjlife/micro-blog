@@ -50,10 +50,11 @@ public interface BlogLikeMapper {
 
     Long selectCountByBlogId(@Param("blogId") Long blogId);
     Long selectCount(@Param("blogId") Long blogId,@Param("userId") Long  userId);
+    Long delete(@Param("blogId") Long blogId,@Param("userId") Long  userId);
 
     Long insertMap(@Param("likeMaps") Map<String, BlogLike> likeMaps);
     Long deleteMap(@Param("unLikeMaps") Map<String, BlogLike> unLikeMaps);
-    Long delete(@Param("blogId") Long blogId,@Param("userId") Long  userId);
+
 
 
 }

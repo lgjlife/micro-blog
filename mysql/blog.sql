@@ -47,7 +47,16 @@ CREATE TABLE `blog_comment`(
     index(`blog_id`),
     index(`user_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT="博客评论表";
-
+DROP TABLE IF EXISTS `comment_like`;
+CREATE TABLE `comment_like`(
+   `like_id` BIGINT   AUTO_INCREMENT COMMENT "点赞ID",
+   `comment_id` BIGINT   COMMENT "评论ID",
+   `user_id` BIGINT   COMMENT "点赞用户ID",
+   `create_time` DATETIME DEFAULT NULL COMMENT "创建时间",
+    PRIMARY KEY (`like_id`),
+    index(`comment_id`),
+    index(`user_id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT="评论点赞表";
 /**
 * 博客收藏表
  */

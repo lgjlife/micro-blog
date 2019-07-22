@@ -1,4 +1,4 @@
-package com.microblog.comment.service.dto;
+package com.microblog.blog.service.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;
@@ -40,6 +40,10 @@ public class CommentDto {
     private String nickName;
     //评论内容
     private String content;
+    //点赞数目
+    private Long likeNum;
+    //点赞标志
+    private boolean likeFlag;
     //评论时间
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")

@@ -1,10 +1,11 @@
-package com.microblog.comment.service.service.impl;
+package com.microblog.blog.service.service.impl;
 
-import com.microblog.comment.service.dto.CommentDto;
-import com.microblog.comment.service.feign.UserFeignService;
-import com.microblog.comment.service.service.CommentService;
-import com.microblog.commment.dao.mapper.BlogCommentMapper;
-import com.microblog.commment.dao.model.BlogComment;
+import com.microblog.blog.dao.mapper.BlogCommentMapper;
+import com.microblog.blog.dao.mapper.CommentLikeMapper;
+import com.microblog.blog.dao.model.BlogComment;
+import com.microblog.blog.service.dto.CommentDto;
+import com.microblog.blog.service.feign.UserFeignService;
+import com.microblog.blog.service.service.CommentService;
 import com.microblog.user.dao.model.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +22,14 @@ import java.util.stream.Collectors;
 public class CommentServiceImpl implements CommentService {
 
     @Autowired
-    private  BlogCommentMapper commentMapper;
+    private BlogCommentMapper commentMapper;
 
     @Autowired
     private UserFeignService userFeignService;
+
+    @Autowired
+    private CommentLikeMapper commentLikeMapper;
+
 
     @Override
     public void create(BlogComment comment) {
@@ -49,7 +54,7 @@ public class CommentServiceImpl implements CommentService {
      *
     */
     @Override
-    public List<CommentDto>  getComments(long blogId,int page,int pageCount){
+    public List<CommentDto>  getComments(long blogId, long userId,int page, int pageCount){
 
         List<BlogComment>  parentComments = commentMapper.selectParent( blogId, page, pageCount);
         log.info("parentComments = " + parentComments);
@@ -67,6 +72,15 @@ public class CommentServiceImpl implements CommentService {
             }
 
             User user = userFeignService.queryUserInfo(comment.getUserId());
+
+            Long likeCount = commentLikeMapper.selectCountByCommentId(comment.getId());
+            if(likeCount == null){
+                likeCount = 0L;
+            }
+            Long userLike = commentLikeMapper.selectCount(comment.getId(),userId);
+            boolean isLike = (userLike == 1?true:false);
+
+
             CommentDto commentDto =  CommentDto
                     .builder()
                     .cid(comment.getId())
@@ -76,6 +90,8 @@ public class CommentServiceImpl implements CommentService {
                     .headerUrl(user.getHeaderUrl())
                     .replyId(comment.getReplyId())
                     .pid(comment.getPid())
+                    .likeNum(likeCount)
+                    .likeFlag(isLike)
                     .content(comment.getContent())
                     .ctime(comment.getPublishTime())
                     .build();
@@ -97,6 +113,14 @@ public class CommentServiceImpl implements CommentService {
                     if(childComment.getPid() == parentCommentDto.getCid()){
 
                         User user = userFeignService.queryUserInfo(childComment.getUserId());
+
+                        Long likeCount = commentLikeMapper.selectCountByCommentId(childComment.getId());
+                        if(likeCount == null){
+                            likeCount = 0L;
+                        }
+                        Long userLike = commentLikeMapper.selectCount(childComment.getId(),userId);
+                        boolean isLike = (userLike == 1?true:false);
+
                         CommentDto childCommentDto =  CommentDto
                                 .builder()
                                 .cid(childComment.getId())
@@ -105,6 +129,8 @@ public class CommentServiceImpl implements CommentService {
                                 .nickName(user.getNickName())
                                 .headerUrl(user.getHeaderUrl())
                                 .pid(childComment.getPid())
+                                .likeNum(likeCount)
+                                .likeFlag(isLike)
                                 .replyId(childComment.getReplyId())
                                 .content(childComment.getContent())
                                 .ctime(childComment.getPublishTime())
@@ -117,6 +143,7 @@ public class CommentServiceImpl implements CommentService {
                             }).collect(Collectors.toList());
                             if((filterComment!=null) && (!filterComment.isEmpty())){
                                 childCommentDto.setReplyUserId(filterComment.get(0).getUserId());
+                                //todo 需要优化
                                 User user1 = userFeignService.queryUserInfo(filterComment.get(0).getUserId());
                                 childCommentDto.setReplyUserNickName(user1.getNickName());
                             }

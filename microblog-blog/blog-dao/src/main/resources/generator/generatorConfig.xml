@@ -25,7 +25,7 @@
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
                         connectionURL="jdbc:mysql://localhost:8066/microblog"
                         userId="root"
-                        password="563739007">
+                        password="123456">
         </jdbcConnection>
         <!-- 用来控制生成的实体类 -->
         <!-- targetPackage  生成文件存放的目录-->
@@ -79,8 +79,8 @@
             <generatedKey column="like_id" sqlStatement="MySql" type="post" identity="true"/>
         </table>-->
 
-        <table tableName="blog_comment" >
-            <generatedKey column="id" sqlStatement="MySql" type="post" identity="true"/>
+        <table tableName="comment_like" >
+            <generatedKey column="like_id" sqlStatement="MySql" type="post" identity="true"/>
         </table>
 
     </context>

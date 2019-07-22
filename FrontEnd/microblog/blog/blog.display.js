@@ -392,6 +392,6 @@ $(function(){
         var blogId = $(this).parent().parent().find(".blog-id").html();
 
 
-        blog.request.likeRequest($(this),Number(blogId),type);
+      //  blog.request.likeRequest($(this),Number(blogId),type);
     })
 })

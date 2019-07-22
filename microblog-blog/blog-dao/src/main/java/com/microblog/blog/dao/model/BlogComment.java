@@ -187,6 +187,7 @@ public class BlogComment {
      *
      * @mbggenerated
      */
+
     public Date getPublishTime() {
         return publishTime;
     }

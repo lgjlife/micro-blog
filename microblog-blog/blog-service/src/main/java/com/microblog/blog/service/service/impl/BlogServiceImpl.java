@@ -7,6 +7,7 @@ import com.microblog.blog.service.exception.BlogException;
 import com.microblog.blog.service.feign.UserFeignService;
 import com.microblog.blog.service.service.BlogService;
 import com.microblog.blog.service.utils.ImgMarkUtil;
+import com.microblog.blog.service.utils.LikeType;
 import com.microblog.blog.service.utils.UserUtil;
 import com.microblog.blog.service.utils.fastdfs.FastdfsUtil;
 import com.microblog.filesystem.provider.FSProvider;
@@ -334,7 +335,7 @@ public class BlogServiceImpl implements BlogService {
 
 
 
-        if("like".equals(type)){
+        if(LikeType.blogLike.equals(type)){
             if(blogLikeMapper.selectCount(blogId,userId) == 1){
                 throw new BlogException("您已经点赞!");
             }
