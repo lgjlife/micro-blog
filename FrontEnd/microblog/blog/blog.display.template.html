@@ -105,7 +105,7 @@
 
 <!-- 一级评论-->
 <script id="blog-comment-list-template" type="text/html">
-    <li commentUserId="{userId}" blogId="{blogId}" cid="{cid}" nickName="{nickName}">
+    <li commentUserId="{userId}" blogId="{blogId}" cid="{cid}" pid="{pid}" nickName="{nickName}">
         <img src="{userHeaderUrl}" style="height: 25px;width: 25px"/>
         <a href="/user/info.home.html?u={userId}">{nickName}</a>
         <br/>
@@ -130,11 +130,11 @@
 
 <!-- 二级评论-->
 <script id="blog-comment-list-child-template" type="text/html">
-    <li commentUserId="{userId}" blogId="{blogId}" cid="{cid}"  nickName="{nickName}"
+    <li commentUserId="{userId}" blogId="{blogId}" cid="{cid}" pid="{pid}"  nickName="{nickName}"
         style="display: block ; "
     >
         <a href="/user/info.home.html?u={userId}">{nickName}</a>
-        <span>{content}</span>
+        <span style="display: {replyDisplayType}">回复<a href="/user/info.home.html?u={replyUserId}">{replyUserNickName}</a>:</span><span>{content}</span>
         <br/>
         <span>{ctime}</span>
         <a href="javascript:void(0)" class="second-reply">回复</a>

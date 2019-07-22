@@ -27,7 +27,10 @@ public class CommentDto {
     private Long replyId;
 
     private Long replyUserId;
-    private Long replyUserNickName;
+    private String replyUserNickName;
+
+    //上一级的评论ID
+    private Long pid;
 
     //评论用户id
     private long userId;

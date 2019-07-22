@@ -75,6 +75,7 @@ public class CommentServiceImpl implements CommentService {
                     .nickName(user.getNickName())
                     .headerUrl(user.getHeaderUrl())
                     .replyId(comment.getReplyId())
+                    .pid(comment.getPid())
                     .content(comment.getContent())
                     .ctime(comment.getPublishTime())
                     .build();
@@ -82,18 +83,18 @@ public class CommentServiceImpl implements CommentService {
             parentCommentDtos.add(commentDto);
         }
 
-        log.info("parentIds = " + parentIds);
+        log.debug("parentIds = " + parentIds);
 
         if(parentIds.size() != 0){
             //有一级评论有子评论
             //查询它的二级评论
             List<BlogComment> childComments = commentMapper.selectChild(parentIds);
-
+            log.debug("childComments[{}] -childComments=[{}]",parentIds,childComments);
             for(CommentDto parentCommentDto:parentCommentDtos){
                 List<CommentDto> child = new ArrayList<>();
 
                 for(BlogComment childComment:childComments){
-                    if(childComment.getReplyId() == parentCommentDto.getCid()){
+                    if(childComment.getPid() == parentCommentDto.getCid()){
 
                         User user = userFeignService.queryUserInfo(childComment.getUserId());
                         CommentDto childCommentDto =  CommentDto
@@ -103,6 +104,7 @@ public class CommentServiceImpl implements CommentService {
                                 .userId(childComment.getUserId())
                                 .nickName(user.getNickName())
                                 .headerUrl(user.getHeaderUrl())
+                                .pid(childComment.getPid())
                                 .replyId(childComment.getReplyId())
                                 .content(childComment.getContent())
                                 .ctime(childComment.getPublishTime())
@@ -115,7 +117,8 @@ public class CommentServiceImpl implements CommentService {
                             }).collect(Collectors.toList());
                             if((filterComment!=null) && (!filterComment.isEmpty())){
                                 childCommentDto.setReplyUserId(filterComment.get(0).getUserId());
-                                childCommentDto.setReplyUserNickName(filterComment.get(0).getUserId());
+                                User user1 = userFeignService.queryUserInfo(filterComment.get(0).getUserId());
+                                childCommentDto.setReplyUserNickName(user1.getNickName());
                             }
 
                         }

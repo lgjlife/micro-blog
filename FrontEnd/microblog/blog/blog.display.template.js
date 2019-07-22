@@ -219,6 +219,7 @@ var blogDisplayTemplate={
             commentListHtml = commentListHtml.replace(/{nickName}/g,comments[parentIndex].nickName);
             commentListHtml = commentListHtml.replace("{blogId}",comments[parentIndex].blogId);
             commentListHtml = commentListHtml.replace("{cid}",comments[parentIndex].cid);
+            commentListHtml = commentListHtml.replace("{pid}",comments[parentIndex].pid);
             commentListHtml = commentListHtml.replace("{content}",comments[parentIndex].content);
             commentListHtml = commentListHtml.replace("{ctime}",comments[parentIndex].ctime);
 
@@ -251,6 +252,7 @@ var blogDisplayTemplate={
                     childCommentHtml = childCommentHtml.replace(/{nickName}/g,child[childIndex].nickName);
                     childCommentHtml = childCommentHtml.replace("{blogId}",child[childIndex].blogId);
                     childCommentHtml = childCommentHtml.replace("{cid}",child[childIndex].cid);
+                    childCommentHtml = childCommentHtml.replace("{pid}",child[childIndex].pid);
                     childCommentHtml = childCommentHtml.replace("{content}",child[childIndex].content);
                     childCommentHtml = childCommentHtml.replace("{ctime}",child[childIndex].ctime);
 
@@ -266,6 +268,18 @@ var blogDisplayTemplate={
                         console.log("当前登录的用户和评论不是同一个人");
                         childCommentHtml = childCommentHtml.replace('{displayType}',"none");
                     }
+                    if(child[childIndex].replyUserNickName != null){
+                        //当前登录的用户和评论是同一个人
+                        console.log("===============");
+                        childCommentHtml = childCommentHtml.replace('{replyDisplayType}',"inline");
+                        childCommentHtml = childCommentHtml.replace('{replyUserId}',child[childIndex].replyUserId);
+                        childCommentHtml = childCommentHtml.replace('{replyUserNickName}',child[childIndex].replyUserNickName);
+
+                    }else
+                    {
+                        childCommentHtml = childCommentHtml.replace('{replyDisplayType}',"none");
+                    }
+
 
                     allChildCommentHtml += childCommentHtml;
                 }
@@ -451,6 +465,7 @@ var blogDisplayTemplate={
                     secondLevelCommentInputDivDom.hide();
                 }
 
+                //提交评论按钮绑定事件
                 $(".secondLevelCommentSubmit").off("click");
                 $(".secondLevelCommentSubmit").on("click",function () {
 
@@ -463,6 +478,7 @@ var blogDisplayTemplate={
                     comment.blogId = secondLevelCommentListDom.attr("blogId");
                     comment.userId = cache.get(cache.key.loginUserInfo).userId;
                     comment.replyId = secondLevelCommentListDom.attr("cid");
+                    comment.pid = secondLevelCommentListDom.attr("pid");
                     comment.content = secondLevelCommentInputTextareaDom.val();
 
                     console.log("提交评论内容 =  " + JSON.stringify(comment));

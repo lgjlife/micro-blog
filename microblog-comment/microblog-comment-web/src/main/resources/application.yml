@@ -33,4 +33,5 @@ microblog:
 logging:
   level:
     com.microblog.comment.dao.mapper: debug
+    com.microblog: debug
     org.apache.ibatis: debug

@@ -88,7 +88,7 @@
   <select id="selectChild" resultMap="BaseResultMap" >
     select id, blog_id, user_id, pid, reply_id, publish_time, content
     from blog_comment
-    where reply_id in
+    where pid in
     <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
       #{item}
     </foreach>
