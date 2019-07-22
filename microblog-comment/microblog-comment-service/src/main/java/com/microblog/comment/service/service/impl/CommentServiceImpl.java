@@ -71,7 +71,7 @@ public class CommentServiceImpl implements CommentService {
                     .builder()
                     .cid(comment.getId())
                     .blogId(comment.getBlogId())
-                    .uid(comment.getUserId())
+                    .userId(comment.getUserId())
                     .nickName(user.getNickName())
                     .headerUrl(user.getHeaderUrl())
                     .replyId(comment.getReplyId())
@@ -86,6 +86,7 @@ public class CommentServiceImpl implements CommentService {
 
         if(parentIds.size() != 0){
             //有一级评论有子评论
+            //查询它的二级评论
             List<BlogComment> childComments = commentMapper.selectChild(parentIds);
 
             for(CommentDto parentCommentDto:parentCommentDtos){
@@ -99,7 +100,7 @@ public class CommentServiceImpl implements CommentService {
                                 .builder()
                                 .cid(childComment.getId())
                                 .blogId(childComment.getBlogId())
-                                .uid(childComment.getUserId())
+                                .userId(childComment.getUserId())
                                 .nickName(user.getNickName())
                                 .headerUrl(user.getHeaderUrl())
                                 .replyId(childComment.getReplyId())
@@ -153,6 +154,10 @@ public class CommentServiceImpl implements CommentService {
     }
 
 
+    @Override
+    public Integer deleteComment(Long commentId) {
+        return commentMapper.deleteComment(commentId);
+    }
 }
 
 

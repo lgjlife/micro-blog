@@ -12,4 +12,6 @@ public interface CommentService {
 
     public List<CommentDto>  getComments(long blogId, int page, int pageCount);
     Integer createComment(BlogComment comment);
+
+    Integer deleteComment(Long commentId);
 }

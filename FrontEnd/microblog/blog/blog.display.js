@@ -222,6 +222,10 @@ var blog={
     **/
     "displayBlog":function(blogInfos){
 
+        blogDisplayTemplate.displayBlog(blogInfos,$("#blog-content-display"),$("html"));
+        blog.IFrameResize();
+        return;
+
         if(blogInfos == null){
             console.log("blog.display.js-displayBlog:" + "blogInfos is null");
             return;

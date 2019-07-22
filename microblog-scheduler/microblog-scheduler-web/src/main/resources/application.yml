@@ -14,7 +14,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver      # 配置MySQL的驱动程序类
     url: jdbc:mysql://172.17.0.1:8066/microblog?characterEncoding=utf-8           # 数据库连接地址
     username: root                                  # 数据库用户名
-    password: 563739007                            # 数据库连接密码
+    password: 123456                            # 数据库连接密码
     filters: config,stat
     dbcp2:                                          # 进行数据库连接池的配置
       min-idle: 5                                   # 数据库连接池的最小维持连接数

@@ -30,7 +30,7 @@ public class CommentDto {
     private Long replyUserNickName;
 
     //评论用户id
-    private long uid;
+    private long userId;
     //评论用户头像
     private String headerUrl;
     //评论用户昵称

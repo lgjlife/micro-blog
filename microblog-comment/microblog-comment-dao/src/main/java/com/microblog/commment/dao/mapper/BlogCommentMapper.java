@@ -49,4 +49,5 @@ public interface BlogCommentMapper {
     List<BlogComment> selectParent(@Param("blogId") long blogId,@Param("page")  int page,@Param("pageCount")  int pageCount);
 
     List<BlogComment> selectChild(List<Long> list);
+    Integer deleteComment(@Param("commentId") Long commentId);
 }

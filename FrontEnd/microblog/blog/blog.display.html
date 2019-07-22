@@ -38,12 +38,21 @@
             </div>
             <!-- 微波内容 -->
             <div id="blog-content-display">
-                 <ul id="blog-content-ul">
+                 <!--<ul id="blog-content-ul">
                                              
-                </ul>
+                </ul>-->
             </div>
         <button  id="show-more">show more</button>
     </body>
+
+    <!--将动态加载的 blog-template 放在此处-->
+    <div id="blog-template">
+
+    </div>
+    <script>
+        $("#blog-template").load('../blog/blog.display.template.html');
+    </script>
+
 
     <!-- 博客列表模板 -->
     <script id="blog-content-list-template" type="text/html"> <!- 注意标签内的type属性 -!>
@@ -132,6 +141,7 @@
         <img class="center maxImg" src="{src}" />
     </script>
 
+    <script src="search.js"></script>
 
 
 

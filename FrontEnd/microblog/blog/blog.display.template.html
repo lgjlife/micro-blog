@@ -26,7 +26,7 @@
                 <span  style='float: right'><a href='javascript:void(0);' onclick="$('.content-blog-menu').show();">操作</a></span>
                 <span class="blog-content-user-id" style="display: none">{userId}</span>
                 <div>
-                    <a href='/user/info.home.html?u={userId}' class="blog-content-user-nickName"> {nickName}  </a>
+                    <a href='/user/info.home.html?u={userId}' class="blog-content-user-nickName" target="_blank"> {nickName}  </a>
                     <span>{publishTime}</span>
                     </div>
 
@@ -114,6 +114,7 @@
         <span>{ctime}</span>
         <a href="javascript:void(0)" class="first-reply">回复</a>
         <a href="javascript:void(0)" class="first-like">点赞</a>
+        <a href="javascript:void(0)" class="first-delete" style="display: {displayType}">删除</a>
         <div class="first-comment-input-div" style="display: none;height: 100px" >
             <textarea class="comment-input" style="width: 80%"></textarea>
             <br/>
@@ -138,6 +139,12 @@
         <span>{ctime}</span>
         <a href="javascript:void(0)" class="second-reply">回复</a>
         <a href="javascript:void(0)" class="second-like">点赞</a>
+        <a href="javascript:void(0)" class="second-delete" style="display: {displayType}">删除</a>
+        <div class="second-comment-input-div" style="display: none;height: 100px" >
+            <textarea class="comment-input" style="width: 80%"></textarea>
+            <br/>
+            <button class="secondLevelCommentSubmit">评论</button>
+        </div>
     </li>
 </script>
 

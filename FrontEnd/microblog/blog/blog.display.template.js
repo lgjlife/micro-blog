@@ -10,7 +10,8 @@ var blogDisplayTemplate={
     "url":{
         //提交评论
         "commentSubmitUrl": "/comment/create",
-        "queryCommentUrl":  "/comment/list"
+        "queryCommentUrl":  "/comment/list",
+        "deleteComment":  "/comment/delete",
     },
     "request":{
         /**
@@ -28,10 +29,11 @@ var blogDisplayTemplate={
                 success:function(data,status){
                     console.log(data.message);
                     if(data.code == returnCode.success){
+                        //评论成功
 
                     }
                     else if(data.code == returnCode.fail){
-
+                        //评论失败
                     }
 
                 },
@@ -43,8 +45,40 @@ var blogDisplayTemplate={
 
             })
         },
+        /***
+         * 删除评论
+         * @param commentId 评论ID
+         */
+        "deleteComment":function (commentId) {
+            $.ajax({
+                url: blogDisplayTemplate.url.deleteComment,
+                type: 'DELETE',
+                cache: false,
+                data: {
+                    "commentId": commentId,
+                },
+                success:function(data,status){
+                    console.log(data.message);
+                    if(data.code == returnCode.success){
+                        //评论成功
+
+                    }
+                    else if(data.code == returnCode.fail){
+                        //评论失败
+                    }
+
+                },
+                error:function(xhr,status,error){
+                    console.log("request error  + " + status);
+                    $("#display").html("");
+                    $("#display").append("错误提示： " + xhr.status + " " + xhr.statusText);
+                }
+
+            })
+        },
+
         /**
-         *
+         * 查询评论
          * @param blogId  微博Id
          * @param page    页码
          * @param pageCount  每页的数目
@@ -87,6 +121,12 @@ var blogDisplayTemplate={
     "getBlogDisplayTemplate":function(){
         return $("#blog-content-list-template").html();
     },
+    /**
+     * 显示博客内容
+     * @param blogInfos
+     * @param blogContentUlDom
+     * @param htmlDom
+     */
     "displayBlog":function(blogInfos,blogContentUlDom,htmlDom){
 
 
@@ -182,6 +222,21 @@ var blogDisplayTemplate={
             commentListHtml = commentListHtml.replace("{content}",comments[parentIndex].content);
             commentListHtml = commentListHtml.replace("{ctime}",comments[parentIndex].ctime);
 
+            var userId = cache.get(cache.key.loginUserInfo).userId;
+            console.log("userId = " + userId + "  commentUserId= " + comments[parentIndex].userId);
+            if(userId == comments[parentIndex].userId){
+                //当前登录的用户和评论是同一个人
+                console.log("当前登录的用户和评论是同一个人");
+                commentListHtml = commentListHtml.replace('{displayType}',"inline");
+
+            }else
+            {
+                console.log("当前登录的用户和评论不是同一个人");
+                commentListHtml = commentListHtml.replace('{displayType}',"none");
+            }
+
+
+
             //二级回复
             var allChildCommentHtml = "";
             if(comments[parentIndex].child.length != 0){
@@ -199,8 +254,22 @@ var blogDisplayTemplate={
                     childCommentHtml = childCommentHtml.replace("{content}",child[childIndex].content);
                     childCommentHtml = childCommentHtml.replace("{ctime}",child[childIndex].ctime);
 
+                    var userId = cache.get(cache.key.loginUserInfo).userId;
+                    console.log("userId = " + userId + "  commentUserId= " + comments[parentIndex].userId);
+                    if(userId == comments[parentIndex].userId){
+                        //当前登录的用户和评论是同一个人
+                        console.log("当前登录的用户和评论是同一个人");
+                        childCommentHtml = childCommentHtml.replace('{displayType}',"inline");
+
+                    }else
+                    {
+                        console.log("当前登录的用户和评论不是同一个人");
+                        childCommentHtml = childCommentHtml.replace('{displayType}',"none");
+                    }
+
                     allChildCommentHtml += childCommentHtml;
                 }
+
 
                 commentListHtml = commentListHtml.replace("{childComment}",allChildCommentHtml);
             }else {
@@ -210,6 +279,9 @@ var blogDisplayTemplate={
             commentDisplayDom.find(".comment-display-ul").append(commentListHtml);
         }
         blogDisplayTemplate.addEvent.addFirstLevelReplyAndLike();
+        blogDisplayTemplate.addEvent.addSecondLevelReplyAndLike();
+        blogDisplayTemplate.addEvent.addFirstLevelDelete();
+        blogDisplayTemplate.addEvent.addSecondLevelDelete();
     },
 
     /**
@@ -278,6 +350,8 @@ var blogDisplayTemplate={
 
             })
         },
+
+
         /**
          * 添加点赞事件
          */
@@ -301,6 +375,7 @@ var blogDisplayTemplate={
                 comment.blogId = blogId;
                 comment.userId = cache.get(cache.key.loginUserInfo).userId;
                 comment.replyId = 0;
+                comment.pid = 0;
                 comment.content = $(this).parent().parent().find(".comment-input").val();
 
                 console.log("提交评论内容 =  " + JSON.stringify(comment));
@@ -308,7 +383,7 @@ var blogDisplayTemplate={
 
             })
         },
-        //一级回复事件
+        //一级回复/点赞事件
         "addFirstLevelReplyAndLike":function () {
 
             $(".first-reply").on("click",function () {
@@ -340,6 +415,7 @@ var blogDisplayTemplate={
                     comment.blogId = firstLevelCommentListDom.attr("blogId");
                     comment.userId = cache.get(cache.key.loginUserInfo).userId;
                     comment.replyId = firstLevelCommentListDom.attr("cid");
+                    comment.pid = firstLevelCommentListDom.attr("cid");
                     comment.content = firstLevelCommentInputTextareaDom.val();
 
                     console.log("提交评论内容 =  " + JSON.stringify(comment));
@@ -355,11 +431,73 @@ var blogDisplayTemplate={
             $(".first-like").on("click",function () {
                 console.log("一级点赞");
             })
+        },
+        "addSecondLevelReplyAndLike":function () {
+
+            $(".second-reply").on("click",function () {
+                console.log("二级评论");
+
+                var secondLevelCommentListDom = $(this).parent();
+                var secondLevelCommentInputDivDom = secondLevelCommentListDom.find(".second-comment-input-div");
+                var secondLevelCommentInputTextareaDom = secondLevelCommentInputDivDom.find("textarea");
+
+                //展开关闭一级评论的输入框
+                if(secondLevelCommentInputDivDom.css("display") == "none"){
+                    console.log("展示对话框");
+                    secondLevelCommentInputDivDom.show();
+                }
+                else {
+                    console.log("关闭对话框");
+                    secondLevelCommentInputDivDom.hide();
+                }
+
+                $(".secondLevelCommentSubmit").off("click");
+                $(".secondLevelCommentSubmit").on("click",function () {
+
+                    var secondLevelCommentListDom = $(this).parent().parent();
+                    var secondLevelCommentInputDivDom = secondLevelCommentListDom.find(".second-comment-input-div");
+                    var secondLevelCommentInputTextareaDom = secondLevelCommentInputDivDom.find("textarea");
+
+                    var comment ={"id":"","blogId":"","userId":"","pid":"","replyId":"","publishTime":"","content":""};
+
+                    comment.blogId = secondLevelCommentListDom.attr("blogId");
+                    comment.userId = cache.get(cache.key.loginUserInfo).userId;
+                    comment.replyId = secondLevelCommentListDom.attr("cid");
+                    comment.content = secondLevelCommentInputTextareaDom.val();
+
+                    console.log("提交评论内容 =  " + JSON.stringify(comment));
+                    blogDisplayTemplate.request.commentSubmit(JSON.stringify(comment));
+
+                })
 
 
+            })
+
+            $(".second-like").on("click",function () {
+                console.log("二级点赞");
+            })
+        },
+        "addFirstLevelDelete":function () {
+
+            $(".first-delete").on("click",function () {
+                console.log("一级删除");
+
+                var commentId = $(this).parent().attr("cid");
+                console.log("删除评论："+commentId);
+                blogDisplayTemplate.request.deleteComment(commentId);
+            })
+        },
+        "addSecondLevelDelete":function () {
+
+            $(".second-delete").on("click",function () {
+                console.log("二级删除");
+                var commentId = $(this).parent().attr("cid");
+                console.log("删除评论："+commentId);
+                blogDisplayTemplate.request.deleteComment(commentId);
+            })
+        },
 
 
-        }
 
 
     },

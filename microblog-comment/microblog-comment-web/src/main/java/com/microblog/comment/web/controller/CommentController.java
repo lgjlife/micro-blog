@@ -61,5 +61,23 @@ public class CommentController {
 
     }
 
+    @PrintUrlAnno
+    @DeleteMapping("/delete")
+    public  BaseResult deleteComment(@RequestParam("commentId") Long commentId ){
+
+        if(commentId == null){
+            return new WebResult(WebResult.RESULT_FAIL,"参数错误，删除评论失败");
+        }
+
+        Integer result =  commentService.deleteComment(commentId);
+        if((result == null)||(result == 0)){
+            return new WebResult(WebResult.RESULT_FAIL,"删除评论失败");
+        }
+        return new WebResult(WebResult.RESULT_SUCCESS,"删除评论成功");
+
+    }
+
+
+
 
 }

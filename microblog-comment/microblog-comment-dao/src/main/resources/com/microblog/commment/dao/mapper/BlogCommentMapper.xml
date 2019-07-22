@@ -78,6 +78,12 @@
     limit #{page},#{pageCount}
   </select>
 
+  <!--删除评论 -->
+
+  <delete id="deleteComment" parameterType="java.lang.Long" >
+    delete from blog_comment
+    where id = #{commentId} or pid = #{commentId}
+  </delete>
 
   <select id="selectChild" resultMap="BaseResultMap" >
     select id, blog_id, user_id, pid, reply_id, publish_time, content
@@ -87,4 +93,7 @@
       #{item}
     </foreach>
   </select>
+
+
+
 </mapper>
