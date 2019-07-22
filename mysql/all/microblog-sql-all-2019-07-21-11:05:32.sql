@@ -89,7 +89,7 @@ CREATE TABLE `QRTZ_CRON_TRIGGERS` (
 
 LOCK TABLES `QRTZ_CRON_TRIGGERS` WRITE;
 /*!40000 ALTER TABLE `QRTZ_CRON_TRIGGERS` DISABLE KEYS */;
-INSERT INTO `QRTZ_CRON_TRIGGERS` VALUES ('quartzScheduler','com.microblog.pointvice.job.HelloJob','123-Group','0/5 * * * * ?','Asia/Chongqing'),('quartzScheduler','com.microblog.pointvice.job.HelloJob','194-Group','0/5 * * * * ?','Asia/Chongqing'),('quartzScheduler','com.microblog.pointvice.job.HelloJob','739-Group','0/5 * * * * ?','Asia/Chongqing');
+INSERT INTO `QRTZ_CRON_TRIGGERS` VALUES ('quartzScheduler','com.microblog.scheduler.service.job.HelloJob','123-Group','0/5 * * * * ?','Asia/Chongqing'),('quartzScheduler','com.microblog.scheduler.service.job.HelloJob','194-Group','0/5 * * * * ?','Asia/Chongqing'),('quartzScheduler','com.microblog.scheduler.service.job.HelloJob','739-Group','0/5 * * * * ?','Asia/Chongqing');
 /*!40000 ALTER TABLE `QRTZ_CRON_TRIGGERS` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -155,7 +155,7 @@ CREATE TABLE `QRTZ_JOB_DETAILS` (
 
 LOCK TABLES `QRTZ_JOB_DETAILS` WRITE;
 /*!40000 ALTER TABLE `QRTZ_JOB_DETAILS` DISABLE KEYS */;
-INSERT INTO `QRTZ_JOB_DETAILS` VALUES ('quartzScheduler','com.microblog.pointvice.job.HelloJob','123-Group',NULL,'com.microblog.pointvice.job.HelloJob','0','0','0','0',_binary '�\�\0sr\0org.quartz.JobDataMap���迩�\�\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap�\�\��\�](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMap\�.�(v\n\�\0Z\0dirtyL\0mapt\0Ljava/util/Map;xp\0sr\0java.util.HashMap\��\�`\�\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0\0x\0'),('quartzScheduler','com.microblog.pointvice.job.HelloJob','194-Group',NULL,'com.microblog.pointvice.job.HelloJob','0','0','0','0',_binary '�\�\0sr\0org.quartz.JobDataMap���迩�\�\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap�\�\��\�](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMap\�.�(v\n\�\0Z\0dirtyL\0mapt\0Ljava/util/Map;xp\0sr\0java.util.HashMap\��\�`\�\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0\0x\0'),('quartzScheduler','com.microblog.pointvice.job.HelloJob','739-Group',NULL,'com.microblog.pointvice.job.HelloJob','0','0','0','0',_binary '�\�\0sr\0org.quartz.JobDataMap���迩�\�\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap�\�\��\�](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMap\�.�(v\n\�\0Z\0dirtyL\0mapt\0Ljava/util/Map;xp\0sr\0java.util.HashMap\��\�`\�\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0\0x\0');
+INSERT INTO `QRTZ_JOB_DETAILS` VALUES ('quartzScheduler','com.microblog.scheduler.service.job.HelloJob','123-Group',NULL,'com.microblog.scheduler.service.job.HelloJob','0','0','0','0',_binary '�\�\0sr\0org.quartz.JobDataMap���迩�\�\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap�\�\��\�](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMap\�.�(v\n\�\0Z\0dirtyL\0mapt\0Ljava/util/Map;xp\0sr\0java.util.HashMap\��\�`\�\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0\0x\0'),('quartzScheduler','com.microblog.scheduler.service.job.HelloJob','194-Group',NULL,'com.microblog.scheduler.service.job.HelloJob','0','0','0','0',_binary '�\�\0sr\0org.quartz.JobDataMap���迩�\�\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap�\�\��\�](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMap\�.�(v\n\�\0Z\0dirtyL\0mapt\0Ljava/util/Map;xp\0sr\0java.util.HashMap\��\�`\�\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0\0x\0'),('quartzScheduler','com.microblog.scheduler.service.job.HelloJob','739-Group',NULL,'com.microblog.scheduler.service.job.HelloJob','0','0','0','0',_binary '�\�\0sr\0org.quartz.JobDataMap���迩�\�\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap�\�\��\�](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMap\�.�(v\n\�\0Z\0dirtyL\0mapt\0Ljava/util/Map;xp\0sr\0java.util.HashMap\��\�`\�\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0\0x\0');
 /*!40000 ALTER TABLE `QRTZ_JOB_DETAILS` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -228,7 +228,7 @@ CREATE TABLE `QRTZ_SCHEDULER_STATE` (
 
 LOCK TABLES `QRTZ_SCHEDULER_STATE` WRITE;
 /*!40000 ALTER TABLE `QRTZ_SCHEDULER_STATE` DISABLE KEYS */;
-INSERT INTO `QRTZ_SCHEDULER_STATE` VALUES ('quartzScheduler','lgj-Lenovo-G4701558187216384',1558187279479,20000);
+INSERT INTO `QRTZ_SCHEDULER_STATE` VALUES ('quartzScheduler','lgj-Lenovo-G4701560769851893',1560837963468,20000);
 /*!40000 ALTER TABLE `QRTZ_SCHEDULER_STATE` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -332,7 +332,7 @@ CREATE TABLE `QRTZ_TRIGGERS` (
 
 LOCK TABLES `QRTZ_TRIGGERS` WRITE;
 /*!40000 ALTER TABLE `QRTZ_TRIGGERS` DISABLE KEYS */;
-INSERT INTO `QRTZ_TRIGGERS` VALUES ('quartzScheduler','com.microblog.pointvice.job.HelloJob','123-Group','com.microblog.pointvice.job.HelloJob','123-Group',NULL,1558187285000,1558187280000,5,'WAITING','CRON',1558141200000,1559127600000,NULL,2,''),('quartzScheduler','com.microblog.pointvice.job.HelloJob','194-Group','com.microblog.pointvice.job.HelloJob','194-Group',NULL,-1,-1,5,'COMPLETE','CRON',1558141200000,1558172940000,NULL,2,''),('quartzScheduler','com.microblog.pointvice.job.HelloJob','739-Group','com.microblog.pointvice.job.HelloJob','739-Group',NULL,1558227600000,-1,5,'WAITING','CRON',1558227600000,1559127600000,NULL,2,'');
+INSERT INTO `QRTZ_TRIGGERS` VALUES ('quartzScheduler','com.microblog.scheduler.service.job.HelloJob','123-Group','com.microblog.scheduler.service.job.HelloJob','123-Group',NULL,-1,1558187280000,5,'COMPLETE','CRON',1558141200000,1559127600000,NULL,2,''),('quartzScheduler','com.microblog.scheduler.service.job.HelloJob','194-Group','com.microblog.scheduler.service.job.HelloJob','194-Group',NULL,-1,-1,5,'COMPLETE','CRON',1558141200000,1558172940000,NULL,2,''),('quartzScheduler','com.microblog.scheduler.service.job.HelloJob','739-Group','com.microblog.scheduler.service.job.HelloJob','739-Group',NULL,-1,-1,5,'COMPLETE','CRON',1558227600000,1559127600000,NULL,2,'');
 /*!40000 ALTER TABLE `QRTZ_TRIGGERS` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -354,7 +354,7 @@ CREATE TABLE `blog` (
   `is_original` varchar(5) DEFAULT 'true' COMMENT '是否原创',
   PRIMARY KEY (`blog_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='博客表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='博客表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -363,7 +363,6 @@ CREATE TABLE `blog` (
 
 LOCK TABLES `blog` WRITE;
 /*!40000 ALTER TABLE `blog` DISABLE KEYS */;
-INSERT INTO `blog` VALUES (1,3,'yy yy',NULL,'PUBLIC','2019-06-06 15:23:06','2019-06-06 15:23:06','true');
 /*!40000 ALTER TABLE `blog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -402,12 +401,14 @@ DROP TABLE IF EXISTS `blog_comment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `blog_comment` (
-  `comment_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '评论ID',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '评论ID',
   `blog_id` bigint(20) DEFAULT NULL COMMENT '博客ID',
   `user_id` bigint(20) DEFAULT NULL COMMENT '评论用户ID',
+  `pid` bigint(20) DEFAULT '0' COMMENT '该评论所在的父级ID',
+  `reply_id` bigint(20) DEFAULT '0' COMMENT '该评论回复的评论ID,没有则为0',
   `content` text COMMENT '内容',
   `publish_time` datetime DEFAULT NULL COMMENT '发布时间',
-  PRIMARY KEY (`comment_id`),
+  PRIMARY KEY (`id`),
   KEY `blog_id` (`blog_id`),
   KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='博客评论表';
@@ -435,7 +436,7 @@ CREATE TABLE `blog_img` (
   `img_url` varchar(100) DEFAULT '' COMMENT '图片URL',
   PRIMARY KEY (`img_id`),
   KEY `blog_id` (`blog_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COMMENT='博客图片表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='博客图片表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -444,7 +445,6 @@ CREATE TABLE `blog_img` (
 
 LOCK TABLES `blog_img` WRITE;
 /*!40000 ALTER TABLE `blog_img` DISABLE KEYS */;
-INSERT INTO `blog_img` VALUES (1,1,'/img/blog/3/8943-1554781102945.jpg'),(2,1,'/img/blog/3/7332-1554781406453.jpg'),(3,1,'/img/blog/3/8090-1554781538549.jpg'),(4,1,'/img/blog/3/7360-1554782486320.jpg'),(5,15,'/img/blog/3/3441-1554782751918.jpg'),(6,16,'/img/blog/3/4547-1554783043411.jpg'),(7,16,'/img/blog/3/4059-1554783043411.jpg'),(8,16,'/img/blog/3/7062-1554783043411.jpg'),(9,16,'/img/blog/3/289-1554783043412.jpg'),(10,16,'/img/blog/3/9138-1554783043412.jpg'),(11,16,'/img/blog/3/7667-1554783043412.jpg'),(12,16,'/img/blog/3/8367-1554783043412.jpg'),(13,16,'/img/blog/3/5086-1554783043412.jpg'),(14,17,'/img/blog/3/5114-1554789818283.jpg'),(15,18,'/img/blog/3/5408-1554790020198.png'),(16,19,'/img/blog/3/8208-1554790690030.png'),(17,20,'/img/blog/3/6950-1554790751325.png'),(18,21,'/img/blog/3/5441-1554790756642.png');
 /*!40000 ALTER TABLE `blog_img` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -456,7 +456,7 @@ DROP TABLE IF EXISTS `blog_like`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `blog_like` (
-  `like_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '转发ID',
+  `like_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '点赞ID',
   `blog_id` bigint(20) DEFAULT NULL COMMENT '博客ID',
   `user_id` bigint(20) DEFAULT NULL COMMENT '点赞用户ID',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
@@ -561,7 +561,7 @@ INSERT INTO `location` VALUES (1,532701,'广东省深圳市宝安区','guangdong
 UNLOCK TABLES;
 
 --
--- Table structure for table `scheduler`
+-- Table structure for table `points`
 --
 
 DROP TABLE IF EXISTS `points`;
@@ -573,16 +573,17 @@ CREATE TABLE `points` (
   `points` bigint(20) DEFAULT '0' COMMENT '总积分',
   PRIMARY KEY (`points_id`),
   UNIQUE KEY `user_id_index` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='积分表';
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='积分表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `scheduler`
+-- Dumping data for table `points`
 --
 
 LOCK TABLES `points` WRITE;
-/*!40000 ALTER TABLE `scheduler` DISABLE KEYS */;
-/*!40000 ALTER TABLE `scheduler` ENABLE KEYS */;
+/*!40000 ALTER TABLE `points` DISABLE KEYS */;
+INSERT INTO `points` VALUES (1,3,27),(2,NULL,1),(3,NULL,1),(4,NULL,1),(5,NULL,1),(6,NULL,1),(7,NULL,1),(8,NULL,1);
+/*!40000 ALTER TABLE `points` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -641,7 +642,7 @@ CREATE TABLE `quartz_job` (
 
 LOCK TABLES `quartz_job` WRITE;
 /*!40000 ALTER TABLE `quartz_job` DISABLE KEYS */;
-INSERT INTO `quartz_job` VALUES (16,'定时任务','我是一个定时任务','0/5 * * * * ?','com.microblog.pointvice.job.HelloJob','194-Group',NULL,'2019-05-18 17:48:11',NULL,'2019-05-18 09:00:00','2019-05-18 17:49:00',NULL,NULL),(17,'定时任务','我是一个定时任务','0/5 * * * * ?','com.microblog.pointvice.job.HelloJob','739-Group',NULL,'2019-05-18 21:31:49',NULL,'2019-05-19 09:00:00','2019-05-29 19:00:00',NULL,NULL),(18,'定时任务','我是一个定时任务','0/5 * * * * ?','com.microblog.pointvice.job.HelloJob','123-Group',NULL,'2019-05-18 21:33:28',NULL,'2019-05-18 09:00:00','2019-05-29 19:00:00',NULL,NULL);
+INSERT INTO `quartz_job` VALUES (16,'定时任务','我是一个定时任务','0/5 * * * * ?','com.microblog.scheduler.service.job.HelloJob','194-Group',NULL,'2019-05-18 17:48:11',NULL,'2019-05-18 09:00:00','2019-05-18 17:49:00',NULL,NULL),(17,'定时任务','我是一个定时任务','0/5 * * * * ?','com.microblog.scheduler.service.job.HelloJob','739-Group',NULL,'2019-05-18 21:31:49',NULL,'2019-05-19 09:00:00','2019-05-29 19:00:00',NULL,NULL),(18,'定时任务','我是一个定时任务','0/5 * * * * ?','com.microblog.scheduler.service.job.HelloJob','123-Group',NULL,'2019-05-18 21:33:28',NULL,'2019-05-18 09:00:00','2019-05-29 19:00:00',NULL,NULL);
 /*!40000 ALTER TABLE `quartz_job` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -673,6 +674,35 @@ LOCK TABLES `relation` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `sign`
+--
+
+DROP TABLE IF EXISTS `sign`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sign` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `user_id` bigint(20) DEFAULT NULL COMMENT '用户ID',
+  `sign_history` varchar(64) DEFAULT NULL COMMENT '签到历史',
+  `sign_count` int(11) DEFAULT '0' COMMENT '连续签到次数',
+  `year` int(11) DEFAULT NULL COMMENT '年份',
+  `last_sign_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '最后签到时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_id_index` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='签到表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sign`
+--
+
+LOCK TABLES `sign` WRITE;
+/*!40000 ALTER TABLE `sign` DISABLE KEYS */;
+INSERT INTO `sign` VALUES (1,3,'AAAAAAAAAAAAAAAAAAAAAAAAAAAAYHgACAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==',NULL,2019,'2019-07-15 07:34:37');
+/*!40000 ALTER TABLE `sign` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `user`
 --
 
@@ -698,7 +728,7 @@ CREATE TABLE `user` (
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '注册时间',
   `login_nums` int(11) DEFAULT NULL COMMENT '登录次数',
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='用户表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -707,8 +737,6 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,31,'第三方但是','77671e8c7374b54bdbfe9b8624aeaf43','b4faae8a1ff14432496e526a3c1d2229','','',1,'/img/header/5597-1550725481498.jpg',1,'非常阿瑟斯的',1,'13925716751','2019-02-20 13:56:06','2019-02-20 21:56:06','2019-02-20 13:56:06',1),
-(2,1,'中国速读法反攻倒算','77671e8c7374b54bdbfe9b8624aeaf43','b4faae8a1ff14432496e526a3c1d2229','','',1,'/img/header/5597-1550725481498.jpg',1,'非常三个地方',1,'13925716752','2019-02-20 13:56:06','2019-02-20 21:56:06','2019-02-20 13:56:06',1);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -745,4 +773,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-06-16 16:23:42
+-- Dump completed on 2019-07-21 11:05:33

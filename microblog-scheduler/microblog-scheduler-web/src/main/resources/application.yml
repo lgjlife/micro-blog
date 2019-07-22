@@ -12,7 +12,7 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource    # 配置当前要使用的数据源的操作类型
     driver-class-name: com.mysql.cj.jdbc.Driver      # 配置MySQL的驱动程序类
-    url: jdbc:mysql://172.17.0.1:3306/microblog?characterEncoding=utf-8           # 数据库连接地址
+    url: jdbc:mysql://172.17.0.1:8066/microblog?characterEncoding=utf-8           # 数据库连接地址
     username: root                                  # 数据库用户名
     password: 563739007                            # 数据库连接密码
     filters: config,stat
@@ -22,7 +22,7 @@ spring:
       max-total: 5                                  # 最大的连接数
       max-wait-millis: 200                          # 等待连接获取的最大超时时间
     #  name: mydatasource
-    #  url: jdbc:mysql://localhost:3306/cloud_frame?characterEncoding=utf-8
+    #  url: jdbc:mysql://localhost:8066/cloud_frame?characterEncoding=utf-8
     #  username: root
     #  password: 563739007
     # type: common.alibaba.druid.pool.DruidDataSource

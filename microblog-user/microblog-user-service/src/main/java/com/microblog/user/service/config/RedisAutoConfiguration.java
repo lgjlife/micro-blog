@@ -43,7 +43,7 @@ public class RedisAutoConfiguration {
         FastJsonRedisSerializer fastJsonRedisSerializer = new FastJsonRedisSerializer(null);
 
         GenericFastJsonRedisSerializer  genericFastJsonRedisSerializer =  new GenericFastJsonRedisSerializer();
-        ParserConfig.getGlobalInstance().addAccept("common.cloud.");
+        ParserConfig.getGlobalInstance().addAccept("com.microblog");
         // key采用String的序列化方式
 
         template.setKeySerializer(stringRedisSerializer);

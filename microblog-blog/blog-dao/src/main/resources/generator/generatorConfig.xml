@@ -23,7 +23,7 @@
         </commentGenerator>
         <!-- 配置数据库连接信息 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/microblog"
+                        connectionURL="jdbc:mysql://localhost:8066/microblog"
                         userId="root"
                         password="563739007">
         </jdbcConnection>

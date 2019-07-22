@@ -59,11 +59,11 @@ var register={
     //请求url
     "requestUrl":{
         //注册提交
-       "registerSubmitUrl":"/user/user/register",
+       "registerSubmitUrl":"/user/register",
         //获取手机或者邮箱验证码
-       "getVerificationCodeUrl":"/user/user/verification/code",
+       "getVerificationCodeUrl":"/user/verification/code",
        //获取 rsa modulus  exponent
-        "requestmModulusAndExponentUrl":"/user/user/key",
+        "requestmModulusAndExponentUrl":"/user/key",
     },
  
     //向服务端ajax请求
@@ -271,7 +271,6 @@ var register={
            $("#register-img-verification-code-input-warn-disp").text("请输入图片验证码！");
            console.log("请输入图片验证码！");
            return false;
-           
            
        }
         $("#register-img-verification-code-input-warn").hide();

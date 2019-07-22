@@ -22,20 +22,8 @@ CREATE TABLE `user`(
     PRIMARY KEY (`user_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT="用户表";
 
-INSERT INTO `user` VALUES (1,1,'中国速读法反攻倒算','77671e8c7374b54bdbfe9b8624aeaf43','b4faae8a1ff14432496e526a3c1d2229',
-'','',1,'/img/header/5597-1550725481498.jpg',1,'非常阿瑟斯的',1,'13925716751','2019-02-20 21:56:06','2019-02-20 21:56:06','2019-02-20 21:56:06',1);
-INSERT INTO `user` VALUES (2,1,'中国速读法反攻倒算','77671e8c7374b54bdbfe9b8624aeaf43','b4faae8a1ff14432496e526a3c1d2229',
-'','',1,'/img/header/5597-1550725481498.jpg',1,'非常三个地方',1,'13925716752','2019-02-20 21:56:06','2019-02-20 21:56:06','2019-02-20 21:56:06',1);
-INSERT INTO `user` VALUES (3,1,'中国速读法反攻倒算','77671e8c7374b54bdbfe9b8624aeaf43','b4faae8a1ff14432496e526a3c1d2229',
-'','',1,'/img/header/5597-1550725481498.jpg',1,'非常速度更算法',1,'13925716753','2019-02-20 21:56:06','2019-02-20 21:56:06','2019-02-20 21:56:06',1);
-INSERT INTO `user` VALUES (4,1,'中国速读法反攻倒算','77671e8c7374b54bdbfe9b8624aeaf43','b4faae8a1ff14432496e526a3c1d2229',
-'','',1,'/img/header/5597-1550725481498.jpg',1,'非常的活动',1,'13925716754','2019-02-20 21:56:06','2019-02-20 21:56:06','2019-02-20 21:56:06',1);
-INSERT INTO `user` VALUES (5,1,'中国速读法反攻倒算','77671e8c7374b54bdbfe9b8624aeaf43','b4faae8a1ff14432496e526a3c1d2229',
-'','',1,'/img/header/5597-1550725481498.jpg',1,'非常算法大给',1,'13925716755','2019-02-20 21:56:06','2019-02-20 21:56:06','2019-02-20 21:56:06',1);
-INSERT INTO `user` VALUES (6,1,'中国速读法反攻倒算','77671e8c7374b54bdbfe9b8624aeaf43','b4faae8a1ff14432496e526a3c1d2229',
-'','',1,'/img/header/5597-1550725481498.jpg',1,'非常分公司的',1,'13925716756','2019-02-20 21:56:06','2019-02-20 21:56:06','2019-02-20 21:56:06',1);
 
-UPDATE user  SET  nick_name="new name" where user_id = 1;
+
 
 DROP TABLE IF EXISTS `user_delete`;
 CREATE TABLE `user_delete`(
@@ -53,8 +41,6 @@ BEGIN
 INSERT  INTO user_delete (user_id) values(OLD.user_id);
 END;
 
-INSERT INTO `user` VALUES (22,1,'中国速读法反攻倒算','77671e8c7374b54bdbfe9b8624aeaf43','b4faae8a1ff14432496e526a3c1d2229',
-'','',1,'/img/header/5597-1550725481498.jpg',1,'非常分公司的',1,'13925716753','2019-02-20 21:56:06','2019-02-20 21:56:06','2019-02-20 21:56:06',1);
 
 DELETE FROM user where user_id=22;
 

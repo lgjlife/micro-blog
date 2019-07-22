@@ -97,7 +97,7 @@ public class IUserService implements UserService {
             phoneVerifCodeDto.setCode(phone);
             phoneVerifCodeDto.setCode(code);
 
-            rocketmqProducer.publish(phoneVerifCodeDto,phonePublishConfig);
+          //  rocketmqProducer.publish(phoneVerifCodeDto,phonePublishConfig);
             Date end = new Date();
             log.debug("向手机号({})发送验证码:({})",phone,code);
             log.info("短信花费时间：" + (end.getTime() - start.getTime()));
@@ -347,7 +347,7 @@ public class IUserService implements UserService {
         user.setLoginPassword(resultPassword);
         user.setSalt(random);
         user.setRegisterTime(new Date());
-
+        user.setNickName("u"+name);
         log.debug(user.toString());
 
         if(userMapper.insert(user) != 0){
