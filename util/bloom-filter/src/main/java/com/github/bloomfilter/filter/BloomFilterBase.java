@@ -1,6 +1,6 @@
 package com.github.bloomfilter.filter;
 
-public interface BloomFilter {
+public interface BloomFilterBase {
 
     boolean add(final String key,final String value);
 

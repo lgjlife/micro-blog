@@ -15,11 +15,19 @@ public class BloomFilterAutoconfiguration {
 
 
     @Bean
-    public  BloomFilter redisBloomFilter(){
+    public BloomFilterBase redisBloomFilter(){
         RedisBloomFilter filter = new RedisBloomFilter();
         filter.setRedisClient(redisClient);
         return filter;
     }
+
+    @Bean
+    public BloomFilterBase guavaBloomFilter(){
+        GuavaBloomFilter filter = new GuavaBloomFilter();
+
+        return filter;
+    }
+
 
 
 }

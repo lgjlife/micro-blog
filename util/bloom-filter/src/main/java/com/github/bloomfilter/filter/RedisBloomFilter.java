@@ -3,7 +3,7 @@ package com.github.bloomfilter.filter;
 import com.github.bloomfilter.redis.RedisClient;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class RedisBloomFilter implements BloomFilter {
+public class RedisBloomFilter implements BloomFilterBase {
 
     @Autowired
     private RedisClient redisClient;
