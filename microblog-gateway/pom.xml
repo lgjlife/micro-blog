@@ -44,6 +44,13 @@
             <scope>test</scope>
         </dependency>
 
+
+        <!-- 用于限流-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis-reactive</artifactId>
+        </dependency>
+
         <!-- swagger 依赖 -->
         <dependency>
             <groupId>io.springfox</groupId>

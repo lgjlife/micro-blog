@@ -161,6 +161,12 @@
             <scope>compile</scope>
         </dependency>
 
+        <!-- redis布隆过滤器客户端-->
+        <dependency>
+            <groupId>com.redislabs</groupId>
+            <artifactId>jrebloom</artifactId>
+            <version>1.2.0</version>
+        </dependency>
 
 
 
