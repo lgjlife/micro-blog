@@ -19,16 +19,12 @@
     </properties>
 
     <dependencies>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-      <!--  <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>-->
+
+
 
         <!-- 验证码-->
         <dependency>
@@ -43,6 +39,7 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
             <version>2.1.0.RELEASE</version>
+
         </dependency>
 
 
@@ -52,6 +49,7 @@
             <artifactId>lombok</artifactId>
             <version>1.18.6</version>
             <scope>compile</scope>
+
         </dependency>
 
         <dependency>
@@ -66,36 +64,41 @@
             <version>1.0.0</version>
         </dependency>
 
-        <!--<dependency>
-            <groupId>com.microblog</groupId>
-            <artifactId>microblog-common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <type>pom</type>
-        </dependency>-->
-        <!--<dependency>
-            <groupId>com.swagger</groupId>
-            <artifactId>swagger-springboot-starter</artifactId>
-            <version>1.0.0</version>
-            <type>pom</type>
-        </dependency>-->
 
-        <!-- swagger 依赖 -->
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>2.9.2</version>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>2.9.2</version>
-        </dependency>
         <dependency>
             <groupId>com.swagger</groupId>
             <artifactId>swagger-springboot-starter</artifactId>
             <version>1.0.0</version>
             <scope>compile</scope>
         </dependency>
+
+        <!-- 日志-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-logging</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>*</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>*</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.lmax</groupId>
+            <artifactId>disruptor</artifactId>
+            <version>3.4.2</version>
+        </dependency>
+
 
     </dependencies>
 
@@ -132,7 +135,6 @@
                     </buildArgs>
                 </configuration>
             </plugin>
-
         </plugins>
     </build>
 

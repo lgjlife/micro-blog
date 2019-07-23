@@ -15,16 +15,6 @@
     <packaging>jar</packaging>
 
     <dependencies>
-
-        <!-- https://mvnrepository.com/artifact/org.apache.shiro/shiro-core -->
-        <!--<dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-core</artifactId>
-            <version>1.4.0</version>
-        </dependency>-->
-
-
-
         <dependency>
             <groupId>com.microblog</groupId>
             <artifactId>microblog-common</artifactId>
@@ -161,12 +151,6 @@
             <scope>compile</scope>
         </dependency>
 
-        <!-- redis布隆过滤器客户端-->
-        <dependency>
-            <groupId>com.redislabs</groupId>
-            <artifactId>jrebloom</artifactId>
-            <version>1.2.0</version>
-        </dependency>
 
 
 

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- monitorInterval配置成一个正整数，则每隔这么久的时间（秒），log4j2会刷新一次配置。如果不配置则不会动态刷新 -->
+<Configuration status="INFO" monitorInterval="30">
+
+    <Properties>
+        <Property name="baseLogDir">logs</Property>
+        <Property name="pattern">%d{yyyyMMdd-HHmmss.SSS} [%level] %c{1} - %msg%n</Property>
+
+        <property name="CONSOLE_LOG_PATTERN"
+                  value="%highlight{%d{HH:mm:ss.SSS}} [%-20t] %highlight{%-5level} %-30logger{36} - %highlight{%msg%n}"/>
+
+        <property name="FILE_LOG_PATTERN"
+                  value="%d{HH:mm:ss.SSS} [%-20t] %-5level %-30logger{36} - %msg%n"/>
+    </Properties>
+    <!-- 先定义所有的appender -->
+    <Appenders>
+        <!-- 这个输出控制台的配置 -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout>
+                <Pattern>${CONSOLE_LOG_PATTERN}</Pattern>
+            </PatternLayout>
+
+            <Filters>
+                <!--<ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY" />
+                <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY" />
+                <ThresholdFilter level="WARN" onMatch="ACCEPT" onMismatch="DENY" />
+                <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY" />-->
+            </Filters>
+
+        </Console>
+        <!-- 应用info日志 -->
+        <RollingRandomAccessFile name="APPINFO_APPENDER" fileName="${baseLogDir}/app-consumer.log"
+                                 filePattern="${baseLogDir}/app-consumer.log.%d{yyyyMMddHH}.%i.gz">
+            <PatternLayout>
+                <Pattern>${FILE_LOG_PATTERN}</Pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="500MB" />
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+            </Policies>
+            <Filters>
+                <ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY" />
+                <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY" />
+                <ThresholdFilter level="WARN" onMatch="ACCEPT" onMismatch="DENY" />
+                <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY" />
+            </Filters>
+            <!-- max=20标识一小时内最多产生20个日志文件 -->
+            <DefaultRolloverStrategy max="20">
+                <!-- 对于指定的路径下的指定后缀的文件，只保留3天的日志文件，那么最多会有3天*24小时*20个日志文件 -->
+                <!-- 注意应用需要根据业务需求和磁盘大小评估需要保留的日志个数，对于500M的日志文件来说，要根据应用日志的情况，观察单个日志压缩后文件大小，并计算总大小需要的空间 -->
+                <Delete basePath="${baseLogDir}" maxDepth="1">
+                    <IfFileName glob="*.gz" />
+                    <IfLastModified age="3d" />
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingRandomAccessFile>
+    </Appenders>
+    <Loggers>
+        <!-- root是默认的logger，也是所有logger的父级logger，如果需要，可以在这里配置一个文件appender以打印外部组件日志 -->
+        <asyncRoot level="error" includeLocation="true">
+            <appender-ref ref="Console" />
+        </asyncRoot>
+
+        <asyncLogger name="com.microblog" level="error" includeLocation="true">
+            <appender-ref ref="Console" />
+        </asyncLogger>
+        <asyncLogger name="com.netflix" level="error" includeLocation="true">
+            <appender-ref ref="Console" />
+        </asyncLogger>
+
+        <!-- <AsyncLogger name="com.microblog" level="ERROR">
+             <AppenderRef ref="Console" />
+         </AsyncLogger>
+         <AsyncLogger name="org" level="ERROR">
+             <AppenderRef ref="Console" />
+         </AsyncLogger>-->
+
+        <!-- 应用日志，采用异步模式，name根据实际的包名修改；生产环境中additivity建议设置为false以避免在root logger中重复打印 -->
+       <!-- <AsyncLogger name="com" level="DEBUG" includeLocation="false" additivity="false">
+            <AppenderRef ref="APPINFO_APPENDER" />
+        </AsyncLogger>-->
+    </Loggers>
+</Configuration>

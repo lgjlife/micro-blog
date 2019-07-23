@@ -16,8 +16,8 @@ public class RedissonConfiguration {
     public RedissonClient redissonClient(){
 
         Config config = new Config();
-        config.useSingleServer()
-                .setAddress("redis://" + host + ":" + port);
+        config.useClusterServers().addNodeAddress("redis://172.18.0.1:8202","redis://172.18.0.1:8203","redis://172.18.0.1:8204",
+                "redis://172.18.0.1:8205","redis://172.18.0.1:8206","redis://172.18.0.1:8207");
         //添加主从配置
 //        config.useMasterSlaveServers().setMasterAddress("").setPassword("").addSlaveAddress(new String[]{"",""});
 

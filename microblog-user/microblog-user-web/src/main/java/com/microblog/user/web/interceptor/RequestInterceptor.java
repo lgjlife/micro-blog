@@ -27,11 +27,11 @@ public class RequestInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
         log.debug("RequestInterceptor,The ServletPath is :",request.getRequestURI());
-        Enumeration<String> headerNames =  request.getHeaderNames();
+     /*   Enumeration<String> headerNames =  request.getHeaderNames();
         while(headerNames.hasMoreElements()){
             String name = headerNames.nextElement();
             System.out.println(name + "---" + request.getHeader(name));
-        }
+        }*/
 
 
         String token =  (String)request.getHeader(HttpHeaders.AUTHORIZATION);
