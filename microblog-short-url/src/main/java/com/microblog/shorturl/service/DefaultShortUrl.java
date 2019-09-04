@@ -5,7 +5,6 @@ import com.microblog.shorturl.dao.mapper.UrlMapper;
 import com.microblog.shorturl.dao.model.Url;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 /**
  *功能描述 
@@ -15,7 +14,7 @@ import org.springframework.stereotype.Service;
 */
 
 @Slf4j
-@Service
+//@Service
 public class DefaultShortUrl implements ShortUrl {
 
     private static final int radix = 62;
