@@ -1,0 +1,70 @@
+server:
+  port: 8102
+eureka:
+  client:
+    service-url:
+      defaultZone: http://172.17.0.1:8001/eureka/
+logging:
+  level:
+    com.microblog: debug
+    org.apache.ibatis: debug
+spring:
+  application:
+    name: microblog-user
+  mybatis:
+    mapper-locations: com.microblog.shorturl.dao.mapper
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource    # 配置当前要使用的数据源的操作类型
+    driver-class-name: com.mysql.cj.jdbc.Driver      # 配置MySQL的驱动程序类
+    url: jdbc:mysql://localhost:3339/microblog?characterEncoding=utf-8           # 数据库连接地址
+    username: root                                  # 数据库用户名
+    password: 123456                            # 数据库连接密码
+    filters: config,stat
+    dbcp2:                                          # 进行数据库连接池的配置
+      min-idle: 5                                   # 数据库连接池的最小维持连接数
+      initial-size: 5                               # 初始化提供的连接数
+      max-total: 5                                  # 最大的连接数
+      max-wait-millis: 200                          # 等待连接获取的最大超时时间
+  redis:
+    cluster:
+      nodes:
+        - 172.18.0.1:8202
+        - 172.18.0.1:8203
+        - 172.18.0.1:8204
+        - 172.18.0.1:8205
+        - 172.18.0.1:8206
+        - 172.18.0.1:8207
+      command-timeout: 15000
+      # 重试次数
+      max-attempts: 5
+      # 跨集群执行命令时要遵循的最大重定向数量
+      max-redirects: 3
+      # 连接池最大连接数（使用负值表示没有限制）
+      max-active: 16
+      # 连接池最大阻塞等待时间（使用负值表示没有限制）
+      max-wait: -1
+      # 连接池中的最大空闲连接
+      max-idle: 8
+      # 连接池中的最小空闲连接
+      min-idle: 0
+      # 是否在从池中取出连接前进行检验,如果检验失败,则从池中去除连接并尝试取出另一个
+      test-on-borrow: true
+
+microblog:
+  common:
+    # 使能打印访问Url，在Controller方法上添加注解@PrintUrlAnno
+    printUrlEnable: true
+    # 使能打印方法执行耗时，在方法上添加注解@PrintUseTimeAnno
+    printUseTimeEnable: true
+
+swagger:
+  basePackage: com.microblog.user.web.controller
+  title: "Blog API 文档"
+  contactName: "lgj"
+  contactUrl: contactUrl-demo
+  contactEmail: contactEmail-demo
+  version: v1.0.0
+  description: blog
+  termsOfServiceUrl: termsOfServiceUrl-demo
+  license: license-demo
+  licenseUrl: licenseUrl-demo

@@ -24,7 +24,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableDiscoveryClient
 @SpringBootApplication
 @ComponentScan(basePackages={"com.microblog.user","com.microblog.common"})
-
 public class MicroblogUserWebApplication {
     public static void main(String args[]) {
         SpringApplication.run(MicroblogUserWebApplication.class, args);

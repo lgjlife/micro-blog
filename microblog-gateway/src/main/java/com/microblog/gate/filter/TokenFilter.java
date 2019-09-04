@@ -32,15 +32,11 @@ public class TokenFilter implements GlobalFilter, Ordered {
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         log.info("TokenFilter filter...");
         ServerHttpRequest request = exchange.getRequest();
-        System.out.println("请求路径："+request.getURI());
+
 
         HttpHeaders httpHeaders = request.getHeaders();
         List<String> headers =  httpHeaders.get(HttpHeaders.USER_AGENT);
 
-        httpHeaders.forEach((key,values)->{
-            System.out.println(key + "::::" + values);
-        });
-        System.out.println();
 
 
         String path  = request.getURI().getPath() ;

@@ -100,6 +100,7 @@ public class BlogServiceImpl implements BlogService {
      * @return:
      *
     */
+    @Transactional
     @Override
     public List<BlogInfoDto> queryBlog(String type, long userId, int page , int count) {
         List<BlogInfoDto>  blogInfoDtos = new LinkedList<>();

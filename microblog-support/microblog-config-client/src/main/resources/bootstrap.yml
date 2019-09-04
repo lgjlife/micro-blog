@@ -5,7 +5,6 @@ spring:
   # 配置中心
   cloud:
     config:
-
       uri: http://localhost:9001
       #如果服务无法连接到配置服务器，则可能希望启动服务失败
       fail-fast: true

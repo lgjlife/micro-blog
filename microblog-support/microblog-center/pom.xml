@@ -35,7 +35,7 @@
         </dependency>
 
         <!-- 日志-->
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-logging</artifactId>
             <exclusions>
@@ -59,7 +59,7 @@
             <groupId>com.lmax</groupId>
             <artifactId>disruptor</artifactId>
             <version>3.4.2</version>
-        </dependency>
+        </dependency>-->
 
     </dependencies>
 
