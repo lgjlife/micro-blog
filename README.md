@@ -314,3 +314,8 @@ public BaseResult login(@RequestBody Map<String, Object> requestMap){
 ![首页](https://github.com/lgjlife/micro-blog/blob/master/img/index.png)
 ![登录页](https://github.com/lgjlife/micro-blog/blob/master/img/login.png)
 ![注册页](https://github.com/lgjlife/micro-blog/blob/master/img/register.png)
+
+
+## 其他信息
+
+* ![Spring Boot Admin Reference Guide](https://codecentric.github.io/spring-boot-admin/2.2.3/#getting-started)

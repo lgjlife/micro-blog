@@ -12,6 +12,10 @@ eureka:
 spring:
   application:
     name: microblog-center
+  security:
+    user:
+      name: admin
+      password: admin
 
 ribbon:
   eureka:

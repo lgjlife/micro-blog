@@ -2,27 +2,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>microblog</artifactId>
-        <groupId>com.microblog</groupId>
-        <version>0.0.1-SNAPSHOT</version>
-    </parent>
     <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.microblog</groupId>
+        <artifactId>microblog</artifactId>
+        <version>1.0.0</version>
+    </parent>
 
+
+    <groupId>com.microblog</groupId>
     <artifactId>microblog-msg</artifactId>
-
-
-    <dependencyManagement>
-        <dependencies>
-            <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-dependencies -->
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>Greenwich.RELEASE</version>
-                <type>pom</type>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
 
 
@@ -38,6 +27,13 @@
             <version>1.18.6</version>
             <scope>provided</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.hjy.library</groupId>
+            <artifactId>encryption</artifactId>
+            <version>1.0.5</version>
+        </dependency>
+
 
 
         <!--redis -->
@@ -101,11 +97,7 @@
 
 
         <!-- https://mvnrepository.com/artifact/com.hjy.library/encryption -->
-        <dependency>
-            <groupId>com.hjy.library</groupId>
-            <artifactId>encryption</artifactId>
-            <version>1.0.5</version>
-        </dependency>
+
 
         <!-- 自定义序列化框架-->
         <dependency>

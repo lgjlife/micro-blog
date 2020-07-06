@@ -2,14 +2,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>microblog-blog</artifactId>
         <groupId>com.microblog</groupId>
+        <artifactId>microblog-blog</artifactId>
         <version>1.0.0</version>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>blog-web</artifactId>
+    <groupId>com.microblog</groupId>
+    <artifactId>microblog-blog-web</artifactId>
     <packaging>jar</packaging>
 
     <properties>
@@ -34,13 +36,11 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-            <version>2.1.0.RELEASE</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-openfeign -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
-            <version>2.1.0.RELEASE</version>
         </dependency>
 
         <!-- mybatis-->
@@ -69,7 +69,7 @@
         </dependency>
         <dependency>
             <groupId>com.microblog</groupId>
-            <artifactId>blog-service</artifactId>
+            <artifactId>microblog-blog-service</artifactId>
             <version>1.0.0</version>
             <scope>compile</scope>
         </dependency>
@@ -79,12 +79,6 @@
             <artifactId>swagger-springboot-starter</artifactId>
             <version>1.0.0</version>
             <type>pom</type>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>5.1.7.RELEASE</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.swagger</groupId>

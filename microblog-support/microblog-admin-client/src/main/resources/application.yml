@@ -5,7 +5,11 @@ spring:
   boot:
     admin:
       client:
-        url: "http://localhost:8006"
+        url: http://localhost:8006
+  security:
+    user:
+      name: admin
+      password: admin
 management:
   security:
     enabled: false

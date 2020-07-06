@@ -12,7 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -160,7 +159,7 @@ public class JWTUtil {
 
         return jwtConsumer;
     }
-    public static void main(String args[]){
+   /* public static void main(String args[]){
 
         Map<String,String> claims = new HashMap<>();
         claims.put("userId","1");
@@ -194,5 +193,5 @@ public class JWTUtil {
         log.debug("email = {}",email);
 
 
-    }
+    }*/
 }

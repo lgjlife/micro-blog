@@ -4,13 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <groupId>com.microblog</groupId>
+        <artifactId>microblog-user</artifactId>
         <version>1.0.0</version>
-        <artifactId>microblog.user</artifactId>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.microblog</groupId>
-    <version>1.0.0</version>
-    <artifactId>microblog.user.dao</artifactId>
+    <artifactId>microblog-user-dao</artifactId>
     <packaging>jar</packaging>
 
 
@@ -25,7 +24,6 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-elasticsearch</artifactId>
-            <version>3.1.2.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>

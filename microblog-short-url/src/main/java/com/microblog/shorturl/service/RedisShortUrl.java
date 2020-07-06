@@ -10,10 +10,7 @@ import org.springframework.scripting.support.ResourceScriptSource;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  *功能描述 
@@ -76,6 +73,7 @@ public class RedisShortUrl implements ShortUrl {
 
         List keys = new ArrayList<String>();
         keys.add(id);
+
 
         List<String> result =  (List)redisTemplate.execute(redisScriptMap.get(scriptPaths[1]),keys,new Object[]{});
 

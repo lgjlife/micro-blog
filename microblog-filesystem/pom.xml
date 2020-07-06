@@ -3,14 +3,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.5.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <groupId>com.microblog</groupId>
+        <artifactId>microblog</artifactId>
+        <version>1.0.0</version>
     </parent>
+
     <groupId>com.microblog</groupId>
-    <artifactId>filesystem</artifactId>
-    <version>1.0.0</version>
+    <artifactId>microblog-filesystem</artifactId>
+
     <name>filesystem</name>
     <description>Demo project for Spring Boot</description>
 

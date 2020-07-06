@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.microblog</groupId>
         <artifactId>microblog</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0.0</version>
     </parent>
 
     <!--<parent>
@@ -17,7 +17,11 @@
 
     <groupId>com.microblog</groupId>
     <artifactId>microblog-search</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+
+    <modules>
+        <module>microblog-search-service</module>
+        <module>microblog-search-web</module>
+    </modules>
     <properties>
         <java.version>1.8</java.version>
     </properties>
@@ -61,19 +65,19 @@
         <dependency>
             <groupId>com.microblog</groupId>
             <artifactId>microblog-blog</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>1.0.0</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.microblog</groupId>
             <artifactId>microblog-user</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>1.0.0</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.microblog</groupId>
             <artifactId>microblog.user.dao</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>1.0.0</version>
             <scope>compile</scope>
         </dependency>
 
@@ -90,20 +94,18 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
-            <version>2.1.0.RELEASE</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-netflix-ribbon -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
-            <version>2.0.1.RELEASE</version>
+
         </dependency>
 
         <!--eureka-client -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-            <version>2.1.0.RELEASE</version>
         </dependency>
 
     </dependencies>
