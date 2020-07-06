@@ -1,0 +1,9 @@
+server:
+  port: 9011
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: localhost:8001/eureka/
+

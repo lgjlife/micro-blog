@@ -23,7 +23,12 @@ microblog:
     printUrlEnable: true
     # 使能打印方法执行耗时，在方法上添加注解@PrintUseTimeAnno
     printUseTimeEnable: true
-
+  mail:
+    encoding: UTF-8
+    host: smtp.sina.com
+    username: lanmeishop1@sina.com
+    password: lanmei
+    protocol: smtp
 rabbitmq:
   consumer:
     host: 127.0.0.1

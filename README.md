@@ -318,4 +318,5 @@ public BaseResult login(@RequestBody Map<String, Object> requestMap){
 
 ## 其他信息
 
-* ![Spring Boot Admin Reference Guide](https://codecentric.github.io/spring-boot-admin/2.2.3/#getting-started)
+* [Spring Boot Admin Reference Guide](https://codecentric.github.io/spring-boot-admin/2.2.3/#getting-started)
+* [seata](http://seata.io/zh-cn/docs/user/microservice.html)
