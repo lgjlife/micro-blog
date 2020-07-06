@@ -1,5 +1,8 @@
 
-DELETE TABLE
+/*
+SEATA AT 模式需要 UNDO_LOG 表
+*/
+DROP TABLE IF NOT  EXISTS  `undo_log`
 CREATE TABLE `undo_log` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `branch_id` bigint(20) NOT NULL,
@@ -12,9 +15,13 @@ CREATE TABLE `undo_log` (
   `ext` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `ux_undo_log` (`xid`,`branch_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
-CREATE TABLE `tb_cart`  (
+/*×××××××××业务表××××××××*/
+
+/**购物车***/
+DROP TABLE IF NOT  EXISTS  `cart`
+CREATE TABLE `cart`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `user_id` bigint(20) NULL DEFAULT NULL COMMENT '用户ID',
   `goods_id` bigint(20) NULL DEFAULT NULL COMMENT '商品ID',
@@ -24,9 +31,12 @@ CREATE TABLE `tb_cart`  (
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '购物车表' ROW_FORMAT = Dynamic;
 -- 初始化数据
-INSERT INTO `tb_cart` VALUES (1, 1, 1, 1590114829756, 1590114829756, 0);
+INSERT INTO `cart` VALUES (1, 1, 1, 1590114829756, 1590114829756, 0);
 
-CREATE TABLE `tb_goods`  (
+
+/*商品表**/
+DROP TABLE IF NOT  EXISTS  `goods`
+CREATE TABLE `goods`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '商品名称',
   `stock_num` bigint(20) NULL DEFAULT NULL COMMENT '商品库存数量',
@@ -37,9 +47,13 @@ CREATE TABLE `tb_goods`  (
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '商品表' ROW_FORMAT = Dynamic;
 -- 初始化数据
-INSERT INTO `tb_goods` VALUES (1, '键盘', 100, 100.00, 1590132270000, 1590377130, 0);
+INSERT INTO `goods` VALUES (1, '键盘', 100, 100.00, 1590132270000, 1590377130, 0);
 
-CREATE TABLE `tb_order`  (
+
+
+/**订单表*/
+DROP TABLE IF NOT  EXISTS  `order`
+CREATE TABLE `order`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `order_no` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '订单编号',
   `user_id` bigint(20) NULL DEFAULT NULL COMMENT '用户ID',

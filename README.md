@@ -137,6 +137,31 @@
 
 ├─── micro-blog 设计图.jpg
 
+## 端口使用
+
+|服务|端口|
+|---|---|
+|microblog-center|8001|
+|microblog-admin-server|8002|
+|microblog-config-server|8003|
+|microblog-hystrix-dashboard|8004|
+|microblog-hystrix-turbine|8005|
+|zipkin-server|9411|
+|microblog-blog-web|8006|
+|microblog-chat|8007|
+|microblog-cache|8008|
+|microblog-filesystem|8009|
+|microblog-gateway|8010|
+|microblog-log|8011|
+|microblog-msg-service|8012|
+|microblog-points-web|8013|
+|microblog-scheduler-web|8014|
+|microblog-search-web|8015|
+|microblog-short-url|8016|
+|microblog-user-web|8017|
+|microblog-websocket|8018|
+
+
 ## 使用工具和技术
 ### 工具
 * 开发环境： IDEA

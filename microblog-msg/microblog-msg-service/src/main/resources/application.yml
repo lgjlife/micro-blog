@@ -1,0 +1,35 @@
+
+server:
+  port: 8012
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8001/eureka/
+microblog:
+  rocketmq:
+    address: 127.0.0.1:9876
+    consumerGroup: MSG_GROUUP
+    topic: MAIL_SMS_MSG_TOPIC
+spring:
+  application:
+    name: MICROBLOG-MSG
+  boot:
+    admin:
+      client:
+        url: http://localhost:8002
+  security:
+    user:
+      name: admin
+      password: admin
+management:
+  security:
+    enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+logging:
+  level:
+    org: info
+    com: debug

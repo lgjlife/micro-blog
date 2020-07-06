@@ -1,5 +1,5 @@
 server:
-  port: 8991
+  port: 8018
 logging:
   level:
     org: info

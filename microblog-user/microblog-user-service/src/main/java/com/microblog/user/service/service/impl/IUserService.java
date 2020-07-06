@@ -47,7 +47,7 @@ public class IUserService implements UserService {
     UserMapper userMapper;
 
   //  @Autowired
-  //  MailService mailService;
+  //  MailService msgMailHandler;
 
     @Autowired
     RedisStringUtil redisStringUtil;
