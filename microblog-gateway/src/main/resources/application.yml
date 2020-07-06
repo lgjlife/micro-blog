@@ -5,6 +5,7 @@ eureka:
     service-url:
       defaultZone: http://localhost:8001/eureka/
 spring:
+  security.oauth2.resourceserver.jwt.jwk-set-uri: 'http://localhost:8091/.well-known/jwks.json'
   redis:
     cluster:
       nodes:

@@ -2,7 +2,6 @@ package com.microblog.gate.filter;
 
 
 import com.microblog.common1.token.jwt.JwtUtil;
-import com.microblog.gate.auth.AuthFilterService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
