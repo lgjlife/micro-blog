@@ -5,5 +5,27 @@ server:
 eureka:
   client:
     service-url:
-      defaultZone: localhost:8001/eureka/
+      defaultZone: http://localhost:8001/eureka/
 
+spring:
+  application:
+    name: Microblog-Cart
+  cloud:
+    alibaba:
+      seata:
+        tx-service-group: my_test_tx_group
+
+  datasource:
+    #type: com.alibaba.druid.pool.DruidDataSource    # 配置当前要使用的数据源的操作类型
+    driver-class-name: com.mysql.cj.jdbc.Driver      # 配置MySQL的驱动程序类
+    url: jdbc:mysql://localhost:3306/microblog?characterEncoding=utf-8           # 数据库连接地址
+    username: root                                  # 数据库用户名
+    password: 123456                            # 数据库连接密码
+
+mybatis:
+  mapper-locations: com.microblog.buys.cart.dao.mapper
+
+logging:
+  level:
+    org: debug
+    org.apache.http: error

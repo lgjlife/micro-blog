@@ -83,6 +83,8 @@
 ├─── microblog-log 日志模块
 
 ├─── microblog-msg 邮件和短信处理应用
+    ├─── microblog-msg-entity   相关的实体定义
+    ├─── microblog-msg-service　邮件和短信处理
 
 ├─── microblog-points 积分应用
 

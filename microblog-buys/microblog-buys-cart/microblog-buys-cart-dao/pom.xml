@@ -9,6 +9,7 @@
     </parent>
     <groupId>com.microblog</groupId>
     <artifactId>microblog-buys-cart-dao</artifactId>
+    <packaging>jar</packaging>
 
     <name>microblog-buys-cart</name>
     <description>Demo project for Spring Boot</description>
@@ -34,6 +35,13 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.4.6</version>
+        </dependency>
+
     </dependencies>
 
     <build>

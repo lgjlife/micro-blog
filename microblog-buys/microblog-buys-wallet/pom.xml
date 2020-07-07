@@ -9,8 +9,10 @@
     </parent>
     <groupId>com.microblog</groupId>
     <artifactId>microblog-buys-wallet</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
 
-    <name>microblog-buys-order</name>
+    <name>microblog-buys-wallet</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>

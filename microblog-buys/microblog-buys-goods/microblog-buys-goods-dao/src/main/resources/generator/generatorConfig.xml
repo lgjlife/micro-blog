@@ -23,7 +23,7 @@
         </commentGenerator>
         <!-- 配置数据库连接信息 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:8066/microblog"
+                        connectionURL="jdbc:mysql://localhost:3306/microblog"
                         userId="root"
                         password="123456">
         </jdbcConnection>
@@ -62,25 +62,15 @@
         <!-- type="pre" identity="false"(only  the value) : ORDER = BEFORE -->
         <!-- 配置需要生成的表 ，如果需要执行时返回主键，就设置generatedKey-->
 
-        <!--<table tableName="blog" >
-            <generatedKey column="blog_id" sqlStatement="MySql" type="post" identity="true"/>
-        </table>
-        <table tableName="blog_img" >
-            <generatedKey column="img_id" sqlStatement="MySql" type="post" identity="true"/>
-        </table>
-
-        <table tableName="blog_collect" >
-            <generatedKey column="collect_id" sqlStatement="MySql" type="post" identity="true"/>
-        </table>
-        <table tableName="blog_repost" >
-            <generatedKey column="repost_id" sqlStatement="MySql" type="post" identity="true"/>
-        </table>
-        <table tableName="blog_like" >
-            <generatedKey column="like_id" sqlStatement="MySql" type="post" identity="true"/>
-        </table>-->
-
-        <table tableName="comment_like" >
-            <generatedKey column="like_id" sqlStatement="MySql" type="post" identity="true"/>
+        <table tableName="goods" enableInsert="true"
+               enableSelectByPrimaryKey="true"
+               enableSelectByExample="true"
+               enableUpdateByPrimaryKey="true"
+               enableDeleteByPrimaryKey="true"
+               enableDeleteByExample="true"
+               enableCountByExample="true"
+               enableUpdateByExample="true">
+            <generatedKey column="id" sqlStatement="MySql" type="post" identity="true"/>
         </table>
 
     </context>

@@ -9,6 +9,7 @@
     </parent>
     <groupId>com.microblog</groupId>
     <artifactId>microblog-buys-goods</artifactId>
+    <packaging>pom</packaging>
 
     <name>microblog-buys-order</name>
     <description>Demo project for Spring Boot</description>

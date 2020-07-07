@@ -5,4 +5,11 @@ server:
 eureka:
   client:
     service-url:
-      defaultZone: localhost:8001/eureka/
+      defaultZone: http://localhost:8001/eureka/
+spring:
+  application:
+    name: Microblog-wallet
+  cloud:
+    alibaba:
+      seata:
+        tx-service-group: my_test_tx_group

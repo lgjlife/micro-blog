@@ -7,6 +7,12 @@ import com.microblog.msgservice.service.MsgMailHandler;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ *功能描述 
+ * @author lgj
+ * @Description 　邮件消息处理　　
+ * @date 　
+*/
 @Data
 @Slf4j
 public class MsgMailHandlerImpl extends MsgMailHandler {

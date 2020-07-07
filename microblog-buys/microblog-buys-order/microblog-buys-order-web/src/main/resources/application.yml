@@ -1,7 +1,15 @@
 server:
-  port: 9013
+  port: 9015
 
 eureka:
   client:
     service-url:
-      defaultZone: localhost:8001/eureka/
+      defaultZone: http://localhost:8001/eureka/
+
+spring:
+  application:
+    name: Microblog-Order
+  cloud:
+    alibaba:
+      seata:
+        tx-service-group: my_test_tx_group

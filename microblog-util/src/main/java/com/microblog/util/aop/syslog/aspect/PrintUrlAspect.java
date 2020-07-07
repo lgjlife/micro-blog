@@ -1,0 +1,91 @@
+package com.microblog.util.aop.syslog.aspect;
+
+
+import com.microblog.util.aop.syslog.anno.PrintUrlAnno;
+import lombok.extern.slf4j.Slf4j;
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import javax.servlet.http.HttpServletRequest;
+import java.lang.reflect.Method;
+
+/** 
+ * @description:  Controller 层打印请求路径切面类
+ *                1.spring-mvc 配置文件添加切面注解支持 <aop:aspectj-autoproxy proxy-target-class="true"/>
+ *                2.在Controller上添加注解@PrintUseTimeAnno
+ * @param:
+ * @return:
+ * @author: Mr.lgj 
+ * @date: 9/7/18 
+*/
+@Slf4j
+@Aspect
+public class PrintUrlAspect {
+
+	/**
+	 * 定义切点
+	 * execution语法：
+	 * （<修饰符模式>?<返回类型模式><方法名模式>(<参数模式>)<异常模式>）
+	 * 1.通过方法	签名定义切点： （public * *(..)）;匹配所有目标类的public 方法
+	 * 2.通过类定义切点 ： （* common.lanmei.user+.*(..)）:匹配user接口的所有方法，有+表示也匹配其 实现类
+	 * 3.通过类包定义切点： （* common.lanmei.user.*(..)）匹配com.lanmei.user包下的所有类的所有方法
+	 * 					 （* common.lanmei.user..*(..)）匹配com.lanmei.user包/子孙包下的所有类的所有方法
+	 * 4.通过方法入参定义切点 * admin(String. *)）匹配方法admin的地一个参数为String ,第二个参数为任意类型的方法
+	 */
+	/*匹配 common.lanmei.os.controller本包及其子孙包的所有方法*/
+//	@Pointcut(value = "execution(* common.lanmei.*.controller..*(..))")
+	@Pointcut(value = "@annotation(com.microblog.util.aop.syslog.anno.PrintUrlAnno)")
+	public void urlLogPointcut() {
+		
+	}
+	/**
+	 * 前置通知
+	 */
+	@Before(value="urlLogPointcut()")
+	public void doBefore(JoinPoint joinPoint) {
+
+		HttpServletRequest request =
+				((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+
+		if(request == null){
+			log.info("Request is null,Cannot print url info , please put @PrintUrlAnno on a http request method");
+			return;
+		}
+		try {
+
+			
+			String targetName = joinPoint.getTarget().getClass().getName();  			 
+            String methodName = joinPoint.getSignature().getName();
+            Class targetClass = Class.forName(targetName);
+
+            Method[] methods = targetClass.getMethods();
+            Method method = null;
+            for(Method m:methods){
+            	if(methodName == m.getName()){
+					method  = m;
+				}
+			}
+            //获取SyslogAnno注解值
+            String description  = method.getAnnotation(PrintUrlAnno.class).description();
+			//打印请求路径
+			log.info("\r\n 访问  " + joinPoint.getTarget().getClass().getName() //类名称
+            		+  "  method = " + methodName
+            		+  "  路径 = "
+				    +  request.getRequestURI()
+             		+ "  描述：" + description);//类功能描述
+
+
+		} catch (Exception e) {
+			log.info("前置通知出现异常,error = " + e);
+		}
+		
+		
+	}
+
+
+
+}
