@@ -1,5 +1,6 @@
 package com.microblog.authorization.config;
 
+import com.microblog.authorization.config.handler.ExceptioHandler;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,16 +62,22 @@ public class AuthorizationServerConfigurer extends AuthorizationServerConfigurer
                 .withClient("test-client")
                 .secret(passwordEncoder.encode("test-secret"))
                 .authorizedGrantTypes("refresh_token", "password")
+                //可以设置access_token的超时时间。会在设置的时间基础上添加60s,也就是设置40s，但真正的超时时间是60s+40s
+               // .accessTokenValiditySeconds(1)
+
                 .scopes("default-scope");
+
     }
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 
 
-        endpoints.userDetailsService(userDetailManger)
+        endpoints
+                .userDetailsService(userDetailManger)
                 .authenticationManager(authenticationManagerBean)
                 .accessTokenConverter(accessTokenConverter())
+                .exceptionTranslator(new ExceptioHandler())
                 .exceptionTranslator(new WebResponseExceptionTranslator<OAuth2Exception>() {
                     @Override
                     public ResponseEntity<OAuth2Exception> translate(Exception e) throws Exception {
@@ -83,6 +90,7 @@ public class AuthorizationServerConfigurer extends AuthorizationServerConfigurer
                     }
                 })
         ;
+
     }
 
     @Override
@@ -102,7 +110,6 @@ public class AuthorizationServerConfigurer extends AuthorizationServerConfigurer
 
                 Date date = ((DefaultOAuth2AccessToken) accessToken).getExpiration();
 
-
                 String fd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
                 log.info("Expiration + " + fd);
 
@@ -115,7 +122,8 @@ public class AuthorizationServerConfigurer extends AuthorizationServerConfigurer
                 return super.enhance(accessToken, authentication);
             }
         };
-        jwtAccessTokenConverter.setKeyPair(keyPair());
+
+        jwtAccessTokenConverter.setKeyPair(keyPair() );
         return jwtAccessTokenConverter;
     }
 
@@ -123,5 +131,7 @@ public class AuthorizationServerConfigurer extends AuthorizationServerConfigurer
     public KeyPair keyPair() {
         KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource("demojwt.jks"), "keystorepass".toCharArray());
         return keyStoreKeyFactory.getKeyPair("jwt", "keypairpass".toCharArray());
+
+        //return KeypairCreator.create();
     }
 }

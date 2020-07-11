@@ -57,6 +57,8 @@ public class AuthUserDetailManger implements UserDetailsManager {
     }
 
 
+
+
     @Override
     public boolean userExists(String s) {
         return false;
@@ -65,6 +67,9 @@ public class AuthUserDetailManger implements UserDetailsManager {
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
 
+//        if(!"my-username".equals(userName)){
+//            throw new UnknownAccountException();
+//        }
         //在通过用户名密码获取token时会调用
         //1.从数据库获取
 

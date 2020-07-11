@@ -1,0 +1,8 @@
+spring:
+  security:
+    user:
+      name: user
+      password: password
+    filter:
+      order: 100
+     # dispatcher-types: FORWARD|INCLUDE|REQUEST|ASYNC|ERROR

@@ -23,6 +23,7 @@ public class ResourceServerConfigurer extends ResourceServerConfigurerAdapter {
         http.authorizeRequests()
                 .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
                 .antMatchers("/.well-known/jwks.json").permitAll()
+                .antMatchers("/login/publickey").permitAll()
                 .anyRequest().authenticated();
     }
 

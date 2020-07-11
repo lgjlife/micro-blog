@@ -8,8 +8,6 @@ jarFiles[3]=microblog-hystrix-dashboard/target/microblog-hystrix-dashboard-1.0.0
 jarFiles[4]=microblog-hystrix-turbine/target/microblog-hystrix-turbine-1.0.0.jar
 jarFiles[5]=zipkin-server/zipkin-server-2.11.8-exec.jar
 
-
-
 jarNames[0]=microblog-center-1.0.0.jar
 jarNames[1]=microblog-config-server-1.0.0.jar
 jarNames[2]=microblog-admin-server-1.0.0.jar

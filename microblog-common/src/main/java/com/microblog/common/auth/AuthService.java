@@ -9,7 +9,7 @@ import org.apache.zookeeper.CreateMode;
 public class AuthService {
 
     private final String rootPath = "/microblog";
-    private final String subPath = "/auth";
+    private final String subPath = "/microblog";
 
     private  ZkCli zkCli;
 

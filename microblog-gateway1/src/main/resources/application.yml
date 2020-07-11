@@ -1,0 +1,82 @@
+server:
+  port: 8010
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8001/eureka/
+spring:
+  security.oauth2.resourceserver.jwt.jwk-set-uri: 'http://localhost:8091/.well-known/jwks.json'
+  redis:
+    cluster:
+      nodes:
+        - 172.18.0.1:8202
+        - 172.18.0.1:8203
+        - 172.18.0.1:8204
+        - 172.18.0.1:8205
+        - 172.18.0.1:8206
+        - 172.18.0.1:8207
+  cloud:
+    gateway:
+      # 网关路由策略
+      routes:
+        # Normwal Websocket route
+        - id: websocket_route
+          uri: ws://localhost:8991
+          predicates:
+            - Path=/websocket/**
+
+        - id: websocket_route1
+          uri: lb://microblog-websocket #localhost:8991
+          predicates:
+            - Path=/socket/**
+
+        # 用户模块
+        - id: microblog-user
+          uri: lb://microblog-user
+          predicates:
+            - Path=/user/**
+
+         #  微博模块
+        - id: microblog-blog
+          uri: lb://microblog-blog
+          predicates:
+            - Path=/blog/**
+
+
+        # 搜索模块
+        - id: microblog-search
+          uri: lb://microblog-search
+          predicates:
+            - Path=/search/**
+
+        # 积分模块
+        - id: microblog-points
+          uri: lb://microblog-points
+          predicates:
+            - Path=/points/**
+
+        # 积分模块
+        - id: microblog-comment
+          uri: lb://microblog-comment
+          predicates:
+            - Path=/comment/**
+
+        # 任务调度
+        - id: microblog-scheduler
+          uri: lb://microblog-scheduler
+          predicates:
+            - Path=/scheduler/**
+
+        # 配置中心
+        - id: microblog-center
+          uri: lb://microblog-center
+          predicates:
+            - Path=/center/**
+
+
+  application:
+    name: gateway
+logging:
+  level:
+    org: error
+    com.microblog: debug

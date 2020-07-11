@@ -2,6 +2,7 @@
 /**
 * 博客表
 *
+
  */
 DROP TABLE IF EXISTS `blog`;
 CREATE TABLE `blog`(

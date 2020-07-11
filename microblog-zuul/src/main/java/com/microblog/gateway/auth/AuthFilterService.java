@@ -21,7 +21,7 @@ public class AuthFilterService {
     private ZkCli zkCli;
 
     private final String rootPath = "/microblog";
-    private final String subPath = "/auth";
+    private final String subPath = "/microblog";
 
     Map<String , List<String>> authPathMaps = new ConcurrentHashMap<>();
 
