@@ -1,5 +1,6 @@
 package com.microblog.authorization.config;
 
+import com.microblog.authorization.util.Md5Util;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -84,7 +85,7 @@ public class AuthUserDetailManger implements UserDetailsManager {
         log.info("authorities = " + authorities);
 
         UserDetails userDetails1 = new User("my-username",
-                passwordEncoder.encode("my-password1"), authorities);
+                passwordEncoder.encode(Md5Util.md5("my-password1")), authorities);
 
         UserDetails userDetails = new UserDetails() {
             @Override
@@ -96,7 +97,7 @@ public class AuthUserDetailManger implements UserDetailsManager {
 
             @Override
             public String getPassword() {
-                return passwordEncoder.encode("my-password1");
+                return passwordEncoder.encode(Md5Util.md5("my-password1"));
             }
 
             @Override
