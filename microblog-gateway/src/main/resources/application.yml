@@ -9,10 +9,10 @@ spring:
         - Path=/api/auth/**
       filters:
         - StripPrefix=2
-    - id: api-service-route
+    - id: api-keypair-route
       uri: http://localhost:8080
       predicates:
-        - Path=/api/service/**
+        - Path=/api/keypair/**
       filters:
         - StripPrefix=1
   security:

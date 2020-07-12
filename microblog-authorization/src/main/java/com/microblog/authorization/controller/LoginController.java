@@ -1,6 +1,6 @@
 package com.microblog.authorization.controller;
 
-import com.microblog.authorization.service.KeyPairService;
+import com.microblog.authorization.keypair.KeyPairService;
 import com.microblog.util.aop.syslog.anno.PrintUrlAnno;
 import com.microblog.util.response.ResponseCode;
 import com.microblog.util.response.ServerResponseDto;

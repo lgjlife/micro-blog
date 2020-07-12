@@ -1,6 +1,7 @@
 package com.microblog.authorization.Filter;
 
-import com.microblog.authorization.service.KeyPairService;
+import com.microblog.authorization.keypair.KeyPairService;
+import com.microblog.authorization.service.ManagerUserService;
 import com.microblog.authorization.util.Md5Util;
 import com.microblog.authorization.util.RSAUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -38,6 +39,9 @@ public class PasswordDecryptFilter implements Filter {
 
     @Autowired
     private KeyPairService keyPairService;
+
+    @Autowired
+    private ManagerUserService managerUserService;
 
 
     @Override
@@ -97,13 +101,22 @@ public class PasswordDecryptFilter implements Filter {
                 if("password".equals(name)){
                     password = value;
                 }
+                if("client_id".equals(name)){
+
+                    UserContext.setUserType(value);
+                }
 
                 params.put(name,new String[]{value});
             }
             //前端密码经过rsa　publickey加密，在这里使用私钥解密。获取原始密码
             String dencryptPassword = decryptPassword(username,password);
+            log.info("解密后的原始密码:" + dencryptPassword);
             //再对密码进行md5,因为数据库存储的是经过md5之后的密码
-            params.put("password",new String[]{Md5Util.md5(dencryptPassword)});
+            String salt = managerUserService.querySalt(username);
+            log.debug("salt = " + salt);
+            String saltPassword = Md5Util.md5(dencryptPassword,salt);
+            log.info("加盐后的密码:" + saltPassword);
+            params.put("password",new String[]{saltPassword});
         }
 
         public String decryptPassword(String username,String password){
@@ -112,7 +125,7 @@ public class PasswordDecryptFilter implements Filter {
 
             String dencryptPassword = RSAUtils.dencrypt(password,privateKey);
 
-            log.info("解密后的原始密码:" + dencryptPassword);
+
             return dencryptPassword;
 
         }

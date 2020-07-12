@@ -1,4 +1,4 @@
-package com.microblog.authorization.service;
+package com.microblog.authorization.keypair;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

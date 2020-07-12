@@ -107,6 +107,8 @@ public class AuthorizationServerConfigurer extends AuthorizationServerConfigurer
                 .allowFormAuthenticationForClients();
     }
 
+
+
     /**
      * 扩展　accesstoken的信息
      * @return

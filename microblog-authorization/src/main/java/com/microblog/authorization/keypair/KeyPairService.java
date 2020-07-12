@@ -1,4 +1,4 @@
-package com.microblog.authorization.service;
+package com.microblog.authorization.keypair;
 
 import java.security.PrivateKey;
 

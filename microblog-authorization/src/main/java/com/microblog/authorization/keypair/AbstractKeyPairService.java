@@ -1,4 +1,4 @@
-package com.microblog.authorization.service;
+package com.microblog.authorization.keypair;
 
 import com.microblog.authorization.util.RsaKeypairCreator;
 import lombok.extern.slf4j.Slf4j;
