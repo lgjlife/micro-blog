@@ -1,63 +1,31 @@
 package com.microblog.authorization.service;
 
-import com.microblog.authorization.util.KeypairCreator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.security.KeyPair;
 import java.security.PrivateKey;
-import java.security.PublicKey;
-import java.util.Base64;
 import java.util.concurrent.ConcurrentHashMap;
 
 
 /**
- *功能描述  基于内存的密钥服务
+ *功能描述  基于内存的密钥服务，只适合单服务，如果授权服务器集群发布，应当重新实现KeyPairService，将PrivateKey存入数据库
  * @author lgj
  * @Description 　　　
  * @date 　
 */
 @Slf4j
 @Component
-public class InMemoryKeyPairService implements KeyPairService {
+public class InMemoryKeyPairService extends AbstractKeyPairService {
 
-    private ConcurrentHashMap<String,PrivateKey> keyMap = new ConcurrentHashMap<>();
+    private ConcurrentHashMap<String, byte[]> keyMap = new ConcurrentHashMap<>();
 
-
-    /**
-     * 创建并获取公有密钥
-     * @param username
-     * @return
-     */
     @Override
-    public String createPublickey(String username) {
-
-        KeyPair keyPair = KeypairCreator.create();
-        PrivateKey privateKey = keyPair.getPrivate();
-        PublicKey publicKey = keyPair.getPublic();
-
-        Base64.Encoder encoder = Base64.getEncoder();
-        String privateKeyStr = new String(encoder.encode(privateKey.getEncoded()));
-        String publicKeyStr = new String(encoder.encode(publicKey.getEncoded()));
-
-        log.info("publicKeyStr = " + publicKeyStr);
-        log.info("privateKeyStr = " + privateKeyStr);
-
-
-        keyMap.put(username,privateKey);
-
-        return publicKeyStr;
+    void doSavePrivateKey(String username,PrivateKey privateKey) {
+        keyMap.put(username,privateKey.getEncoded());
     }
 
-    /**
-     * 获取私有密钥
-     * @param username
-     * @return
-     */
     @Override
-    public PrivateKey queryPrivatekey(String username) {
-
-        PrivateKey privateKey = keyMap.get(username);
-        return privateKey;
+    PrivateKey doGetPrivateKey(String username) {
+        return byteToPrivatekey(keyMap.get(username));
     }
 }

@@ -19,9 +19,9 @@ spring:
     user:
       password: password
       name: user
-  security.oauth2.resourceserver.jwt.jwk-set-uri: 'http://localhost:8000/.well-known/jwks.json'
+  security.oauth2.resourceserver.jwt.jwk-set-uri: 'http://localhost:8000/jwt/publickey'
 logging:
   level:
-    org: error
+    org: debug
     com: error
     com.microblog: debug

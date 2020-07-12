@@ -18,6 +18,12 @@ import java.util.Collection;
 import java.util.List;
 
 
+/**
+ *功能描述  用户管理，通过username来获取用户信息等操作
+ * @author lgj
+ * @Description 　　　
+ * @date 　
+*/
 @Component
 @Slf4j
 public class AuthUserDetailManger implements UserDetailsManager {
@@ -27,52 +33,43 @@ public class AuthUserDetailManger implements UserDetailsManager {
 
     @Override
     public void createUser(UserDetails userDetails) {
-
         log.info("createUser");
         String userName = userDetails.getUsername();
-
         log.info("userName = " + userName);
-
-
     }
 
     @Override
     public void updateUser(UserDetails userDetails) {
         log.info("updateUser");
         String userName = userDetails.getUsername();
-
         log.info("userName = " + userName);
     }
 
     @Override
     public void deleteUser(String userName) {
         log.info("deleteUser");
-
         log.info("userName = " + userName);
     }
 
     @Override
     public void changePassword(String s, String s1) {
         log.info("changePassword");
-
     }
-
-
-
-
     @Override
     public boolean userExists(String s) {
         return false;
     }
 
+    /**
+     * 每次客户端获取access_token的时候都会调用该方法加载用户信息
+     * 1.通过用户名称获取信息，账户状态，权限信息，密码
+     * 2.密码需要使用PasswordEncoder加密
+     * @param userName
+     * @return
+     * @throws UsernameNotFoundException
+     */
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-
-//        if(!"my-username".equals(userName)){
-//            throw new UnknownAccountException();
-//        }
-        //在通过用户名密码获取token时会调用
-        //1.从数据库获取
 
         log.info("loadUserByUsername +  " + userName);
 

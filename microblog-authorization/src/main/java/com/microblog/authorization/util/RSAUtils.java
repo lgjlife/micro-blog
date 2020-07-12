@@ -8,12 +8,19 @@ import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.util.Base64;
 
+
+/**
+ *功能描述  rsa　工具类
+ * @author lgj
+ * @Description 　　　
+ * @date 　
+*/
 @Slf4j
 public class RSAUtils {
 
     public static void main(String args[]){
 
-        KeyPair keyPair = KeypairCreator.create();
+        KeyPair keyPair = new RsaKeypairCreator().genKeyPair();
         PublicKey publicKey = keyPair.getPublic();
         PrivateKey privateKey = keyPair.getPrivate();
 

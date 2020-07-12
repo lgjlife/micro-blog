@@ -4,39 +4,36 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.codec.Base64;
 
 import java.security.KeyPair;
-import java.security.KeyPairGenerator;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 
+
+/**
+ *功能描述 RSA密钥创建
+ * @author lgj
+ * @Description 　　　
+ * @date 　
+*/
 @Slf4j
-public class KeypairCreator {
+public class RsaKeypairCreator extends AbstractKeypairCreator{
 
     private static final String DEFAULT_ALGORITHM = "RSA";
     private static final int DEFAULT_SIZE = 2048;
 
-
-    public static  KeyPair create(String alg,int size){
-
-        try{
-            KeyPairGenerator keyPairGenerator  = KeyPairGenerator.getInstance(alg);
-            keyPairGenerator.initialize(size);
-            KeyPair keyPair = keyPairGenerator.generateKeyPair();
-
-            return keyPair;
-        }
-        catch(Exception ex){
-            log.error(ex.getMessage());
-            return null;
-        }
+    @Override
+    public String algorithm() {
+        return DEFAULT_ALGORITHM;
     }
 
-    public static  KeyPair create(){
-       return create(DEFAULT_ALGORITHM,DEFAULT_SIZE);
+    @Override
+    public int size() {
+        return DEFAULT_SIZE;
     }
+
 
     public static void main(String args[]) throws Exception{
 
-        KeyPair keyPair = KeypairCreator.create();
+        KeyPair keyPair = new RsaKeypairCreator().genKeyPair();
 
         PublicKey publicKey = keyPair.getPublic();
 

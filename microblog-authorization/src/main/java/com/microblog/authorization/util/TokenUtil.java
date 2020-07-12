@@ -33,7 +33,7 @@ public class TokenUtil {
 
 
     public void init(){
-        KeyPair keyPair = KeypairCreator.create();
+        KeyPair keyPair = new RsaKeypairCreator().genKeyPair();
         publicKey  = keyPair.getPublic();
         privateKey = keyPair.getPrivate();
 

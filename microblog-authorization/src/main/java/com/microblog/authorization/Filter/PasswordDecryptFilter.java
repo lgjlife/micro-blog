@@ -45,8 +45,9 @@ public class PasswordDecryptFilter implements Filter {
 
         HttpServletRequest request = (HttpServletRequest)servletRequest;
 
+        //只有密码登录才会进行重写password字段
         if(GRANT_TYPE_VALUE.equals(request.getParameter(GRANT_TYPE_KEY))){
-
+            //通过HttpServletRequestWrapper重写请求参数
             HttpServletRequestWrapper servletRequestWrapper = new RemodifyPasswordHttpServletRequestWrapper(request);
 
             filterChain.doFilter(servletRequestWrapper,servletResponse);
@@ -56,6 +57,13 @@ public class PasswordDecryptFilter implements Filter {
         }
     }
 
+    /**
+     *功能描述  重写请求参数处理类　
+     * 　　　　需要重写getParameterMap()方法
+     * @author lgj
+     * @Description 　　　
+     * @date 　
+    */
     private class RemodifyPasswordHttpServletRequestWrapper extends HttpServletRequestWrapper {
 
         private HttpServletRequest request;
@@ -92,14 +100,10 @@ public class PasswordDecryptFilter implements Filter {
 
                 params.put(name,new String[]{value});
             }
-
+            //前端密码经过rsa　publickey加密，在这里使用私钥解密。获取原始密码
             String dencryptPassword = decryptPassword(username,password);
-
+            //再对密码进行md5,因为数据库存储的是经过md5之后的密码
             params.put("password",new String[]{Md5Util.md5(dencryptPassword)});
-
-
-
-
         }
 
         public String decryptPassword(String username,String password){

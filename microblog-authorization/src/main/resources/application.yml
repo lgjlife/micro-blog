@@ -8,4 +8,4 @@ management:
 
 logging:
   level:
-    org: error
+    org: info

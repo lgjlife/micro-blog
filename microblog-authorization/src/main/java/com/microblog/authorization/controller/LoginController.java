@@ -10,6 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+
+/**
+ *功能描述 扽路相关
+ * @author lgj
+ * @Description 　　　
+ * @date 　
+*/
 @RestController
 @RequestMapping("/login")
 public class LoginController {
@@ -18,6 +25,11 @@ public class LoginController {
     private KeyPairService keyPairService;
 
 
+    /**
+     * 获取rsa的publickey,用于对密码加密
+     * @param username
+     * @return
+     */
     @PrintUrlAnno
     @GetMapping("/publickey")
     public ServerResponseDto getPublicKey(@RequestParam("username") String username){
