@@ -13,7 +13,7 @@ eureka:
 
 spring:
   application:
-    name: Microblog-Goods
+    name: microblog-authorization
   cloud:
     alibaba:
       seata:

@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 import org.springframework.security.web.server.authorization.ServerAccessDeniedHandler;
+import org.springframework.security.web.server.header.XFrameOptionsServerHttpHeadersWriter;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
@@ -34,15 +35,21 @@ public class ResourceServerConfigurer {
     @Bean
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
 
-
+        /*
+        Refused to display 'http://localhost:8081/api/auth/druid/index.html' in a frame because it set 'X-Frame-Options' to 'deny'.
+        * */
+        http.headers().frameOptions().mode(XFrameOptionsServerHttpHeadersWriter.Mode.SAMEORIGIN);
         http.oauth2ResourceServer().jwt();
         http
             .csrf().disable()
             .authorizeExchange()
-            .pathMatchers("/").permitAll()
-            .pathMatchers("/api/auth/**").permitAll()
-            .pathMatchers("/login.html", "/login").permitAll()
-            .pathMatchers("/actuator/**").permitAll()
+            .pathMatchers(
+                    "/",
+                    "/api/auth/**",
+                    "/actuator/**",
+                    "/api/gateway/eureka/**"
+                    ).permitAll()
+
             .pathMatchers("/api/needauth").authenticated()
             .pathMatchers("/api/notauth")
             .access(AccessReactiveAuthorizationManager.hasAnyAuthority("USER1","ADMIN1"))//hasAnyRole("USER"," ADMIN")

@@ -13,6 +13,12 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *功能描述 用户服务，用于获取　UserDetails
+ * @author lgj
+ * @Description 　　　
+ * @date 　
+*/
 @Slf4j
 @Component
 public class UserServiceImpl implements UserService{
@@ -28,35 +34,16 @@ public class UserServiceImpl implements UserService{
     public UserDetails getManangerUser(String username) {
 
         ManagerUser managerUser = managerUserService.queryManagerUser(username);
-        managerUser = null;
+
         if(managerUser == null){
             throw new UsernameNotFoundException("用户不存在");
         }
 
         log.debug("managerUser = " + managerUser);
-        if (managerUser != null){
-
-            List<GrantedAuthority> authorities = new ArrayList<>();
-            UserDetails userDetails = new User(managerUser.getUsername(),
-                    passwordEncoder.encode(managerUser.getPassword()), authorities);
-            return userDetails;
-        }
-        else {
-
-            return null;
-        }
-
-//
-//        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-//        authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-//        authorities.add(new SimpleGrantedAuthority("USER1"));
-//        authorities.add(new SimpleGrantedAuthority("ADMIN1"));
-//
-//        log.info("authorities = " + authorities);
-//
-//        UserDetails userDetails = new User("李白",
-//                passwordEncoder.encode(Md5Util.md5("123456")), authorities);
-//        return userDetails;
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        UserDetails userDetails = new User(managerUser.getUsername(),
+                passwordEncoder.encode(managerUser.getPassword()), authorities);
+        return userDetails;
     }
 
     @Override

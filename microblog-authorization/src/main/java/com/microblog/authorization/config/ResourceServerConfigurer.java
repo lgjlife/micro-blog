@@ -25,6 +25,7 @@ public class ResourceServerConfigurer extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
 
+        http.headers().frameOptions().disable();//.sameOrigin();
         http.csrf().disable();
         http.authorizeRequests()
                 .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
@@ -32,7 +33,8 @@ public class ResourceServerConfigurer extends ResourceServerConfigurerAdapter {
                 .antMatchers("/jwt/publickey").permitAll()
                 //登录过程获取publickey，这个用于登录时用于密码加密
                 .antMatchers("/login/publickey").permitAll()
-                //.antMatchers("/api/auth/login/publickey").permitAll()
+                .antMatchers("/druid/**").permitAll()
+                .antMatchers("/favicon.ico").permitAll()
                 //其他uri都要进行登录验证
                 .anyRequest().authenticated();
     }

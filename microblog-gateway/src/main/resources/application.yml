@@ -1,12 +1,26 @@
 server:
   port: 8010
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8001/eureka/
+
 ## gateway
 spring:
+  application:
+    name: microblog-gateway
   cloud.gateway.routes:
     - id: microblog-auth
       uri: http://localhost:8000
       predicates:
         - Path=/api/auth/**
+      filters:
+        - StripPrefix=2
+    - id: microblog-gateway
+      uri: http://localhost:8010
+      predicates:
+        - Path=/api/gateway/**
       filters:
         - StripPrefix=2
     - id: api-keypair-route
@@ -22,6 +36,6 @@ spring:
   security.oauth2.resourceserver.jwt.jwk-set-uri: 'http://localhost:8000/jwt/publickey'
 logging:
   level:
-    org: debug
+    org: info
     com: error
     com.microblog: debug
