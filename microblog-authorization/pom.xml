@@ -43,6 +43,14 @@
         </dependency>
 
         <dependency>
+            <groupId>com.swagger</groupId>
+            <artifactId>swagger-springboot-starter</artifactId>
+            <version>1.0.0</version>
+            <scope>compile</scope>
+        </dependency>
+
+
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>

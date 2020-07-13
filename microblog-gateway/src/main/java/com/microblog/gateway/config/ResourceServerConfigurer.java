@@ -44,10 +44,18 @@ public class ResourceServerConfigurer {
             .csrf().disable()
             .authorizeExchange()
             .pathMatchers(
+
                     "/",
                     "/api/auth/**",
                     "/actuator/**",
-                    "/api/gateway/eureka/**"
+                    "/api/gateway/eureka/**",
+                    "/api/swagger/**",
+                    "/api/gateway/swagger-ui.html/**","/api/gateway/swagger-ui.html","/api/gateway/webjars/**",
+                    "/api/gateway/swagger-resources/**","/api/gateway/swagger-ui./**",
+                    "/api/gateway/v2/**","/api/gateway/api/gateway/v2/**",
+                    "/swagger-ui.html/**","/swagger-ui.html","/webjars/**",
+                    "/swagger-resources/**","/swagger-ui./**",
+                    "/v2/**","/api/gateway/v2/**"
                     ).permitAll()
 
             .pathMatchers("/api/needauth").authenticated()

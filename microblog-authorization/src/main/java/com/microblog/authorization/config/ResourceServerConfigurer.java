@@ -35,6 +35,8 @@ public class ResourceServerConfigurer extends ResourceServerConfigurerAdapter {
                 .antMatchers("/login/publickey").permitAll()
                 .antMatchers("/druid/**").permitAll()
                 .antMatchers("/favicon.ico").permitAll()
+                .antMatchers("/v2/**"
+                        ).permitAll()
                 //其他uri都要进行登录验证
                 .anyRequest().authenticated();
     }

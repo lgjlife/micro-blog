@@ -36,6 +36,7 @@ spring:
   security.oauth2.resourceserver.jwt.jwk-set-uri: 'http://localhost:8000/jwt/publickey'
 logging:
   level:
-    org: info
+    org: debug
     com: error
     com.microblog: debug
+
