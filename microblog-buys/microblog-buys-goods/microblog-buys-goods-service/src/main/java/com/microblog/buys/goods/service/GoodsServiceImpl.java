@@ -2,7 +2,7 @@ package com.microblog.buys.goods.service;
 
 import com.microblog.buys.goods.dao.mapper.GoodsMapper;
 import com.microblog.buys.goods.dao.model.Goods;
-import com.microblog.util.response.ResponseCode;
+import com.microblog.util.result.ResponseCode;
 import com.microblog.util.response.ServerResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

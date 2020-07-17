@@ -11,6 +11,14 @@ spring:
   application:
     name: microblog-gateway
   cloud.gateway.routes:
+    #　认证模块
+    - id: microblog-scheduler
+      uri: http://localhost:8014
+      predicates:
+        - Path=/api/scheduler/**
+      filters:
+        - StripPrefix=2
+    #　认证模块
     - id: microblog-auth
       uri: http://localhost:8000
       predicates:
@@ -36,7 +44,7 @@ spring:
   security.oauth2.resourceserver.jwt.jwk-set-uri: 'http://localhost:8000/jwt/publickey'
 logging:
   level:
-    org: debug
+    org: info
     com: error
     com.microblog: debug
 

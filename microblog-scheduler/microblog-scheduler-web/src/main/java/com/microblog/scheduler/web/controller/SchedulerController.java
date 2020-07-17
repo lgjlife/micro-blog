@@ -1,11 +1,12 @@
 package com.microblog.scheduler.web.controller;
 
-import com.microblog.common.aop.syslog.anno.PrintUrlAnno;
-import com.microblog.common.result.BaseResult;
-import com.microblog.common.result.WebResult;
+
 import com.microblog.scheduler.dao.model.QuartzJob;
 import com.microblog.scheduler.service.SchedulerService;
-import com.microblog.scheduler.service.code.SchedulerReturnCode;
+import com.microblog.util.aop.syslog.anno.PrintUrlAnno;
+import com.microblog.util.result.BaseResult;
+import com.microblog.util.result.ResponseCode;
+import com.microblog.util.result.WebResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -14,9 +15,14 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 
+/**
+ *功能描述 任务处理控制器
+ * @author lgj
+ * @Description 　　　
+ * @date 　
+*/
 @Api(value = "/scheduler",description = "任务调度 controller")
 @Slf4j
 @RestController
@@ -27,7 +33,11 @@ public class SchedulerController {
     private SchedulerService schedulerService;
 
 
-
+    /**
+     * 创建任务
+     * @param job
+     * @return
+     */
     @PrintUrlAnno
     @RequestMapping("/job")
     @ApiOperation(value = "/job",httpMethod = "POST",notes="创建任务")
@@ -41,36 +51,17 @@ public class SchedulerController {
     @PostMapping("/job/manager")
     @ResponseBody
     @ApiOperation(value = "/job/manager",httpMethod = "POST",notes="任务管理")
-    public BaseResult jobManager(@RequestBody Map<String ,String> requestMap){
-        String type = requestMap.get("type");
-        String jobGroup = requestMap.get("jobGroup");
-        String jobClass = requestMap.get("jobClass");
+    public BaseResult jobManager(@RequestParam("type") String type,
+                                 @RequestParam("jobGroup") String jobGroup,
+                                 @RequestParam("jobClass") String jobClass){
+
         if((StringUtils.isEmpty(type))
         ||(StringUtils.isEmpty(jobGroup))
         ||(StringUtils.isEmpty(jobClass))){
-            return new WebResult(SchedulerReturnCode.NULL_PARAM.getCode(),SchedulerReturnCode.NULL_PARAM.getMessage());
+            return new WebResult(ResponseCode.ILLEGAL_ARGUMENT.getCode(),"请求参数错误");
         }
 
-        if(type.equals("startup")){
-            return schedulerService.resumeJob(jobGroup,jobClass);
-
-        }
-        else if(type.equals("pause")){
-            return schedulerService.pauseJob(jobGroup,jobClass);
-
-        }
-        else if(type.equals("delete")){
-            return schedulerService.deleteJob(jobGroup,jobClass);
-        }
-        else if(type.equals("remove")){
-            return schedulerService.removeJob(jobGroup,jobClass);
-        }
-        else if(type.equals("register")){
-            return schedulerService.registerJob(jobGroup,jobClass);
-        }
-
-        return new WebResult(SchedulerReturnCode.NULL_PARAM.getCode(),SchedulerReturnCode.NULL_PARAM.getMessage());
-
+        return schedulerService.manager(type,jobGroup,jobClass);
     }
 
     @ApiOperation(value = "/list",httpMethod = "GET",notes="获取任务列表")

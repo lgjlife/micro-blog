@@ -75,8 +75,17 @@ public class AuthorizationServerConfigurer extends AuthorizationServerConfigurer
                 .secret(passwordEncoder.encode("normal-secret"))
                 .authorizedGrantTypes(AuthorizedGrantTypes.REFRESH_TOKEN, AuthorizedGrantTypes.PASSWORD)
                 //可以设置access_token的超时时间。会在设置的时间基础上添加60s,也就是设置40s，但真正的超时时间是60s+40s
-                .accessTokenValiditySeconds(1)
                 .scopes("normal-scope")
+
+                //第三方
+                .and()
+                .inMemory()
+                .withClient("third-client")
+                .secret(passwordEncoder.encode("third-secret"))
+                .authorizedGrantTypes(AuthorizedGrantTypes.REFRESH_TOKEN, AuthorizedGrantTypes.PASSWORD)
+                //可以设置access_token的超时时间。会在设置的时间基础上添加60s,也就是设置40s，但真正的超时时间是60s+40s
+                .scopes("normal-scope")
+
                 ;
 
     }

@@ -1,8 +1,6 @@
 package com.microblog.scheduler.service;
 
 
-import com.microblog.common.result.BaseResult;
-import com.microblog.common.result.WebResult;
 import com.microblog.scheduler.dao.mapper.QuartzJobMapper;
 import com.microblog.scheduler.dao.model.QuartzJob;
 import com.microblog.scheduler.service.anno.QuartzJobAnno;
@@ -10,6 +8,9 @@ import com.microblog.scheduler.service.code.SchedulerReturnCode;
 import com.microblog.scheduler.service.configuration.quartz.SchedulerHandle;
 import com.microblog.scheduler.service.job.SchedulerJobFactory;
 import com.microblog.scheduler.service.job.dto.JobState;
+import com.microblog.util.result.BaseResult;
+import com.microblog.util.result.ResponseCode;
+import com.microblog.util.result.WebResult;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.Job;
 import org.quartz.Trigger;
@@ -23,13 +24,10 @@ import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
- *功能描述 
+ *功能描述 任务管理服务
  * @author lgj
- * @Description   任务调度service
- * @date 5/18/19
- * @param: 
- * @return: 
- *
+ * @Description 　　　
+ * @date 　
 */
 @Slf4j
 @Service
@@ -42,16 +40,39 @@ public class SchedulerService {
     QuartzJobMapper quartzJobMapper;
 
 
+    /**
+     * 对外提供的对任务的管理
+     * @param type　@see SchedulerService.Handler.class
+     * @param jobGroup 　任务组
+     * @param jobClass　任务类
+     * @return
+     */
+    public BaseResult manager(String type,String jobGroup,String jobClass){
 
-    /**SchedulerHandle
-     *功能描述
-     * @author lgj
-     * @Description  创建任务
-     * @date 5/18/19
-     * @param:
-     * @return:
-     *
-    */
+        if(Handler.START_HANDLER.equals(type)){
+            return resumeJob(jobGroup,jobClass);
+
+        }
+        else if(Handler.PAUSE_HANDLER.equals(type)){
+            return pauseJob(jobGroup,jobClass);
+
+        }
+        else if(Handler.DELETE_HANDLER.equals(type)){
+            return deleteJob(jobGroup,jobClass);
+        }
+        else if(Handler.REMOVE_HANDLER.equals(type)){
+            return removeJob(jobGroup,jobClass);
+        }
+        else if(Handler.REGISTER_HANDLER.equals(type)){
+            return registerJob(jobGroup,jobClass);
+        }
+        return new WebResult(ResponseCode.ILLEGAL_ARGUMENT.getCode(),"请求参数出错");
+    }
+    /**
+     * 创建任务
+     * @param job
+     * @return
+     */
     public BaseResult createJob(QuartzJob job){
         job.setJobGroup(new Random().nextInt(1000)+"-Group");
         job.setCreateTime(new Date());
@@ -69,13 +90,10 @@ public class SchedulerService {
             return new WebResult(SchedulerReturnCode.JOB_CREATE_FAIL.getCode(),SchedulerReturnCode.JOB_CREATE_FAIL.getMessage());
         }
     }
-
     /**
-     *功能描述
-     * @author lgj
-     * @Description  获取数据库中所有的任务和相应的运行状态
-     * @date 5/18/19
-    */
+     * 获取数据库中所有的任务和相应的运行状态
+     * @return
+     */
     public List<QuartzJob> queryJob(){
 
         List<QuartzJob> quartzJobs = null;
@@ -105,12 +123,11 @@ public class SchedulerService {
         return quartzJobs;
     }
 
+
     /**
-     *功能描述
-     * @author lgj
-     * @Description 查询应用中的 被QuartzJobAnno注解的类
-     * @date 5/18/19
-    */
+     * 查询应用中的 被QuartzJobAnno注解的类
+     * @return
+     */
     public List<String> queryJobClass(){
         Reflections reflections = new Reflections("com",
                 new TypeAnnotationsScanner(),
@@ -131,9 +148,6 @@ public class SchedulerService {
         return null;
     }
 
-    public void func(){
-        log.info("SchedulerService func....");
-    }
 
 
     public void addJob( )  {
@@ -147,16 +161,12 @@ public class SchedulerService {
 
     }
 
-
     /**
-     *功能描述
-     * @author lgj
-     * @Description  删除任务，包括数据库和quartz
-     * @date 5/18/19
-     * @param:
-     * @return:
-     *
-    */
+     * 删除任务，包括数据库和quartz
+     * @param jobGroup
+     * @param jobClass
+     * @return
+     */
     public BaseResult deleteJob(String jobGroup, String jobClass){
 
         Integer result = quartzJobMapper.deleteByGroupAndClass(jobGroup,jobClass);
@@ -174,12 +184,13 @@ public class SchedulerService {
         }
 
     }
+
     /**
-     *功能描述
-     * @author lgj
-     * @Description 从quartz 中移除任务
-     * @date 5/18/19
-    */
+     * 从quartz 中移除任务
+     * @param jobGroup
+     * @param jobClass
+     * @return
+     */
     public BaseResult removeJob(String jobGroup, String jobClass)   {
         QuartzJob job = SchedulerJobFactory.helloJob();
         try{
@@ -194,15 +205,13 @@ public class SchedulerService {
         }
 
     }
+
     /**
-     *功能描述
-     * @author lgj
-     * @Description  注册任务
-     * @date 5/18/19
-     * @param:
-     * @return:
-     *
-    */
+     * 注册任务
+     * @param jobGroup
+     * @param jobClass
+     * @return
+     */
     public BaseResult registerJob(String jobGroup, String jobClass)   {
         QuartzJob job = quartzJobMapper.selectByGroupAndClass(jobGroup,jobClass);
         try{
@@ -220,15 +229,13 @@ public class SchedulerService {
 
     }
 
+
     /**
-     *功能描述
-     * @author lgj
-     * @Description  暂停任务运行
-     * @date 5/18/19
-     * @param:
-     * @return:
-     *
-    */
+     * 暂停任务运行
+     * @param jobGroup
+     * @param jobClass
+     * @return
+     */
     public BaseResult pauseJob( String jobGroup,String jobClass)  {
         QuartzJob job = SchedulerJobFactory.helloJob();
         try{
@@ -247,14 +254,8 @@ public class SchedulerService {
     }
 
     /**
-     *功能描述
-     * @author lgj
-     * @Description  暂停所有任务运行
-     * @date 5/18/19
-     * @param:
-     * @return:
-     *
-    */
+     * 暂停所有任务运行
+     */
     public void pauseAllJob( )  {
         QuartzJob job = SchedulerJobFactory.helloJob();
         try{
@@ -267,14 +268,11 @@ public class SchedulerService {
     }
 
     /**
-     *功能描述
-     * @author lgj
-     * @Description 恢复任务运行
-     * @date 5/18/19
-     * @param:
-     * @return:
-     *
-    */
+     * 恢复任务运行
+     * @param jobGroup
+     * @param jobClass
+     * @return
+     */
     public BaseResult resumeJob( String jobGroup,String jobClass)  {
         QuartzJob job = SchedulerJobFactory.helloJob();
         try{
@@ -292,14 +290,8 @@ public class SchedulerService {
     }
 
     /**
-     *功能描述
-     * @author lgj
-     * @Description 　恢复所有任务运行
-     * @date 5/18/19
-     * @param:
-     * @return:
-     *
-    */
+     * 恢复所有任务运行
+     */
     public void resumeAllJob( )  {
 
         try{
@@ -308,5 +300,26 @@ public class SchedulerService {
         catch(Exception ex){
             log.error(ex.getMessage());
         }
+    }
+
+
+
+    /**
+     *功能描述 任务操作类型
+     * @author lgj
+     * @Description 　　　
+     * @date 　
+    */
+    private class  Handler{
+        /*启动*/
+        private static  final  String  START_HANDLER = "startup";
+        /*暂停*/
+        private static  final  String  PAUSE_HANDLER = "pause";
+        /*删除*/
+        private static  final  String  DELETE_HANDLER = "delete";
+        /*移除*/
+        private static  final  String  REMOVE_HANDLER = "remove";
+        /*注册*/
+        private static  final  String  REGISTER_HANDLER = "register";
     }
 }

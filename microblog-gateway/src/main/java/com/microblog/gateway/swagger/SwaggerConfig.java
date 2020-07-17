@@ -12,14 +12,6 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger.web.UiConfiguration;
 
-/**
- * @program: top-parent
- * @description: SwaggerConfig 配置类
- * @author: Mr.lgj
- * @version:
- * @See:
- * @create: 2018-11-19 14:19
- **/
 
 
 //@EnableSwagger2                // Swagger的开关，表示已经启用Swagger

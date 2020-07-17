@@ -82,6 +82,16 @@
             <groupId>org.glassfish.jaxb</groupId>
             <artifactId>jaxb-runtime</artifactId>
             <version>2.2.11</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>jaxb-api</artifactId>
+                    <groupId>javax.xml.bind</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>jaxb-core</artifactId>
+                    <groupId>org.glassfish.jaxb</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>javax.activation</groupId>

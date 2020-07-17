@@ -14,6 +14,8 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 import org.springframework.security.web.server.authorization.ServerAccessDeniedHandler;
 import org.springframework.security.web.server.header.XFrameOptionsServerHttpHeadersWriter;
 import org.springframework.web.server.ServerWebExchange;
+import org.springframework.web.server.WebFilter;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
@@ -27,6 +29,9 @@ public class ResourceServerConfigurer {
     @Autowired
     PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private SecurityWebFilterChain securityWebFilterChain;
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -34,6 +39,8 @@ public class ResourceServerConfigurer {
 
     @Bean
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
+
+
 
         /*
         Refused to display 'http://localhost:8081/api/auth/druid/index.html' in a frame because it set 'X-Frame-Options' to 'deny'.
@@ -54,7 +61,7 @@ public class ResourceServerConfigurer {
                     "/api/gateway/swagger-resources/**","/api/gateway/swagger-ui./**",
                     "/api/gateway/v2/**","/api/gateway/api/gateway/v2/**",
                     "/swagger-ui.html/**","/swagger-ui.html","/webjars/**",
-                    "/swagger-resources/**","/swagger-ui./**",
+                    "/swagger-resources/**","/swagger-ui./**","/favicon.ico",
                     "/v2/**","/api/gateway/v2/**"
                     ).permitAll()
 
@@ -86,6 +93,20 @@ public class ResourceServerConfigurer {
 //                //webFilter.setServerAuthenticationConverter(new AuthenticationConverter());
 //            }
 //        }
+
+
+
+        Flux<WebFilter> webFilterFlux =  chain.getWebFilters();
+
+        Flux<WebFilter>  filter =  webFilterFlux.filter( webFilter -> {
+
+
+            return true;
+        });
+
+
+
+
 
         return chain;
 

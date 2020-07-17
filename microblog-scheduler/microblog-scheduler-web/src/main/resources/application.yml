@@ -1,9 +1,9 @@
 server:
-  port: 8108
+  port: 8014
 eureka:
   client:
     service-url:
-      defaultZone: http://172.17.0.1:8001/eureka/
+      defaultZone: http://localhost:8001/eureka/
 
 spring:
   #   allow-bean-definition-overriding: true
@@ -12,7 +12,7 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource    # 配置当前要使用的数据源的操作类型
     driver-class-name: com.mysql.cj.jdbc.Driver      # 配置MySQL的驱动程序类
-    url: jdbc:mysql://172.17.0.1:8066/microblog?characterEncoding=utf-8           # 数据库连接地址
+    url: jdbc:mysql://localhost:3306/microblog?characterEncoding=utf-8           # 数据库连接地址
     username: root                                  # 数据库用户名
     password: 123456                            # 数据库连接密码
     filters: config,stat
@@ -37,13 +37,6 @@ spring:
 logging:
   level:
     com.microblog: debug
-
-microblog:
-  common:
-    # 使能打印访问Url，在Controller方法上添加注解@PrintUrlAnno
-    printUrlEnable: true
-    # 使能打印方法执行耗时，在方法上添加注解@PrintUseTimeAnno
-    printUseTimeEnable: true
 
 swagger:
   basePackage: com.microblog.scheduler.web.controller

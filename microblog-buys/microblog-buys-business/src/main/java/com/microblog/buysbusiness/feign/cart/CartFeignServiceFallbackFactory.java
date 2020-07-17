@@ -1,6 +1,6 @@
 package com.microblog.buysbusiness.feign.cart;
 
-import com.microblog.util.response.ResponseCode;
+import com.microblog.util.result.ResponseCode;
 import com.microblog.util.response.ServerResponseDto;
 import feign.hystrix.FallbackFactory;
 import lombok.extern.slf4j.Slf4j;

@@ -1,4 +1,4 @@
-package com.microblog.util.response;
+package com.microblog.util.result;
 
 public enum  ResponseCode {
 

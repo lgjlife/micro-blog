@@ -1,4 +1,4 @@
-package com.microblog.points.dao.model;
+package com.microblog.scheduler.dao.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;

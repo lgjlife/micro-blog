@@ -4,7 +4,8 @@ package com.microblog.buysbusiness.controller;
 import com.microblog.buysbusiness.feign.cart.CartFeignService;
 import com.microblog.buysbusiness.feign.goods.GoodsFeignService;
 import com.microblog.util.aop.syslog.anno.PrintUrlAnno;
-import com.microblog.util.response.ServerResponseDto;
+
+import com.microblog.util.result.WebResult;
 import io.seata.spring.annotation.GlobalTransactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,10 +40,10 @@ public class BusinessController {
     @GlobalTransactional(timeoutMills = 300000, name = "business-delete")
     @PrintUrlAnno(layer = "Controller",description="购买操作")
     @RequestMapping("/delete")
-    public ServerResponseDto delete(){
+    public WebResult delete(){
         log.info("全局事务开始");
-        ServerResponseDto cartResponse = cartFeignService.delete();
-        ServerResponseDto goodsResponse = goodsFeignService.delete();
+        WebResult cartResponse = cartFeignService.delete();
+        WebResult goodsResponse = goodsFeignService.delete();
 
         log.info("cartResponse = " + cartResponse);
         log.info("goodsResponse = " + goodsResponse);
@@ -61,19 +62,19 @@ public class BusinessController {
             throw new RuntimeException("测试抛异常后，分布式事务回滚！");
         }
 
-        return new ServerResponseDto(2,"抛出异常");
+        return new WebResult(2,"抛出异常");
 
     }
 
 
     @PrintUrlAnno(layer = "Controller",description="查询")
     @RequestMapping("/query")
-    public List<ServerResponseDto> query(){
-        ServerResponseDto cartResponse = cartFeignService.query();
-        ServerResponseDto goodsResponse = goodsFeignService.query();
+    public List<WebResult> query(){
+        WebResult cartResponse = cartFeignService.query();
+        WebResult goodsResponse = goodsFeignService.query();
 
 
-        List<ServerResponseDto> result = new ArrayList<>();
+        List<WebResult> result = new ArrayList<>();
         result.add(cartResponse);
         result.add(goodsResponse);
 

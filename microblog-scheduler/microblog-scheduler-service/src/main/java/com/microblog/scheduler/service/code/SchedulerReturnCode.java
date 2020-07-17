@@ -1,6 +1,7 @@
 package com.microblog.scheduler.service.code;
 
-import com.microblog.common.code.ReturnCode;
+
+import com.microblog.util.code.ReturnCode;
 
 public enum  SchedulerReturnCode implements ReturnCode {
 

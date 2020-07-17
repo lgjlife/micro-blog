@@ -1,7 +1,7 @@
 package com.microblog.authorization.config.handler;
 
-import com.microblog.util.response.ResponseCode;
-import com.microblog.util.response.ServerResponseDto;
+import com.microblog.util.result.ResponseCode;
+import com.microblog.util.result.WebResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,14 +14,14 @@ public class ExceptioHandler implements WebResponseExceptionTranslator {
     public ResponseEntity translate(Exception ex) throws Exception {
 
 
-        ServerResponseDto responseDto = null;
+        WebResult responseDto = null;
 
 
-        responseDto = new ServerResponseDto(ResponseCode.FAIL.getCode(),ex.getMessage());
+        responseDto = new WebResult(ResponseCode.FAIL.getCode(),ex.getMessage());
 
         log.info("responseDto = " + responseDto);
-        ResponseEntity<ServerResponseDto> responseEntity
-                = new ResponseEntity<ServerResponseDto>(responseDto,HttpStatus.valueOf(200));
+        ResponseEntity<WebResult> responseEntity
+                = new ResponseEntity<WebResult>(responseDto,HttpStatus.valueOf(200));
 
         return responseEntity;
 

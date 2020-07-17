@@ -1,6 +1,7 @@
-package com.microblog.points.dao.mapper;
+package com.microblog.scheduler.dao.mapper;
 
-import com.microblog.points.dao.model.QuartzJob;
+
+import com.microblog.scheduler.dao.model.QuartzJob;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

@@ -2,7 +2,7 @@ package com.microblog.buysbusiness.feign.cart;
 
 
 import com.microblog.buysbusiness.feign.config.FeignConfig;
-import com.microblog.util.response.ServerResponseDto;
+import com.microblog.util.result.WebResult;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public interface CartFeignService {
 
     @RequestMapping(value = "/cart/query",method = RequestMethod.GET)
-    ServerResponseDto query();
+    WebResult query();
 
 
     @RequestMapping(value = "/cart/delete",method = RequestMethod.GET)
-    ServerResponseDto delete();
+    WebResult delete();
 
 }
